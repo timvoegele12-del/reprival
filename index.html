@@ -320,6 +320,21 @@ section[data-view]{min-width:0}
 .dock{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:9;display:flex;gap:4px;padding:6px;border-radius:999px;background:rgba(24,27,31,.82);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border:1px solid var(--line);max-width:calc(100% - 32px)}
 .dock button{border:0;background:transparent;border-radius:999px;padding:12px 20px;font-family:var(--display);font-weight:600;font-size:13px;color:var(--dim);cursor:pointer;min-height:46px}
 .dock button[aria-selected="true"]{background:var(--fg);color:var(--bg)}
+.dock button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:7px 12px;min-height:52px;border-radius:22px}
+.dock button svg{width:21px;height:21px;flex:none}
+.dock button span{font-family:var(--body,inherit);font-size:11px;font-weight:700;letter-spacing:.01em;line-height:1;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.hhero{padding:26px 22px 22px;gap:6px;background:radial-gradient(120% 90% at 100% 0%,rgba(122,231,255,.10),transparent 60%),var(--panel)}
+.hdate{font-size:13px;font-weight:600;color:var(--dim)}
+.hgreet{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(26px,8vw,36px);line-height:1.08;letter-spacing:-.015em;overflow-wrap:anywhere}
+.hsub{margin:4px 0 14px;color:var(--dim);font-size:15px;line-height:1.45}
+.hrank,.hgoal{font:inherit;color:inherit;text-align:left;cursor:pointer;width:100%}
+.hrank:active,.hgoal:active{transform:scale(.99)}
+.hrank .rk{gap:14px}.hrank .embwrap{width:56px;height:56px;min-width:56px}
+.hrow{display:flex;align-items:center;gap:12px;min-width:0}.hrow>div{min-width:0;flex:1}
+.hchev{color:var(--dim);font-size:22px;line-height:1;flex:none}
+.hgoal .hgt{font-family:var(--display);font-weight:600;font-size:17px;overflow-wrap:anywhere}
+.hgoal small{display:block;color:var(--dim);font-size:13px;margin-top:3px}
+.fdmore{margin-top:2px}
 #toast{pointer-events:none;position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:11px 18px;border-radius:999px;font-weight:700;font-size:14px;z-index:120;max-width:calc(100% - 32px);text-align:center}
 @media (prefers-reduced-motion:no-preference){.bar i,.track i,.ring{transition:all .35s ease}}
 .how summary{cursor:pointer;font-family:var(--display);font-weight:600;font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:28px}
@@ -497,7 +512,7 @@ section[data-view]{min-width:0}
 .duxl{width:84px;height:84px;border-radius:24px}
 .duxs{font-family:var(--display);font-weight:800;font-size:34px;color:var(--fg);white-space:nowrap}
 .dock button.dot{position:relative}
-.dock button.dot::after{content:'';position:absolute;top:8px;right:10px;width:8px;height:8px;border-radius:50%;background:#ff5fa2;box-shadow:0 0 0 2px rgba(24,27,31,.9)}
+.dock button.dot::after{content:'';position:absolute;top:6px;right:calc(50% - 17px);width:8px;height:8px;border-radius:50%;background:#ff5fa2;box-shadow:0 0 0 2px rgba(24,27,31,.9)}
 @media (prefers-reduced-motion:reduce){.rxb.pop,.duxr{animation:none!important}}
 /* Heatmap + Abzeichen */
 .heatm{display:grid;grid-template-columns:repeat(26,minmax(0,1fr));font-size:10px;color:var(--dim);font-weight:700;margin-bottom:-8px;white-space:nowrap;overflow:hidden}
@@ -586,8 +601,8 @@ textarea{width:100%;background:var(--panel-2);border:1px solid var(--line);borde
 .hday:first-child{padding-top:4px}
 .pr{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--good);border:1px solid var(--line);border-radius:999px;padding:4px 9px;white-space:nowrap}
 .ex[data-act]:hover{background:rgba(255,255,255,.03)}
-@media (max-width:420px){.dock button{padding:12px 11px;font-size:12px}}
-@media (max-width:370px){.dock{gap:2px;padding:5px}.dock button{padding:11px 8px;font-size:11px}}
+@media (max-width:420px){.dock button{padding:7px 9px}}
+@media (max-width:370px){.dock{gap:2px;padding:5px}.dock button{padding:7px 5px}.dock button span{font-size:10px}}
 .dock{max-width:calc(100vw - 20px)}.dock button{min-width:0;flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .stats>div{background:var(--panel-2);border-radius:16px;padding:12px;min-width:0}
@@ -620,7 +635,17 @@ textarea{width:100%;background:var(--panel-2);border:1px solid var(--line);borde
   </div>
 
   <main>
-    <section data-view="train" id="v-train">
+    <section data-view="home" id="v-home">
+      <div class="bento">
+        <div class="card span2 hhero" id="homeHero"></div>
+        <div class="card span2" id="streakCard"></div>
+        <button type="button" class="card span2 hrank" id="homeRank" data-act="gotab" data-v="ranks" hidden></button>
+        <button type="button" class="card span2 hgoal" id="homeGoal" data-act="homegoal" hidden></button>
+        <div class="card span2" id="rivalMini" hidden></div>
+      </div>
+    </section>
+
+    <section data-view="train" id="v-train" hidden>
       <div class="bento">
         <div class="card span2" id="bwCheck" hidden></div>
         <div class="card span2">
@@ -657,8 +682,6 @@ textarea{width:100%;background:var(--panel-2);border:1px solid var(--line);borde
         </div>
         <div class="card"><div class="lbl">Saisonpunkte</div><div class="big" id="spts">0</div><div class="dim" id="smonth"></div></div>
         <div class="card"><div class="lbl">Trainingstage</div><div class="big" id="sdays">0</div><div class="dim">in diesem Monat</div></div>
-        <div class="card span2" id="streakCard"></div>
-        <div class="card span2" id="rivalMini" hidden></div>
         <div class="card span2 chartwrap" id="chartCard"></div>
         <div class="card span2"><div class="lbl" id="recLbl">Letztes Training</div><div id="recent"></div></div>
       </div>
@@ -680,7 +703,6 @@ textarea{width:100%;background:var(--panel-2);border:1px solid var(--line);borde
         <div class="card span2" id="duelCard" hidden></div>
         <div class="card span2" id="rivalCard" hidden></div>
         <div class="card span2" id="feedCard" hidden></div>
-        <div class="card span2" id="inviteCard" hidden></div>
         <div class="card span2" id="crewSetup" hidden></div>
         <div class="card span2">
           <div class="pills" id="modePills"></div>
@@ -688,6 +710,7 @@ textarea{width:100%;background:var(--panel-2);border:1px solid var(--line);borde
           <div id="board"></div>
         </div>
         <div class="card span2" id="prevCard" hidden></div>
+        <div class="card span2" id="inviteCard" hidden></div>
         <details class="card span2 how">
           <summary>So funktioniert die Crew</summary>
           <div class="howin">
@@ -758,10 +781,11 @@ textarea{width:100%;background:var(--panel-2);border:1px solid var(--line);borde
   </div>
 </div>
 <nav class="dock" aria-label="Bereiche" role="tablist">
-  <button role="tab" data-tab="train" aria-selected="true">Training</button>
-  <button role="tab" data-tab="ranks" aria-selected="false">Ränge</button>
-  <button role="tab" data-tab="stat" aria-selected="false">Statistik</button>
-  <button role="tab" data-tab="crew" aria-selected="false">Crew</button>
+  <button role="tab" data-tab="home" aria-selected="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.2L12 4.5l8 6.7V19a1.5 1.5 0 0 1-1.5 1.5H15v-5.5H9v5.5H5.5A1.5 1.5 0 0 1 4 19z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>Start</span></button>
+  <button role="tab" data-tab="train" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18M6.5 7.5v9M9.5 9v6M17.5 7.5v9M14.5 9v6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span>Training</span></button>
+  <button role="tab" data-tab="ranks" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l7 2.6v5.6c0 4.3-3 7.4-7 8.8-4-1.4-7-4.5-7-8.8V6.1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 12.5l3-2.5 3 2.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Ränge</span></button>
+  <button role="tab" data-tab="stat" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V13M10 20V8M15 20v-9M20 20V4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><span>Statistik</span></button>
+  <button role="tab" data-tab="crew" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3.5 19.5c.6-3.3 2.8-5 5.5-5s4.9 1.7 5.5 5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M15.5 5.6a3 3 0 0 1 0 5.8M17.5 14.8c1.6.7 2.6 2.3 3 4.7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span>Crew</span></button>
 </nav>
 <div class="prfx" id="pr" aria-live="polite" hidden></div>
 <div class="fx" id="fx" role="dialog" aria-modal="true" aria-label="Neuer Rang" hidden></div>
@@ -1021,7 +1045,7 @@ LANG=S.lang==='en'?'en':'de';
 /* ---------- Sprache: Deutsch (Quelle) -> Englisch per Übersetzungsschicht ---------- */
 const D={
 // Navigation & allgemein
-'Training':'Training','Ränge':'Ranks','Statistik':'Stats','Crew':'Crew','Profil bearbeiten':'Edit profile','Athlet':'Athlete','Du':'You',
+'Start':'Home','Guten Morgen':'Good morning','Guten Tag':'Good afternoon','Guten Abend':'Good evening','Hallo':'Hello','Trag deinen ersten Satz ein und hol dir deinen Rang.':'Log your first set and earn your rank.','Heute schon trainiert. Stark.':'Already trained today. Strong.','Bereit für dein Training?':'Ready for your workout?','Weiteren Satz eintragen':'Log another set','Training eintragen':'Log workout','Nächstes Ziel':'Next goal','Weniger anzeigen':'Show less','Dein Rang':'Your rank','Training':'Training','Ränge':'Ranks','Statistik':'Stats','Crew':'Crew','Profil bearbeiten':'Edit profile','Athlet':'Athlete','Du':'You',
 'Abbrechen':'Cancel','Speichern':'Save','Weiter':'Continue','Löschen':'Delete','Ändern':'Change','Verstanden':'Got it','Beitreten':'Join','Nicht jetzt':'Not now',
 'Heute':'Today','Gestern':'Yesterday','Vorgestern':'2 days ago','heute':'today','gestern':'yesterday','Wann?':'When?','diese Woche':'this week','in diesem Monat':'this month',
 'kg':'kg','lb':'lb','Wdh':'reps','Kilogramm':'Kilograms','Pfund':'Pounds','Gewichtseinheit':'Weight unit','Sprache':'Language',
@@ -1191,6 +1215,7 @@ const PAT=[
  [/^Für eine faire Wertung brauchst du mindestens (.+)\.$/,m=>`For a fair score you need at least ${m[1]}.`],
  [/^Verlauf (.+): von (.+) zu (.+)$/,m=>`Progress ${tw(m[1])}: from ${trS(m[2])} to ${trS(m[3])}`],
  [/^(.+) auf (\d[\d.,]* (?:km|mi|m))$/,m=>`${m[1]} over ${m[2]}`],
+ [/^Alle anzeigen \((\d+)\)$/,m=>`Show all (${m[1]})`],
  [/^Mehr anzeigen \((\d+) weitere\)$/,m=>`Show more (${m[1]} more)`],
  [/^(.+) (\d+) Wdh bearbeiten$/,m=>`Edit ${tw(m[1])} ${m[2]} reps`],
  [/^(.+?) (\d[\d.,]* (?:km|mi|m) in [\d:]+) bearbeiten$/,m=>`Edit ${tw(m[1])} ${m[2]}`],
@@ -1540,7 +1565,7 @@ function chartHTML(id,since,compact){
     <svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Verlauf ${esc(x.n)}: von ${vText(x,pts[0].v)} zu ${vText(x,pts[pts.length-1].best)}">${ticks}<path d="${area}" style="fill:var(--accent);opacity:.12"/><path d="${line}" style="fill:none;stroke:var(--accent);stroke-width:2.2;stroke-linejoin:round;stroke-linecap:round"/>${dots}<text x="${pl}" y="${H-6}" style="fill:var(--dim);font:10px var(--mono)">${dl(t0)}</text><text x="${W-pr}" y="${H-6}" text-anchor="end" style="fill:var(--dim);font:10px var(--mono)">${dl(t1)}</text></svg>${compact?'':tip('chart','Linie: bester Wert bisher. Punkte: bester Satz pro Trainingstag.')}`;
 }
 
-let bwConfirm=false,cscope='crew',inviteTxt='',statLift=null,statRange='all',statLimit=30,dsel=0,editing=null,tl='bench',tab='train',toastT,mode='season',cfilter='all',nx=null,confirmDel=false,ladderOpen=false;
+let bwConfirm=false,cscope='crew',inviteTxt='',statLift=null,statRange='all',statLimit=30,dsel=0,editing=null,tl='bench',tab='home',feedOpen=false,toastT,mode='season',cfilter='all',nx=null,confirmDel=false,ladderOpen=false;
 if(S.last&&L(S.last))tl=S.last;
 
 function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>{t.hidden=true},2800)}
@@ -1791,7 +1816,7 @@ async function initCrew(){
     DB=db;
     initBackup();
     DB.collection('members').onSnapshot(
-      snap=>{members=snap.docs.map(d=>({id:d.id,...d.data()}));{const own=members.find(m=>m.id===UID);if(own&&mergeSocial(own)){save();syncCrew()}socialMerged=true}renderBoard();try{crewNotify()}catch(e){}if(tab==='train')renderTrain();else STALE.train=1},
+      snap=>{members=snap.docs.map(d=>({id:d.id,...d.data()}));{const own=members.find(m=>m.id===UID);if(own&&mergeSocial(own)){save();syncCrew()}socialMerged=true}renderBoard();try{crewNotify()}catch(e){}if(tab==='train')renderTrain();else STALE.train=1;if(tab==='home')renderHome();else STALE.home=1},
       e=>{crewErr=(e&&e.code)||'error';renderSetup();renderBoard()}
     );
     renderSetup();syncCrew();
@@ -1882,13 +1907,15 @@ function renderFeed(){
   const list=crewList(),now=Date.now(),items=[];
   for(const e of list)for(const ev of (e.ev||[]))if(now-ev.ts<14*day)items.push({e,ev});
   items.sort((a,b)=>b.ev.ts-a.ev.ts);
-  const h=items.slice(0,15).map(({e,ev})=>{
+  const shown=feedOpen?items.slice(0,15):items.slice(0,3);
+  const h=shown.map(({e,ev})=>{
     const owner=eid(e),key=owner+'~'+ev.i,cnt={},names={};
     for(const m of list){if(eid(m)===owner)continue;const r=(m.rx||{})[key];if(r){cnt[r]=(cnt[r]||0)+1;(names[r]=names[r]||[]).push(m.me?S.nick:m.nick)}}
     const mine=e.me?null:(S.rx||{})[key];
     const rx=REACT.map(([k,em])=>e.me?(cnt[k]?`<span class="rxb ro" title="${esc((names[k]||[]).join(', '))}">${em}<b>${cnt[k]}</b></span>`:''):`<button class="rxb${mine===k?' on':''}" data-act="react" data-v="${esc(key)}" data-e="${k}" aria-pressed="${mine===k}" aria-label="${em} ${cnt[k]||0}" title="${esc((names[k]||[]).join(', '))}">${em}${cnt[k]?`<b>${cnt[k]}</b>`:''}</button>`).join('');
     return `<div class="fd${e.me?' me':''}">${picHTML(e.me?S.avatar:e.av,'sm',e.me?myAvatarOpts():{tier:e.tier})}<div class="fdb"><div class="fdh"><b>${esc(e.me?S.nick:e.nick)}</b>${e.me?'<em>Du</em>':''}<small>${agoOf(ev.ts)}</small></div><div class="fdt">${evHTML(ev)}</div>${rx?`<div class="fdr">${rx}</div>`:''}</div></div>`}).join('');
-  el.innerHTML=`<div class="lbl">Crew-Feed</div>${h||'<p class="note" style="margin:0">Noch ist es ruhig. Sobald jemand eine Bestleistung schafft oder aufsteigt, steht es hier, und ihr könnt euch gegenseitig anfeuern.</p>'}`;
+  const more=items.length>3?`<button class="acc fdmore" data-act="feedmore" aria-expanded="${feedOpen}"><span>${feedOpen?'Weniger anzeigen':'Alle anzeigen ('+Math.min(15,items.length)+')'}</span><span class="chev">▾</span></button>`:'';
+  el.innerHTML=`<div class="lbl">Crew-Feed</div>${h?h+more:'<p class="note" style="margin:0">Noch ist es ruhig. Sobald jemand eine Bestleistung schafft oder aufsteigt, steht es hier, und ihr könnt euch gegenseitig anfeuern.</p>'}`;
 }
 function renderDuels(){
   const el=$('#duelCard');if(!el)return;const ok=crewOk();el.hidden=!ok;if(!ok)return;
@@ -2167,6 +2194,27 @@ function renderBwCheck(){
   el.hidden=!show;
   if(show)el.innerHTML=`<div class="lbl">Kurzer Check</div><div style="font-family:var(--display);font-weight:600;font-size:17px">Wiegst du noch ${fw(S.bw)} ${U()}?</div><p class="note" style="margin:0">Dein Gewicht macht die Wertung fair. Ein aktueller Wert hält deine Punkte genau.</p><div class="btnrow"><button class="btn sm" data-act="bwok" style="background:var(--fg);color:var(--bg);border-color:var(--fg)">Ja, stimmt</button><button class="btn sm ghost" data-act="bwedit">Ändern</button></div>`;
 }
+function renderHome(){
+  const now=new Date(),h=now.getHours(),has=S.sets.some(z=>L(z.lift));
+  const gr=h>=5&&h<11?'Guten Morgen':h>=11&&h<17?'Guten Tag':h>=17&&h<23?'Guten Abend':'Hallo';
+  const todayDone=S.sets.some(z=>dayKey(z.ts)===dayKey(Date.now()));
+  const sub=!has?'Trag deinen ersten Satz ein und hol dir deinen Rang.':todayDone?'Heute schon trainiert. Stark.':'Bereit für dein Training?';
+  $('#homeHero').innerHTML=`<div class="hdate">${esc(now.toLocaleDateString(LOC(),{weekday:'long',day:'numeric',month:'long'}))}</div><h2 class="hgreet"><span>${gr}</span>${S.nick?', '+esc(S.nick):''}</h2><p class="hsub">${sub}</p><button class="btn primary" data-act="gotab" data-v="train">${todayDone?'Weiteren Satz eintragen':'Training eintragen'}</button>`;
+  const st=streakInfo();
+  renderStreak(st);
+  const o=overall(),hr=$('#homeRank');hr.hidden=!o.arr.length;
+  if(o.arr.length){const g=o.g,pct=o.locked?100:Math.max(0,Math.min(100,o.avg-g*100)),miss=Math.max(1,Math.ceil((g+1)*100-o.avg));
+    hr.style.setProperty('--c','var(--t'+g+')');
+    hr.innerHTML=`<div class="hrow"><div class="embwrap" style="color:var(--t${g})">${emblem(g)}</div><div><div class="lbl">Dein Rang</div><div class="tname">${TIERS[g]}</div></div><span class="hchev" aria-hidden="true">›</span></div><div class="bar"><i style="width:${pct}%"></i></div>${g<NT?(o.locked?`<div class="next"><span class="dim">Nächster Rang <b style="color:var(--t${g+1})">${TIERS[g+1]}</b></span><span class="mono">noch ${o.need} ${o.need===1?'Trainingstag':'Trainingstage'}</span></div>`:`<div class="next"><span class="dim">Nächster Rang <b style="color:var(--t${g+1})">${TIERS[g+1]}</b></span><span class="mono">noch ${miss} ${miss===1?'Punkt':'Punkte'}</span></div>`):'<div class="next"><span class="dim">Höchster Rang erreicht</span></div>'}`}
+  const hg=$('#homeGoal');let gl='',gx=null;
+  if(has){const ls=S.sets.filter(z=>L(z.lift)&&!isCustom(z.lift)).sort((a,b)=>b.ts-a.ts)[0];
+    if(ls){gx=L(ls.lift);const sc=compute(S.sets).best[gx.id];if(sc!==undefined){const ti=tierOfS(gx,sc);if(ti<NT)gl=goalFor(gx,ti)}}}
+  hg.hidden=!gl;if(gl){hg.dataset.v=gx.id;hg.innerHTML=`<div class="lbl">Nächstes Ziel</div><div class="hrow"><div><div class="hgt">${esc(gx.n)}</div><small><span>🎯 Dein nächster Rang mit</span> <b>${gl}</b></small></div><span class="hchev" aria-hidden="true">›</span></div>`}
+  const rm=$('#rivalMini'),rv2=(DB&&CAN!==false&&!S.example&&S.nick)?rivals():null;
+  rm.hidden=!rv2;
+  if(rv2){const g=rv2.up?rv2.up.v-rv2.me.v:0,t=rv2.up?(g>0?`<b>${esc(rv2.up.e.nick)}</b> ist ${g} Saisonpunkte vor dir`:`Gleichauf mit <b>${esc(rv2.up.e.nick)}</b>`):`Du führst vor <b>${esc(rv2.down.e.nick)}</b>`;
+    rm.innerHTML=`<div class="lbl">Dein Rivale</div><div class="est"><div style="min-width:0">${t}</div><button class="btn sm" data-tab="crew">Crew</button></div>`}
+}
 function renderTrain(){
   renderBwCheck();
   if(!L(tl))tl=BASE[0].id;
@@ -2195,12 +2243,6 @@ function renderTrain(){
   $('#spts').textContent=c.hist[key]||0;
   $('#smonth').textContent=monthName(key);
   $('#sdays').textContent=daysTrained(key);
-  const st=streakInfo();
-  renderStreak(st);
-  const rm=$('#rivalMini'),rv2=(DB&&CAN!==false&&!S.example&&S.nick)?rivals():null;
-  rm.hidden=!rv2;
-  if(rv2){const g=rv2.up?rv2.up.v-rv2.me.v:0,t=rv2.up?(g>0?`<b>${esc(rv2.up.e.nick)}</b> ist ${g} Saisonpunkte vor dir`:`Gleichauf mit <b>${esc(rv2.up.e.nick)}</b>`):`Du führst vor <b>${esc(rv2.down.e.nick)}</b>`;
-    rm.innerHTML=`<div class="lbl">Dein Rivale</div><div class="est"><div style="min-width:0">${t}</div><button class="btn sm" data-tab="crew">Crew</button></div>`}
   $('#chartCard').innerHTML=chartHTML(tl)+(S.sets.some(z=>z.lift===tl)?`<button class="btn sm" data-act="statopen" data-v="${esc(tl)}" style="justify-self:start">Alle Einträge ansehen</button>`:'');
   const es=editing?S.sets.find(z=>z.id===editing.id):null;
   if(editing&&!es)editing=null;
@@ -2390,7 +2432,7 @@ function renderStat(){
     <div class="card span2 chartwrap"><div class="pills wrap">${pillsHTML('statrange',[['1m','1 Monat'],['3m','3 Monate'],['1y','1 Jahr'],['all','Alles']],statRange)}</div>${chartHTML(statLift,since)}</div>
     <div class="card span2"><div class="lbl">Alle Einträge</div>${tip('edit7','Einträge kannst du 7 Tage lang ändern oder löschen. Danach sind sie fest, damit die Wertung fair bleibt.')}${hist}${rows.length>statLimit?`<button class="btn sm" data-act="statmore" style="justify-self:start">Mehr anzeigen (${rows.length-statLimit} weitere)</button>`:''}</div>`;
 }
-const STALE={};const TABR=()=>({train:renderTrain,ranks:renderRanks,stat:renderStat,crew:renderBoard});
+const STALE={};const TABR=()=>({home:renderHome,train:renderTrain,ranks:renderRanks,stat:renderStat,crew:renderBoard});
 function renderAll(){renderTop();const m=TABR();for(const k in m){if(k===tab){STALE[k]=0;m[k]()}else STALE[k]=1}}
 
 let pendAv='legday',impConfirm=false,DL=null;
@@ -2612,7 +2654,7 @@ function closeSheet(){$('#sheet').hidden=true}
 function setTab(t){
   tab=t;if(t==='crew'){crewDot(false);setTimeout(()=>{try{checkDuelResults()}catch(e){}},300)}if(t==='stat'||STALE[t]){STALE[t]=0;const f=TABR()[t];if(f)f()}
   document.querySelectorAll('[data-view]').forEach(s=>s.hidden=s.dataset.view!==t);
-  document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===t));
+  document.querySelectorAll('.dock [data-tab]').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===t));
   window.scrollTo(0,0);
 }
 function prefill(){
@@ -2765,6 +2807,9 @@ document.addEventListener('click',e=>{
     tl=s.lift;editing={id:s.id};confirmDel=false;fillIn(L(s.lift),s);setTab('train');renderTrain();
   }
   else if(a==='editdel'){if(editing&&canEdit(S.sets.find(z=>z.id===editing.id))){S.sets=S.sets.filter(z=>z.id!==editing.id);editing=null;syncShown();save();prefill();renderAll();syncCrew()}}
+  else if(a==='gotab'){setTab(v)}
+  else if(a==='feedmore'){feedOpen=!feedOpen;renderFeed()}
+  else if(a==='homegoal'){if(v&&L(v)){tl=v;S.last=v;nx=null;exQ='';try{$('#exQ').value=''}catch(e){}editing=null;confirmDel=false;save();prefill()}setTab('train');renderTrain()}
   else if(a==='stattab'){statLift=null;setTab('stat');renderStat()}
   else if(a==='editcancel'){editing=null;prefill();renderTrain()}
   else if(a==='sharecard'){shareCard().catch(()=>toast('Die Karte konnte nicht erstellt werden.'))}
@@ -2842,7 +2887,7 @@ document.addEventListener('click',e=>{
     toast(S.example?'Profil gespeichert. Für die Crew zuerst das Profil leeren.':'Profil gespeichert');
   }
   else if(a==='leave'){
-    clearTimeout(wTimer);S.nick='';lastSent='';leaveCrewDoc();save();renderTop();renderSetup();renderBoard();if(tab==='train')renderTrain();else STALE.train=1;toast('Du hast die Crew verlassen');
+    clearTimeout(wTimer);S.nick='';lastSent='';leaveCrewDoc();save();renderTop();renderSetup();renderBoard();if(tab==='train')renderTrain();else STALE.train=1;if(tab==='home')renderHome();else STALE.home=1;toast('Du hast die Crew verlassen');
   }
 });
 ['#w','#r','#th','#tm','#ts'].forEach(s=>$(s).addEventListener('input',renderTrain));
