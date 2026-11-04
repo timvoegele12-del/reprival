@@ -335,6 +335,9 @@ section[data-view]{min-width:0}
 .hgoal .hgt{font-family:var(--display);font-weight:600;font-size:17px;overflow-wrap:anywhere}
 .hgoal small{display:block;color:var(--dim);font-size:13px;margin-top:3px}
 .fdmore{margin-top:2px}
+#crewSwitch .pills{justify-self:stretch;justify-content:flex-start;width:100%}
+.csleave{justify-self:start;color:var(--dim);font-size:13px;min-height:38px;padding:8px 12px}
+.crewadd{display:grid;gap:10px;border-top:1px solid var(--line);padding-top:12px}
 #toast{pointer-events:none;position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:11px 18px;border-radius:999px;font-weight:700;font-size:14px;z-index:120;max-width:calc(100% - 32px);text-align:center}
 @media (prefers-reduced-motion:no-preference){.bar i,.track i,.ring{transition:all .35s ease}}
 .how summary{cursor:pointer;font-family:var(--display);font-weight:600;font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:28px}
@@ -735,6 +738,7 @@ textarea{font-size:16px}
     <section data-view="crew" id="v-crew" hidden>
       <div class="bento">
         <div class="card span2" id="joinBanner" hidden></div>
+        <div class="card span2" id="crewSwitch" hidden></div>
         <div class="card span2" id="seasonCard"></div>
         <div class="card span2" id="scopeCard" hidden><div class="pills wrap" id="scopePills"></div></div>
         <div class="card span2" id="duelCard" hidden></div>
@@ -793,7 +797,7 @@ textarea{font-size:16px}
       <div class="tip" data-tip="pBw"><p class="note">Dein Gewicht macht die Wertung fair: Leichte und Schwere werden im Verhältnis zu ihrem Körpergewicht bewertet. Ändern zählt nur für neue Sätze, alte Punkte bleiben.</p><button class="tipx" data-act="tipok" data-v="pBw">Verstanden</button></div></div>
     <div style="display:grid;gap:8px"><label class="lbl" for="profCrew">Crew-Code (optional)</label>
       <input id="profCrew" class="nm-in" type="text" maxlength="20" placeholder="z. B. gym-bros" autocomplete="off">
-      <div class="tip" data-tip="pCrew"><p class="note">Alle Freunde tragen denselben Code ein und sehen sich nur untereinander. Der Code ist kein Passwort.</p><button class="tipx" data-act="tipok" data-v="pCrew">Verstanden</button></div></div>
+      <div class="tip" data-tip="pCrew"><p class="note">Alle Freunde tragen denselben Code ein und sehen sich nur untereinander. Mit einem neuen Code trittst du einer weiteren Crew bei, bis zu 3. Wechseln und verlassen kannst du im Crew-Reiter.</p><button class="tipx" data-act="tipok" data-v="pCrew">Verstanden</button></div></div>
     <div style="display:grid;gap:8px"><label class="lbl" for="profStudio">Studio oder Stadt (optional)</label>
       <input id="profStudio" class="nm-in" type="text" maxlength="24" placeholder="z. B. FitX Passau" autocomplete="off">
       <div id="studioSugg" style="display:grid;gap:6px" hidden></div>
@@ -1024,6 +1028,11 @@ const AVATARS=[
 const AV_IDS=AVATARS.map(a=>a.id);
 const normStudio=s=>String(s||'').toLowerCase().replace(/[^a-z0-9äöüß]/g,'').slice(0,24);
 const normCrew=s=>String(s||'').toLowerCase().replace(/[^a-z0-9äöüß-]/g,'').slice(0,20);
+/* Mehrere Crews: S.crews (max. 3), S.crew = gerade angezeigte Crew */
+const MAXCREWS=3;
+function fixCrews(){let a=Array.isArray(S.crews)?S.crews.map(normCrew).filter(Boolean):(S.crew?[normCrew(S.crew)]:[]);a=[...new Set(a)].slice(0,MAXCREWS);S.crew=normCrew(S.crew);if(S.crew&&!a.includes(S.crew)){if(a.length<MAXCREWS)a.unshift(S.crew);else S.crew=a[0]}if(!S.crew&&a.length)S.crew=a[0];S.crews=a}
+function joinCrew(c){fixCrews();if(S.crews.includes(c)){S.crew=c;return true}if(S.crews.length>=MAXCREWS){toast('Du bist schon in 3 Crews. Verlasse zuerst eine im Crew-Reiter.');return false}S.crews.push(c);S.crew=c;return true}
+const inCrew=(c,k)=>k?c.crews.includes(k):!c.crews.length;
 /* Kopf-Anker je Avatar: x,y Kopfmitte, r Radius, ey Augenhöhe, hb Stirnband-Höhe, cy Ketten-Höhe */
 const ANCH={lycra:{x:66,y:31,r:6.5,ey:31.5,hb:0,cy:38.5,gx:69.5,wb:[62.3,44.5,-17]},chlor:{x:45,y:50,r:13,ey:50,hb:0,cy:61,wb:[78.5,39.5,39]},legday:{x:50,y:20,r:11,ey:21,hb:13,cy:32},pizza:{x:50,y:28,r:14,ey:25,hb:18,cy:42},spaghetti:{x:50,y:33,r:8,ey:32,hb:28,cy:41.5},bear:{x:50,y:43,r:15,ey:39,hb:32,cy:61},bulk:{x:50,y:29,r:17,ey:28,hb:0,cy:49},flag:{x:40,y:26,r:7.5,ey:26.5,hb:21,cy:34}};
 /* Extras, die man mit dem Gesamtrang freischaltet */
@@ -1078,11 +1087,12 @@ function load(){
   return seed();
 }
 let S=load();
+fixCrews();
 LANG=S.lang==='en'?'en':'de';
 /* ---------- Sprache: Deutsch (Quelle) -> Englisch per Übersetzungsschicht ---------- */
 const D={
 // Navigation & allgemein
-'Start':'Home','Guten Morgen':'Good morning','Guten Tag':'Good afternoon','Guten Abend':'Good evening','Hallo':'Hello','Trag deinen ersten Satz ein und hol dir deinen Rang.':'Log your first set and earn your rank.','Heute schon trainiert. Stark.':'Already trained today. Strong.','Bereit für dein Training?':'Ready for your workout?','Weiteren Satz eintragen':'Log another set','Training eintragen':'Log workout','Nächstes Ziel':'Next goal','Weniger anzeigen':'Show less','Dein Rang':'Your rank','Training':'Training','Ränge':'Ranks','Statistik':'Stats','Crew':'Crew','Profil bearbeiten':'Edit profile','Athlet':'Athlete','Du':'You',
+'Start':'Home','Deine Crews':'Your crews','Wirklich verlassen? Nochmal tippen':'Really leave? Tap again','Deine Crew':'Your crew','+ Crew':'+ Crew','Studio-Liga':'Studio league','Neue Crew erstellen':'Create new crew','Du kannst in bis zu 3 Crews gleichzeitig sein.':'You can be in up to 3 crews at once.','Du bist schon in 3 Crews. Verlasse zuerst eine im Crew-Reiter.':'You are already in 3 crews. Leave one first in the Crew tab.','Für die Crew':'For the crew','Alle Freunde tragen denselben Code ein und sehen sich nur untereinander. Mit einem neuen Code trittst du einer weiteren Crew bei, bis zu 3. Wechseln und verlassen kannst du im Crew-Reiter.':'All friends enter the same code and only see each other. A new code lets you join another crew, up to 3. Switch and leave in the Crew tab.','Guten Morgen':'Good morning','Guten Tag':'Good afternoon','Guten Abend':'Good evening','Hallo':'Hello','Trag deinen ersten Satz ein und hol dir deinen Rang.':'Log your first set and earn your rank.','Heute schon trainiert. Stark.':'Already trained today. Strong.','Bereit für dein Training?':'Ready for your workout?','Weiteren Satz eintragen':'Log another set','Training eintragen':'Log workout','Nächstes Ziel':'Next goal','Weniger anzeigen':'Show less','Dein Rang':'Your rank','Training':'Training','Ränge':'Ranks','Statistik':'Stats','Crew':'Crew','Profil bearbeiten':'Edit profile','Athlet':'Athlete','Du':'You',
 'Abbrechen':'Cancel','Speichern':'Save','Weiter':'Continue','Löschen':'Delete','Ändern':'Change','Verstanden':'Got it','Beitreten':'Join','Nicht jetzt':'Not now',
 'Heute':'Today','Gestern':'Yesterday','Vorgestern':'2 days ago','heute':'today','gestern':'yesterday','Wann?':'When?','diese Woche':'this week','in diesem Monat':'this month',
 'kg':'kg','lb':'lb','Wdh':'reps','Kilogramm':'Kilograms','Pfund':'Pounds','Gewichtseinheit':'Weight unit','Sprache':'Language',
@@ -1252,6 +1262,8 @@ const PAT=[
  [/^Für eine faire Wertung brauchst du mindestens (.+)\.$/,m=>`For a fair score you need at least ${m[1]}.`],
  [/^Verlauf (.+): von (.+) zu (.+)$/,m=>`Progress ${tw(m[1])}: from ${trS(m[2])} to ${trS(m[3])}`],
  [/^(.+) auf (\d[\d.,]* (?:km|mi|m))$/,m=>`${m[1]} over ${m[2]}`],
+ [/^Crew „(.+)“ verlassen$/,m=>`Leave crew “${m[1]}”`],
+ [/^Du hast die Crew (.+) verlassen$/,m=>`You left the crew ${m[1]}`],
  [/^Alle anzeigen \((\d+)\)$/,m=>`Show all (${m[1]})`],
  [/^Mehr anzeigen \((\d+) weitere\)$/,m=>`Show more (${m[1]} more)`],
  [/^(.+) (\d+) Wdh bearbeiten$/,m=>`Edit ${tw(m[1])} ${m[2]} reps`],
@@ -1367,7 +1379,7 @@ const T=s=>LANG==='en'?tr(s):s;
 const ORIG=new WeakMap(),ORIGA=new WeakMap();
 function trNode(n){
   if(n.nodeType===3){
-    const p=n.parentNode;if(p&&(p.nodeName==='SCRIPT'||p.nodeName==='STYLE'))return;
+    const p=n.parentNode;if(p&&(p.nodeName==='SCRIPT'||p.nodeName==='STYLE'||p.classList&&p.classList.contains('notr')))return;
     const src=ORIG.has(n)&&ORIG.get(n).en===n.data?ORIG.get(n).de:n.data;const t=tr(src);
     if(t!==n.data){ORIG.set(n,{de:src,en:t});n.data=t}
   }else if(n.nodeType===1){
@@ -1651,7 +1663,7 @@ function daysTrained(key){const set={};for(const s of S.sets)if(monthKey(s.ts)==
 function payload(){
   const o=overall();
   const tt=titleOf(o,streakInfo());
-  return {nick:S.nick,av:S.avatar,crew:S.crew||'',studio:S.studio||'',title:tt?tt.n:'',cls:classFor(S.bw).label,kw:o.sum,tier:o.arr.length?o.g:-1,hist:o.hist,...socialPayload()};
+  return {nick:S.nick,av:S.avatar,crew:S.crew||'',crews:Array.isArray(S.crews)?S.crews.slice(0,MAXCREWS):[],studio:S.studio||'',title:tt?tt.n:'',cls:classFor(S.bw).label,kw:o.sum,tier:o.arr.length?o.g:-1,hist:o.hist,...socialPayload()};
 }
 
 
@@ -1704,7 +1716,7 @@ async function doBackup(){
     const rows=S.sets.map(z=>[z.lift,z.w,z.r,z.bw,z.ts,z.id]),n=Math.ceil(rows.length/BK_CH);
     for(let i=0;i<n;i++){const part=rows.slice(i*BK_CH,(i+1)*BK_CH),str=JSON.stringify(part);if(bkChunks[i]!==str){await DB.doc(bkPath('c'+i)).set({s:part});bkChunks[i]=str}}
     const ts=Date.now();
-    await DB.doc(bkPath('bk')).set({v:2,dev:DEV,ts,n,count:rows.length,bw:S.bw,nick:S.nick||'',crew:S.crew||'',studio:S.studio||'',avatar:S.avatar,custom:S.custom,bwLog:(S.bwLog||[]).slice(-1500),bwChecked:S.bwChecked||0,last:S.last||'',tips:S.tips||{},unit:S.unit==='lb'?'lb':'kg',lang:LANG,dunit:DU(),soc:{ev:S.ev||[],rx:S.rx||{},du:S.du||[],da:S.da||{},dx:S.dx||[],duelWon:S.duelWon||{},duelSeen:S.duelSeen||{},badges:S.badges||{},rxSeen:(S.rxSeen||[]).slice(-300)}});
+    await DB.doc(bkPath('bk')).set({v:2,dev:DEV,ts,n,count:rows.length,bw:S.bw,nick:S.nick||'',crew:S.crew||'',crews:S.crews||[],studio:S.studio||'',avatar:S.avatar,custom:S.custom,bwLog:(S.bwLog||[]).slice(-1500),bwChecked:S.bwChecked||0,last:S.last||'',tips:S.tips||{},unit:S.unit==='lb'?'lb':'kg',lang:LANG,dunit:DU(),soc:{ev:S.ev||[],rx:S.rx||{},du:S.du||[],da:S.da||{},dx:S.dx||[],duelWon:S.duelWon||{},duelSeen:S.duelSeen||{},badges:S.badges||{},rxSeen:(S.rxSeen||[]).slice(-300)}});
     bkSeenSet(ts);bkLast=ts;bkErr='';
   }catch(e){bkErr=(e&&e.code)||'error'}
   bkBusy=false;renderBkStatus();
@@ -1713,7 +1725,7 @@ async function readBackup(m){
   const parts=[],nn=Math.min(60,Number(m.n)||0),cache=[];
   for(let i=0;i<nn;i++){const c=await DB.doc(bkPath('c'+i)).get();const d=c.exists?c.data():null;if(!d||!Array.isArray(d.s))return null;parts.push(...d.s);cache[i]=JSON.stringify(d.s)}
   if(parts.length<Number(m.count||0))return null;
-  const o=cleanImport({bw:m.bw,nick:m.nick,crew:m.crew,studio:m.studio,avatar:m.avatar,custom:m.custom,bwLog:m.bwLog,bwChecked:m.bwChecked,sets:parts.filter(Array.isArray).map(a=>({lift:a[0],w:a[1],r:a[2],bw:a[3],ts:a[4],id:a[5]}))});
+  const o=cleanImport({bw:m.bw,nick:m.nick,crew:m.crew,crews:m.crews,studio:m.studio,avatar:m.avatar,custom:m.custom,bwLog:m.bwLog,bwChecked:m.bwChecked,sets:parts.filter(Array.isArray).map(a=>({lift:a[0],w:a[1],r:a[2],bw:a[3],ts:a[4],id:a[5]}))});
   return o?{o,cache}:null;
 }
 /* ---------- Einführung beim ersten Start ---------- */
@@ -1784,7 +1796,7 @@ function introAct(a,v){
 }
 function applyBackup(res,m){
   const o=res.o;
-  Object.assign(S,{bw:o.bw,nick:o.nick,crew:o.crew,studio:o.studio,avatar:o.avatar,custom:o.custom,bwLog:o.bwLog,bwChecked:o.bwChecked,sets:o.sets,example:false,introDone:1});
+  Object.assign(S,{bw:o.bw,nick:o.nick,crew:o.crew,crews:o.crews,studio:o.studio,avatar:o.avatar,custom:o.custom,bwLog:o.bwLog,bwChecked:o.bwChecked,sets:o.sets,example:false,introDone:1});fixCrews();
   try{if(!$('#intro').hidden)introClose()}catch(e){}
   if(m.tips&&typeof m.tips==='object'&&!Array.isArray(m.tips)){const t={};for(const k of Object.keys(m.tips).slice(0,40))if(/^[A-Za-z0-9]{1,20}$/.test(k))t[k]=1;S.tips=t}
   if(m.soc&&typeof m.soc==='object'){try{mergeSocial(m.soc);const ob=(o2)=>o2&&typeof o2==='object'&&!Array.isArray(o2)?o2:{};
@@ -1861,12 +1873,12 @@ async function initCrew(){
 }
 function cleanMember(m){
   return {id:m.id,me:false,nick:String(m.nick||'Unbekannt').slice(0,20),av:AV_IDS.includes(m.av)?m.av:'legday',bw:Number(m.bw)||0,cls:String(m.cls||''),
-    kw:Number(m.kw)||0,tier:Number.isInteger(m.tier)&&m.tier>=0&&m.tier<=NT?m.tier:-1,hist:(m.hist&&typeof m.hist==='object')?m.hist:{},title:String(m.title||'').slice(0,24),crew:normCrew(m.crew),studio:String(m.studio||'').slice(0,24),sk:normStudio(m.studio),ev:cleanEv(m.ev),rx:cleanRx(m.rx),du:cleanDu(m.du),da:cleanDa(m.da),dd:cleanDd(m.dd)};
+    kw:Number(m.kw)||0,tier:Number.isInteger(m.tier)&&m.tier>=0&&m.tier<=NT?m.tier:-1,hist:(m.hist&&typeof m.hist==='object')?m.hist:{},title:String(m.title||'').slice(0,24),crew:normCrew(m.crew),crews:[...new Set((Array.isArray(m.crews)&&m.crews.length?m.crews:[m.crew]).slice(0,5).map(normCrew).filter(Boolean))],studio:String(m.studio||'').slice(0,24),sk:normStudio(m.studio),ev:cleanEv(m.ev),rx:cleanRx(m.rx),du:cleanDu(m.du),da:cleanDa(m.da),dd:cleanDd(m.dd)};
 }
 function entries(scope){
   scope=scope||cscope;const sk=normStudio(S.studio);
   const list=[];
-  for(const m of members){if(m.id===UID)continue;const c=cleanMember(m);if(scope==='studio'&&sk?c.sk===sk:c.crew===(S.crew||''))list.push(c)}
+  for(const m of members){if(m.id===UID)continue;const c=cleanMember(m);if(scope==='studio'&&sk?c.sk===sk:inCrew(c,S.crew||''))list.push(c)}
   list.push({id:UID||'me',me:true,...payload(),nick:S.nick||'Du'});
   return list;
 }
@@ -1881,7 +1893,7 @@ const hue=s=>{let h=0;for(const c of String(s))h=(h*31+c.charCodeAt(0))%360;retu
 const REACT=[['fire','🔥'],['muscle','💪'],['lol','😂']];
 const DUEL_DAYS=7,DUEL_WAIT=3*day;
 const LOSER_T=['Kuchenbeauftragter','Hantel-Sortierer','Handtuch-Halter','Protein-Lieferant','Spind-Aufräumer'];
-let duelForm=false,duelOpp='',duelMet='days';
+let leaveAsk=false,crewAddOpen=false,duelForm=false,duelOpp='',duelMet='days';
 function vib(p){if(S.vib===false)return;try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}}
 function addEv(e){const lim=Date.now()-30*day;S.ev=(Array.isArray(S.ev)?S.ev:[]).filter(z=>z&&z.ts>lim).slice(-11);S.ev.push({i:newId(),ts:Date.now(),...e})}
 const okUid=v=>typeof v==='string'&&v.length>0&&v.length<=128&&!v.includes('~');
@@ -1911,6 +1923,8 @@ function socialPayload(){const now=Date.now();
   return {ev:(Array.isArray(S.ev)?S.ev:[]).filter(e=>e.ts>now-30*day).slice(-12),rx,du:(Array.isArray(S.du)?S.du:[]).filter(d=>d.c>now-21*day).slice(-8),dx:(Array.isArray(S.dx)?S.dx:[]).slice(-20),da:S.da&&typeof S.da==='object'?S.da:{},dd:ddMine()}}
 const crewOk=()=>!!(DB&&CAN!==false&&!S.example&&S.nick);
 function crewList(){return crewOk()?entries('crew'):[]}
+/* alle, mit denen man in irgendeiner Crew ist (für Duelle, Reaktionen, Titel) */
+function socialList(){if(!crewOk())return [];fixCrews();const set=new Set(S.crews),list=[];for(const m of members){if(m.id===UID)continue;const c=cleanMember(m);if(set.size?c.crews.some(x=>set.has(x)):!c.crews.length)list.push(c)}list.push({id:UID||'me',me:true,...payload(),nick:S.nick||'Du'});return list}
 const eid=e=>e.me?UID:e.id;
 const DUEL_GRACE=2*day;
 function duelWindow(start){const d=new Date(start);d.setHours(12,0,0,0);const days=[];for(let k=0;k<DUEL_DAYS;k++){days.push(isoDay(d.getTime()));d.setDate(d.getDate()+1)}d.setHours(0,0,0,0);return {days,end:d.getTime()}}
@@ -1956,8 +1970,8 @@ function renderFeed(){
 }
 function renderDuels(){
   const el=$('#duelCard');if(!el)return;const ok=crewOk();el.hidden=!ok;if(!ok)return;
-  const list=crewList(),now=Date.now(),me=list.find(e=>e.me),ds=allDuels(list).filter(d=>d.ch.me||d.op.me);
-  const others=list.filter(e=>!e.me);
+  const list=socialList(),now=Date.now(),me=list.find(e=>e.me),ds=allDuels(list).filter(d=>d.ch.me||d.op.me);
+  const actIds=new Set(crewList().map(eid)),others=list.filter(e=>!e.me&&actIds.has(eid(e)));
   const pic=e=>picHTML(e.me?S.avatar:e.av,'sm',e.me?myAvatarOpts():{tier:e.tier});
   let h='<div class="lbl">Duelle</div>';
   for(const d of ds.filter(d=>d.state==='pending'&&d.op.me))h+=`<div class="du inc"><div class="duh">${pic(d.ch)}<div><b>${esc(d.ch.nick)}</b> <span>fordert dich heraus</span><div class="dim sm">${metQ(d.m)}</div></div></div><div class="btnrow"><button class="btn sm" data-act="duelok" data-v="${esc(d.key)}" style="background:var(--fg);color:var(--bg);border-color:var(--fg)">Annehmen</button><button class="btn sm ghost" data-act="duelno" data-v="${esc(d.key)}">Ablehnen</button></div></div>`;
@@ -2001,13 +2015,13 @@ function showDuelResult(d){
 function checkDuelResults(){
   if(!crewOk()||!$('#fx').hidden||!$('#intro').hidden||rcState||document.hidden)return;
   S.duelSeen=S.duelSeen&&typeof S.duelSeen==='object'?S.duelSeen:{};
-  const d=allDuels(crewList()).find(d=>d.state==='done'&&(d.ch.me||d.op.me)&&!S.duelSeen[d.key]&&Date.now()-d.end<14*day);if(!d)return;
+  const d=allDuels(socialList()).find(d=>d.state==='done'&&(d.ch.me||d.op.me)&&!S.duelSeen[d.key]&&Date.now()-d.end<14*day);if(!d)return;
   S.duelSeen[d.key]=1;const [ms,os,opp]=d.ch.me?[d.a,d.b,d.op]:[d.b,d.a,d.ch];
   if(ms>os){const eidD='dw'+hue(d.key)+String(d.id).slice(0,10);if(!(S.ev||[]).some(e=>e.i===eidD)){addEv({k:'duel',o:opp.nick.slice(0,20),v:ms,w:os,m:d.m});S.ev[S.ev.length-1].i=eidD}S.duelWon=S.duelWon&&typeof S.duelWon==='object'?S.duelWon:{};S.duelWon[d.key]=1;setTimeout(()=>checkBadges(),9500)}
   save();syncCrew();showDuelResult(d);if(tab==='crew')renderDuels();
 }
 function crewNotify(){
-  if(!crewOk()||!UID)return;const list=crewList(),mine=new Set((S.ev||[]).map(e=>e.i)),keys=[],who={};
+  if(!crewOk()||!UID)return;const list=socialList(),mine=new Set((S.ev||[]).map(e=>e.i)),keys=[],who={};
   for(const e of list){if(e.me)continue;for(const [k,v] of Object.entries(e.rx||{})){const [u,i]=k.split('~');if(u===UID&&mine.has(i)){const kk=e.id+'|'+i+'|'+v;keys.push(kk);who[kk]=e.nick}}}
   if(!Array.isArray(S.rxSeen)){S.rxSeen=keys.slice(-300);save()}
   else{const seen=new Set(S.rxSeen),nw=keys.filter(k=>!seen.has(k));
@@ -2369,12 +2383,17 @@ function renderSetup(){
   el.hidden=!html;el.innerHTML=html;
   const ok=DB&&CAN!==false&&!S.example&&S.nick;
   box.hidden=!ok;
-  box.innerHTML=ok?`<h3>Dein Profil</h3><div class="btnrow"><button class="btn sm" data-act="profile">Name und Avatar ändern</button><button class="btn sm ghost" data-act="leave">Crew verlassen</button></div>`:'';
+  box.innerHTML=ok?`<h3>Dein Profil</h3><div class="btnrow"><button class="btn sm" data-act="profile">Name und Avatar ändern</button><button class="btn sm ghost" data-act="leave">${S.crews&&S.crews.length>1?'Crew „'+esc(S.crew)+'“ verlassen':'Crew verlassen'}</button></div>`:'';
 }
 function renderBoard(){
   if(cscope==='studio'&&!normStudio(S.studio))cscope='crew';
   const hasSt=!!normStudio(S.studio),okc=DB&&CAN!==false&&!S.example&&S.nick;
-  $('#scopeCard').hidden=!(hasSt&&okc);
+  fixCrews();const showSw=!!okc&&S.crews.length>0;
+  $('#scopeCard').hidden=!(hasSt&&okc)||showSw;
+  {const cs=$('#crewSwitch');cs.hidden=!showSw;
+    if(showSw){const jv=crewAddOpen&&$('#joinCode2')?$('#joinCode2').value:'';
+      cs.innerHTML=`<div class="lbl">${S.crews.length>1?'Deine Crews':'Deine Crew'}</div><div class="pills wrap">${S.crews.map(c=>`<button class="pill" data-act="crewsel" data-v="${esc(c)}" aria-pressed="${c===S.crew&&cscope==='crew'}"><span class="notr">${esc(c)}</span></button>`).join('')}${hasSt?`<button class="pill" data-act="scope" data-v="studio" aria-pressed="${cscope==='studio'}">🏋️ <span>Studio-Liga</span></button>`:''}${S.crews.length<MAXCREWS?`<button class="pill add" data-act="crewadd" aria-expanded="${crewAddOpen}">+ Crew</button>`:''}</div>${crewAddOpen&&S.crews.length<MAXCREWS?`<div class="crewadd"><div class="joinrow"><input id="joinCode2" class="nm-in" type="text" maxlength="20" placeholder="Crew-Code" autocomplete="off" aria-label="Crew-Code"><button class="btn sm" data-act="crewjoin">Beitreten</button></div><button class="btn sm ghost" data-act="invite" style="justify-self:start">Neue Crew erstellen</button><p class="note" style="margin:0">Du kannst in bis zu 3 Crews gleichzeitig sein.</p></div>`:''}${cscope==='crew'?`<button class="btn sm ghost csleave" data-act="leaveask">${leaveAsk?'Wirklich verlassen? Nochmal tippen':(S.crews.length>1?'Crew „'+esc(S.crew)+'“ verlassen':'Crew verlassen')}</button>`:''}`;
+      if(jv){const n2=$('#joinCode2');if(n2)n2.value=jv}}}
   $('#scopePills').innerHTML=pillsHTML('scope',[['crew','Meine Crew'],['studio','Studio-Liga '+(S.studio||'')]],cscope);
   const key=monthKey(Date.now()),list=entries();
   const present=[...new Set(list.map(e=>e.cls).filter(Boolean))].sort((a,b)=>CLASSES.findIndex(c=>c.label===a)-CLASSES.findIndex(c=>c.label===b));
@@ -2384,7 +2403,7 @@ function renderBoard(){
   $('#classPills').innerHTML=pillsHTML('cls',[['all','Alle Klassen'],...present.map(c=>[c,clsLabel(c)])],cfilter);
     const val=e=>mode==='season'?(Number(e.hist[key])||0):e.kw;
   const f=list.filter(e=>cfilter==='all'||e.cls===cfilter).sort((a,b)=>val(b)-val(a)||b.kw-a.kw);
-  const max=Math.max(1,...f.map(val)),LT=loserTitles(crewList());
+  const max=Math.max(1,...f.map(val)),LT=loserTitles(socialList());
   $('#board').innerHTML=f.length?f.map((e,i)=>{
     const lt=LT[e.me?UID:e.id],tr=(e.tier>=0?' · '+TIERS[e.tier]:'')+(lt?' · 🍰 '+lt:e.title?' · '+e.title:'');
     return `<div class="row ${e.me?'me':''}"><div class="pos p${i+1}">${i+1}</div>${picHTML(e.me?S.avatar:e.av,'sm',e.me?myAvatarOpts():{tier:e.tier})}
@@ -2406,11 +2425,11 @@ function renderBoard(){
     rc.innerHTML=h;
   }
   renderDuels();renderFeed();
-  const jb=$('#joinBanner'),pj=pendingJoin&&pendingJoin!==S.crew;jb.hidden=!pj;
+  const jb=$('#joinBanner'),pj=pendingJoin&&!(S.crews||[]).includes(pendingJoin);jb.hidden=!pj;
   if(pj)jb.innerHTML=`<div class="lbl">Einladung</div><div style="font-family:var(--display);font-weight:600;font-size:18px">Du wurdest in die Crew „${esc(pendingJoin)}“ eingeladen</div><p class="note" style="margin:0">${S.example?'Beim Beitreten werden die Beispieldaten entfernt, damit nur deine echten Werte zählen.':'Danach siehst du dich und deine Freunde in der gleichen Rangliste.'}</p><div class="btnrow"><button class="btn sm" data-act="crewjoin" data-v="${esc(pendingJoin)}" style="background:var(--fg);color:var(--bg);border-color:var(--fg)">Crew beitreten</button><button class="btn sm ghost" data-act="joinno">Nicht jetzt</button></div>`;
   const ic=$('#inviteCard');ic.hidden=!okc;
   if(okc){
-    let h='<div class="lbl">Crew einladen</div>';
+    let h='<div class="lbl">Crew einladen</div>'+(S.crews&&S.crews.length>1?`<p class="note" style="margin:-6px 0 0"><span>Für die Crew</span> <b class="notr">${esc(S.crew)}</b></p>`:'');
     if(S.crew){
       const link=crewLink(S.crew);
       h+=`<div class="qrbox"><span class="qrw">${qrSVG(link)}</span><div style="min-width:0;display:grid;gap:6px"><span class="lbl">Crew-Code</span><span class="code">${esc(S.crew)}</span>${window.__standalone?tip('qrHowW','Freunde scannen den Code mit der Handykamera. RepRival öffnet sich, nach dem Anmelden treten sie mit einem Tipp bei.'):tip('qrHow','Freunde scannen den Code mit der Handykamera. Die App öffnet sich, dann im Profil den Crew-Code eintragen.')}</div></div>
@@ -2479,7 +2498,7 @@ const STALE={};const TABR=()=>({home:renderHome,train:renderTrain,ranks:renderRa
 function renderAll(){renderTop();const m=TABR();for(const k in m){if(k===tab){STALE[k]=0;m[k]()}else STALE[k]=1}}
 
 let pendAv='legday',impConfirm=false,DL=null;
-function exportData(){return JSON.stringify({v:1,bw:S.bw,nick:S.nick,crew:S.crew||'',studio:S.studio||'',avatar:S.avatar,custom:S.custom,bwLog:S.bwLog||[],bwChecked:S.bwChecked||0,sets:S.sets})}
+function exportData(){return JSON.stringify({v:1,bw:S.bw,nick:S.nick,crew:S.crew||'',crews:S.crews||[],studio:S.studio||'',avatar:S.avatar,custom:S.custom,bwLog:S.bwLog||[],bwChecked:S.bwChecked||0,sets:S.sets})}
 function cleanImport(o){
   if(!o||typeof o!=='object'||!Array.isArray(o.sets))return null;
   const custom=(Array.isArray(o.custom)?o.custom:[]).filter(c=>c&&typeof c.id==='string'&&typeof c.n==='string'&&(c.kind==='kg'||c.kind==='bw'||c.kind==='cd')&&Array.isArray(c.t)&&(c.t.length===6||c.t.length===NT)&&c.t.every(n=>Number.isFinite(n))).slice(0,50)
@@ -2494,7 +2513,7 @@ function cleanImport(o){
     if(!plausible(x,scOf(x,s.w,Math.round(s.r),bw)))continue;
     sets.push({id:/^[A-Za-z0-9_-]{1,24}$/.test(String(s.id))?String(s.id):newId(),lift:s.lift,w:s.w,r:Math.round(s.r),bw,ts:s.ts});
   }
-  return {bw:BW,nick:String(o.nick||'').slice(0,20),crew:normCrew(o.crew),studio:String(o.studio||'').slice(0,24),bwLog:(Array.isArray(o.bwLog)?o.bwLog:[]).filter(z=>z&&Number.isFinite(z.ts)&&z.bw>=30&&z.bw<=250).map(z=>({ts:z.ts,bw:Number(z.bw)})).slice(-2000),bwChecked:Number(o.bwChecked)||0,avatar:AV_IDS.includes(o.avatar)?o.avatar:'legday',custom,sets};
+  return {bw:BW,nick:String(o.nick||'').slice(0,20),crew:normCrew(o.crew),crews:Array.isArray(o.crews)?o.crews.map(normCrew).filter(Boolean).slice(0,MAXCREWS):(normCrew(o.crew)?[normCrew(o.crew)]:[]),studio:String(o.studio||'').slice(0,24),bwLog:(Array.isArray(o.bwLog)?o.bwLog:[]).filter(z=>z&&Number.isFinite(z.ts)&&z.bw>=30&&z.bw<=250).map(z=>({ts:z.ts,bw:Number(z.bw)})).slice(-2000),bwChecked:Number(o.bwChecked)||0,avatar:AV_IDS.includes(o.avatar)?o.avatar:'legday',custom,sets};
 }
 async function initDl(){try{if(window.claude&&window.claude.use){DL=await window.claude.use('downloads');const b=$('#bkFile');if(b)b.hidden=!DL;renderRanks();renderBoard()}}catch(e){DL=null}}
 function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
@@ -2810,18 +2829,22 @@ document.addEventListener('click',e=>{
   else if(a==='cls'){cfilter=v;renderBoard()}
   else if(a==='scope'){cscope=v;renderBoard()}
   else if(a==='invite'){
-    if(!S.crew){S.crew=normCrew((S.nick||'crew')+'-'+Math.floor(100+Math.random()*900));save();syncCrew();renderSetup()}
-    renderBoard();toast('Crew erstellt. Teile jetzt Link oder QR-Code.');
+    if(!S.crew||a==='invite'&&crewAddOpen){fixCrews();if(S.crews.length>=MAXCREWS){toast('Du bist schon in 3 Crews. Verlasse zuerst eine im Crew-Reiter.');return}let nc;do{nc=normCrew((S.nick||'crew')+'-'+Math.floor(100+Math.random()*900))}while(S.crews.includes(nc));joinCrew(nc);crewAddOpen=false;cscope='crew';save();syncCrew();renderSetup();for(const k in STALE)STALE[k]=1}
+    renderBoard();toast('Crew erstellt. Teile jetzt Link oder QR-Code.');setTimeout(()=>{try{$('#inviteCard').scrollIntoView({behavior:'smooth',block:'start'})}catch(e){}},80);
   }
   else if(a==='crewjoin'){
-    const c=normCrew(v||($('#joinCode')&&$('#joinCode').value)||'');
+    const c=normCrew(v||($('#joinCode2')&&$('#joinCode2').value)||($('#joinCode')&&$('#joinCode').value)||'');
     if(!c){toast('Bitte gib einen Crew-Code ein.');return}
     if(!DB||CAN===false){toast(!DB?'Die Crew ist in dieser Ansicht nicht verfügbar. Öffne die App eingeloggt über den Claude-Link.':'Dir fehlen hier Schreibrechte. Bitte den Besitzer, dich als Mitwirkende freizugeben.');return}
+    fixCrews();if(!S.crews.includes(c)&&S.crews.length>=MAXCREWS){toast('Du bist schon in 3 Crews. Verlasse zuerst eine im Crew-Reiter.');return}
     if(S.example){S.sets=[];S.example=false;S.shown=0}
-    S.crew=c;pendingJoin='';save();renderAll();syncCrew();renderSetup();renderBoard();
+    joinCrew(c);crewAddOpen=false;cscope='crew';pendingJoin='';save();renderAll();syncCrew();renderSetup();renderBoard();
     toast('Du bist jetzt in der Crew '+c);
     if(!S.nick)setTimeout(()=>{openSheet();toast('Wähle noch deinen Namen, damit dich die Crew sieht.')},400);
   }
+  else if(a==='crewsel'){fixCrews();if(S.crews.includes(v)){S.crew=v;cscope='crew';inviteTxt='';save();syncCrew();for(const k in STALE)STALE[k]=1;renderBoard()}}
+  else if(a==='leaveask'){if(!leaveAsk){leaveAsk=true;renderBoard();setTimeout(()=>{if(leaveAsk){leaveAsk=false;renderBoard()}},4000);return}leaveAsk=false;const lb=document.querySelector('#settingsBox [data-act="leave"]');if(lb)lb.click()}
+  else if(a==='crewadd'){crewAddOpen=!crewAddOpen;renderBoard();if(crewAddOpen&&!matchMedia('(pointer:coarse)').matches)setTimeout(()=>{try{$('#joinCode2').focus()}catch(e){}},30)}
   else if(a==='joinno'){pendingJoin='';renderBoard()}
   else if(a==='crewcopy'||a==='crewshare'){
     const link=crewLink(S.crew),txt=window.__standalone?'Komm in meine RepRival-Crew „'+S.crew+'“! Öffne den Link, erstelle ein Konto und tritt mit einem Tipp bei: '+link:'Komm in meine RepRival-Crew „'+S.crew+'“! Öffne die App über den Link und trag im Profil den Crew-Code '+S.crew+' ein: '+link;const txt2=T(txt);
@@ -2877,7 +2900,7 @@ document.addEventListener('click',e=>{
     if(!o){toast('Das ist kein gültiges Backup. Füge den kompletten Text ein.');return}
     if(!o.sets.length){toast('Das Backup enthält keine gültigen Sätze. Deine Daten bleiben unverändert.');return}
     if(!impConfirm){impConfirm=true;$('#bkLoad').textContent=`Ja, ${o.sets.length} Sätze einspielen und aktuelle Daten ersetzen`;return}
-    S.bw=o.bw;S.nick=o.nick||S.nick;S.crew=o.crew;S.studio=o.studio||'';S.bwLog=o.bwLog;S.bwChecked=o.bwChecked;S.avatar=o.avatar;S.custom=o.custom;S.sets=o.sets;S.example=false;
+    S.bw=o.bw;S.nick=o.nick||S.nick;S.crew=o.crew;S.crews=o.crews;fixCrews();S.studio=o.studio||'';S.bwLog=o.bwLog;S.bwChecked=o.bwChecked;S.avatar=o.avatar;S.custom=o.custom;S.sets=o.sets;S.example=false;
     impConfirm=false;$('#bkLoad').textContent='Backup einspielen';
     S.shown=undefined;syncShown();save();closeSheet();tl=BASE[0].id;prefill();renderAll();renderSetup();syncCrew();toast('Backup eingespielt');
   }
@@ -2927,10 +2950,11 @@ document.addEventListener('click',e=>{
     if(nb2!==S.bw)logBw(nb2);
     S.bw=nb2;S.bwChecked=Date.now();bwConfirm=false;
     if(S.nick&&!n){clearTimeout(wTimer);lastSent='';leaveCrewDoc()}
-    S.nick=n;S.avatar=pendAv;S.crew=normCrew($('#profCrew').value);S.studio=($('#profStudio').value||'').trim().slice(0,24);inviteTxt='';save();closeSheet();renderAll();renderSetup();renderBoard();syncCrew();
+    {const pc=normCrew($('#profCrew').value);if(pc&&!(S.crews||[]).includes(pc)&&(S.crews||[]).length>=MAXCREWS){toast('Du bist schon in 3 Crews. Verlasse zuerst eine im Crew-Reiter.');return}if(pc){joinCrew(pc);cscope='crew'}}S.nick=n;S.avatar=pendAv;S.studio=($('#profStudio').value||'').trim().slice(0,24);inviteTxt='';save();closeSheet();renderAll();renderSetup();renderBoard();syncCrew();
     toast(S.example?'Profil gespeichert. Für die Crew zuerst das Profil leeren.':'Profil gespeichert');
   }
   else if(a==='leave'){
+    fixCrews();if(S.crews.length>1){const old=S.crew;S.crews=S.crews.filter(c=>c!==old);S.crew=S.crews[0];cscope='crew';inviteTxt='';save();syncCrew();for(const k in STALE)STALE[k]=1;renderSetup();renderBoard();toast('Du hast die Crew '+old+' verlassen');return}
     clearTimeout(wTimer);S.nick='';lastSent='';leaveCrewDoc();save();renderTop();renderSetup();renderBoard();if(tab==='train')renderTrain();else STALE.train=1;if(tab==='home')renderHome();else STALE.home=1;toast('Du hast die Crew verlassen');
   }
 });
@@ -2955,7 +2979,7 @@ document.addEventListener('keydown',e=>{
 });
 $('#profBw').addEventListener('input',()=>{bwConfirm=false;$('#bwWarn').hidden=true;$('[data-act="profsave"]').textContent='Speichern'});
 syncShown();prefill();renderAll();applyTips();renderSetup();applyLang();initCrew();initDl();
-if(pendingJoin&&pendingJoin!==S.crew){try{setTab('crew')}catch(e){}}
+if(pendingJoin&&!(S.crews||[]).includes(pendingJoin)){try{setTab('crew')}catch(e){}}
 if(S.example&&!S.introDone){try{introOpen()}catch(e){}}
 try{checkBadges()}catch(e){}
 setTimeout(()=>{try{maybeRecap()}catch(e){}},1500);
