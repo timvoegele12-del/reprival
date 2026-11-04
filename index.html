@@ -620,10 +620,47 @@ textarea{width:100%;background:var(--panel-2);border:1px solid var(--line);borde
 .list .l{flex:1}
 .hl{display:flex;align-items:center;gap:6px 8px;flex-wrap:wrap}
 .hl b{white-space:normal;overflow-wrap:anywhere}
+
+/* ---------- Handy-Modus: App-Leiste oben, Tab-Leiste unten, kompakter ---------- */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{-webkit-tap-highlight-color:transparent}
+button,a,.pill,.btn,.acc,[role="button"],summary{touch-action:manipulation}
+button,.pill,.dock,.lbl,summary{-webkit-user-select:none;user-select:none}
+textarea{font-size:16px}
+.ptitle{display:none}
+@media (hover:none){.btn:hover{border-color:var(--line)}}
+@media (prefers-reduced-motion:no-preference){.btn,.pill,.acc,.hrank,.hgoal,.dock button{transition:transform .12s ease,background-color .2s ease,color .2s ease}.btn:active,.pill:active,.acc:active{transform:scale(.96)}}
+@media (max-width:640px){
+  body{padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px));padding-bottom:calc(96px + env(safe-area-inset-bottom,0px));overscroll-behavior-y:none}
+  .head{position:sticky;top:0;z-index:8;margin-inline:-12px;padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 10px 16px;background:rgba(7,8,10,.78);-webkit-backdrop-filter:saturate(1.4) blur(18px);backdrop-filter:saturate(1.4) blur(18px);border-bottom:1px solid transparent;transition:border-color .2s ease}
+  .head.scrolled{border-bottom-color:var(--line)}
+  .ptitle{display:block;margin:0;font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:-.02em;line-height:1.1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .head .who{order:2;flex:none;padding:2px;border-radius:50%}
+  .head .who .hi{display:none}
+  .head .who .pic{width:40px;height:40px}
+  main{padding-top:8px}
+  .bento{gap:10px}
+  .card{padding:16px;border-radius:20px;gap:12px}
+  .hhero{padding:22px 18px 18px}
+  .dock{left:0;right:0;transform:none;bottom:0;max-width:none;width:100%;border-radius:0;border:0;border-top:1px solid var(--line);padding:6px max(6px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(6px,env(safe-area-inset-left,0px));gap:0;background:rgba(12,14,17,.9);justify-content:space-around}
+  .dock button,.dock button[aria-selected="true"]{flex:1 1 0;background:transparent;color:var(--dim);padding:4px 2px;min-height:54px;border-radius:14px;gap:4px}
+  .dock button svg{width:22px;height:22px;padding:4px 16px;box-sizing:content-box;border-radius:999px}
+  .dock button[aria-selected="true"]{color:var(--fg)}
+  .dock button[aria-selected="true"] svg{background:rgba(122,231,255,.16);color:var(--accent)}
+  .dock button span{font-size:11px}
+  .dock button.dot::after{top:4px;right:calc(50% - 22px)}
+  body.kb .dock{display:none}
+  #toast{bottom:calc(82px + env(safe-area-inset-bottom,0px))}
+  .sheet{padding:0;padding-top:max(24px,env(safe-area-inset-top,0px))}
+  .sheetin{max-width:none;border-radius:24px 24px 0 0;border-bottom:0;padding:12px 18px calc(22px + env(safe-area-inset-bottom,0px))}
+  .sheetin::before{content:'';justify-self:center;width:40px;height:5px;border-radius:9px;background:rgba(255,255,255,.18);margin-bottom:2px}
+}
+@media (max-width:370px){.dock button svg{padding:4px 10px}}
 </style>
 
 <div class="wrap">
   <header class="head">
+    <h1 class="ptitle" id="pgTitle">RepRival</h1>
     <div class="who" data-act="profile" role="button" tabindex="0" aria-label="Profil bearbeiten">
       <div class="pic" id="av"></div>
       <div class="hi"><small id="hiSub">Profil bearbeiten</small><b id="hi">Athlet</b></div>
@@ -2648,13 +2685,14 @@ function openSheet(){try{const lb=$('#acctRow');if(lb)lb.hidden=!window.__rrLogo
   renderBkStatus();
   bwConfirm=false;$('#bwWarn').hidden=true;$('[data-act="profsave"]').textContent='Speichern';$('#profBw').value=fw(S.bw);renderUnitSw();renderLangSw();renderDistSw();renderSndSw();
   pendAv=S.avatar;$('#profName').value=S.nick||'';$('#profCrew').value=S.crew||'';$('#profStudio').value=S.studio||'';renderStudioSugg();renderAvGrid();
-  impConfirm=false;$('#bkLoad').textContent='Backup einspielen';$('#sheet').hidden=false;setTimeout(()=>{try{$('#profName').focus()}catch(e){}},30);
+  impConfirm=false;$('#bkLoad').textContent='Backup einspielen';$('#sheet').hidden=false;if(!matchMedia('(pointer:coarse)').matches)setTimeout(()=>{try{$('#profName').focus()}catch(e){}},30);
 }
 function closeSheet(){$('#sheet').hidden=true}
 function setTab(t){
   tab=t;if(t==='crew'){crewDot(false);setTimeout(()=>{try{checkDuelResults()}catch(e){}},300)}if(t==='stat'||STALE[t]){STALE[t]=0;const f=TABR()[t];if(f)f()}
   document.querySelectorAll('[data-view]').forEach(s=>s.hidden=s.dataset.view!==t);
   document.querySelectorAll('.dock [data-tab]').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===t));
+  {const pt=$('#pgTitle');if(pt)pt.textContent={home:'RepRival',train:'Training',ranks:'Ränge',stat:'Statistik',crew:'Crew'}[t]||'RepRival'}
   window.scrollTo(0,0);
 }
 function prefill(){
@@ -2918,6 +2956,10 @@ setTimeout(()=>{try{maybeRecap()}catch(e){}},1500);
 {let x0=null,y0=0;const ie=$('#intro');ie.addEventListener('touchstart',e=>{if(e.target.closest('input'))return;const t=e.touches[0];x0=t.clientX;y0=t.clientY},{passive:true});
  ie.addEventListener('touchend',e=>{if(x0===null)return;const t=e.changedTouches[0],dx=t.clientX-x0,dy=t.clientY-y0;x0=null;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5)introGo(inStep+(dx<0?1:-1))},{passive:true});
  ie.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='inNick'){e.preventDefault();try{$('#inBw').focus()}catch(x){}}else if(e.key==='Enter'&&e.target.id==='inBw'){e.preventDefault();introAct('indone')}})}
+{const hd=document.querySelector('.head');let tk=0;const upd=()=>{tk=0;if(hd)hd.classList.toggle('scrolled',window.scrollY>4)};window.addEventListener('scroll',()=>{if(!tk){tk=1;requestAnimationFrame(upd)}},{passive:true});
+ const isTxt=e=>e&&e.matches&&e.matches('input:not([type=checkbox]):not([type=radio]):not([type=range]),textarea')&&!e.closest('.sheet,#intro,#rrLogin,#remind');
+ document.addEventListener('focusin',e=>{if(isTxt(e.target)&&matchMedia('(max-width:640px) and (pointer:coarse)').matches)document.body.classList.add('kb')});
+ document.addEventListener('focusout',()=>{setTimeout(()=>{if(!isTxt(document.activeElement))document.body.classList.remove('kb')},60)})}
 })();
 </script>
 
