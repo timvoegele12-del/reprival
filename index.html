@@ -1035,7 +1035,7 @@ const AVATARS=[
 ];
 const AV_IDS=AVATARS.map(a=>a.id);
 const normStudio=s=>String(s||'').toLowerCase().replace(/[^a-z0-9äöüß]/g,'').slice(0,24);
-const normCrew=s=>String(s||'').toLowerCase().replace(/[^a-z0-9äöüß-]/g,'').slice(0,20);
+const normCrew=s=>String(s||'').trim().toLowerCase().replace(/\s+/g,'-').replace(/[^a-z0-9äöüß-]/g,'').replace(/-+/g,'-').replace(/^-|-$/g,'').slice(0,20);
 /* Mehrere Crews: S.crews (max. 3), S.crew = gerade angezeigte Crew */
 const MAXCREWS=3;
 function fixCrews(){let a=Array.isArray(S.crews)?S.crews.map(normCrew).filter(Boolean):(S.crew?[normCrew(S.crew)]:[]);a=[...new Set(a)].slice(0,MAXCREWS);S.crew=normCrew(S.crew);if(S.crew&&!a.includes(S.crew)){if(a.length<MAXCREWS)a.unshift(S.crew);else S.crew=a[0]}if(!S.crew&&a.length)S.crew=a[0];S.crews=a}
@@ -1100,7 +1100,7 @@ LANG=S.lang==='en'?'en':'de';
 /* ---------- Sprache: Deutsch (Quelle) -> Englisch per Übersetzungsschicht ---------- */
 const D={
 // Navigation & allgemein
-'Start':'Home','Deine Crews':'Your crews','Wirklich verlassen? Nochmal tippen':'Really leave? Tap again','Deine Crew':'Your crew','+ Crew':'+ Crew','Studio-Liga':'Studio league','Neue Crew erstellen':'Create new crew','Du kannst in bis zu 3 Crews gleichzeitig sein.':'You can be in up to 3 crews at once.','Du bist schon in 3 Crews. Verlasse zuerst eine im Crew-Reiter.':'You are already in 3 crews. Leave one first in the Crew tab.','Für die Crew':'For the crew','Alle Freunde tragen denselben Code ein und sehen sich nur untereinander. Mit einem neuen Code trittst du einer weiteren Crew bei, bis zu 3. Wechseln und verlassen kannst du im Crew-Reiter.':'All friends enter the same code and only see each other. A new code lets you join another crew, up to 3. Switch and leave in the Crew tab.','Guten Morgen':'Good morning','Guten Tag':'Good afternoon','Guten Abend':'Good evening','Hallo':'Hello','Trag deinen ersten Satz ein und hol dir deinen Rang.':'Log your first set and earn your rank.','Heute schon trainiert. Stark.':'Already trained today. Strong.','Bereit für dein Training?':'Ready for your workout?','Weiteren Satz eintragen':'Log another set','Training eintragen':'Log workout','Nächstes Ziel':'Next goal','Weniger anzeigen':'Show less','Dein Rang':'Your rank','Training':'Training','Ränge':'Ranks','Statistik':'Stats','Crew':'Crew','Profil bearbeiten':'Edit profile','Athlet':'Athlete','Du':'You',
+'Start':'Home','Deine Crews':'Your crews','Crew-Name oder Code':'Crew name or code','z. B. gym-bros':'e.g. gym-bros','Name deiner Crew':'Your crew name','Erstellen: du bestimmst den Namen, er wird zum Code für deine Freunde. Beitreten: Code von Freunden eingeben. Bis zu 3 Crews gleichzeitig.':'Create: you choose the name, it becomes the code for your friends. Join: enter a code from friends. Up to 3 crews at once.','Gib deiner Crew zuerst einen Namen, z. B. gym-bros.':'Give your crew a name first, e.g. gym-bros.','Der Crew-Name braucht mindestens 3 Zeichen.':'The crew name needs at least 3 characters.','Wirklich verlassen? Nochmal tippen':'Really leave? Tap again','Deine Crew':'Your crew','+ Crew':'+ Crew','Studio-Liga':'Studio league','Neue Crew erstellen':'Create new crew','Du kannst in bis zu 3 Crews gleichzeitig sein.':'You can be in up to 3 crews at once.','Du bist schon in 3 Crews. Verlasse zuerst eine im Crew-Reiter.':'You are already in 3 crews. Leave one first in the Crew tab.','Für die Crew':'For the crew','Alle Freunde tragen denselben Code ein und sehen sich nur untereinander. Mit einem neuen Code trittst du einer weiteren Crew bei, bis zu 3. Wechseln und verlassen kannst du im Crew-Reiter.':'All friends enter the same code and only see each other. A new code lets you join another crew, up to 3. Switch and leave in the Crew tab.','Guten Morgen':'Good morning','Guten Tag':'Good afternoon','Guten Abend':'Good evening','Hallo':'Hello','Trag deinen ersten Satz ein und hol dir deinen Rang.':'Log your first set and earn your rank.','Heute schon trainiert. Stark.':'Already trained today. Strong.','Bereit für dein Training?':'Ready for your workout?','Weiteren Satz eintragen':'Log another set','Training eintragen':'Log workout','Nächstes Ziel':'Next goal','Weniger anzeigen':'Show less','Dein Rang':'Your rank','Training':'Training','Ränge':'Ranks','Statistik':'Stats','Crew':'Crew','Profil bearbeiten':'Edit profile','Athlet':'Athlete','Du':'You',
 'Abbrechen':'Cancel','Speichern':'Save','Weiter':'Continue','Löschen':'Delete','Ändern':'Change','Verstanden':'Got it','Beitreten':'Join','Nicht jetzt':'Not now',
 'Heute':'Today','Gestern':'Yesterday','Vorgestern':'2 days ago','heute':'today','gestern':'yesterday','Wann?':'When?','diese Woche':'this week','in diesem Monat':'this month',
 'kg':'kg','lb':'lb','Wdh':'reps','Kilogramm':'Kilograms','Pfund':'Pounds','Gewichtseinheit':'Weight unit','Sprache':'Language',
@@ -1270,6 +1270,8 @@ const PAT=[
  [/^Für eine faire Wertung brauchst du mindestens (.+)\.$/,m=>`For a fair score you need at least ${m[1]}.`],
  [/^Verlauf (.+): von (.+) zu (.+)$/,m=>`Progress ${tw(m[1])}: from ${trS(m[2])} to ${trS(m[3])}`],
  [/^(.+) auf (\d[\d.,]* (?:km|mi|m))$/,m=>`${m[1]} over ${m[2]}`],
+ [/^Crew (.+) erstellt\. Teile jetzt Link oder QR-Code\.$/,m=>`Crew ${m[1]} created. Now share the link or QR code.`],
+ [/^Den Namen „(.+)“ gibt es schon\. Wähle einen anderen oder tritt mit „Beitreten“ bei\.$/,m=>`The name “${m[1]}” is already taken. Pick another one or use “Join”.`],
  [/^Crew „(.+)“ verlassen$/,m=>`Leave crew “${m[1]}”`],
  [/^Du hast die Crew (.+) verlassen$/,m=>`You left the crew ${m[1]}`],
  [/^Alle anzeigen \((\d+)\)$/,m=>`Show all (${m[1]})`],
@@ -2399,9 +2401,9 @@ function renderBoard(){
   fixCrews();const showSw=!!okc&&S.crews.length>0;
   $('#scopeCard').hidden=!(hasSt&&okc)||showSw;
   {const cs=$('#crewSwitch');cs.hidden=!showSw;
-    if(showSw){const jv=crewAddOpen&&$('#joinCode2')?$('#joinCode2').value:'';
-      cs.innerHTML=`<div class="lbl">${S.crews.length>1?'Deine Crews':'Deine Crew'}</div><div class="pills wrap">${S.crews.map(c=>`<button class="pill" data-act="crewsel" data-v="${esc(c)}" aria-pressed="${c===S.crew&&cscope==='crew'}"><span class="notr">${esc(c)}</span></button>`).join('')}${hasSt?`<button class="pill" data-act="scope" data-v="studio" aria-pressed="${cscope==='studio'}">🏋️ <span>Studio-Liga</span></button>`:''}${S.crews.length<MAXCREWS?`<button class="pill add" data-act="crewadd" aria-expanded="${crewAddOpen}">+ Crew</button>`:''}</div>${crewAddOpen&&S.crews.length<MAXCREWS?`<div class="crewadd"><div class="joinrow"><input id="joinCode2" class="nm-in" type="text" maxlength="20" placeholder="Crew-Code" autocomplete="off" aria-label="Crew-Code"><button class="btn sm" data-act="crewjoin">Beitreten</button></div><button class="btn sm ghost" data-act="invite" style="justify-self:start">Neue Crew erstellen</button><p class="note" style="margin:0">Du kannst in bis zu 3 Crews gleichzeitig sein.</p></div>`:''}${cscope==='crew'?`<button class="btn sm ghost csleave" data-act="leaveask">${leaveAsk?'Wirklich verlassen? Nochmal tippen':(S.crews.length>1?'Crew „'+esc(S.crew)+'“ verlassen':'Crew verlassen')}</button>`:''}`;
-      if(jv){const n2=$('#joinCode2');if(n2)n2.value=jv}}}
+    if(showSw){const j2=$('#joinCode2'),jv=crewAddOpen&&j2?j2.value:'',j2f=!!j2&&document.activeElement===j2;
+      cs.innerHTML=`<div class="lbl">${S.crews.length>1?'Deine Crews':'Deine Crew'}</div><div class="pills wrap">${S.crews.map(c=>`<button class="pill" data-act="crewsel" data-v="${esc(c)}" aria-pressed="${c===S.crew&&cscope==='crew'}"><span class="notr">${esc(c)}</span></button>`).join('')}${hasSt?`<button class="pill" data-act="scope" data-v="studio" aria-pressed="${cscope==='studio'}">🏋️ <span>Studio-Liga</span></button>`:''}${S.crews.length<MAXCREWS?`<button class="pill add" data-act="crewadd" aria-expanded="${crewAddOpen}">+ Crew</button>`:''}</div>${crewAddOpen&&S.crews.length<MAXCREWS?`<div class="crewadd"><label class="lbl" for="joinCode2">Crew-Name oder Code</label><input id="joinCode2" class="nm-in" type="text" maxlength="20" placeholder="z. B. gym-bros" autocomplete="off" autocapitalize="off"><div class="btnrow"><button class="btn sm" data-act="invite" style="background:var(--fg);color:var(--bg);border-color:var(--fg)">Neue Crew erstellen</button><button class="btn sm" data-act="crewjoin">Beitreten</button></div><p class="note" style="margin:0">Erstellen: du bestimmst den Namen, er wird zum Code für deine Freunde. Beitreten: Code von Freunden eingeben. Bis zu 3 Crews gleichzeitig.</p></div>`:''}${cscope==='crew'?`<button class="btn sm ghost csleave" data-act="leaveask">${leaveAsk?'Wirklich verlassen? Nochmal tippen':(S.crews.length>1?'Crew „'+esc(S.crew)+'“ verlassen':'Crew verlassen')}</button>`:''}`;
+      if(jv||j2f){const n2=$('#joinCode2');if(n2){n2.value=jv;if(j2f)n2.focus()}}}}
   $('#scopePills').innerHTML=pillsHTML('scope',[['crew','Meine Crew'],['studio','Studio-Liga '+(S.studio||'')]],cscope);
   const key=monthKey(Date.now()),list=entries();
   const present=[...new Set(list.map(e=>e.cls).filter(Boolean))].sort((a,b)=>CLASSES.findIndex(c=>c.label===a)-CLASSES.findIndex(c=>c.label===b));
@@ -2443,11 +2445,13 @@ function renderBoard(){
       h+=`<div class="qrbox"><span class="qrw">${qrSVG(link)}</span><div style="min-width:0;display:grid;gap:6px"><span class="lbl">Crew-Code</span><span class="code">${esc(S.crew)}</span>${window.__standalone?tip('qrHowW','Freunde scannen den Code mit der Handykamera. RepRival öffnet sich, nach dem Anmelden treten sie mit einem Tipp bei.'):tip('qrHow','Freunde scannen den Code mit der Handykamera. Die App öffnet sich, dann im Profil den Crew-Code eintragen.')}</div></div>
       <input class="linkin" id="crewLinkTxt" type="text" readonly value="${esc(link)}" aria-label="Einladungslink">
       <div class="btnrow"><button class="btn sm" data-act="crewshare" style="background:var(--fg);color:var(--bg);border-color:var(--fg)">Link teilen</button><button class="btn sm" data-act="crewcopy">Link kopieren</button>${DL?'<button class="btn sm ghost" data-act="crewqr">QR-Code speichern</button>':''}</div>`;
-    }else h+=`<p class="note" style="margin:0">Du hast noch keine Crew. Erstelle eine, dann bekommst du einen QR-Code und einen Link zum Teilen.</p><button class="btn sm" data-act="invite" style="justify-self:start;background:var(--fg);color:var(--bg);border-color:var(--fg)">Crew erstellen</button>`;
+    }else h+=`<p class="note" style="margin:0">Du hast noch keine Crew. Erstelle eine, dann bekommst du einen QR-Code und einen Link zum Teilen.</p><div class="joinrow"><input id="newCrewName" class="nm-in" type="text" maxlength="20" placeholder="Name deiner Crew" autocomplete="off" autocapitalize="off" aria-label="Name deiner Crew"><button class="btn sm" data-act="invite" style="background:var(--fg);color:var(--bg);border-color:var(--fg)">Crew erstellen</button></div>`;
     h+=`<div style="display:grid;gap:8px;border-top:1px solid var(--line);padding-top:12px"><label class="lbl" for="joinCode">Code von Freunden bekommen?</label><div class="joinrow"><input id="joinCode" class="nm-in" type="text" maxlength="20" placeholder="Crew-Code" autocomplete="off"><button class="btn sm" data-act="crewjoin">Beitreten</button></div></div>`;
     const jc=$('#joinCode'),jv=jc?jc.value:'',jf=!!jc&&document.activeElement===jc;
+    const ncI=$('#newCrewName'),ncv=ncI?ncI.value:'',ncf=!!ncI&&document.activeElement===ncI;
     ic.innerHTML=h;
     if(jv||jf){const n2=$('#joinCode');if(n2){n2.value=jv;if(jf)n2.focus()}}
+    if(ncv||ncf){const n3=$('#newCrewName');if(n3){n3.value=ncv;if(ncf)n3.focus()}}
   }
   const d=new Date(now.getFullYear(),now.getMonth()-1,1),pk=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
   const pw=[...list].filter(e=>(Number(e.hist[pk])||0)>0).sort((a,b)=>Number(b.hist[pk])-Number(a.hist[pk]))[0];
@@ -2837,8 +2841,16 @@ document.addEventListener('click',e=>{
   else if(a==='cls'){cfilter=v;renderBoard()}
   else if(a==='scope'){cscope=v;renderBoard()}
   else if(a==='invite'){
-    if(!S.crew||a==='invite'&&crewAddOpen){fixCrews();if(S.crews.length>=MAXCREWS){toast('Du bist schon in 3 Crews. Verlasse zuerst eine im Crew-Reiter.');return}let nc;do{nc=normCrew((S.nick||'crew')+'-'+Math.floor(100+Math.random()*900))}while(S.crews.includes(nc));joinCrew(nc);crewAddOpen=false;cscope='crew';save();syncCrew();renderSetup();for(const k in STALE)STALE[k]=1}
-    renderBoard();toast('Crew erstellt. Teile jetzt Link oder QR-Code.');setTimeout(()=>{try{$('#inviteCard').scrollIntoView({behavior:'smooth',block:'start'})}catch(e){}},80);
+    if(!S.crew||crewAddOpen){fixCrews();if(S.crews.length>=MAXCREWS){toast('Du bist schon in 3 Crews. Verlasse zuerst eine im Crew-Reiter.');return}
+      const inp=$('#newCrewName')||$('#joinCode2'),want=normCrew(inp?inp.value:'');let nc;
+      if(inp&&!want){toast('Gib deiner Crew zuerst einen Namen, z. B. gym-bros.');try{inp.focus()}catch(e){}return}
+      if(want){if(want.length<3){toast('Der Crew-Name braucht mindestens 3 Zeichen.');return}
+        if(S.crews.includes(want)||members.some(m=>m.id!==UID&&cleanMember(m).crews.includes(want))){toast('Den Namen „'+want+'“ gibt es schon. Wähle einen anderen oder tritt mit „Beitreten“ bei.');return}
+        nc=want}
+      else{do{nc=normCrew((S.nick||'crew')+'-'+Math.floor(100+Math.random()*900))}while(S.crews.includes(nc))}
+      if(S.example){S.sets=[];S.example=false;S.shown=0}
+      joinCrew(nc);crewAddOpen=false;cscope='crew';save();syncCrew();renderSetup();for(const k in STALE)STALE[k]=1}
+    renderBoard();toast('Crew '+S.crew+' erstellt. Teile jetzt Link oder QR-Code.');setTimeout(()=>{try{$('#inviteCard').scrollIntoView({behavior:'smooth',block:'start'})}catch(e){}},80);
   }
   else if(a==='crewjoin'){
     const c=normCrew(v||($('#joinCode2')&&$('#joinCode2').value)||($('#joinCode')&&$('#joinCode').value)||'');
