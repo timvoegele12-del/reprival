@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#07080a"><meta name="description" content="RepRival: Trainiere. Steig auf. Schlag deine Freunde."><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="icon" href="icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="apple-mobile-web-app-title" content="RepRival"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script><script src="config.js"></script><script>/* RepRival Web: verbindet die App mit Supabase (Login per E-Mail-Link, Crew, Sicherung).
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#07080a"><meta name="description" content="RepRival: Trainiere. Steig auf. Schlag deine Freunde."><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png"><link rel="icon" href="icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="RepRival"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script><script src="config.js"></script><script>/* RepRival Web: verbindet die App mit Supabase (Login per E-Mail-Link, Crew, Sicherung).
    Stellt dieselbe Schnittstelle bereit wie window.claude in der Claude-Version. */
 (function(){
   window.__standalone=true;
@@ -79,7 +79,7 @@
     return null}};
   if('serviceWorker' in navigator&&location.protocol==='https:')window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{})});
 })();
-</script><style>.rrl{position:fixed;inset:0;z-index:140;display:grid;place-items:center;padding:24px max(16px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background-color:#07080a;background-image:radial-gradient(70% 380px at 50% 0,rgba(122,231,255,.16),transparent 70%)}
+</script><style>.rrl{position:fixed;inset:0;z-index:140;display:grid;place-items:center;padding:calc(24px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background-color:#07080a;background-image:radial-gradient(70% 380px at 50% 0,rgba(122,231,255,.16),transparent 70%)}
 .rrl-card{width:100%;max-width:420px;display:grid;gap:14px}
 .rrl-logo{font-family:var(--display);font-weight:800;font-size:clamp(34px,11vw,48px);letter-spacing:-.02em;background:linear-gradient(90deg,var(--fg) 30%,var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent;text-align:center;margin-bottom:8px}
 .rrl h2{margin:0;font-family:var(--display);font-weight:800;font-size:24px;text-align:center}
@@ -625,7 +625,10 @@ textarea{width:100%;background:var(--panel-2);border:1px solid var(--line);borde
 .hl b{white-space:normal;overflow-wrap:anywhere}
 
 /* ---------- Handy-Modus: App-Leiste oben, Tab-Leiste unten, kompakter ---------- */
-html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background-color:#07080a}
+/* kein Doppeltipp-Zoom (Zwei-Finger-Zoom bleibt erlaubt) */
+*{touch-action:manipulation}
+.head{padding-top:calc(18px + env(safe-area-inset-top,0px))}
 body{-webkit-tap-highlight-color:transparent}
 button,a,.pill,.btn,.acc,[role="button"],summary{touch-action:manipulation}
 button,.pill,.dock,.lbl,summary{-webkit-user-select:none;user-select:none}
@@ -645,6 +648,11 @@ textarea{font-size:16px}
   .bento{gap:10px}
   .card{padding:16px;border-radius:20px;gap:12px}
   .hhero{padding:22px 18px 18px}
+  .step{grid-template-columns:58px minmax(0,1fr) 58px;gap:8px}
+  .step button,.step input{height:58px}
+  .step button{font-size:26px}
+  .tgrid input{height:58px}.tgrid b{line-height:58px}
+  .steppers{gap:16px}
   .dock{left:0;right:0;transform:none;bottom:0;max-width:none;width:100%;border-radius:0;border:0;border-top:1px solid var(--line);padding:6px max(6px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(6px,env(safe-area-inset-left,0px));gap:0;background:rgba(12,14,17,.9);justify-content:space-around}
   .dock button,.dock button[aria-selected="true"]{flex:1 1 0;background:transparent;color:var(--dim);padding:4px 2px;min-height:54px;border-radius:14px;gap:4px}
   .dock button svg{width:22px;height:22px;padding:4px 16px;box-sizing:content-box;border-radius:999px}
