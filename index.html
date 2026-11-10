@@ -173,6 +173,28 @@ section[data-view]{min-width:0}
 .gchips .pill[aria-pressed="true"]{background:rgba(122,231,255,.14);color:var(--accent);border-color:rgba(122,231,255,.4)}
 .expic{width:52px;height:52px;flex:none;margin-left:auto;display:grid;place-items:center;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line)}.expic .exi{width:36px;height:36px}
 .nm-e .exi{width:20px;height:20px;display:inline-block;vertical-align:-4px;margin-right:6px;color:var(--fg)}
+.plcard{gap:12px}
+.pltiles{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;margin:0 -4px;padding:2px 4px 4px;scroll-snap-type:x proximity}.pltiles::-webkit-scrollbar{display:none}
+.pltile{flex:none;width:128px;display:grid;justify-items:center;gap:4px;padding:12px 10px 12px;border-radius:18px;background:var(--panel-2);border:1px solid var(--line);color:var(--fg);font:inherit;cursor:pointer;scroll-snap-align:start;text-align:center}
+.pltile b{font-family:var(--display);font-weight:700;font-size:14px;line-height:1.2;overflow-wrap:anywhere}.pltile small{color:var(--dim);font-size:12px}
+.pltile.add{border-style:dashed;align-content:center}.pltile .plus{font-size:30px;line-height:1;color:var(--accent);font-weight:300;height:64px;display:grid;place-items:center}
+.pltile:active{transform:scale(.97)}
+.bmap{display:flex;justify-content:center;gap:6px}.bmap .body{height:64px;width:auto}
+.bmap.big .body{height:200px}.bmap.mid .body{height:130px}.bmap.big{gap:22px;padding:6px 0}
+.body .sil path{fill:#262c33}.body .m{fill:#3a424c;stroke:var(--panel);stroke-width:.7}.pltile .body .m,.pltile .body .ml{stroke:var(--panel-2)}
+.body .m.mp{fill:#ff7a59}.body .m.ms{fill:#a8553f}.body .ml{fill:none;stroke:var(--panel);stroke-width:.8}
+.mlegend{display:flex;justify-content:center;gap:16px;font-size:12px;color:var(--dim)}.mlegend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}.mlegend i.mp{background:#ff7a59}.mlegend i.ms{background:#a8553f}
+.plbody{display:grid;gap:14px}.plsh{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.plsh h2{overflow-wrap:anywhere}
+.iconx{flex:none;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:var(--panel-2);color:var(--fg);font-size:20px;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0}
+.iconx.sm{width:36px;height:36px;font-size:16px}.iconx:disabled{opacity:.3;cursor:default}
+.plist{display:grid;gap:8px}
+.plrow{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:10px 12px;border-radius:16px;background:var(--panel-2);border:1px solid var(--line);color:var(--fg);font:inherit;cursor:pointer;min-height:56px}
+.plrow .exi{width:30px;height:30px}.pltx{min-width:0;flex:1;display:grid;gap:2px}.pltx b{font-weight:700;font-size:15px;overflow-wrap:anywhere}.pltx small{color:var(--dim);font-size:12.5px}.pltx small .mono{color:var(--accent);font-size:12.5px}
+.pli{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;background:rgba(255,255,255,.06);color:var(--dim)}
+.plhead{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}.pln{display:block;font-family:var(--display);font-weight:800;font-size:20px;overflow-wrap:anywhere}.plprog{color:var(--accent);font-size:15px}
+.plex .pill.done{border-color:rgba(155,225,93,.45);color:#9be15d}.plex .ck{font-weight:800;width:22px;text-align:center}
+.pesel{display:grid;gap:6px}.perow{display:flex;align-items:center;gap:8px;padding:6px 6px 6px 10px;border-radius:14px;background:var(--panel-2);border:1px solid var(--line)}.perow b{flex:1;min-width:0;font-size:14px;overflow-wrap:anywhere}
+.peadd{display:flex;flex-wrap:wrap;gap:8px}.peadd .pill[aria-pressed="true"]::after{content:'✓';margin-left:2px;font-weight:800}
 .srn{display:flex;align-items:center;gap:10px;min-width:0}.srn .exi{width:28px;height:28px}.srn b{font-family:var(--display);font-weight:700;font-size:17px;overflow-wrap:anywhere}
 .curex{display:flex;align-items:center;gap:14px;min-width:0;padding:12px 14px;border-radius:18px;background:var(--panel-2);border:1px solid var(--line)}
 .curex .embwrap{width:56px;height:56px;min-width:56px}
@@ -705,6 +727,7 @@ textarea{font-size:16px}
     <section data-view="train" id="v-train" hidden>
       <div class="bento">
         <div class="card span2" id="bwCheck" hidden></div>
+        <div class="card span2 plcard" id="planCard"></div>
         <div class="card span2">
           <div class="lbl">Übung wählen</div>
           <div class="exsearch"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><input id="exQ" type="search" placeholder="Übung suchen" aria-label="Übung suchen" autocomplete="off" enterkeyhint="go"><button class="exqx" data-act="exqclear" aria-label="Suche leeren" hidden>×</button></div>
@@ -789,6 +812,12 @@ textarea{font-size:16px}
   </main>
 </div>
 
+<div class="sheet" id="planSheet" data-act="plclose" hidden>
+  <div class="sheetin plsheet" role="dialog" aria-modal="true" aria-labelledby="plTitle"><div id="plBody" class="plbody"></div></div>
+</div>
+<div class="sheet" id="planEdit" data-act="peclose" hidden>
+  <div class="sheetin plsheet" role="dialog" aria-modal="true" aria-labelledby="peTitle"><div id="peBody" class="plbody"></div></div>
+</div>
 <div class="sheet" id="remind" data-act="remclose" hidden>
   <div class="sheetin" role="dialog" aria-modal="true" aria-labelledby="remTitle">
     <h2 id="remTitle">Trainings-Erinnerung</h2>
@@ -1153,7 +1182,7 @@ LANG=S.lang==='en'?'en':'de';
 /* ---------- Sprache: Deutsch (Quelle) -> Englisch per Übersetzungsschicht ---------- */
 const D={
 // Navigation & allgemein
-'Start':'Home','Alle':'All','Brust':'Chest','Rücken':'Back','Schultern':'Shoulders','Arme':'Arms','Beine':'Legs','Bauch':'Core','Eigene':'Custom','Gewicht pro Hantel eintragen':'Enter weight per dumbbell','Keine passende Übung mit Einträgen gefunden.':'No matching exercise with entries found.','Übung in der Statistik suchen':'Search exercise in stats',
+'Start':'Home','Wirklich löschen? Nochmal tippen':'Really delete? Tap again','Trainingspläne':'Workout plans','Aktiver Plan':'Active plan','Eigener Plan':'Custom plan','Trainingsplan':'Workout plan','z. B. Elias Pushday':'e.g. Elias push day','Plan ansehen':'View plan','Beenden':'End','Weiter:':'Next:','Plan geschafft 💪':'Plan done 💪','Hauptmuskeln':'Primary muscles','Mittrainiert':'Also worked','zuletzt':'last','Plan starten':'Start plan','Weiter trainieren':'Continue training','Bearbeiten':'Edit','Als eigenen Plan anpassen':'Customize as my plan','Plan bearbeiten':'Edit plan','Neuer Plan':'New plan','Übungen hinzufügen':'Add exercises','Tippe unten auf Übungen, um sie hinzuzufügen.':'Tap exercises below to add them.','Plan speichern':'Save plan','Gib deinem Plan einen Namen.':'Give your plan a name.','Wähle mindestens eine Übung.':'Pick at least one exercise.','Plan gespeichert':'Plan saved','Plan gelöscht':'Plan deleted','Höchstens 12 Übungen pro Plan.':'At most 12 exercises per plan.','Du hast schon 20 eigene Pläne. Lösch zuerst einen.':'You already have 20 custom plans. Delete one first.','Übung für den Plan suchen':'Search exercise for the plan','Nach oben':'Move up','Entfernen':'Remove','Leg Day':'Leg Day','Oberkörper':'Upper body','Unterkörper':'Lower body','Ganzkörper':'Full body','Arm Day':'Arm Day','Ohne Geräte':'No equipment','Vordere Schulter':'Front delts','Seitliche Schulter':'Side delts','Hintere Schulter':'Rear delts','Nacken':'Traps','Oberer Rücken':'Upper back','Latissimus':'Lats','Unterer Rücken':'Lower back','Bizeps':'Biceps','Trizeps':'Triceps','Unterarme':'Forearms','Seitlicher Bauch':'Obliques','Vordere Oberschenkel':'Quads','Hintere Oberschenkel':'Hamstrings','Po':'Glutes','Adduktoren':'Adductors','Waden':'Calves','Alle':'All','Brust':'Chest','Rücken':'Back','Schultern':'Shoulders','Arme':'Arms','Beine':'Legs','Bauch':'Core','Eigene':'Custom','Gewicht pro Hantel eintragen':'Enter weight per dumbbell','Keine passende Übung mit Einträgen gefunden.':'No matching exercise with entries found.','Übung in der Statistik suchen':'Search exercise in stats',
 'Kurzhantel-Bankdrücken':'Dumbbell Bench Press','Butterfly (Maschine)':'Chest Fly (Machine)','Cable Crossover':'Cable Crossover','Kabelrudern':'Seated Cable Row','Kurzhantel-Rudern':'Dumbbell Row','Rückenstrecker':'Back Extensions','Kurzhantel-Schulterdrücken':'Dumbbell Shoulder Press','Seitheben':'Lateral Raises','Face Pulls':'Face Pulls','Reverse Butterfly':'Reverse Fly','Kurzhantel-Curls':'Dumbbell Curls','Hammer-Curls':'Hammer Curls','Trizepsdrücken am Kabel':'Tricep Pushdown','French Press':'Skull Crushers','Enges Bankdrücken':'Close-Grip Bench Press','Frontkniebeuge':'Front Squat','Rumänisches Kreuzheben':'Romanian Deadlift','Beinstrecker':'Leg Extension','Beinbeuger':'Leg Curl','Ausfallschritte':'Lunges','Bulgarian Split Squats':'Bulgarian Split Squats','Hip Thrust':'Hip Thrust','Wadenheben':'Calf Raises','Wadenheben sitzend':'Seated Calf Raises','Crunches':'Crunches','Beinheben hängend':'Hanging Leg Raises','Ab-Roller':'Ab Wheel','Kabel-Crunches':'Cable Crunches','Deine Crews':'Your crews','Crew-Name oder Code':'Crew name or code','z. B. gym-bros':'e.g. gym-bros','Name deiner Crew':'Your crew name','Erstellen: du bestimmst den Namen, er wird zum Code für deine Freunde. Beitreten: Code von Freunden eingeben. Bis zu 3 Crews gleichzeitig.':'Create: you choose the name, it becomes the code for your friends. Join: enter a code from friends. Up to 3 crews at once.','Gib deiner Crew zuerst einen Namen, z. B. gym-bros.':'Give your crew a name first, e.g. gym-bros.','Der Crew-Name braucht mindestens 3 Zeichen.':'The crew name needs at least 3 characters.','Wirklich verlassen? Nochmal tippen':'Really leave? Tap again','Deine Crew':'Your crew','+ Crew':'+ Crew','Studio-Liga':'Studio league','Neue Crew erstellen':'Create new crew','Du kannst in bis zu 3 Crews gleichzeitig sein.':'You can be in up to 3 crews at once.','Du bist schon in 3 Crews. Verlasse zuerst eine im Crew-Reiter.':'You are already in 3 crews. Leave one first in the Crew tab.','Für die Crew':'For the crew','Alle Freunde tragen denselben Code ein und sehen sich nur untereinander. Mit einem neuen Code trittst du einer weiteren Crew bei, bis zu 3. Wechseln und verlassen kannst du im Crew-Reiter.':'All friends enter the same code and only see each other. A new code lets you join another crew, up to 3. Switch and leave in the Crew tab.','Guten Morgen':'Good morning','Guten Tag':'Good afternoon','Guten Abend':'Good evening','Hallo':'Hello','Trag deinen ersten Satz ein und hol dir deinen Rang.':'Log your first set and earn your rank.','Heute schon trainiert. Stark.':'Already trained today. Strong.','Bereit für dein Training?':'Ready for your workout?','Weiteren Satz eintragen':'Log another set','Training eintragen':'Log workout','Nächstes Ziel':'Next goal','Weniger anzeigen':'Show less','Dein Rang':'Your rank','Training':'Training','Ränge':'Ranks','Statistik':'Stats','Crew':'Crew','Profil bearbeiten':'Edit profile','Athlet':'Athlete','Du':'You',
 'Abbrechen':'Cancel','Speichern':'Save','Weiter':'Continue','Löschen':'Delete','Ändern':'Change','Verstanden':'Got it','Beitreten':'Join','Nicht jetzt':'Not now',
 'Heute':'Today','Gestern':'Yesterday','Vorgestern':'2 days ago','heute':'today','gestern':'yesterday','Wann?':'When?','diese Woche':'this week','in diesem Monat':'this month',
@@ -1328,6 +1357,8 @@ const PAT=[
  [/^Den Namen „(.+)“ gibt es schon\. Wähle einen anderen oder tritt mit „Beitreten“ bei\.$/,m=>`The name “${m[1]}” is already taken. Pick another one or use “Join”.`],
  [/^Crew „(.+)“ verlassen$/,m=>`Leave crew “${m[1]}”`],
  [/^Du hast die Crew (.+) verlassen$/,m=>`You left the crew ${m[1]}`],
+ [/^Im Plan \((\d+)\/(\d+)\)$/,m=>`In plan (${m[1]}/${m[2]})`],
+ [/^(\d+) Übungen$/,m=>`${m[1]} exercises`],[/^1 Übung$/,()=>'1 exercise'],
  [/^Alle anzeigen \((\d+)\)$/,m=>`Show all (${m[1]})`],
  [/^Mehr anzeigen \((\d+) weitere\)$/,m=>`Show more (${m[1]} more)`],
  [/^(.+) (\d+) Wdh bearbeiten$/,m=>`Edit ${tw(m[1])} ${m[2]} reps`],
@@ -1780,7 +1811,7 @@ async function doBackup(){
     const rows=S.sets.map(z=>[z.lift,z.w,z.r,z.bw,z.ts,z.id]),n=Math.ceil(rows.length/BK_CH);
     for(let i=0;i<n;i++){const part=rows.slice(i*BK_CH,(i+1)*BK_CH),str=JSON.stringify(part);if(bkChunks[i]!==str){await DB.doc(bkPath('c'+i)).set({s:part});bkChunks[i]=str}}
     const ts=Date.now();
-    await DB.doc(bkPath('bk')).set({v:2,dev:DEV,ts,n,count:rows.length,bw:S.bw,nick:S.nick||'',crew:S.crew||'',crews:S.crews||[],studio:S.studio||'',avatar:S.avatar,custom:S.custom,bwLog:(S.bwLog||[]).slice(-1500),bwChecked:S.bwChecked||0,last:S.last||'',tips:S.tips||{},unit:S.unit==='lb'?'lb':'kg',lang:LANG,dunit:DU(),soc:{ev:S.ev||[],rx:S.rx||{},du:S.du||[],da:S.da||{},dx:S.dx||[],duelWon:S.duelWon||{},duelSeen:S.duelSeen||{},badges:S.badges||{},rxSeen:(S.rxSeen||[]).slice(-300)}});
+    await DB.doc(bkPath('bk')).set({v:2,dev:DEV,ts,n,count:rows.length,bw:S.bw,nick:S.nick||'',crew:S.crew||'',crews:S.crews||[],plans:S.plans||[],studio:S.studio||'',avatar:S.avatar,custom:S.custom,bwLog:(S.bwLog||[]).slice(-1500),bwChecked:S.bwChecked||0,last:S.last||'',tips:S.tips||{},unit:S.unit==='lb'?'lb':'kg',lang:LANG,dunit:DU(),soc:{ev:S.ev||[],rx:S.rx||{},du:S.du||[],da:S.da||{},dx:S.dx||[],duelWon:S.duelWon||{},duelSeen:S.duelSeen||{},badges:S.badges||{},rxSeen:(S.rxSeen||[]).slice(-300)}});
     bkSeenSet(ts);bkLast=ts;bkErr='';
   }catch(e){bkErr=(e&&e.code)||'error'}
   bkBusy=false;renderBkStatus();
@@ -1789,7 +1820,7 @@ async function readBackup(m){
   const parts=[],nn=Math.min(60,Number(m.n)||0),cache=[];
   for(let i=0;i<nn;i++){const c=await DB.doc(bkPath('c'+i)).get();const d=c.exists?c.data():null;if(!d||!Array.isArray(d.s))return null;parts.push(...d.s);cache[i]=JSON.stringify(d.s)}
   if(parts.length<Number(m.count||0))return null;
-  const o=cleanImport({bw:m.bw,nick:m.nick,crew:m.crew,crews:m.crews,studio:m.studio,avatar:m.avatar,custom:m.custom,bwLog:m.bwLog,bwChecked:m.bwChecked,sets:parts.filter(Array.isArray).map(a=>({lift:a[0],w:a[1],r:a[2],bw:a[3],ts:a[4],id:a[5]}))});
+  const o=cleanImport({bw:m.bw,nick:m.nick,crew:m.crew,crews:m.crews,plans:m.plans,studio:m.studio,avatar:m.avatar,custom:m.custom,bwLog:m.bwLog,bwChecked:m.bwChecked,sets:parts.filter(Array.isArray).map(a=>({lift:a[0],w:a[1],r:a[2],bw:a[3],ts:a[4],id:a[5]}))});
   return o?{o,cache}:null;
 }
 /* ---------- Einführung beim ersten Start ---------- */
@@ -1860,7 +1891,7 @@ function introAct(a,v){
 }
 function applyBackup(res,m){
   const o=res.o;
-  Object.assign(S,{bw:o.bw,nick:o.nick,crew:o.crew,crews:o.crews,studio:o.studio,avatar:o.avatar,custom:o.custom,bwLog:o.bwLog,bwChecked:o.bwChecked,sets:o.sets,example:false,introDone:1});fixCrews();
+  Object.assign(S,{bw:o.bw,nick:o.nick,crew:o.crew,crews:o.crews,plans:o.plans,studio:o.studio,avatar:o.avatar,custom:o.custom,bwLog:o.bwLog,bwChecked:o.bwChecked,sets:o.sets,example:false,introDone:1});fixCrews();
   try{if(!$('#intro').hidden)introClose()}catch(e){}
   if(m.tips&&typeof m.tips==='object'&&!Array.isArray(m.tips)){const t={};for(const k of Object.keys(m.tips).slice(0,40))if(/^[A-Za-z0-9]{1,20}$/.test(k))t[k]=1;S.tips=t}
   if(m.soc&&typeof m.soc==='object'){try{mergeSocial(m.soc);const ob=(o2)=>o2&&typeof o2==='object'&&!Array.isArray(o2)?o2:{};
@@ -2168,7 +2199,7 @@ let rcState=null;
 let navDepth=0;
 function navPush(){if(!window.__standalone||navDepth)return;try{history.pushState({rr:1},'');navDepth=1}catch(e){}}
 if(window.__standalone)window.addEventListener('popstate',()=>{navDepth=0;
-  if(rcState){closeRecap()}else if(!$('#remind').hidden){closeRemind()}else if(!$('#sheet').hidden){closeSheet()}else if(!$('#fx').hidden){try{closeRankUp()}catch(e){$('#fx').hidden=true}}else if(tab!=='home'){setTab('home');return}else return;
+  if(rcState){closeRecap()}else if(!$('#planEdit').hidden){closePlanEdit()}else if(!$('#planSheet').hidden){closePlan()}else if(!$('#remind').hidden){closeRemind()}else if(!$('#sheet').hidden){closeSheet()}else if(!$('#fx').hidden){try{closeRankUp()}catch(e){$('#fx').hidden=true}}else if(tab!=='home'){setTab('home');return}else return;
   if(tab!=='home')navPush()});
 function recapData(pk){
   const real=S.sets.filter(z=>L(z.lift)&&monthKey(z.ts)===pk);if(!real.length)return null;
@@ -2336,6 +2367,64 @@ function renderHome(){
   if(rv2){const g=rv2.up?rv2.up.v-rv2.me.v:0,t=rv2.up?(g>0?`<b>${esc(rv2.up.e.nick)}</b> ist ${g} Saisonpunkte vor dir`:`Gleichauf mit <b>${esc(rv2.up.e.nick)}</b>`):`Du führst vor <b>${esc(rv2.down.e.nick)}</b>`;
     rm.innerHTML=`<div class="lbl">Dein Rivale</div><div class="est"><div style="min-width:0">${t}</div><button class="btn sm" data-tab="crew">Crew</button></div>`}
 }
+
+/* ---------- Trainingspläne + Muskelkarte ---------- */
+const MUSC={"bench": [["chest"], ["fdelt", "triceps"]], "incline": [["chest", "fdelt"], ["triceps"]], "dbbench": [["chest"], ["fdelt", "triceps"]], "flymachine": [["chest"], ["fdelt"]], "cablefly": [["chest"], ["fdelt"]], "pushup": [["chest"], ["triceps", "fdelt", "abs"]], "dead": [["hams", "glutes", "lowback"], ["traps", "quads", "forearms", "lats"]], "row": [["lats", "upback"], ["rdelt", "biceps", "lowback"]], "lat": [["lats"], ["biceps", "upback"]], "pullup": [["lats"], ["biceps", "upback", "forearms"]], "cablerow": [["lats", "upback"], ["biceps", "rdelt"]], "dbrow": [["lats", "upback"], ["biceps", "rdelt"]], "backext": [["lowback"], ["glutes", "hams"]], "muscleup": [["lats", "triceps"], ["chest", "biceps"]], "ohp": [["fdelt", "sdelt"], ["triceps", "traps"]], "dbohp": [["fdelt", "sdelt"], ["triceps", "traps"]], "lateral": [["sdelt"], ["traps"]], "facepull": [["rdelt", "upback"], ["traps"]], "revfly": [["rdelt"], ["upback"]], "curl": [["biceps"], ["forearms"]], "dbcurl": [["biceps"], ["forearms"]], "hammer": [["biceps", "forearms"], []], "dips": [["triceps", "chest"], ["fdelt"]], "pushdown": [["triceps"], []], "skull": [["triceps"], []], "closegrip": [["triceps", "chest"], ["fdelt"]], "squat": [["quads", "glutes"], ["hams", "lowback", "adductors"]], "legpress": [["quads", "glutes"], ["hams"]], "frontsquat": [["quads"], ["glutes", "abs"]], "rdl": [["hams", "glutes"], ["lowback"]], "legext": [["quads"], []], "legcurl": [["hams"], ["calves"]], "lunge": [["quads", "glutes"], ["hams", "adductors"]], "bulgarian": [["quads", "glutes"], ["hams"]], "hipthrust": [["glutes"], ["hams"]], "calf": [["calves"], []], "seatcalf": [["calves"], []], "crunch": [["abs"], ["obliques"]], "legraise": [["abs"], ["obliques", "forearms"]], "abroller": [["abs"], ["lats", "obliques"]], "cablecrunch": [["abs"], ["obliques"]], "run": [[], ["quads", "hams", "calves", "glutes"]], "bike": [["quads"], ["calves", "glutes"]], "rowerg": [[], ["lats", "quads", "biceps", "hams"]], "swim": [[], ["lats", "sdelt", "triceps"]]};
+const MNAME={chest:'Brust',fdelt:'Vordere Schulter',sdelt:'Seitliche Schulter',rdelt:'Hintere Schulter',traps:'Nacken',upback:'Oberer Rücken',lats:'Latissimus',lowback:'Unterer Rücken',biceps:'Bizeps',triceps:'Trizeps',forearms:'Unterarme',abs:'Bauch',obliques:'Seitlicher Bauch',quads:'Vordere Oberschenkel',hams:'Hintere Oberschenkel',glutes:'Po',adductors:'Adduktoren',calves:'Waden'};
+const ANAT={"front": {"sil": "<path d=\"M50 3 C56 3 59 8 59 14 C59 20 56 25 50 26 Z\"/><path d=\"M 50 3 C 44 3 41 8 41 14 C 41 20 44 25 50 26 Z\"/><path d=\"M50 24 L55 24 L56 31 L50 32 Z\"/><path d=\"M 50 24 L 45 24 L 44 31 L 50 32 Z\"/><path d=\"M73 114 C76 114 79 116 80 120 C80 125 78 129 75 129 C73 127 72 122 72 116 Z\"/><path d=\"M 27 114 C 24 114 21 116 20 120 C 20 125 22 129 25 129 C 27 127 28 122 28 116 Z\"/><path d=\"M57 147 C61 150 65 150 68 147 L67 156 C64 158 60 158 58 157 Z\"/><path d=\"M 43 147 C 39 150 35 150 32 147 L 33 156 C 36 158 40 158 42 157 Z\"/><path d=\"M60 192 L64 192 C66 196 68 199 69 201 L58 201 C58 198 59 195 60 192 Z\"/><path d=\"M 40 192 L 36 192 C 34 196 32 199 31 201 L 42 201 C 42 198 41 195 40 192 Z\"/><path d=\"M51 98 C54 99 58 100 62 99 L64 104 C60 103 55 104 51 105 Z\"/><path d=\"M 49 98 C 46 99 42 100 38 99 L 36 104 C 40 103 45 104 49 105 Z\"/>", "mus": {"traps": "M55 27 C59 30 64 31 69 33 L57 34 Z M 45 27 C 41 30 36 31 31 33 L 43 34 Z", "fdelt": "M58 36 C63 33 68 33 71 36 C70 42 69 47 68 51 C65 45 62 40 58 37 Z M 42 36 C 37 33 32 33 29 36 C 30 42 31 47 32 51 C 35 45 38 40 42 37 Z", "sdelt": "M71 36 C75 38 78 42 78 48 C78 52 76 55 73 57 C71 55 69 53 68 51 C69 46 70 41 71 36 Z M 29 36 C 25 38 22 42 22 48 C 22 52 24 55 27 57 C 29 55 31 53 32 51 C 31 46 30 41 29 36 Z", "chest": "M51 37 C57 35 63 37 67 42 C69 46 69 51 66 55 C61 59 55 59 51 57 Z M 49 37 C 43 35 37 37 33 42 C 31 46 31 51 34 55 C 39 59 45 59 49 57 Z", "biceps": "M70 56 C74 56 77 61 78 68 C78 74 77 78 74 81 C71 79 69 72 69 64 C69 61 69 58 70 56 Z M 30 56 C 26 56 23 61 22 68 C 22 74 23 78 26 81 C 29 79 31 72 31 64 C 31 61 31 58 30 56 Z", "forearms": "M74 83 C78 84 80 90 80 97 C80 104 78 110 76 113 L72 113 C71 106 70 98 71 90 C71 87 72 85 74 83 Z M 26 83 C 22 84 20 90 20 97 C 20 104 22 110 24 113 L 28 113 C 29 106 30 98 29 90 C 29 87 28 85 26 83 Z", "abs": "M51 60 L59 59 C60 70 60 82 59 95 C56 97 53 98 51 98 Z M 49 60 L 41 59 C 40 70 40 82 41 95 C 44 97 47 98 49 98 Z", "obliques": "M60 59 C64 60 67 63 67 69 C67 79 65 88 61 96 C61 84 61 72 60 59 Z M 40 59 C 36 60 33 63 33 69 C 33 79 35 88 39 96 C 39 84 39 72 40 59 Z", "quads": "M57 106 C61 104 66 105 68 111 C70 122 69 134 67 144 C64 148 60 148 57 145 C55 135 54 118 57 106 Z M 43 106 C 39 104 34 105 32 111 C 30 122 31 134 33 144 C 36 148 40 148 43 145 C 45 135 46 118 43 106 Z", "adductors": "M51 106 C53 106 55 106 56 107 C54 117 54 128 55 140 C53 132 51 120 51 106 Z M 49 106 C 47 106 45 106 44 107 C 46 117 46 128 45 140 C 47 132 49 120 49 106 Z", "calves": "M58 159 C62 158 65 159 66 165 C67 174 65 183 63 190 L60 190 C58 181 57 168 58 159 Z M 42 159 C 38 158 35 159 34 165 C 33 174 35 183 37 190 L 40 190 C 42 181 43 168 42 159 Z"}, "lines": "M51 69 L59.6 68.5 M51 79 L60 78.5 M51 88 L59.8 88 M 49 69 L 40.4 68.5 M 49 79 L 40 78.5 M 49 88 L 40.2 88"}, "back": {"sil": "<path d=\"M50 3 C56 3 59 8 59 14 C59 20 56 25 50 26 Z\"/><path d=\"M 50 3 C 44 3 41 8 41 14 C 41 20 44 25 50 26 Z\"/><path d=\"M50 24 L55 24 L56 28 L50 29 Z\"/><path d=\"M 50 24 L 45 24 L 44 28 L 50 29 Z\"/><path d=\"M73 114 C76 114 79 116 80 120 C80 125 78 129 75 129 C73 127 72 122 72 116 Z\"/><path d=\"M 27 114 C 24 114 21 116 20 120 C 20 125 22 129 25 129 C 27 127 28 122 28 116 Z\"/><path d=\"M57 152 C61 154 65 154 68 151 L68 157 C64 158 60 158 57 157 Z\"/><path d=\"M 43 152 C 39 154 35 154 32 151 L 32 157 C 36 158 40 158 43 157 Z\"/><path d=\"M59 185 L63 185 C65 192 67 197 68 201 L58 201 C58 196 58 190 59 185 Z\"/><path d=\"M 41 185 L 37 185 C 35 192 33 197 32 201 L 42 201 C 42 196 42 190 41 185 Z\"/>", "mus": {"traps": "M50 25 C54 27 61 30 70 34 C65 37 60 41 56 48 C54 53 52 58 50 62 Z M 50 25 C 46 27 39 30 30 34 C 35 37 40 41 44 48 C 46 53 48 58 50 62 Z", "rdelt": "M70 35 C75 37 78 42 78 48 C78 52 76 55 73 57 C71 51 69 45 65 39 Z M 30 35 C 25 37 22 42 22 48 C 22 52 24 55 27 57 C 29 51 31 45 35 39 Z", "upback": "M57 47 C61 42 66 40 70 43 C71 47 71 51 69 54 C65 56 60 57 55 57 C55 53 56 50 57 47 Z M 43 47 C 39 42 34 40 30 43 C 29 47 29 51 31 54 C 35 56 40 57 45 57 C 45 53 44 50 43 47 Z", "lats": "M54 59 C60 59 66 57 70 55 C71 66 69 77 64 88 C60 86 57 82 55 76 C54 70 54 64 54 59 Z M 46 59 C 40 59 34 57 30 55 C 29 66 31 77 36 88 C 40 86 43 82 45 76 C 46 70 46 64 46 59 Z", "lowback": "M51 66 L53 60 C54 70 55 80 59 88 C60 91 60 94 59 97 L51 97 Z M 49 66 L 47 60 C 46 70 45 80 41 88 C 40 91 40 94 41 97 L 49 97 Z", "triceps": "M70 56 C74 56 77 61 78 68 C78 74 77 78 74 81 C71 79 69 72 69 64 C69 61 69 58 70 56 Z M 30 56 C 26 56 23 61 22 68 C 22 74 23 78 26 81 C 29 79 31 72 31 64 C 31 61 31 58 30 56 Z", "forearms": "M74 83 C78 84 80 90 80 97 C80 104 78 110 76 113 L72 113 C71 106 70 98 71 90 C71 87 72 85 74 83 Z M 26 83 C 22 84 20 90 20 97 C 20 104 22 110 24 113 L 28 113 C 29 106 30 98 29 90 C 29 87 28 85 26 83 Z", "glutes": "M51 99 C57 97 64 98 68 104 C70 111 68 118 62 121 C57 122 53 121 51 119 Z M 49 99 C 43 97 36 98 32 104 C 30 111 32 118 38 121 C 43 122 47 121 49 119 Z", "hams": "M55 123 C60 122 66 123 68 129 C69 137 68 145 66 150 C63 152 60 152 57 150 C55 141 54 131 55 123 Z M 45 123 C 40 122 34 123 32 129 C 31 137 32 145 34 150 C 37 152 40 152 43 150 C 45 141 46 131 45 123 Z", "calves": "M57 159 C62 156 67 159 68 166 C69 173 66 180 63 183 L59 183 C56 176 55 167 57 159 Z M 43 159 C 38 156 33 159 32 166 C 31 173 34 180 37 183 L 41 183 C 44 176 45 167 43 159 Z"}}};
+const PLANS=[["p-push", "Push Day", [["bench", "4 × 6–8"], ["incline", "3 × 8–10"], ["ohp", "3 × 8–10"], ["lateral", "3 × 12–15"], ["pushdown", "3 × 10–12"], ["dips", "2 × max."]]], ["p-pull", "Pull Day", [["dead", "3 × 5"], ["pullup", "3 × 6–10"], ["row", "3 × 8–10"], ["lat", "3 × 10–12"], ["facepull", "3 × 15"], ["curl", "3 × 10–12"], ["hammer", "2 × 12"]]], ["p-legs", "Leg Day", [["squat", "4 × 6–8"], ["rdl", "3 × 8–10"], ["legpress", "3 × 10–12"], ["legcurl", "3 × 12"], ["legext", "3 × 12"], ["calf", "4 × 12–15"]]], ["p-upper", "Oberkörper", [["bench", "4 × 6–8"], ["row", "4 × 8"], ["ohp", "3 × 8–10"], ["lat", "3 × 10–12"], ["curl", "2 × 12"], ["pushdown", "2 × 12"]]], ["p-lower", "Unterkörper", [["squat", "4 × 6–8"], ["hipthrust", "3 × 8–10"], ["bulgarian", "3 × 10"], ["legcurl", "3 × 12"], ["seatcalf", "3 × 15"], ["legraise", "3 × 12"]]], ["p-full", "Ganzkörper", [["squat", "3 × 8"], ["bench", "3 × 8"], ["row", "3 × 8"], ["ohp", "3 × 10"], ["rdl", "3 × 10"], ["abroller", "3 × 10"]]], ["p-arms", "Arm Day", [["closegrip", "3 × 8"], ["curl", "3 × 10"], ["skull", "3 × 10"], ["hammer", "3 × 12"], ["pushdown", "3 × 12"], ["dbcurl", "2 × 15"]]], ["p-core", "Bauch", [["legraise", "3 × 12"], ["cablecrunch", "3 × 15"], ["abroller", "3 × 10"], ["crunch", "2 × 25"]]], ["p-bw", "Ohne Geräte", [["pushup", "4 × max."], ["pullup", "4 × max."], ["dips", "3 × max."], ["backext", "3 × 15"], ["crunch", "3 × 25"]]]].map(([id,n,ex])=>({id,n,ex}));
+const MAXPLANS=20,MAXPLEX=12;
+function musOf(ids){const p={},s={};for(const id of ids){let m=MUSC[id];if(!m){const x=L(id);if(x&&x.cdt)m=MUSC[x.cdt]}if(!m)continue;m[0].forEach(k=>p[k]=1);m[1].forEach(k=>s[k]=1)}for(const k in p)delete s[k];return {p,s}}
+function bodyMap(ids,cls){const {p,s}=musOf(ids);const one=v=>`<svg class="body" viewBox="0 0 100 205" aria-hidden="true"><g class="sil">${ANAT[v].sil}</g>${Object.entries(ANAT[v].mus).map(([k,d])=>`<path class="m${p[k]?' mp':s[k]?' ms':''}" d="${d}"/>`).join('')}${ANAT[v].lines?`<path class="ml" d="${ANAT[v].lines}"/>`:''}</svg>`;return `<div class="bmap ${cls||''}">${one('front')}${one('back')}</div>`}
+function planById(id){return PLANS.find(p=>p.id===id)||(Array.isArray(S.plans)?S.plans:[]).find(p=>p.id===id)||null}
+function planEx(p){return (p&&Array.isArray(p.ex)?p.ex:[]).map(e=>Array.isArray(e)?e:[e,'']).filter(([id])=>L(id))}
+function doneToday(id){const k=dayKey(Date.now());return S.sets.some(z=>z.lift===id&&dayKey(z.ts)===k)}
+function activePlan(){if(!S.plan)return null;if(S.plan.d!==dayKey(Date.now())||!planById(S.plan.id)){S.plan=null;return null}return planById(S.plan.id)}
+function lastSetText(id){const x=L(id);let z=null;for(const q of S.sets)if(q.lift===id&&(!z||q.ts>z.ts))z=q;if(!z)return '';return x.kind==='cd'?`${distText(x,z.w)} · ${fmtT(z.r)}`:x.kind==='bw'?(z.w>0?`+${fw(z.w)} × ${z.r}`:`${z.r} Wdh`):`${fw(z.w)} ${U()} × ${z.r}`}
+function planTile(p){const ex=planEx(p);return `<button class="pltile" data-act="planview" data-v="${esc(p.id)}">${bodyMap(ex.map(e=>e[0]))}<b>${esc(p.n)}</b><small>${ex.length} ${ex.length===1?'Übung':'Übungen'}</small></button>`}
+function renderPlanCard(){const el=$('#planCard');if(!el)return;const ap=activePlan();
+  if(ap){const ex=planEx(ap),done=ex.filter(([id])=>doneToday(id)).length,next=ex.find(([id])=>!doneToday(id)&&id!==tl);
+    el.innerHTML=`<div class="plhead"><div style="min-width:0"><div class="lbl">Aktiver Plan</div><b class="pln">${esc(ap.n)}</b></div><span class="mono plprog">${done}/${ex.length}</span></div><div class="bar"><i style="width:${ex.length?Math.round(done/ex.length*100):0}%"></i></div>
+    <div class="pills plex">${ex.map(([id])=>`<button class="pill exp${doneToday(id)?' done':''}" data-act="tlift" data-v="${esc(id)}" aria-pressed="${id===tl&&!nx}">${doneToday(id)?'<span class="ck" aria-hidden="true">✓</span>':exIcon(L(id))}${esc(L(id).n)}</button>`).join('')}</div>
+    <div class="btnrow">${done===ex.length?'<span class="chip ok">Plan geschafft 💪</span>':next?`<button class="btn sm" data-act="tlift" data-v="${esc(next[0])}" style="background:var(--fg);color:var(--bg);border-color:var(--fg)">${exIcon(L(next[0]))}<span>Weiter:</span>&nbsp;${esc(L(next[0]).n)}</button>`:''}<button class="btn sm ghost" data-act="planview" data-v="${esc(ap.id)}">Plan ansehen</button><button class="btn sm ghost" data-act="planend">Beenden</button></div>`;return}
+  const own=Array.isArray(S.plans)?S.plans:[];
+  el.innerHTML=`<div class="lbl">Trainingspläne</div><div class="pltiles">${own.map(planTile).join('')}<button class="pltile add" data-act="planew"><span class="plus">+</span><b>Eigener Plan</b><small>z. B. Elias Pushday</small></button>${PLANS.map(planTile).join('')}</div>`}
+let plView=null,plDel=false,pe=null;
+function openPlan(id){plView=id;plDel=false;renderPlanSheet();$('#planSheet').hidden=false;try{$('#planSheet .sheetin').scrollTop=0}catch(e){}navPush()}
+function closePlan(){$('#planSheet').hidden=true;plView=null}
+function renderPlanSheet(){const p=planById(plView);if(!p){closePlan();return}const ex=planEx(p),ids=ex.map(e=>e[0]),m=musOf(ids),own=!PLANS.includes(p),ap=activePlan();
+  const mus=Object.keys(m.p).map(k=>MNAME[k]);
+  $('#plBody').innerHTML=`<div class="plsh"><div style="min-width:0"><div class="lbl">${own?'Eigener Plan':'Trainingsplan'}</div><h2 id="plTitle">${esc(p.n)}</h2></div><button class="iconx" data-act="plclose" aria-label="Schließen">×</button></div>
+  ${bodyMap(ids,'big')}<div class="mlegend"><span><i class="mp"></i>Hauptmuskeln</span><span><i class="ms"></i>Mittrainiert</span></div>
+  ${mus.length?`<p class="note" style="margin:0;text-align:center">${mus.map(t=>`<span>${t}</span>`).join(' · ')}</p>`:''}
+  <div class="plist">${ex.map(([id,h],i)=>{const x=L(id),last=lastSetText(id);return `<button class="plrow" data-act="planstart" data-v="${esc(id)}"><span class="pli">${i+1}</span>${exIcon(x)}<span class="pltx"><b>${esc(x.n)}</b>${h||last?`<small>${h?`<span class="mono">${esc(h)}</span>`:''}${h&&last?' · ':''}${last?`<span>zuletzt</span> ${last}`:''}</small>`:''}</span>${doneToday(id)?'<span class="ck" style="color:#9be15d;font-weight:800" aria-label="heute erledigt">✓</span>':'<span class="hchev" aria-hidden="true">›</span>'}</button>`}).join('')}</div>
+  <button class="btn primary" data-act="planstart">${ap&&ap.id===p.id?'Weiter trainieren':'Plan starten'}</button>
+  <div class="btnrow">${own?`<button class="btn sm ghost" data-act="planedit" data-v="${esc(p.id)}">Bearbeiten</button><button class="btn sm ghost" data-act="plandel" data-v="${esc(p.id)}">${plDel?'Wirklich löschen? Nochmal tippen':'Löschen'}</button>`:`<button class="btn sm ghost" data-act="plancopy" data-v="${esc(p.id)}">Als eigenen Plan anpassen</button>`}</div>`}
+function startPlan(id,lift){const p=planById(id);if(!p)return;const ex=planEx(p);if(!ex.length)return;
+  S.plan={id:p.id,d:dayKey(Date.now())};const first=(lift&&L(lift))?lift:(ex.find(([i])=>!doneToday(i))||ex[0])[0];
+  closePlan();tl=first;S.last=first;nx=null;exQ='';try{$('#exQ').value=''}catch(e){}editing=null;confirmDel=false;save();prefill();setTab('train');renderTrain()}
+function openPlanEdit(id,copyFrom){const src=planById(id||copyFrom);pe={id:id||null,n:src?src.n:'',ex:src?planEx(src).map(e=>[e[0],e[1]||'']):[],q:'',g:'all'};closePlan();renderPlanEdit();$('#planEdit').hidden=false;try{$('#planEdit .sheetin').scrollTop=0}catch(e){}navPush();if(!matchMedia('(pointer:coarse)').matches)setTimeout(()=>{try{$('#peName').focus()}catch(e){}},40)}
+function closePlanEdit(){$('#planEdit').hidden=true;pe=null}
+function renderPlanEdit(){if(!pe)return;
+  $('#peBody').innerHTML=`<div class="plsh"><h2 id="peTitle">${pe.id?'Plan bearbeiten':'Neuer Plan'}</h2><button class="iconx" data-act="peclose" aria-label="Schließen">×</button></div>
+  <div style="display:grid;gap:8px"><label class="lbl" for="peName">Name</label><input id="peName" class="nm-in" type="text" maxlength="30" placeholder="z. B. Elias Pushday" autocomplete="off" value="${esc(pe.n)}"></div>
+  <div id="peMap">${bodyMap(pe.ex.map(e=>e[0]),'mid')}</div>
+  <div class="lbl" id="peCnt"></div><div class="pesel" id="peSel"></div>
+  <div class="lbl">Übungen hinzufügen</div>
+  <div class="exsearch"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><input id="peQ" type="search" placeholder="Übung suchen" aria-label="Übung für den Plan suchen" autocomplete="off" value="${esc(pe.q)}"></div>
+  <div class="pills gchips" id="peG"></div><div class="peadd" id="peList"></div>
+  <div class="btnrow"><button class="btn primary" data-act="pesave">Plan speichern</button><button class="btn sm ghost" data-act="peclose">Abbrechen</button></div>`;
+  renderPeParts()}
+function renderPeParts(){if(!pe)return;const inP=new Set(pe.ex.map(e=>e[0]));
+  $('#peMap').innerHTML=bodyMap(pe.ex.map(e=>e[0]),'mid');
+  $('#peCnt').textContent='Im Plan ('+pe.ex.length+'/'+MAXPLEX+')';
+  $('#peSel').innerHTML=pe.ex.length?pe.ex.map(([id],i)=>`<div class="perow"><span class="pli">${i+1}</span>${exIcon(L(id))}<b>${esc(L(id).n)}</b><button class="iconx sm" data-act="peup" data-v="${i}" aria-label="Nach oben"${i?'':' disabled'}>↑</button><button class="iconx sm" data-act="perm" data-v="${i}" aria-label="Entfernen">×</button></div>`).join(''):'<p class="note" style="margin:0">Tippe unten auf Übungen, um sie hinzuzufügen.</p>';
+  const own=(S.custom||[]).map(c=>L(c.id)).filter(Boolean),q=normQ(pe.q);
+  if(pe.g==='own'&&!own.length)pe.g='all';
+  let list=q?own.concat(BASE):pe.g==='all'?BASE.concat(own):pe.g==='own'?own:BASE.filter(l=>l.g===pe.g);
+  if(q)list=list.filter(l=>normQ(l.n).includes(q)||normQ(tw(l.n)).includes(q));
+  const g=$('#peG');g.hidden=!!q;g.innerHTML=pillsHTML('peg',GROUPS.concat(own.length?[['own','Eigene']]:[]),pe.g);
+  $('#peList').innerHTML=list.length?list.map(l=>`<button class="pill exp" data-act="petog" data-v="${esc(l.id)}" aria-pressed="${inP.has(l.id)}">${exIcon(l)}${esc(l.n)}</button>`).join(''):'<span class="exnone">Nichts gefunden</span>'}
 function renderTrain(){
   renderBwCheck();
   if(!L(tl))tl=BASE[0].id;
@@ -2348,6 +2437,7 @@ function renderTrain(){
   if(exG!=='all'&&exG!=='own'&&!GROUPS.some(g=>g[0]===exG))exG='all';if(exG==='own'&&!own.length)exG='all';
   let items=q?own.concat(std):exG==='all'?own.concat(std):exG==='own'?own:std.filter(l=>l.g===exG).sort((a,b)=>BASE.indexOf(a)-BASE.indexOf(b));
   if(q)items=items.filter(l=>normQ(l.n).includes(q)||normQ(tw(l.n)).includes(q));
+  renderPlanCard();
   $('#groupChips').hidden=!!q;
   $('#groupChips').innerHTML=pillsHTML('exgroup',GROUPS.concat(own.length?[['own','Eigene']]:[]),exG);
   $('#trainChips').innerHTML=(q&&!items.length?`<span class="exnone">Nichts gefunden</span><button class="pill add" data-act="exfromq">+ „${esc(exQ.trim().slice(0,28))}“ anlegen</button>`:(q?'':`<button class="pill add" data-act="newex" aria-pressed="${!!nx}">+ Neue Übung</button>`)+items.map(l=>`<button class="pill exp" data-act="tlift" data-v="${esc(l.id)}" aria-pressed="${!nx&&l.id===tl}">${exIcon(l)}${esc(l.n)}</button>`).join(''));
@@ -2578,7 +2668,7 @@ const STALE={};const TABR=()=>({home:renderHome,train:renderTrain,ranks:renderRa
 function renderAll(){renderTop();const m=TABR();for(const k in m){if(k===tab){STALE[k]=0;m[k]()}else STALE[k]=1}}
 
 let pendAv='legday',impConfirm=false,DL=null;
-function exportData(){return JSON.stringify({v:1,bw:S.bw,nick:S.nick,crew:S.crew||'',crews:S.crews||[],studio:S.studio||'',avatar:S.avatar,custom:S.custom,bwLog:S.bwLog||[],bwChecked:S.bwChecked||0,sets:S.sets})}
+function exportData(){return JSON.stringify({v:1,bw:S.bw,nick:S.nick,crew:S.crew||'',crews:S.crews||[],plans:S.plans||[],studio:S.studio||'',avatar:S.avatar,custom:S.custom,bwLog:S.bwLog||[],bwChecked:S.bwChecked||0,sets:S.sets})}
 function cleanImport(o){
   if(!o||typeof o!=='object'||!Array.isArray(o.sets))return null;
   const custom=(Array.isArray(o.custom)?o.custom:[]).filter(c=>c&&typeof c.id==='string'&&typeof c.n==='string'&&(c.kind==='kg'||c.kind==='bw'||c.kind==='cd')&&Array.isArray(c.t)&&(c.t.length===6||c.t.length===NT)&&c.t.every(n=>Number.isFinite(n))).slice(0,50)
@@ -2593,7 +2683,7 @@ function cleanImport(o){
     if(!plausible(x,scOf(x,s.w,Math.round(s.r),bw)))continue;
     sets.push({id:/^[A-Za-z0-9_-]{1,24}$/.test(String(s.id))?String(s.id):newId(),lift:s.lift,w:s.w,r:Math.round(s.r),bw,ts:s.ts});
   }
-  return {bw:BW,nick:String(o.nick||'').slice(0,20),crew:normCrew(o.crew),crews:Array.isArray(o.crews)?o.crews.map(normCrew).filter(Boolean).slice(0,MAXCREWS):(normCrew(o.crew)?[normCrew(o.crew)]:[]),studio:String(o.studio||'').slice(0,24),bwLog:(Array.isArray(o.bwLog)?o.bwLog:[]).filter(z=>z&&Number.isFinite(z.ts)&&z.bw>=30&&z.bw<=250).map(z=>({ts:z.ts,bw:Number(z.bw)})).slice(-2000),bwChecked:Number(o.bwChecked)||0,avatar:AV_IDS.includes(o.avatar)?o.avatar:'legday',custom,sets};
+  return {bw:BW,nick:String(o.nick||'').slice(0,20),crew:normCrew(o.crew),plans:(Array.isArray(o.plans)?o.plans:[]).filter(p=>p&&typeof p==='object').slice(0,20).map(p=>({id:/^[A-Za-z0-9_-]{1,40}$/.test(String(p.id))?String(p.id):'u'+newId(),n:String(p.n||'Plan').slice(0,30),ex:(Array.isArray(p.ex)?p.ex:[]).slice(0,12).map(e=>Array.isArray(e)?[String(e[0]).slice(0,40),String(e[1]||'').slice(0,20)]:[String(e).slice(0,40),''])})),crews:Array.isArray(o.crews)?o.crews.map(normCrew).filter(Boolean).slice(0,MAXCREWS):(normCrew(o.crew)?[normCrew(o.crew)]:[]),studio:String(o.studio||'').slice(0,24),bwLog:(Array.isArray(o.bwLog)?o.bwLog:[]).filter(z=>z&&Number.isFinite(z.ts)&&z.bw>=30&&z.bw<=250).map(z=>({ts:z.ts,bw:Number(z.bw)})).slice(-2000),bwChecked:Number(o.bwChecked)||0,avatar:AV_IDS.includes(o.avatar)?o.avatar:'legday',custom,sets};
 }
 async function initDl(){try{if(window.claude&&window.claude.use){DL=await window.claude.use('downloads');const b=$('#bkFile');if(b)b.hidden=!DL;renderRanks();renderBoard()}}catch(e){DL=null}}
 function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
@@ -2777,7 +2867,7 @@ document.addEventListener('visibilitychange',()=>{if(!AC)return;if(document.hidd
 {const unlock=()=>{if(S.music&&S.music!=='off'&&!musStyle)musicApply();else if(AC&&AC.state==='suspended')AC.resume().catch(()=>{});document.removeEventListener('pointerdown',unlock,true);document.removeEventListener('keydown',unlock,true)};
  document.addEventListener('pointerdown',unlock,true);document.addEventListener('keydown',unlock,true)}
 document.addEventListener('click',e=>{const el=e.target.closest&&e.target.closest('button,[role="tab"],summary,.srow,[data-act]');if(!el||el.disabled)return;
-  const a=el.dataset.act||'';if(a==='save'||a==='music'||a==='sfx'||a==='sheetclose'&&el.id==='sheet'||a==='remclose'&&el.id==='remind'||a==='prclose'||a==='fxclose')return;
+  const a=el.dataset.act||'';if(a==='save'||a==='music'||a==='sfx'||a==='sheetclose'&&el.id==='sheet'||a==='remclose'&&el.id==='remind'||a==='plclose'&&el.id==='planSheet'||a==='peclose'&&el.id==='planEdit'||a==='prclose'||a==='fxclose')return;
   sfx(el.getAttribute('role')==='tab'?'tab':(a==='del'||a==='exdel'||a==='clear')?'del':'tap')},true);
 function renderSndSw(){const m=$('#musSw'),f=$('#sfxSw'),cur=S.music||'off',vr=$('#vibRow'),vs=$('#vibSw');if(vr){const can=typeof navigator.vibrate==='function';vr.hidden=!can;if(can&&vs)vs.innerHTML=[['on','An'],['off','Aus']].map(([k,n])=>`<button data-act="vib" data-v="${k}" aria-pressed="${(S.vib!==false)===(k==='on')}">${n}</button>`).join('')}
   if(m)m.innerHTML=[['off','Aus'],['lofi','Gym Lo-Fi'],['ambient','Neon'],['phonk','Drift & Deadlift']].map(([k,n])=>`<button class="pill" data-act="music" data-v="${k}" aria-pressed="${cur===k}">${esc(n)}</button>`).join('');
@@ -2888,6 +2978,26 @@ document.addEventListener('click',e=>{
   else if(a==='rp')step('#r',1,1,false);
   else if(a==='del'){if(!canEdit(S.sets.find(z=>z.id===v))){toast('Einträge älter als 7 Tage sind fest.');return}S.sets=S.sets.filter(s=>s.id!==v);if(editing&&editing.id===v)editing=null;syncShown();save();renderAll();syncCrew()}
   else if(a==='clear'){S.sets=[];S.example=false;S.shown=0;save();renderAll();renderSetup();toast('Profil geleert. Trag deine eigenen Sätze ein.')}
+  else if(a==='planview'){openPlan(v)}
+  else if(a==='plclose'){if(t.id!=='planSheet'||e.target===t)closePlan()}
+  else if(a==='planstart'){startPlan(plView,v)}
+  else if(a==='planend'){S.plan=null;save();renderTrain()}
+  else if(a==='planew'){if((S.plans||[]).length>=MAXPLANS){toast('Du hast schon 20 eigene Pläne. Lösch zuerst einen.');return}openPlanEdit(null,null)}
+  else if(a==='plancopy'){if((S.plans||[]).length>=MAXPLANS){toast('Du hast schon 20 eigene Pläne. Lösch zuerst einen.');return}openPlanEdit(null,v)}
+  else if(a==='planedit'){openPlanEdit(v,null)}
+  else if(a==='plandel'){if(!plDel){plDel=true;renderPlanSheet();setTimeout(()=>{if(plDel&&plView){plDel=false;renderPlanSheet()}},4000);return}plDel=false;S.plans=(S.plans||[]).filter(p=>p.id!==v);if(S.plan&&S.plan.id===v)S.plan=null;save();closePlan();renderTrain();toast('Plan gelöscht')}
+  else if(a==='peclose'){if(t.id!=='planEdit'||e.target===t)closePlanEdit()}
+  else if(a==='peg'){if(pe){pe.g=v;renderPeParts()}}
+  else if(a==='petog'){if(!pe)return;const i=pe.ex.findIndex(e=>e[0]===v);if(i>=0)pe.ex.splice(i,1);else{if(pe.ex.length>=MAXPLEX){toast('Höchstens 12 Übungen pro Plan.');return}pe.ex.push([v,''])}renderPeParts()}
+  else if(a==='perm'){if(!pe)return;pe.ex.splice(+v,1);renderPeParts()}
+  else if(a==='peup'){if(!pe)return;const i=+v;if(i>0){const x=pe.ex[i];pe.ex[i]=pe.ex[i-1];pe.ex[i-1]=x}renderPeParts()}
+  else if(a==='pesave'){if(!pe)return;const n=String(($('#peName')||{}).value||pe.n||'').trim().slice(0,30);
+    if(!n){toast('Gib deinem Plan einen Namen.');try{$('#peName').focus()}catch(e){}return}
+    if(!pe.ex.length){toast('Wähle mindestens eine Übung.');return}
+    S.plans=Array.isArray(S.plans)?S.plans:[];let id=pe.id;
+    if(id&&S.plans.some(p=>p.id===id))S.plans=S.plans.map(p=>p.id===id?{id,n,ex:pe.ex.slice(0,MAXPLEX)}:p);
+    else{id='u'+newId();S.plans.unshift({id,n,ex:pe.ex.slice(0,MAXPLEX)})}
+    save();closePlanEdit();renderTrain();openPlan(id);toast('Plan gespeichert')}
   else if(a==='statqclear'){statQ='';const i=$('#statQ');if(i){i.value='';i.focus()}applyStatQ()}
   else if(a==='exgroup'){exG=v;renderTrain();const tc=$('#trainChips');if(tc)tc.scrollLeft=0}
   else if(a==='exqclear'){exQ='';$('#exQ').value='';renderTrain();$('#exQ').focus()}
@@ -2990,7 +3100,7 @@ document.addEventListener('click',e=>{
     if(!o){toast('Das ist kein gültiges Backup. Füge den kompletten Text ein.');return}
     if(!o.sets.length){toast('Das Backup enthält keine gültigen Sätze. Deine Daten bleiben unverändert.');return}
     if(!impConfirm){impConfirm=true;$('#bkLoad').textContent=`Ja, ${o.sets.length} Sätze einspielen und aktuelle Daten ersetzen`;return}
-    S.bw=o.bw;S.nick=o.nick||S.nick;S.crew=o.crew;S.crews=o.crews;fixCrews();S.studio=o.studio||'';S.bwLog=o.bwLog;S.bwChecked=o.bwChecked;S.avatar=o.avatar;S.custom=o.custom;S.sets=o.sets;S.example=false;
+    S.bw=o.bw;S.nick=o.nick||S.nick;S.crew=o.crew;S.crews=o.crews;S.plans=o.plans;fixCrews();S.studio=o.studio||'';S.bwLog=o.bwLog;S.bwChecked=o.bwChecked;S.avatar=o.avatar;S.custom=o.custom;S.sets=o.sets;S.example=false;
     impConfirm=false;$('#bkLoad').textContent='Backup einspielen';
     S.shown=undefined;syncShown();save();closeSheet();tl=BASE[0].id;prefill();renderAll();renderSetup();syncCrew();toast('Backup eingespielt');
   }
@@ -3055,7 +3165,7 @@ document.addEventListener('input',e=>{if(e.target&&e.target.id==='inBw'){const e
 $('#remTime').addEventListener('input',()=>{const v=$('#remTime').value;if(/^\d\d:\d\d$/.test(v)){S.remTime=v;save()}updGcal()});
 $('#remGcal').addEventListener('click',()=>{if(!gcalLink())return;setTimeout(()=>{closeRemind();toast('Google Kalender geöffnet. Termin dort speichern.')},300)});
 $('#exQ').addEventListener('input',e=>{exQ=e.target.value;renderTrain()});
-document.addEventListener('input',e=>{if(e.target&&e.target.id==='statQ'){statQ=e.target.value;applyStatQ()}});
+document.addEventListener('input',e=>{if(e.target&&e.target.id==='statQ'){statQ=e.target.value;applyStatQ()}else if(pe&&e.target&&e.target.id==='peQ'){pe.q=e.target.value;renderPeParts()}else if(pe&&e.target&&e.target.id==='peName'){pe.n=e.target.value}});
 document.addEventListener('keydown',e=>{if(e.target&&e.target.id==='statQ'&&e.key==='Enter'){e.preventDefault();const r=[...document.querySelectorAll('#statGrid .srow')].find(z=>!z.hidden);if(statQ.trim()&&r){e.target.blur();r.click()}}});
 $('#exQ').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();if(!exQ.trim())return;const b=$('#trainChips [data-act="tlift"]')||$('#trainChips [data-act="exfromq"]');if(b){b.click();$('#exQ').blur()}}else if(e.key==='Escape'&&exQ){e.stopPropagation();exQ='';e.target.value='';renderTrain()}});
 $('#profStudio').addEventListener('input',renderStudioSugg);
@@ -3064,6 +3174,8 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape'&&!$('#fx').hidden){closeRankUp();return}
   if(e.key==='Escape'&&rcState){closeRecap();return}
   if((e.key==='ArrowRight'||e.key==='ArrowLeft')&&rcState){const st=rcState;st.i=Math.max(0,Math.min(st.sl.length-1,st.i+(e.key==='ArrowRight'?1:-1)));renderRecap();return}
+  if(e.key==='Escape'&&!$('#planEdit').hidden){closePlanEdit();return}
+  if(e.key==='Escape'&&!$('#planSheet').hidden){closePlan();return}
   if(e.key==='Escape'&&!$('#remind').hidden){closeRemind();return}
   if(e.key==='Escape'&&!$('#sheet').hidden){closeSheet();return}
   if((e.key==='Enter'||e.key===' ')&&e.target.getAttribute&&e.target.getAttribute('role')==='button'&&e.target.dataset.act){e.preventDefault();e.target.click()}
