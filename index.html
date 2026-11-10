@@ -555,6 +555,30 @@ section[data-view]{min-width:0}
 .heat i.fut{background:transparent}
 .heat i.now{outline:1.5px solid var(--accent);outline-offset:1px}
 .l1{background:rgba(122,231,255,.28)!important}.l2{background:rgba(122,231,255,.5)!important}.l3{background:rgba(122,231,255,.78)!important}.l4{background:var(--t11)!important;box-shadow:0 0 6px rgba(255,216,107,.6)}
+.tour{position:fixed;inset:0;z-index:150;touch-action:none}
+.tspot{position:fixed;border-radius:22px;box-shadow:0 0 0 9999px rgba(4,5,7,.78),0 0 0 2px var(--accent),0 0 26px 4px rgba(122,231,255,.35);pointer-events:none;transition:top .45s cubic-bezier(.2,.8,.2,1),left .45s cubic-bezier(.2,.8,.2,1),width .45s cubic-bezier(.2,.8,.2,1),height .45s cubic-bezier(.2,.8,.2,1),border-radius .45s}
+.tbub{position:fixed;left:12px;right:12px;max-width:440px;margin:0 auto;background:var(--panel);border:1px solid rgba(122,231,255,.35);border-radius:22px;padding:16px 16px 14px;display:grid;gap:12px;box-shadow:0 18px 50px rgba(0,0,0,.55);transition:top .45s cubic-bezier(.2,.8,.2,1),bottom .45s cubic-bezier(.2,.8,.2,1)}
+.tbub::after{content:'';position:absolute;left:var(--ax,50%);width:16px;height:16px;background:var(--panel);border:1px solid rgba(122,231,255,.35);transform:translateX(-50%) rotate(45deg);transition:left .45s cubic-bezier(.2,.8,.2,1)}
+.tbub.dn::after{bottom:-9px;border-top:0;border-left:0}.tbub.up::after{top:-9px;border-bottom:0;border-right:0}
+.trow{display:flex;gap:12px;align-items:flex-start}.tav{flex:none;width:58px;height:58px;border-radius:18px;background:rgba(122,231,255,.08);display:grid;place-items:center}.tav svg{width:52px;height:52px}
+.tav.hop{animation:thop .6s cubic-bezier(.3,1.6,.5,1)}@keyframes thop{0%{transform:translateY(0) scale(1)}35%{transform:translateY(-10px) scale(1.06,.95)}70%{transform:translateY(0) scale(.97,1.04)}100%{transform:none}}
+.ttx{min-width:0;display:grid;gap:4px}.ttx small{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.ttx h3{margin:0;font-family:var(--display);font-weight:800;font-size:19px;line-height:1.15}.ttx p{margin:0;color:var(--dim);font-size:14.5px;line-height:1.45}
+.tft{display:flex;align-items:center;justify-content:space-between;gap:10px}.tdots{display:flex;gap:6px}.tdots i{width:7px;height:7px;border-radius:9px;background:rgba(255,255,255,.18);transition:width .3s,background .3s}.tdots i.on{width:20px;background:var(--accent)}
+.tbtns{display:flex;gap:8px;align-items:center}.tskip{background:none;border:0;color:var(--dim);font:inherit;font-size:13.5px;padding:10px 6px;cursor:pointer;min-height:40px}
+@media (prefers-reduced-motion:reduce){.tspot,.tbub,.tbub::after{transition:none}.tav.hop{animation:none}}
+.calhd{display:flex;justify-content:space-between;align-items:flex-end;gap:8px}.calmn{color:var(--fg);font-weight:700}
+.calwd,.calg{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+.calwd span{text-align:center;font-size:11px;font-weight:700;color:var(--dim);text-transform:uppercase}
+.calg i{display:grid;place-items:center;aspect-ratio:1;border-radius:9px;background:rgba(255,255,255,.05);font-style:normal;max-height:46px}
+.calg i span{font-size:13px;font-weight:600;color:var(--dim)}.calg i.l1 span,.calg i.l2 span{color:var(--fg);font-weight:800}.calg i.l3 span{color:#062026;font-weight:800}.calg i.l4 span{color:#2a1d00;font-weight:800}
+.calg i.pad,.calg i.fut{background:transparent}.calg i.fut span{opacity:.45}
+.calg i.now{outline:2px solid var(--accent);outline-offset:1px}
+.calg.sm{gap:2px}.calg.sm i{border-radius:2.5px}.calg.sm i.now{outline-width:1.5px;outline-offset:0}
+.caly{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 12px}
+.calmini{display:grid;gap:5px}.calmh{display:flex;justify-content:space-between;font-size:11.5px;font-weight:700;color:var(--dim)}.calmh b{color:var(--accent)}
+.calmini.cur .calmh span{color:var(--fg)}.calmini.futm{opacity:.45}
+.calft{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.calbtn{min-height:40px}
 .heatl{display:flex;align-items:center;gap:4px;justify-content:flex-end;font-size:11px;color:var(--dim)}
 .heatl i{width:11px}
 .bdg{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
@@ -812,6 +836,7 @@ textarea{font-size:16px}
   </main>
 </div>
 
+<div class="tour" id="tour" hidden><div class="tspot" id="tSpot"></div><div class="tbub" id="tBub" role="dialog" aria-modal="true" aria-labelledby="tTitle" aria-describedby="tTxt"></div></div>
 <div class="sheet" id="planSheet" data-act="plclose" hidden>
   <div class="sheetin plsheet" role="dialog" aria-modal="true" aria-labelledby="plTitle"><div id="plBody" class="plbody"></div></div>
 </div>
@@ -863,7 +888,7 @@ textarea{font-size:16px}
       <p class="note" id="acctDelNote" style="margin:0;color:var(--bad);font-weight:600" hidden>Wirklich löschen? Dein Konto, alle Sätze, Sicherungen und dein Crew-Eintrag werden endgültig entfernt. Zum Bestätigen nochmal auf „Endgültig löschen“ tippen.</p>
       <p class="note" style="margin:0"><a href="datenschutz.html" style="color:var(--dim)">Datenschutz</a> · <a href="impressum.html" style="color:var(--dim)">Impressum</a></p></div>
     <button class="btn sm ghost" data-act="tipsreset" id="tipReset" style="justify-self:start" hidden>Erklärungen wieder anzeigen</button>
-    <button class="btn sm ghost" data-act="introagain" style="justify-self:start">Einführung noch einmal ansehen</button>
+    <div class="btnrow"><button class="btn sm ghost" data-act="introagain">Einführung noch einmal ansehen</button><button class="btn sm ghost" data-act="tourstart">App-Tour ansehen</button></div>
     <p class="note" id="bwWarn" style="color:var(--t3);margin:0;font-weight:600" role="alert" hidden></p>
     <div class="btnrow"><button class="btn primary" data-act="profsave" style="flex:1 1 200px">Speichern</button><button class="btn" data-act="sheetclose">Abbrechen</button></div>
   </div>
@@ -1182,7 +1207,13 @@ LANG=S.lang==='en'?'en':'de';
 /* ---------- Sprache: Deutsch (Quelle) -> Englisch per Übersetzungsschicht ---------- */
 const D={
 // Navigation & allgemein
-'Start':'Home','Wirklich löschen? Nochmal tippen':'Really delete? Tap again','Trainingspläne':'Workout plans','Aktiver Plan':'Active plan','Eigener Plan':'Custom plan','Trainingsplan':'Workout plan','z. B. Elias Pushday':'e.g. Elias push day','Plan ansehen':'View plan','Beenden':'End','Weiter:':'Next:','Plan geschafft 💪':'Plan done 💪','Hauptmuskeln':'Primary muscles','Mittrainiert':'Also worked','zuletzt':'last','Plan starten':'Start plan','Weiter trainieren':'Continue training','Bearbeiten':'Edit','Als eigenen Plan anpassen':'Customize as my plan','Plan bearbeiten':'Edit plan','Neuer Plan':'New plan','Übungen hinzufügen':'Add exercises','Tippe unten auf Übungen, um sie hinzuzufügen.':'Tap exercises below to add them.','Plan speichern':'Save plan','Gib deinem Plan einen Namen.':'Give your plan a name.','Wähle mindestens eine Übung.':'Pick at least one exercise.','Plan gespeichert':'Plan saved','Plan gelöscht':'Plan deleted','Höchstens 12 Übungen pro Plan.':'At most 12 exercises per plan.','Du hast schon 20 eigene Pläne. Lösch zuerst einen.':'You already have 20 custom plans. Delete one first.','Übung für den Plan suchen':'Search exercise for the plan','Nach oben':'Move up','Entfernen':'Remove','Leg Day':'Leg Day','Oberkörper':'Upper body','Unterkörper':'Lower body','Ganzkörper':'Full body','Arm Day':'Arm Day','Ohne Geräte':'No equipment','Vordere Schulter':'Front delts','Seitliche Schulter':'Side delts','Hintere Schulter':'Rear delts','Nacken':'Traps','Oberer Rücken':'Upper back','Latissimus':'Lats','Unterer Rücken':'Lower back','Bizeps':'Biceps','Trizeps':'Triceps','Unterarme':'Forearms','Seitlicher Bauch':'Obliques','Vordere Oberschenkel':'Quads','Hintere Oberschenkel':'Hamstrings','Po':'Glutes','Adduktoren':'Adductors','Waden':'Calves','Alle':'All','Brust':'Chest','Rücken':'Back','Schultern':'Shoulders','Arme':'Arms','Beine':'Legs','Bauch':'Core','Eigene':'Custom','Gewicht pro Hantel eintragen':'Enter weight per dumbbell','Keine passende Übung mit Einträgen gefunden.':'No matching exercise with entries found.','Übung in der Statistik suchen':'Search exercise in stats',
+'Start':'Home','1 Trainingstag':'1 training day','Ganzes Jahr ansehen':'View whole year','Nur diesen Monat':'This month only','App-Tour ansehen':'Take the app tour','Überspringen':'Skip','Weiter':'Next','Alles klar!':'Got it!','Profil':'Profile',
+'Dein täglicher Startpunkt':'Your daily starting point','Hier startest du jeden Tag. Deine Woche, dein Rang und dein nächstes Ziel, alles auf einen Blick.':'Start here every day. Your week, your rank and your next goal, all at a glance.',
+'Hier wird geschwitzt':'This is where you sweat','Trag hier deine Sätze ein. Oben findest du fertige Pläne wie Push Day, oder du baust dir deinen eigenen.':'Log your sets here. At the top you will find ready-made plans like Push Day, or build your own.',
+'Jede Übung hat ihren Rang':'Every exercise has its rank','Vom Anfänger bis zur Legende. Je stärker du im Verhältnis zu deinem Körpergewicht bist, desto höher steigst du.':'From rookie to legend. The stronger you are relative to your bodyweight, the higher you climb.',
+'Schwarz auf weiß stärker':'Proof you are getting stronger','Hier siehst du, wie du dich steigerst: Verlauf jeder Übung, dein Trainingskalender und dein Monatsrückblick.':'See how you progress: history for every exercise, your training calendar and your monthly recap.',
+'Das Beste kommt zum Schluss':'Saving the best for last','Lade Freunde ein, fordert euch zu Duellen heraus und kämpft in der Rangliste um Platz 1.':'Invite friends, challenge each other to duels and fight for first place on the leaderboard.',
+'Alles über dich':'All about you','Tippe oben auf deinen Avatar für Profil, Körpergewicht, Musik, Sprache und deine Crews. Viel Spaß beim Pumpen!':'Tap your avatar at the top for profile, bodyweight, music, language and your crews. Have fun pumping!','Wirklich löschen? Nochmal tippen':'Really delete? Tap again','Trainingspläne':'Workout plans','Aktiver Plan':'Active plan','Eigener Plan':'Custom plan','Trainingsplan':'Workout plan','z. B. Elias Pushday':'e.g. Elias push day','Plan ansehen':'View plan','Beenden':'End','Weiter:':'Next:','Plan geschafft 💪':'Plan done 💪','Hauptmuskeln':'Primary muscles','Mittrainiert':'Also worked','zuletzt':'last','Plan starten':'Start plan','Weiter trainieren':'Continue training','Bearbeiten':'Edit','Als eigenen Plan anpassen':'Customize as my plan','Plan bearbeiten':'Edit plan','Neuer Plan':'New plan','Übungen hinzufügen':'Add exercises','Tippe unten auf Übungen, um sie hinzuzufügen.':'Tap exercises below to add them.','Plan speichern':'Save plan','Gib deinem Plan einen Namen.':'Give your plan a name.','Wähle mindestens eine Übung.':'Pick at least one exercise.','Plan gespeichert':'Plan saved','Plan gelöscht':'Plan deleted','Höchstens 12 Übungen pro Plan.':'At most 12 exercises per plan.','Du hast schon 20 eigene Pläne. Lösch zuerst einen.':'You already have 20 custom plans. Delete one first.','Übung für den Plan suchen':'Search exercise for the plan','Nach oben':'Move up','Entfernen':'Remove','Leg Day':'Leg Day','Oberkörper':'Upper body','Unterkörper':'Lower body','Ganzkörper':'Full body','Arm Day':'Arm Day','Ohne Geräte':'No equipment','Vordere Schulter':'Front delts','Seitliche Schulter':'Side delts','Hintere Schulter':'Rear delts','Nacken':'Traps','Oberer Rücken':'Upper back','Latissimus':'Lats','Unterer Rücken':'Lower back','Bizeps':'Biceps','Trizeps':'Triceps','Unterarme':'Forearms','Seitlicher Bauch':'Obliques','Vordere Oberschenkel':'Quads','Hintere Oberschenkel':'Hamstrings','Po':'Glutes','Adduktoren':'Adductors','Waden':'Calves','Alle':'All','Brust':'Chest','Rücken':'Back','Schultern':'Shoulders','Arme':'Arms','Beine':'Legs','Bauch':'Core','Eigene':'Custom','Gewicht pro Hantel eintragen':'Enter weight per dumbbell','Keine passende Übung mit Einträgen gefunden.':'No matching exercise with entries found.','Übung in der Statistik suchen':'Search exercise in stats',
 'Kurzhantel-Bankdrücken':'Dumbbell Bench Press','Butterfly (Maschine)':'Chest Fly (Machine)','Cable Crossover':'Cable Crossover','Kabelrudern':'Seated Cable Row','Kurzhantel-Rudern':'Dumbbell Row','Rückenstrecker':'Back Extensions','Kurzhantel-Schulterdrücken':'Dumbbell Shoulder Press','Seitheben':'Lateral Raises','Face Pulls':'Face Pulls','Reverse Butterfly':'Reverse Fly','Kurzhantel-Curls':'Dumbbell Curls','Hammer-Curls':'Hammer Curls','Trizepsdrücken am Kabel':'Tricep Pushdown','French Press':'Skull Crushers','Enges Bankdrücken':'Close-Grip Bench Press','Frontkniebeuge':'Front Squat','Rumänisches Kreuzheben':'Romanian Deadlift','Beinstrecker':'Leg Extension','Beinbeuger':'Leg Curl','Ausfallschritte':'Lunges','Bulgarian Split Squats':'Bulgarian Split Squats','Hip Thrust':'Hip Thrust','Wadenheben':'Calf Raises','Wadenheben sitzend':'Seated Calf Raises','Crunches':'Crunches','Beinheben hängend':'Hanging Leg Raises','Ab-Roller':'Ab Wheel','Kabel-Crunches':'Cable Crunches','Deine Crews':'Your crews','Crew-Name oder Code':'Crew name or code','z. B. gym-bros':'e.g. gym-bros','Name deiner Crew':'Your crew name','Erstellen: du bestimmst den Namen, er wird zum Code für deine Freunde. Beitreten: Code von Freunden eingeben. Bis zu 3 Crews gleichzeitig.':'Create: you choose the name, it becomes the code for your friends. Join: enter a code from friends. Up to 3 crews at once.','Gib deiner Crew zuerst einen Namen, z. B. gym-bros.':'Give your crew a name first, e.g. gym-bros.','Der Crew-Name braucht mindestens 3 Zeichen.':'The crew name needs at least 3 characters.','Wirklich verlassen? Nochmal tippen':'Really leave? Tap again','Deine Crew':'Your crew','+ Crew':'+ Crew','Studio-Liga':'Studio league','Neue Crew erstellen':'Create new crew','Du kannst in bis zu 3 Crews gleichzeitig sein.':'You can be in up to 3 crews at once.','Du bist schon in 3 Crews. Verlasse zuerst eine im Crew-Reiter.':'You are already in 3 crews. Leave one first in the Crew tab.','Für die Crew':'For the crew','Alle Freunde tragen denselben Code ein und sehen sich nur untereinander. Mit einem neuen Code trittst du einer weiteren Crew bei, bis zu 3. Wechseln und verlassen kannst du im Crew-Reiter.':'All friends enter the same code and only see each other. A new code lets you join another crew, up to 3. Switch and leave in the Crew tab.','Guten Morgen':'Good morning','Guten Tag':'Good afternoon','Guten Abend':'Good evening','Hallo':'Hello','Trag deinen ersten Satz ein und hol dir deinen Rang.':'Log your first set and earn your rank.','Heute schon trainiert. Stark.':'Already trained today. Strong.','Bereit für dein Training?':'Ready for your workout?','Weiteren Satz eintragen':'Log another set','Training eintragen':'Log workout','Nächstes Ziel':'Next goal','Weniger anzeigen':'Show less','Dein Rang':'Your rank','Training':'Training','Ränge':'Ranks','Statistik':'Stats','Crew':'Crew','Profil bearbeiten':'Edit profile','Athlet':'Athlete','Du':'You',
 'Abbrechen':'Cancel','Speichern':'Save','Weiter':'Continue','Löschen':'Delete','Ändern':'Change','Verstanden':'Got it','Beitreten':'Join','Nicht jetzt':'Not now',
 'Heute':'Today','Gestern':'Yesterday','Vorgestern':'2 days ago','heute':'today','gestern':'yesterday','Wann?':'When?','diese Woche':'this week','in diesem Monat':'this month',
@@ -1359,6 +1390,7 @@ const PAT=[
  [/^Du hast die Crew (.+) verlassen$/,m=>`You left the crew ${m[1]}`],
  [/^Im Plan \((\d+)\/(\d+)\)$/,m=>`In plan (${m[1]}/${m[2]})`],
  [/^(\d+) Übungen$/,m=>`${m[1]} exercises`],[/^1 Übung$/,()=>'1 exercise'],
+ [/^(\d+) Trainingstage$/,m=>`${m[1]} training days`],[/^Schritt (\d+) von (\d+)$/,m=>`Step ${m[1]} of ${m[2]}`],
  [/^Alle anzeigen \((\d+)\)$/,m=>`Show all (${m[1]})`],
  [/^Mehr anzeigen \((\d+) weitere\)$/,m=>`Show more (${m[1]} more)`],
  [/^(.+) (\d+) Wdh bearbeiten$/,m=>`Edit ${tw(m[1])} ${m[2]} reps`],
@@ -1886,7 +1918,8 @@ function introAct(a,v){
     if(n)S.nick=n;S.avatar=inAv;S.introDone=1;inviteTxt='';save();introClose();
     try{prefill()}catch(e){}
     for(const k in STALE)STALE[k]=1;renderAll();renderSetup();renderBoard();syncCrew();applyTips();
-    toast(fresh?(S.nick?`Willkommen, ${S.nick}! Trag jetzt deinen ersten Satz ein.`:'Los geht’s! Trag jetzt deinen ersten Satz ein.'):'Profil gespeichert');
+    const wmsg=fresh?(S.nick?`Willkommen, ${S.nick}! Trag jetzt deinen ersten Satz ein.`:'Los geht’s! Trag jetzt deinen ersten Satz ein.'):'Profil gespeichert';
+    if(fresh&&S.tour!=='done')setTimeout(()=>startTour(()=>toast(wmsg)),420);else toast(wmsg);
   }
 }
 function applyBackup(res,m){
@@ -2143,16 +2176,27 @@ setInterval(()=>{try{if(crewOk()){checkDuelResults();if(tab==='crew')renderDuels
 /* ---------- Trainingskalender (Heatmap) ---------- */
 function recapBtns(){const d=new Date(),ks=[0,1].map(k=>{const p=new Date(d.getFullYear(),d.getMonth()-k,1);return p.getFullYear()+'-'+String(p.getMonth()+1).padStart(2,'0')}).filter(k=>S.sets.some(z=>L(z.lift)&&monthKey(z.ts)===k));
   return ks.length?`<div class="btnrow">${ks.map((k,i)=>`<button class="btn sm${i?'':' ghost'}" data-act="recap" data-v="${k}">📊 ${i?'Rückblick':'Bisher'} ${esc(new Date(+k.slice(0,4),+k.slice(5)-1,1).toLocaleDateString(LOC(),{month:'long'}))}</button>`).join('')}</div>`:''}
+let heatYear=false;
 function heatHTML(){
-  const W=26,dp=compute(S.sets).dp||{},t0=new Date();t0.setHours(12,0,0,0);const mon=new Date(t0);mon.setDate(t0.getDate()-((t0.getDay()+6)%7)-7*(W-1));
-  const today=isoDay(t0.getTime()),lv=v=>v<=0?0:v<15?1:v<40?2:v<100?3:4;let cells='',months='',days=0,lastM=-1;
-  for(let w=0;w<W;w++){const d0=new Date(mon);d0.setDate(mon.getDate()+7*w);
-    if(d0.getMonth()!==lastM){lastM=d0.getMonth();if(w<=W-3)months+=`<span style="grid-column:${w+1}/span 3">${d0.toLocaleDateString(LOC(),{month:'short'}).replace('.','')}</span>`}
-    for(let k=0;k<7;k++){const d=new Date(d0);d.setDate(d0.getDate()+k);const key=isoDay(d.getTime()),fut=key>today,v=Number(dp[key])||0;if(v>0)days++;
-      cells+=`<i class="${fut?'fut':'l'+lv(v)}${key===today?' now':''}"${v>0?` title="${d.toLocaleDateString(LOC(),{weekday:'short',day:'numeric',month:'short'})} · +${v}"`:''}></i>`}}
-  return `<div style="display:grid;gap:2px"><div class="lbl">Trainingskalender</div><span class="dim sm">${days===1?'1 Trainingstag':days+' Trainingstage'} in 6 Monaten</span></div>
-    <div class="heatm" aria-hidden="true">${months}</div><div class="heat" role="img" aria-label="${days} Trainingstage in 6 Monaten">${cells}</div>
-    <div class="heatl" aria-hidden="true"><span>weniger</span><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l4"></i><span>mehr</span></div>`;
+  const dp=compute(S.sets).dp||{},t0=new Date();t0.setHours(12,0,0,0);const today=isoDay(t0.getTime()),lv=v=>v<=0?0:v<15?1:v<40?2:v<100?3:4;
+  const wd=[...Array(7)].map((_,i)=>{const x=new Date(2024,0,1+i);return x.toLocaleDateString(LOC(),{weekday:'narrow'})});
+  const legend=`<div class="heatl" aria-hidden="true"><span>weniger</span><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l4"></i><span>mehr</span></div>`;
+  const month=(y,m,big)=>{const first=new Date(y,m,1,12),n=new Date(y,m+1,0).getDate(),off=(first.getDay()+6)%7;let c='',cnt=0;
+    for(let k=0;k<off;k++)c+='<i class="pad"></i>';
+    for(let dd=1;dd<=n;dd++){const dt=new Date(y,m,dd,12),key=isoDay(dt.getTime()),v=Number(dp[key])||0,fut=key>today;if(v>0)cnt++;
+      c+=`<i class="${fut?'fut':'l'+lv(v)}${key===today?' now':''}"${v>0?` title="${dt.toLocaleDateString(LOC(),{weekday:'short',day:'numeric',month:'short'})} · +${v}"`:''}>${big?`<span>${dd}</span>`:''}</i>`}
+    return {c,cnt}};
+  if(!heatYear){const y=t0.getFullYear(),m=t0.getMonth(),r=month(y,m,true),mn=t0.toLocaleDateString(LOC(),{month:'long',year:'numeric'});
+    return `<div class="calhd"><div style="display:grid;gap:2px"><div class="lbl">Trainingskalender</div><span class="dim sm"><b class="calmn">${esc(mn)}</b> · ${r.cnt===1?'1 Trainingstag':r.cnt+' Trainingstage'}</span></div></div>
+      <div class="calwd" aria-hidden="true">${wd.map(w=>`<span>${w}</span>`).join('')}</div>
+      <div class="calg" role="img" aria-label="${esc(mn)}: ${r.cnt} Trainingstage">${r.c}</div>
+      <div class="calft"><button class="btn sm ghost calbtn" data-act="heatyear" aria-expanded="false">📅 <span>Ganzes Jahr ansehen</span></button>${legend}</div>`}
+  const y=t0.getFullYear();let ms='',tot=0;
+  for(let m=0;m<12;m++){const r=month(y,m,false);tot+=r.cnt;const nm=new Date(y,m,1,12).toLocaleDateString(LOC(),{month:'short'}).replace('.','');
+    ms+=`<div class="calmini${m===t0.getMonth()?' cur':''}${m>t0.getMonth()?' futm':''}"><div class="calmh"><span>${esc(nm)}</span>${r.cnt?`<b>${r.cnt}</b>`:''}</div><div class="calg sm">${r.c}</div></div>`}
+  return `<div class="calhd"><div style="display:grid;gap:2px"><div class="lbl">Trainingskalender</div><span class="dim sm"><b class="calmn">${y}</b> · ${tot===1?'1 Trainingstag':tot+' Trainingstage'}</span></div></div>
+    <div class="caly" role="img" aria-label="${y}: ${tot} Trainingstage">${ms}</div>
+    <div class="calft"><button class="btn sm ghost calbtn" data-act="heatyear" aria-expanded="true">↩ <span>Nur diesen Monat</span></button>${legend}</div>`;
 }
 /* ---------- Abzeichen ---------- */
 const BADGES=[
@@ -2199,7 +2243,7 @@ let rcState=null;
 let navDepth=0;
 function navPush(){if(!window.__standalone||navDepth)return;try{history.pushState({rr:1},'');navDepth=1}catch(e){}}
 if(window.__standalone)window.addEventListener('popstate',()=>{navDepth=0;
-  if(rcState){closeRecap()}else if(!$('#planEdit').hidden){closePlanEdit()}else if(!$('#planSheet').hidden){closePlan()}else if(!$('#remind').hidden){closeRemind()}else if(!$('#sheet').hidden){closeSheet()}else if(!$('#fx').hidden){try{closeRankUp()}catch(e){$('#fx').hidden=true}}else if(tab!=='home'){setTab('home');return}else return;
+  if(tourOpen()){endTour()}else if(rcState){closeRecap()}else if(!$('#planEdit').hidden){closePlanEdit()}else if(!$('#planSheet').hidden){closePlan()}else if(!$('#remind').hidden){closeRemind()}else if(!$('#sheet').hidden){closeSheet()}else if(!$('#fx').hidden){try{closeRankUp()}catch(e){$('#fx').hidden=true}}else if(tab!=='home'){setTab('home');return}else return;
   if(tab!=='home')navPush()});
 function recapData(pk){
   const real=S.sets.filter(z=>L(z.lift)&&monthKey(z.ts)===pk);if(!real.length)return null;
@@ -2368,6 +2412,36 @@ function renderHome(){
     rm.innerHTML=`<div class="lbl">Dein Rivale</div><div class="est"><div style="min-width:0">${t}</div><button class="btn sm" data-tab="crew">Crew</button></div>`}
 }
 
+
+/* ---------- App-Tour: erklärt jeden Reiter einmal ---------- */
+const TOUR=[
+  {tab:'home',sel:'.dock [data-tab="home"]',k:'Start',h:'Dein täglicher Startpunkt',p:'Hier startest du jeden Tag. Deine Woche, dein Rang und dein nächstes Ziel, alles auf einen Blick.'},
+  {tab:'train',sel:'.dock [data-tab="train"]',k:'Training',h:'Hier wird geschwitzt',p:'Trag hier deine Sätze ein. Oben findest du fertige Pläne wie Push Day, oder du baust dir deinen eigenen.'},
+  {tab:'ranks',sel:'.dock [data-tab="ranks"]',k:'Ränge',h:'Jede Übung hat ihren Rang',p:'Vom Anfänger bis zur Legende. Je stärker du im Verhältnis zu deinem Körpergewicht bist, desto höher steigst du.'},
+  {tab:'stat',sel:'.dock [data-tab="stat"]',k:'Statistik',h:'Schwarz auf weiß stärker',p:'Hier siehst du, wie du dich steigerst: Verlauf jeder Übung, dein Trainingskalender und dein Monatsrückblick.'},
+  {tab:'crew',sel:'.dock [data-tab="crew"]',k:'Crew',h:'Das Beste kommt zum Schluss',p:'Lade Freunde ein, fordert euch zu Duellen heraus und kämpft in der Rangliste um Platz 1.'},
+  {tab:'home',sel:'.head .who',k:'Profil',h:'Alles über dich',p:'Tippe oben auf deinen Avatar für Profil, Körpergewicht, Musik, Sprache und deine Crews. Viel Spaß beim Pumpen!'}];
+let tourI=-1,tourAfter=null;
+function tourOpen(){return tourI>=0}
+function startTour(after){tourI=0;tourAfter=after||null;S.tour='pending';try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}
+  document.body.classList.remove('kb');$('#tour').hidden=false;document.documentElement.style.overflow='hidden';navPush();tourShow(true)}
+function tourShow(first){const st=TOUR[tourI];if(!st)return endTour();
+  if(st.tab&&tab!==st.tab)setTab(st.tab);window.scrollTo(0,0);
+  const last=tourI===TOUR.length-1;let av='';try{av='<svg viewBox="0 0 100 100" aria-hidden="true">'+avatarSVG(S.avatar,myAvatarOpts())+'</svg>'}catch(e){}
+  $('#tBub').innerHTML=`<div class="trow"><div class="tav${first?'':' hop'}">${av}</div><div class="ttx"><small>${st.k}</small><h3 id="tTitle">${st.h}</h3><p id="tTxt">${st.p}</p></div></div>
+    <div class="tft"><div class="tdots" aria-label="Schritt ${tourI+1} von ${TOUR.length}">${TOUR.map((_,i)=>`<i class="${i===tourI?'on':''}"></i>`).join('')}</div>
+    <div class="tbtns">${last?'':'<button class="tskip" data-act="tourskip">Überspringen</button>'}<button class="btn sm" data-act="tournext" style="background:var(--fg);color:var(--bg);border-color:var(--fg)">${last?'Alles klar!':'Weiter'}</button></div></div>`;
+  requestAnimationFrame(()=>requestAnimationFrame(tourPlace));
+  setTimeout(()=>{try{$('#tBub [data-act="tournext"]').focus({preventScroll:true})}catch(e){}},60)}
+function tourPlace(){if(!tourOpen())return;const st=TOUR[tourI],el=document.querySelector(st.sel),sp=$('#tSpot'),b=$('#tBub');if(!el){sp.style.cssText='width:0;height:0;top:50%;left:50%';return}
+  const r=el.getBoundingClientRect(),pad=st.sel.includes('who')?6:4,vw=innerWidth,vh=innerHeight;
+  sp.style.left=(r.left-pad)+'px';sp.style.top=(r.top-pad)+'px';sp.style.width=(r.width+pad*2)+'px';sp.style.height=(r.height+pad*2)+'px';sp.style.borderRadius=st.sel.includes('who')?'50%':'20px';
+  const below=r.top<vh/2;b.classList.toggle('up',below);b.classList.toggle('dn',!below);
+  if(below){b.style.top=(r.bottom+pad+14)+'px';b.style.bottom='auto'}else{b.style.bottom=(vh-r.top+pad+14)+'px';b.style.top='auto'}
+  const br=b.getBoundingClientRect(),cx=r.left+r.width/2;b.style.setProperty('--ax',Math.max(24,Math.min(br.width-24,cx-br.left))+'px')}
+function endTour(){if(!tourOpen())return;tourI=-1;$('#tour').hidden=true;document.documentElement.style.overflow='';S.tour='done';save();setTab('home');renderAll();
+  const f=tourAfter;tourAfter=null;if(f)setTimeout(f,250)}
+window.addEventListener('resize',()=>{if(tourOpen())tourPlace()});
 /* ---------- Trainingspläne + Muskelkarte ---------- */
 const MUSC={"bench": [["chest"], ["fdelt", "triceps"]], "incline": [["chest", "fdelt"], ["triceps"]], "dbbench": [["chest"], ["fdelt", "triceps"]], "flymachine": [["chest"], ["fdelt"]], "cablefly": [["chest"], ["fdelt"]], "pushup": [["chest"], ["triceps", "fdelt", "abs"]], "dead": [["hams", "glutes", "lowback"], ["traps", "quads", "forearms", "lats"]], "row": [["lats", "upback"], ["rdelt", "biceps", "lowback"]], "lat": [["lats"], ["biceps", "upback"]], "pullup": [["lats"], ["biceps", "upback", "forearms"]], "cablerow": [["lats", "upback"], ["biceps", "rdelt"]], "dbrow": [["lats", "upback"], ["biceps", "rdelt"]], "backext": [["lowback"], ["glutes", "hams"]], "muscleup": [["lats", "triceps"], ["chest", "biceps"]], "ohp": [["fdelt", "sdelt"], ["triceps", "traps"]], "dbohp": [["fdelt", "sdelt"], ["triceps", "traps"]], "lateral": [["sdelt"], ["traps"]], "facepull": [["rdelt", "upback"], ["traps"]], "revfly": [["rdelt"], ["upback"]], "curl": [["biceps"], ["forearms"]], "dbcurl": [["biceps"], ["forearms"]], "hammer": [["biceps", "forearms"], []], "dips": [["triceps", "chest"], ["fdelt"]], "pushdown": [["triceps"], []], "skull": [["triceps"], []], "closegrip": [["triceps", "chest"], ["fdelt"]], "squat": [["quads", "glutes"], ["hams", "lowback", "adductors"]], "legpress": [["quads", "glutes"], ["hams"]], "frontsquat": [["quads"], ["glutes", "abs"]], "rdl": [["hams", "glutes"], ["lowback"]], "legext": [["quads"], []], "legcurl": [["hams"], ["calves"]], "lunge": [["quads", "glutes"], ["hams", "adductors"]], "bulgarian": [["quads", "glutes"], ["hams"]], "hipthrust": [["glutes"], ["hams"]], "calf": [["calves"], []], "seatcalf": [["calves"], []], "crunch": [["abs"], ["obliques"]], "legraise": [["abs"], ["obliques", "forearms"]], "abroller": [["abs"], ["lats", "obliques"]], "cablecrunch": [["abs"], ["obliques"]], "run": [[], ["quads", "hams", "calves", "glutes"]], "bike": [["quads"], ["calves", "glutes"]], "rowerg": [[], ["lats", "quads", "biceps", "hams"]], "swim": [[], ["lats", "sdelt", "triceps"]]};
 const MNAME={chest:'Brust',fdelt:'Vordere Schulter',sdelt:'Seitliche Schulter',rdelt:'Hintere Schulter',traps:'Nacken',upback:'Oberer Rücken',lats:'Latissimus',lowback:'Unterer Rücken',biceps:'Bizeps',triceps:'Trizeps',forearms:'Unterarme',abs:'Bauch',obliques:'Seitlicher Bauch',quads:'Vordere Oberschenkel',hams:'Hintere Oberschenkel',glutes:'Po',adductors:'Adduktoren',calves:'Waden'};
@@ -2998,6 +3072,10 @@ document.addEventListener('click',e=>{
     if(id&&S.plans.some(p=>p.id===id))S.plans=S.plans.map(p=>p.id===id?{id,n,ex:pe.ex.slice(0,MAXPLEX)}:p);
     else{id='u'+newId();S.plans.unshift({id,n,ex:pe.ex.slice(0,MAXPLEX)})}
     save();closePlanEdit();renderTrain();openPlan(id);toast('Plan gespeichert')}
+  else if(a==='tournext'){if(tourI>=TOUR.length-1){endTour();return}tourI++;tourShow(false);try{vib(12)}catch(e){}}
+  else if(a==='tourskip'){endTour()}
+  else if(a==='tourstart'){closeSheet();setTimeout(()=>startTour(null),200)}
+  else if(a==='heatyear'){heatYear=!heatYear;const hc=$('#heatCard');if(hc)hc.innerHTML=heatHTML()+recapBtns()}
   else if(a==='statqclear'){statQ='';const i=$('#statQ');if(i){i.value='';i.focus()}applyStatQ()}
   else if(a==='exgroup'){exG=v;renderTrain();const tc=$('#trainChips');if(tc)tc.scrollLeft=0}
   else if(a==='exqclear'){exQ='';$('#exQ').value='';renderTrain();$('#exQ').focus()}
@@ -3174,6 +3252,7 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape'&&!$('#fx').hidden){closeRankUp();return}
   if(e.key==='Escape'&&rcState){closeRecap();return}
   if((e.key==='ArrowRight'||e.key==='ArrowLeft')&&rcState){const st=rcState;st.i=Math.max(0,Math.min(st.sl.length-1,st.i+(e.key==='ArrowRight'?1:-1)));renderRecap();return}
+  if(e.key==='Escape'&&tourOpen()){endTour();return}
   if(e.key==='Escape'&&!$('#planEdit').hidden){closePlanEdit();return}
   if(e.key==='Escape'&&!$('#planSheet').hidden){closePlan();return}
   if(e.key==='Escape'&&!$('#remind').hidden){closeRemind();return}
@@ -3182,7 +3261,7 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Enter'&&e.target.id==='profName'){e.preventDefault();document.querySelector('[data-act="profsave"]').click()}
 });
 $('#profBw').addEventListener('input',()=>{bwConfirm=false;$('#bwWarn').hidden=true;$('[data-act="profsave"]').textContent='Speichern'});
-syncShown();prefill();renderAll();applyTips();renderSetup();applyLang();initCrew();initDl();
+syncShown();prefill();renderAll();applyTips();renderSetup();applyLang();initCrew();initDl();if(S.tour==='pending'&&S.introDone&&!S.example)setTimeout(()=>{if(!tourOpen()&&$('#intro').hidden)startTour(null)},700);
 if(pendingJoin&&!(S.crews||[]).includes(pendingJoin)){try{setTab('crew')}catch(e){}}
 if(S.example&&!S.introDone){try{introOpen()}catch(e){}}
 try{checkBadges()}catch(e){}
