@@ -56,7 +56,25 @@
     try{await sb.auth.signOut({scope:'local'})}catch(e){}try{for(const k of Object.keys(localStorage))if(/^eisenrang|^rr-|^sb-/.test(k))localStorage.removeItem(k)}catch(e){}location.reload()}:null;
   window.__rrPw=sb?()=>{if(sess)showLogin('pw')}:null;
   window.__rrLogin=()=>{if(sb)showLogin('in')};
-  window.__rrLogout=sb?async()=>{try{await sb.auth.signOut()}catch(e){}location.reload()}:null;
+  /* ---------- Push-Nachrichten ---------- */
+  const VAPID='BAWTuZTI9_VOcNtYRAVhXAFC_K28ZoEcFR6-MW8s-KgKXIUQAm7fvlhZoroUbjJgDeWRTU6So4pIzsbu1e24cxE';
+  const ub=t=>{t=t.replace(/-/g,'+').replace(/_/g,'/');while(t.length%4)t+='=';const b=atob(t),u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u};
+  const pushOk=()=>'serviceWorker' in navigator&&'PushManager' in window&&'Notification' in window;
+  const isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  const standalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+  const getSub=async()=>{const reg=await navigator.serviceWorker.getRegistration();return reg?await reg.pushManager.getSubscription():null};
+  const saveSub=async(s,lang)=>{const j=s.toJSON();const {error}=await sb.rpc('save_push_sub',{p_endpoint:j.endpoint,p_p256dh:j.keys.p256dh,p_auth:j.keys.auth,p_lang:lang==='en'?'en':'de'});if(error)throw error};
+  window.__rrPush=sb?{
+    async state(){if(!pushOk())return isIOS&&!standalone()?'ios-install':'unsupported';if(Notification.permission==='denied')return 'denied';try{return (await getSub())&&Notification.permission==='granted'?'on':'off'}catch(e){return 'off'}},
+    async enable(lang){if(!pushOk())return isIOS&&!standalone()?'ios-install':'unsupported';
+      const p=await Notification.requestPermission();if(p!=='granted')return p==='denied'?'denied':'off';
+      const reg=await navigator.serviceWorker.ready;let s=await reg.pushManager.getSubscription();
+      if(!s)s=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:ub(VAPID)});
+      await ready;await saveSub(s,lang);return 'on'},
+    async disable(){try{const s=await getSub();if(s){try{await sb.rpc('delete_push_sub',{p_endpoint:s.endpoint})}catch(e){}await s.unsubscribe()}}catch(e){}return 'off'},
+    async sync(lang){try{if(!pushOk()||Notification.permission!=='granted')return;const s=await getSub();if(s){await ready;await saveSub(s,lang)}}catch(e){}}
+  }:null;
+  window.__rrLogout=sb?async()=>{try{await window.__rrPush.disable()}catch(e){}try{await sb.auth.signOut()}catch(e){}location.reload()}:null;
   const err=e=>({code:e&&e.code==='42501'?'invalid_argument':(e&&e.code)||'error',message:e&&e.message});
   const toDoc=r=>({id:r.path.split('/').slice(1).join('/'),data:()=>r.data});
   const db={
@@ -555,6 +573,9 @@ section[data-view]{min-width:0}
 .heat i.fut{background:transparent}
 .heat i.now{outline:1.5px solid var(--accent);outline-offset:1px}
 .l1{background:rgba(122,231,255,.28)!important}.l2{background:rgba(122,231,255,.5)!important}.l3{background:rgba(122,231,255,.78)!important}.l4{background:var(--t11)!important;box-shadow:0 0 6px rgba(255,216,107,.6)}
+.pushcard{background:linear-gradient(135deg,rgba(122,231,255,.10),rgba(255,95,162,.06)),var(--panel);border-color:rgba(122,231,255,.28)}
+.pushcard .prow{display:flex;gap:14px;align-items:flex-start}.pushcard .bell{flex:none;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:rgba(122,231,255,.12)}
+.pushcard h3{margin:0 0 4px;font-family:var(--display);font-weight:800;font-size:17px}.pushcard p{margin:0;color:var(--dim);font-size:14px;line-height:1.45}
 .tour{position:fixed;inset:0;z-index:150;touch-action:none}
 .tspot{position:fixed;border-radius:22px;box-shadow:0 0 0 9999px rgba(4,5,7,.78),0 0 0 2px var(--accent),0 0 26px 4px rgba(122,231,255,.35);pointer-events:none;transition:top .45s cubic-bezier(.2,.8,.2,1),left .45s cubic-bezier(.2,.8,.2,1),width .45s cubic-bezier(.2,.8,.2,1),height .45s cubic-bezier(.2,.8,.2,1),border-radius .45s}
 .tbub{position:fixed;left:12px;right:12px;max-width:440px;margin:0 auto;background:var(--panel);border:1px solid rgba(122,231,255,.35);border-radius:22px;padding:16px 16px 14px;display:grid;gap:12px;box-shadow:0 18px 50px rgba(0,0,0,.55);transition:top .45s cubic-bezier(.2,.8,.2,1),bottom .45s cubic-bezier(.2,.8,.2,1)}
@@ -741,6 +762,7 @@ textarea{font-size:16px}
     <section data-view="home" id="v-home">
       <div class="bento">
         <div class="card span2 hhero" id="homeHero"></div>
+        <div class="card span2 pushcard" id="pushCard" hidden></div>
         <div class="card span2" id="streakCard"></div>
         <button type="button" class="card span2 hrank" id="homeRank" data-act="gotab" data-v="ranks" hidden></button>
         <button type="button" class="card span2 hgoal" id="homeGoal" data-act="homegoal" hidden></button>
@@ -863,6 +885,7 @@ textarea{font-size:16px}
     <div class="wlrow"><span class="lbl">Strecken</span><div class="unitsw" id="distSw" role="group" aria-label="Streckeneinheit"></div></div>
     <div style="display:grid;gap:8px"><span class="lbl">Musik</span><div class="pills wrap" id="musSw" role="group" aria-label="Hintergrundmusik"></div></div>
     <div class="wlrow"><span class="lbl">Klicktöne</span><div class="unitsw" id="sfxSw" role="group" aria-label="Klicktöne"></div></div>
+    <div style="display:grid;gap:8px" id="pushRow" hidden><div class="wlrow"><span class="lbl">Benachrichtigungen</span><div class="unitsw" id="pushSw" role="group" aria-label="Benachrichtigungen"></div></div><p class="note" id="pushNote" style="margin:0" hidden></p></div>
     <div class="wlrow" id="vibRow" hidden><span class="lbl">Vibration</span><div class="unitsw" id="vibSw" role="group" aria-label="Vibration"></div></div>
     <div style="display:grid;gap:8px"><div class="wlrow"><label class="lbl" for="profBw" id="profBwLbl">Körpergewicht</label><div class="unitsw" id="unitSw" role="group" aria-label="Gewichtseinheit"></div></div>
       <div class="step"><button data-act="bwm" aria-label="Körpergewicht verringern">−</button><input id="profBw" type="text" inputmode="decimal" autocomplete="off"><button data-act="bwp" aria-label="Körpergewicht erhöhen">+</button></div>
@@ -1207,7 +1230,15 @@ LANG=S.lang==='en'?'en':'de';
 /* ---------- Sprache: Deutsch (Quelle) -> Englisch per Übersetzungsschicht ---------- */
 const D={
 // Navigation & allgemein
-'Start':'Home','1 Trainingstag':'1 training day','Ganzes Jahr ansehen':'View whole year','Nur diesen Monat':'This month only','App-Tour ansehen':'Take the app tour','Überspringen':'Skip','Weiter':'Next','Alles klar!':'Got it!','Profil':'Profile',
+'Start':'Home','Benachrichtigungen':'Notifications','Verpasse kein Duell':'Never miss a duel','Aktivieren':'Turn on','Später':'Later','Verstanden':'Got it',
+'Wir sagen dir Bescheid, wenn dich jemand herausfordert, auf deinen Eintrag reagiert oder dich in der Crew überholt.':'We let you know when someone challenges you, reacts to your entry or overtakes you in the crew.',
+'Damit RepRival dir Bescheid geben kann, füge die App zum Home-Bildschirm hinzu: in Safari auf Teilen → „Zum Home-Bildschirm“.':'So RepRival can notify you, add the app to your home screen: in Safari tap Share → “Add to Home Screen”.',
+'Auf dem iPhone gehen Benachrichtigungen nur, wenn RepRival auf dem Home-Bildschirm ist: in Safari auf Teilen → „Zum Home-Bildschirm“.':'On iPhone, notifications only work when RepRival is on your home screen: in Safari tap Share → “Add to Home Screen”.',
+'Benachrichtigungen sind auf deinem Handy für RepRival blockiert. Erlaube sie in den Einstellungen deines Handys.':'Notifications for RepRival are blocked on your phone. Allow them in your phone settings.',
+'Dein Browser unterstützt leider keine Benachrichtigungen.':'Sorry, your browser does not support notifications.',
+'Du bekommst Bescheid bei Duellen, Reaktionen, neuen Crew-Mitgliedern und wenn dich jemand überholt.':'You get notified about duels, reactions, new crew members and when someone overtakes you.',
+'Das hat gerade nicht geklappt. Versuch es später nochmal.':'That did not work right now. Please try again later.','Benachrichtigungen sind an 🔔':'Notifications are on 🔔','Benachrichtigungen sind aus':'Notifications are off',
+'Benachrichtigungen sind blockiert. Erlaube sie in den Einstellungen deines Handys.':'Notifications are blocked. Allow them in your phone settings.','Füge RepRival zuerst zum Home-Bildschirm hinzu.':'Add RepRival to your home screen first.','1 Trainingstag':'1 training day','Ganzes Jahr ansehen':'View whole year','Nur diesen Monat':'This month only','App-Tour ansehen':'Take the app tour','Überspringen':'Skip','Weiter':'Next','Alles klar!':'Got it!','Profil':'Profile',
 'Dein täglicher Startpunkt':'Your daily starting point','Hier startest du jeden Tag. Deine Woche, dein Rang und dein nächstes Ziel, alles auf einen Blick.':'Start here every day. Your week, your rank and your next goal, all at a glance.',
 'Hier wird geschwitzt':'This is where you sweat','Trag hier deine Sätze ein. Oben findest du fertige Pläne wie Push Day, oder du baust dir deinen eigenen.':'Log your sets here. At the top you will find ready-made plans like Push Day, or build your own.',
 'Jede Übung hat ihren Rang':'Every exercise has its rank','Vom Anfänger bis zur Legende. Je stärker du im Verhältnis zu deinem Körpergewicht bist, desto höher steigst du.':'From rookie to legend. The stronger you are relative to your bodyweight, the higher you climb.',
@@ -2391,6 +2422,7 @@ function renderBwCheck(){
   if(show)el.innerHTML=`<div class="lbl">Kurzer Check</div><div style="font-family:var(--display);font-weight:600;font-size:17px">Wiegst du noch ${fw(S.bw)} ${U()}?</div><p class="note" style="margin:0">Dein Gewicht macht die Wertung fair. Ein aktueller Wert hält deine Punkte genau.</p><div class="btnrow"><button class="btn sm" data-act="bwok" style="background:var(--fg);color:var(--bg);border-color:var(--fg)">Ja, stimmt</button><button class="btn sm ghost" data-act="bwedit">Ändern</button></div>`;
 }
 function renderHome(){
+  try{renderPushUI()}catch(e){}
   const now=new Date(),h=now.getHours(),has=S.sets.some(z=>L(z.lift));
   const gr=h>=5&&h<11?'Guten Morgen':h>=11&&h<17?'Guten Tag':h>=17&&h<23?'Guten Abend':'Hallo';
   const todayDone=S.sets.some(z=>dayKey(z.ts)===dayKey(Date.now()));
@@ -2413,6 +2445,28 @@ function renderHome(){
 }
 
 
+
+/* ---------- Push-Nachrichten (nur Web-Version) ---------- */
+let pushSt=null,pushBusy=false;
+async function refreshPush(){if(!window.__rrPush)return;try{pushSt=await window.__rrPush.state()}catch(e){pushSt='unsupported'}renderPushUI()}
+function renderPushUI(){const P=window.__rrPush;const row=$('#pushRow');if(row)row.hidden=!P;
+  if(P&&row){const on=pushSt==='on';$('#pushSw').innerHTML=[['on','An'],['off','Aus']].map(([k,n])=>`<button data-act="push" data-v="${k}" aria-pressed="${(k==='on')===on}"${pushBusy?' disabled':''}>${n}</button>`).join('');
+    const nt={'ios-install':'Auf dem iPhone gehen Benachrichtigungen nur, wenn RepRival auf dem Home-Bildschirm ist: in Safari auf Teilen → „Zum Home-Bildschirm“.',denied:'Benachrichtigungen sind auf deinem Handy für RepRival blockiert. Erlaube sie in den Einstellungen deines Handys.',unsupported:'Dein Browser unterstützt leider keine Benachrichtigungen.',on:'Du bekommst Bescheid bei Duellen, Reaktionen, neuen Crew-Mitgliedern und wenn dich jemand überholt.'}[pushSt]||'';
+    const pn=$('#pushNote');pn.hidden=!nt;pn.textContent=nt}
+  const c=$('#pushCard');if(!c)return;
+  const show=!!P&&!S.example&&!!S.nick&&!S.pushAsk&&(pushSt==='ios-install'||(pushSt==='off'&&typeof Notification!=='undefined'&&Notification.permission==='default'));
+  c.hidden=!show;if(!show)return;
+  c.innerHTML=pushSt==='ios-install'?`<div class="prow"><span class="bell" aria-hidden="true">🔔</span><div><h3>Verpasse kein Duell</h3><p>Damit RepRival dir Bescheid geben kann, füge die App zum Home-Bildschirm hinzu: in Safari auf Teilen → „Zum Home-Bildschirm“.</p></div></div><div class="btnrow"><button class="btn sm ghost" data-act="pushlater">Verstanden</button></div>`
+   :`<div class="prow"><span class="bell" aria-hidden="true">🔔</span><div><h3>Verpasse kein Duell</h3><p>Wir sagen dir Bescheid, wenn dich jemand herausfordert, auf deinen Eintrag reagiert oder dich in der Crew überholt.</p></div></div><div class="btnrow"><button class="btn sm" data-act="pushyes" style="background:var(--fg);color:var(--bg);border-color:var(--fg)">Aktivieren</button><button class="btn sm ghost" data-act="pushlater">Später</button></div>`}
+async function pushSet(on){const P=window.__rrPush;if(!P||pushBusy)return;pushBusy=true;renderPushUI();
+  try{pushSt=on?await P.enable(LANG):await P.disable()}catch(e){toast('Das hat gerade nicht geklappt. Versuch es später nochmal.')}
+  pushBusy=false;if(on&&pushSt==='on'){S.pushAsk=Date.now();save();toast('Benachrichtigungen sind an 🔔')}else if(on&&pushSt==='denied')toast('Benachrichtigungen sind blockiert. Erlaube sie in den Einstellungen deines Handys.');else if(on&&pushSt==='ios-install')toast('Füge RepRival zuerst zum Home-Bildschirm hinzu.');else if(!on)toast('Benachrichtigungen sind aus');
+  renderPushUI()}
+function goFromPush(t){if(['home','train','ranks','stat','crew'].includes(t)){try{setTab(t)}catch(e){}}}
+if(window.__rrPush){setTimeout(async()=>{await refreshPush();if(pushSt==='on')window.__rrPush.sync(LANG)},900);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshPush()});
+  try{navigator.serviceWorker.addEventListener('message',e=>{if(e.data&&e.data.rrGo!==undefined)goFromPush(e.data.rrGo)})}catch(e){}
+  {const m=/^#go=([a-z]+)$/.exec(location.hash||'');if(m){setTimeout(()=>goFromPush(m[1]),400);try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}}}}
 /* ---------- App-Tour: erklärt jeden Reiter einmal ---------- */
 const TOUR=[
   {tab:'home',sel:'.dock [data-tab="home"]',k:'Start',h:'Dein täglicher Startpunkt',p:'Hier startest du jeden Tag. Deine Woche, dein Rang und dein nächstes Ziel, alles auf einen Blick.'},
@@ -2943,7 +2997,7 @@ document.addEventListener('visibilitychange',()=>{if(!AC)return;if(document.hidd
 document.addEventListener('click',e=>{const el=e.target.closest&&e.target.closest('button,[role="tab"],summary,.srow,[data-act]');if(!el||el.disabled)return;
   const a=el.dataset.act||'';if(a==='save'||a==='music'||a==='sfx'||a==='sheetclose'&&el.id==='sheet'||a==='remclose'&&el.id==='remind'||a==='plclose'&&el.id==='planSheet'||a==='peclose'&&el.id==='planEdit'||a==='prclose'||a==='fxclose')return;
   sfx(el.getAttribute('role')==='tab'?'tab':(a==='del'||a==='exdel'||a==='clear')?'del':'tap')},true);
-function renderSndSw(){const m=$('#musSw'),f=$('#sfxSw'),cur=S.music||'off',vr=$('#vibRow'),vs=$('#vibSw');if(vr){const can=typeof navigator.vibrate==='function';vr.hidden=!can;if(can&&vs)vs.innerHTML=[['on','An'],['off','Aus']].map(([k,n])=>`<button data-act="vib" data-v="${k}" aria-pressed="${(S.vib!==false)===(k==='on')}">${n}</button>`).join('')}
+function renderSndSw(){try{renderPushUI()}catch(e){}const m=$('#musSw'),f=$('#sfxSw'),cur=S.music||'off',vr=$('#vibRow'),vs=$('#vibSw');if(vr){const can=typeof navigator.vibrate==='function';vr.hidden=!can;if(can&&vs)vs.innerHTML=[['on','An'],['off','Aus']].map(([k,n])=>`<button data-act="vib" data-v="${k}" aria-pressed="${(S.vib!==false)===(k==='on')}">${n}</button>`).join('')}
   if(m)m.innerHTML=[['off','Aus'],['lofi','Gym Lo-Fi'],['ambient','Neon'],['phonk','Drift & Deadlift']].map(([k,n])=>`<button class="pill" data-act="music" data-v="${k}" aria-pressed="${cur===k}">${esc(n)}</button>`).join('');
   if(f)f.innerHTML=[['on','An'],['off','Aus']].map(([k,n])=>`<button data-act="sfx" data-v="${k}" aria-pressed="${(S.sfx!==false)===(k==='on')}">${n}</button>`).join('')}
 
@@ -3072,6 +3126,9 @@ document.addEventListener('click',e=>{
     if(id&&S.plans.some(p=>p.id===id))S.plans=S.plans.map(p=>p.id===id?{id,n,ex:pe.ex.slice(0,MAXPLEX)}:p);
     else{id='u'+newId();S.plans.unshift({id,n,ex:pe.ex.slice(0,MAXPLEX)})}
     save();closePlanEdit();renderTrain();openPlan(id);toast('Plan gespeichert')}
+  else if(a==='push'){pushSet(v==='on')}
+  else if(a==='pushyes'){pushSet(true)}
+  else if(a==='pushlater'){S.pushAsk=Date.now();save();renderPushUI()}
   else if(a==='tournext'){if(tourI>=TOUR.length-1){endTour();return}tourI++;tourShow(false);try{vib(12)}catch(e){}}
   else if(a==='tourskip'){endTour()}
   else if(a==='tourstart'){closeSheet();setTimeout(()=>startTour(null),200)}
@@ -3209,7 +3266,7 @@ document.addEventListener('click',e=>{
   else if(a==='vib'){S.vib=v!=='off';save();renderSndSw();vib([60,40,60])}
   else if(a==='sfx'){S.sfx=v!=='off';save();renderSndSw();if(S.sfx)sfx('tap')}
   else if(a==='dunit'){if(v===DU())return;const cx=nx&&nx.kind?{kind:nx.kind,cdt:nx.cdt}:L(tl),el=$('#w'),cur=num(el.value),conv=cx&&cx.kind==='cd'&&cdm(cx).du!=='m'&&cur>0?dOut(cur):null;S.dunit=v==='mi'?'mi':'km';save();if(conv!==null)el.value=fmtIn(dIn(conv),3);renderDistSw();renderAll();toast(v==='mi'?'Strecken jetzt in Meilen':'Strecken jetzt in Kilometern')}
-  else if(a==='lang'){if(v===LANG)return;S.lang=v==='en'?'en':'de';LANG=S.lang;save();
+  else if(a==='lang'){if(v===LANG)return;S.lang=v==='en'?'en':'de';LANG=S.lang;save();if(window.__rrPush&&pushSt==='on')window.__rrPush.sync(LANG);
     if(LANG==='de')applyLang();
     for(const k in STALE)STALE[k]=1;renderAll();renderSetup();applyTips();renderBkStatus();renderAvGrid();renderStudioSugg();renderUnitSw();renderLangSw();if(!$('#intro').hidden){introKeep();const x=num(inBwV);if(x>0)inBwV=fmtIn(x,1);renderIntro()}
     const pb=$('#profBw');if(pb&&document.activeElement!==pb)pb.value=fw(S.bw);
