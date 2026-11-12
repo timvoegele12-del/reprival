@@ -564,6 +564,44 @@ section[data-view]{min-width:0}
 .dures{font-family:var(--display);font-weight:800}
 .dures.win{color:var(--t11)}.dures.lose{color:var(--bad)}
 .dunew{display:grid;gap:10px}
+.dulift{display:inline-flex;align-items:center;gap:5px;color:var(--fg);font-weight:700}.dulift .exi{width:18px;height:18px;flex:none}
+.dustake{font-size:13px;color:var(--dim);overflow-wrap:anywhere}.dustake b{color:var(--fg)}
+.dusel{background:var(--panel-2);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-family:var(--body);font-size:16px;font-weight:600;color:var(--fg);width:100%;min-width:0;min-height:48px}
+.dunew input.nm-in{font-family:var(--body);font-size:16px}
+.flad{display:grid;gap:6px}
+.flr{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;align-items:start;padding:10px;border-radius:16px;border:1px solid transparent}
+.flr.cur{background:rgba(122,231,255,.08);border-color:rgba(122,231,255,.35)}
+.flr .lmini{width:40px;height:40px}
+.flb{display:grid;gap:8px;min-width:0}.flb>b{font-family:var(--display);font-weight:600;font-size:14px;color:var(--c)}
+.flp{display:flex;flex-wrap:wrap;gap:6px}
+.pill.flc{min-height:38px;max-width:100%;font-size:13px}.pill.flc span{overflow:hidden;text-overflow:ellipsis}.pill.flc i{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--dim);font-weight:500}
+.pill.flc.me{border-color:rgba(122,231,255,.6);color:var(--accent)}
+.exf{display:flex;align-items:center;gap:8px;width:100%;margin:-4px 0 14px;padding:8px 12px;border-radius:12px;border:1px solid var(--line);background:var(--panel-2);color:var(--dim);font-size:13px;text-align:left;cursor:pointer;min-height:40px}
+.exf .exfp{color:var(--accent);font-weight:700;white-space:nowrap}.exf .exft{min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.exf .exft b{color:var(--fg)}
+.pfb{appearance:none;-webkit-appearance:none;border:0;background:none;padding:0;margin:0;cursor:pointer;display:block;border-radius:50%;color:inherit}
+.pfb:focus-visible,.exf:focus-visible,.frow:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.pfh{display:flex;align-items:center;gap:14px;min-width:0}.pic.pfpic{width:68px;height:68px}
+.pfcnt{display:flex;gap:18px;font-size:14px;color:var(--dim)}.pfcnt b{color:var(--fg);font-family:var(--display);font-weight:800;font-size:17px;margin-right:4px}
+.pfrk{display:flex;align-items:center;gap:14px}.pfrk .embwrap{width:72px;height:72px}
+.pfst{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.pfst>div{background:var(--panel-2);border:1px solid var(--line);border-radius:16px;padding:12px 8px;display:grid;gap:2px;text-align:center}
+.pfst b{font-family:var(--display);font-weight:800;font-size:22px;line-height:1.1}.pfst span{font-size:11px;color:var(--dim);font-weight:600}
+.pfsec{display:grid;gap:10px;border-top:1px solid var(--line);padding-top:14px}
+.pfcmp{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:6px 10px;align-items:center;font-size:13px}
+.pfcmp .track{height:8px}.pfcmp b{font-family:var(--mono);font-weight:500}
+.pfdays{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.pfd{display:grid;gap:4px;justify-items:center}.pfd i{width:100%;max-width:34px;aspect-ratio:1;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid var(--line);display:block}
+.pfd.on i{background:var(--accent);border-color:var(--accent)}.pfd small{font-size:11px;color:var(--dim)}
+.pfmon{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;align-items:end;height:96px}
+.pfm{display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:3px;height:100%;justify-items:center;font-size:11px;color:var(--dim)}
+.pfm i{width:100%;max-width:30px;align-self:end;border-radius:6px 6px 2px 2px;background:var(--accent);opacity:.85;min-height:2px;display:block}
+.pfm b{font-family:var(--mono);font-weight:500;color:var(--fg)}
+.pfx.ex{padding:10px 0}.pfx.ex:first-child{border-top:0;padding-top:0}
+.pfev{display:flex;justify-content:space-between;gap:10px;align-items:baseline;padding:8px 0;border-top:1px solid var(--line)}.pfev:first-child{border-top:0;padding-top:0}
+.pfev small{color:var(--dim);font-size:12px;white-space:nowrap}
+.frow{display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line);cursor:pointer}
+.frow:first-of-type{border-top:0}.frow .foa{color:var(--dim);font-size:20px}
+.row[data-act="prof"]{cursor:pointer}
 .pill.dupick{display:inline-flex;align-items:center;gap:8px;padding:4px 14px 4px 4px}
 .pill.dupick .pic{width:30px;height:30px}
 .duxr{display:flex;align-items:center;gap:14px;animation:fxpop 1s .1s cubic-bezier(.2,1.5,.3,1) both}
@@ -862,6 +900,7 @@ textarea{font-size:16px}
         <div class="card span2" id="duelCard" hidden></div>
         <div class="card span2" id="rivalCard" hidden></div>
         <div class="card span2" id="feedCard" hidden></div>
+        <div class="card span2" id="followCard" hidden></div>
         <div class="card span2" id="crewSetup" hidden></div>
         <div class="card span2">
           <div class="pills" id="modePills"></div>
@@ -894,6 +933,9 @@ textarea{font-size:16px}
 <div class="tour" id="tour" hidden><div class="tspot" id="tSpot"></div><div class="tbub" id="tBub" role="dialog" aria-modal="true" aria-labelledby="tTitle" aria-describedby="tTxt"></div></div>
 <div class="sheet" id="planSheet" data-act="plclose" hidden>
   <div class="sheetin plsheet" role="dialog" aria-modal="true" aria-labelledby="plTitle"><div id="plBody" class="plbody"></div></div>
+</div>
+<div class="sheet" id="profSheet" data-act="pfclose" hidden>
+  <div class="sheetin plsheet" role="dialog" aria-modal="true" aria-labelledby="pfTitle"><div id="pfBody" class="plbody"></div></div>
 </div>
 <div class="sheet" id="planEdit" data-act="peclose" hidden>
   <div class="sheetin plsheet" role="dialog" aria-modal="true" aria-labelledby="peTitle"><div id="peBody" class="plbody"></div></div>
@@ -1280,7 +1322,7 @@ LANG=S.lang==='en'?'en':'de';
 /* ---------- Sprache: Deutsch (Quelle) -> Englisch per Übersetzungsschicht ---------- */
 const D={
 // Navigation & allgemein
-'Start':'Home','Mit eingeschalteten Benachrichtigungen meldet sich RepRival auch, wenn du die App während der Pause verlässt.':'With notifications turned on, RepRival also alerts you when you leave the app during your rest.','Zeit stoppen':'Time it','Stoppuhr':'Stopwatch','Geh in Position …':'Get into position …','Sofort starten':'Start now','Halten! Tippe auf Stopp, wenn du fertig bist.':'Hold it! Tap Stop when you are done.','Stopp':'Stop','Stark! 💪':'Strong! 💪','Nur eintragen':'Just fill in','Nochmal':'Again','Pausentimer nach jedem Satz':'Rest timer after each set','Pro Übung kannst du die Pause im Timer mit −15 / +15 anpassen. Die App merkt sich das für diese Übung.':'Adjust the rest per exercise with −15 / +15 in the timer. The app remembers it for that exercise.','Pause':'Rest','Pause vorbei':'Rest over','Nächster Satz! 💪':'Next set! 💪','Pausentimer aus':'Rest timer off','Heute bei dieser Übung':'Today for this exercise','Ziel':'Goal','Noch kein Satz heute. Los geht’s!':'No set yet today. Let’s go!','Training läuft':'Workout running','Freies Training':'Free workout','Training beenden':'End workout','Wähle unten eine Übung und trag deinen ersten Satz ein.':'Pick an exercise below and log your first set.','Andere Übung':'Other exercise','Auswahl schließen':'Close picker','Training beendet':'Workout finished','Trainingsdauer':'Workout duration','Brustpresse (Maschine)':'Chest Press (Machine)','Überzüge':'Pullovers','Rudern an der Maschine':'Machine Row','Hängen an der Stange':'Dead Hang','Schulterpresse (Maschine)':'Shoulder Press (Machine)','Seitheben (Maschine)':'Lateral Raise (Machine)','Bizeps-Maschine':'Biceps Curl Machine','Trizeps-Maschine':'Triceps Machine','Hackenschmidt-Kniebeuge':'Hack Squat','Kniebeuge (Multipresse)':'Smith Machine Squat','Abduktoren-Maschine':'Hip Abduction Machine','Adduktoren-Maschine':'Hip Adduction Machine','Wandsitzen':'Wall Sit','Bauchmaschine':'Ab Crunch Machine','Plank (Unterarmstütz)':'Plank','Seitstütz':'Side Plank','Auf Zeit':'Timed','Dauer (Sekunden)':'Duration (seconds)','Wertung (Zeit)':'Score (time)','Zeit':'Time','Sek.':'sec','Bitte eine Dauer von 1 bis 900 Sekunden eintragen.':'Please enter a duration of 1 to 900 seconds.','Benachrichtigungen':'Notifications','Verpasse kein Duell':'Never miss a duel','Aktivieren':'Turn on','Später':'Later','Verstanden':'Got it',
+'Start':'Home','Freunde in den Rängen':'Friends on the rank ladder','Sobald du mit Freunden in einer Crew bist, siehst du hier, auf welchem Rang sie gerade stehen.':'Once you share a crew with friends, you will see here which rank they are on right now.','Zur Crew':'Go to crew','Du stehst unter deinen Freunden ganz oben.':'You are at the top among your friends.','ist mit dir gleichauf.':'is level with you.','Tippe auf eine Person, um ihr Profil zu sehen.':'Tap a person to see their profile.','gleichauf mit':'level with','Freunde bei dieser Übung':'Friends on this exercise','Die Zahl sind die Rangpunkte bei dieser Übung. Sie richten sich nach dem Körpergewicht, damit der Vergleich fair ist.':'The number shows the rank points on this exercise. They are relative to body weight to keep the comparison fair.','So sehen dich andere':'How others see you','Follower':'Followers','Folgt':'Following','+ Folgen':'+ Follow','✓ Folge ich':'✓ Following','⚔️ Herausfordern':'⚔️ Challenge','Gesamtrang':'Overall rank','Im Vergleich mit dir':'Compared with you','Eure Duelle:':'Your duels:','Letzte 7 Tage':'Last 7 days','Saisonpunkte pro Monat':'Season points per month','Alle Übungen anzeigen':'Show all exercises','Gleichauf mit dir':'Level with you','Trainierst du noch nicht':'You don’t train this yet','Noch keine Übungen mit Rang.':'No ranked exercises yet.','Letzte Erfolge':'Recent achievements','Noch keine Erfolge in den letzten Wochen.':'No achievements in the last few weeks.','Dieses Profil ist nicht mehr sichtbar. Ihr seid in keiner gemeinsamen Crew mehr.':'This profile is no longer visible. You no longer share a crew.','Folge ich':'Following','Tippe in der Rangliste auf eine Person. Im Profil siehst du ihre Ränge und Erfolge und kannst ihr folgen.':'Tap a person in the leaderboard. Their profile shows their ranks and achievements, and you can follow them.','Heute trainiert':'Trained today','Gestern trainiert':'Trained yesterday','Von den Athleten, denen du folgst, gibt es noch nichts Neues.':'Nothing new yet from the athletes you follow.','Du folgst schon 50 Athleten. Entfolge erst jemandem.':'You already follow 50 athletes. Unfollow someone first.','Gerade ist kein neues Duell mit dieser Person möglich.':'A new duel with this person is not possible right now.','Rangpunkte plus':'Rank points gained','Einsatz:':'Stake:','Einsatz (freiwillig)':'Stake (optional)','z. B. Verlierer zahlt den Shake':'e.g. loser buys the shake','Eine Übung':'One exercise','Dauer':'Duration','3 Tage':'3 days','7 Tage':'7 days','14 Tage':'14 days','Gezählt wird, wie viele Rangpunkte ihr bei dieser Übung im Duell zulegt. So haben auch Einsteiger eine faire Chance.':'What counts is how many rank points each of you gains on this exercise during the duel. That gives beginners a fair chance too.','🔁 Revanche':'🔁 Rematch','Bilanz':'Record','Mit eingeschalteten Benachrichtigungen meldet sich RepRival auch, wenn du die App während der Pause verlässt.':'With notifications turned on, RepRival also alerts you when you leave the app during your rest.','Zeit stoppen':'Time it','Stoppuhr':'Stopwatch','Geh in Position …':'Get into position …','Sofort starten':'Start now','Halten! Tippe auf Stopp, wenn du fertig bist.':'Hold it! Tap Stop when you are done.','Stopp':'Stop','Stark! 💪':'Strong! 💪','Nur eintragen':'Just fill in','Nochmal':'Again','Pausentimer nach jedem Satz':'Rest timer after each set','Pro Übung kannst du die Pause im Timer mit −15 / +15 anpassen. Die App merkt sich das für diese Übung.':'Adjust the rest per exercise with −15 / +15 in the timer. The app remembers it for that exercise.','Pause':'Rest','Pause vorbei':'Rest over','Nächster Satz! 💪':'Next set! 💪','Pausentimer aus':'Rest timer off','Heute bei dieser Übung':'Today for this exercise','Ziel':'Goal','Noch kein Satz heute. Los geht’s!':'No set yet today. Let’s go!','Training läuft':'Workout running','Freies Training':'Free workout','Training beenden':'End workout','Wähle unten eine Übung und trag deinen ersten Satz ein.':'Pick an exercise below and log your first set.','Andere Übung':'Other exercise','Auswahl schließen':'Close picker','Training beendet':'Workout finished','Trainingsdauer':'Workout duration','Brustpresse (Maschine)':'Chest Press (Machine)','Überzüge':'Pullovers','Rudern an der Maschine':'Machine Row','Hängen an der Stange':'Dead Hang','Schulterpresse (Maschine)':'Shoulder Press (Machine)','Seitheben (Maschine)':'Lateral Raise (Machine)','Bizeps-Maschine':'Biceps Curl Machine','Trizeps-Maschine':'Triceps Machine','Hackenschmidt-Kniebeuge':'Hack Squat','Kniebeuge (Multipresse)':'Smith Machine Squat','Abduktoren-Maschine':'Hip Abduction Machine','Adduktoren-Maschine':'Hip Adduction Machine','Wandsitzen':'Wall Sit','Bauchmaschine':'Ab Crunch Machine','Plank (Unterarmstütz)':'Plank','Seitstütz':'Side Plank','Auf Zeit':'Timed','Dauer (Sekunden)':'Duration (seconds)','Wertung (Zeit)':'Score (time)','Zeit':'Time','Sek.':'sec','Bitte eine Dauer von 1 bis 900 Sekunden eintragen.':'Please enter a duration of 1 to 900 seconds.','Benachrichtigungen':'Notifications','Verpasse kein Duell':'Never miss a duel','Aktivieren':'Turn on','Später':'Later','Verstanden':'Got it',
 'Wir sagen dir Bescheid, wenn dich jemand herausfordert, auf deinen Eintrag reagiert oder dich in der Crew überholt.':'We let you know when someone challenges you, reacts to your entry or overtakes you in the crew.',
 'Damit RepRival dir Bescheid geben kann, füge die App zum Home-Bildschirm hinzu: in Safari auf Teilen → „Zum Home-Bildschirm“.':'So RepRival can notify you, add the app to your home screen: in Safari tap Share → “Add to Home Screen”.',
 'Auf dem iPhone gehen Benachrichtigungen nur, wenn RepRival auf dem Home-Bildschirm ist: in Safari auf Teilen → „Zum Home-Bildschirm“.':'On iPhone, notifications only work when RepRival is on your home screen: in Safari tap Share → “Add to Home Screen”.',
@@ -1326,7 +1368,7 @@ const D={
 'Platz in der Crew:':'Crew place:','Dein Rang':'Your rank','Teilen':'Share','Fertig':'Done','Monatsrückblick':'Monthly recap','Für diesen Monat gibt es noch keine Einträge.':'There are no entries for this month yet.','Text kopiert':'Text copied',
 'Endstand wird ausgewertet':'Final score being tallied','Ein Duell wurde abgebrochen, weil jemand die Crew verlassen hat.':'A duel was cancelled because someone left the crew.','Einige Duelle wurden abgebrochen, weil jemand die Crew verlassen hat.':'Some duels were cancelled because someone left the crew.','REPRIVAL · RÜCKBLICK':'REPRIVAL · RECAP','Rückblick als Bild gespeichert':'Recap saved as image','Das Teilen hat nicht geklappt.':'Sharing didn’t work.','In Google Kalender eintragen':'Add to Google Calendar','Kalender-Datei (.ics) für Apple & Outlook':'Calendar file (.ics) for Apple & Outlook','Google öffnet sich mit fertig ausgefülltem, wöchentlichem Termin. Du musst nur noch speichern.':'Google opens with a ready-made weekly event. You just need to save it.','Google Kalender geöffnet. Termin dort speichern.':'Google Calendar opened. Save the event there.','Kalender-Dateien lassen sich innerhalb von Claude nicht speichern. Nutze Google Kalender oder die Datei-Version der App.':'Calendar files can’t be saved inside Claude. Use Google Calendar or the file version of the app.','Abmelden':'Sign out','Anmelden':'Sign in','Melde dich an, um deine Crew zu sehen.':'Sign in to see your crew.','Mit E-Mail anmelden':'Sign in with email','Deine E-Mail-Adresse':'Your email address','Anmelde-Link senden':'Send sign-in link','Erst mal ohne Konto ausprobieren':'Try without an account first','Prüf dein Postfach und tippe auf den Link in der E-Mail.':'Check your inbox and tap the link in the email.','Bitte eine gültige E-Mail-Adresse eingeben.':'Please enter a valid email address.','Der Link konnte nicht gesendet werden. Versuch es gleich noch einmal.':'The link couldn’t be sent. Please try again shortly.','Kein Passwort nötig. Wir schicken dir einen Link, mit dem du dich anmeldest. Deine Trainingsdaten werden sicher gespeichert, und du kannst mit Freunden in einer Crew antreten.':'No password needed. We’ll send you a link to sign in. Your training data is stored safely and you can compete with friends in a crew.','In deinem RepRival-Konto':'In your RepRival account','Code senden':'Send code','Code aus der E-Mail':'Code from the email','Kein Passwort nötig. Wir schicken dir einen Code per E-Mail. Danach bleibst du auf diesem Gerät angemeldet.':'No password needed. We’ll email you a code. After that you stay signed in on this device.','Prüf dein Postfach und gib den Code hier ein (oder tippe auf den Link in der E-Mail).':'Check your inbox and enter the code here (or tap the link in the email).','Bitte den Code aus der E-Mail eingeben.':'Please enter the code from the email.','Der Code stimmt nicht oder ist abgelaufen. Fordere einfach einen neuen an.':'The code is wrong or expired. Just request a new one.','Gerade wurden zu viele Anmelde-Mails verschickt. Bitte etwas später nochmal versuchen.':'Too many sign-in emails were sent just now. Please try again a bit later.','Die E-Mail konnte nicht gesendet werden. Versuch es gleich noch einmal.':'The email couldn’t be sent. Please try again shortly.','Passwort ändern':'Change password','Passwort':'Password','E-Mail-Adresse':'Email address','mindestens 8 Zeichen':'at least 8 characters','Konto erstellen':'Create account','Noch kein Konto? Konto erstellen':'No account yet? Create one','Schon ein Konto? Anmelden':'Already have an account? Sign in','Passwort vergessen?':'Forgot password?','Neues Passwort':'New password','Passwort speichern':'Save password','Passwort gespeichert':'Password saved','Melde dich an, um mit deiner Crew zu trainieren. Danach bleibst du auf diesem Gerät angemeldet.':'Sign in to train with your crew. After that you stay signed in on this device.','Mit E-Mail und Passwort. Deine Trainingsdaten werden sicher gespeichert, und du kannst mit Freunden in einer Crew antreten.':'With email and password. Your training data is stored safely and you can compete with friends in a crew.','Wähle ein neues Passwort für dein RepRival-Konto.':'Choose a new password for your RepRival account.','Bitte dein Passwort eingeben.':'Please enter your password.','Das Passwort braucht mindestens 8 Zeichen.':'The password needs at least 8 characters.','E-Mail oder Passwort stimmt nicht.':'Email or password is incorrect.','Diese E-Mail ist schon registriert. Melde dich einfach an.':'This email is already registered. Just sign in.','Gerade zu viele Versuche. Bitte etwas später nochmal versuchen.':'Too many attempts right now. Please try again later.','Bitte zuerst die Bestätigungs-Mail öffnen.':'Please open the confirmation email first.','Das ist schon dein aktuelles Passwort.':'That is already your current password.','Das hat nicht geklappt. Versuch es gleich noch einmal.':'That didn’t work. Please try again shortly.','Fast geschafft: Bitte bestätige deine E-Mail über den Link in der Mail.':'Almost done: please confirm your email via the link in the email.','Gib oben deine E-Mail-Adresse ein, dann schicken wir dir einen Link.':'Enter your email above and we’ll send you a link.','Gerade zu viele Mails. Bitte etwas später nochmal versuchen.':'Too many emails right now. Please try again later.','Wir haben dir einen Link geschickt. Öffne ihn, dann kannst du ein neues Passwort wählen.':'We sent you a link. Open it to choose a new password.','Freunde scannen den Code mit der Handykamera. RepRival öffnet sich, nach dem Anmelden treten sie mit einem Tipp bei.':'Friends scan the code with their phone camera. RepRival opens, and after signing in they join with one tap.','Konto':'Account','Konto löschen':'Delete account','Endgültig löschen':'Delete permanently','Wirklich löschen? Dein Konto, alle Sätze, Sicherungen und dein Crew-Eintrag werden endgültig entfernt. Zum Bestätigen nochmal auf „Endgültig löschen“ tippen.':'Really delete? Your account, all sets, backups and your crew entry will be removed permanently. Tap “Delete permanently” again to confirm.','Das Löschen hat nicht geklappt. Versuch es gleich noch einmal.':'Deleting didn’t work. Please try again shortly.','Datenschutz':'Privacy','Impressum':'Legal notice','Ich habe die':'I have read the','Datenschutzerklärung':'privacy policy','gelesen und willige ein, dass meine Trainingsdaten inklusive Körpergewicht gespeichert werden.':'and agree that my training data including body weight is stored.','Bitte bestätige die Datenschutzerklärung.':'Please confirm the privacy policy.','Crew-Feed':'Crew feed','Duelle':'Duels','Neue Bestleistung':'New personal best','Rang-Aufstieg':'Rank up','Neuer Gesamtrang':'New overall rank','Wochen-Serie':'Weekly streak','Duell gewonnen':'Duel won','fordert dich heraus':'challenges you',
 'Wer holt in 7 Tagen mehr Saisonpunkte?':'Who earns more season points in 7 days?','Wer hat in 7 Tagen mehr Trainingstage?':'Who gets more training days in 7 days?','Annehmen':'Accept','Ablehnen':'Decline','Gewonnen!':'Won!','Verloren':'Lost','Unentschieden':'Draw','noch 1 Tag':'1 day left',
-'Warte auf Antwort von':'Waiting for','Zurückziehen':'Withdraw','hat abgelehnt. Feigling?':'declined. Chicken?','Lade Freunde in deine Crew ein, dann kannst du sie zu einem 7-Tage-Duell herausfordern.':'Invite friends to your crew to challenge them to a 7-day duel.',
+'Warte auf Antwort von':'Waiting for','Zurückziehen':'Withdraw','hat abgelehnt. Feigling?':'declined. Chicken?','Lade Freunde in deine Crew ein, dann kannst du sie zu einem Duell herausfordern.':'Invite friends to your crew to challenge them to a duel.',
 'Gerade läuft schon mit allen ein Duell.':'You already have a duel running with everyone.','⚔️ Neues Duell':'⚔️ New duel','Gegner':'Opponent','Worum geht’s?':'What’s at stake?','Herausfordern':'Challenge','Der Verlierer trägt eine Woche lang einen peinlichen Titel.':'The loser wears an embarrassing title for a week.',
 'Herausforderung gesendet ⚔️':'Challenge sent ⚔️','Duell angenommen! 7 Tage, los geht’s.':'Duel accepted! 7 days, let’s go.','DUELL GEWONNEN':'DUEL WON','UNENTSCHIEDEN':'DRAW','DUELL VERLOREN':'DUEL LOST','Stark!':'Strong!','Kopf an Kopf':'Neck and neck','Knapp daneben':'So close','Dein Titel für 7 Tage:':'Your title for 7 days:',
 'Noch ist es ruhig. Sobald jemand eine Bestleistung schafft oder aufsteigt, steht es hier, und ihr könnt euch gegenseitig anfeuern.':'It’s quiet so far. As soon as someone hits a personal best or ranks up, it shows up here and you can cheer each other on.',
@@ -1508,7 +1550,23 @@ const PAT=[
  [/^noch (\d+) Tage$/,m=>`${m[1]} days left`],
  [/^(\d+) Wochen in Folge$/,m=>`${m[1]} weeks in a row`],
  [/^gegen (.+)$/,m=>`vs. ${m[1]}`],
- [/^(\d+) : (\d+) (Trainingstage|Saisonpunkte)$/,m=>`${m[1]} : ${m[2]} ${tw(m[3])}`],
+ [/^(\d+) : (\d+) (Trainingstage|Saisonpunkte|Rangpunkte plus)$/,m=>`${m[1]} : ${m[2]} ${tw(m[3])}`],
+ [/^Wer holt in (\d+) Tagen mehr Saisonpunkte\?$/,m=>`Who earns more season points in ${m[1]} days?`],
+ [/^Wer hat in (\d+) Tagen mehr Trainingstage\?$/,m=>`Who gets more training days in ${m[1]} days?`],
+ [/^Wer steigert sich in (\d+) Tagen mehr\?$/,m=>`Who improves more in ${m[1]} days?`],
+ [/^Duell angenommen! (\d+) Tage, los geht’s\.$/,m=>`Duel accepted! ${m[1]} days, let’s go.`],
+ [/^Platz (\d+) von (\d+)$/,m=>`#${m[1]} of ${m[2]}`],
+ [/^liegt (\d+) (Rangpunkt|Rangpunkte) vor dir\.$/,m=>`is ${m[1]} rank ${m[1]==='1'?'point':'points'} ahead of you.`],
+ [/^(\d+) (Punkt|Punkte) hinter dir$/,m=>`${m[1]} ${m[1]==='1'?'point':'points'} behind you`],
+ [/^(\d+) (Punkt|Punkte) vor dir$/,m=>`${m[1]} ${m[1]==='1'?'point':'points'} ahead of you`],
+ [/^Du liegst (\d+) (Punkt|Punkte) vorn$/,m=>`You are ${m[1]} ${m[1]==='1'?'point':'points'} ahead`],
+ [/^(\d+) von 7 Tagen trainiert$/,m=>`trained on ${m[1]} of 7 days`],
+ [/^Zuletzt vor (\d+) Tagen trainiert$/,m=>`Last trained ${m[1]} days ago`],
+ [/^(\d+) Rangpunkte$/,m=>`${m[1]} rank points`],
+ [/^Profil (.+)$/,m=>`Profile ${m[1]}`],
+ [/^(.+) folgt dir jetzt$/,m=>`${m[1]} now follows you`],
+ [/^(.+) und (\d+) weitere folgen dir jetzt$/,m=>`${m[1]} and ${m[2]} others now follow you`],
+ [/^(.+): (neue Bestleistung|Rang-Aufstieg|neuer Gesamtrang|neue Wochen-Serie|neues Abzeichen|Duell gewonnen)$/,m=>`${m[1]}: ${({'neue Bestleistung':'new personal best','Rang-Aufstieg':'rank up','neuer Gesamtrang':'new overall rank','neue Wochen-Serie':'new weekly streak','neues Abzeichen':'new badge','Duell gewonnen':'duel won'})[m[2]]}`],
  [/^(Trainingstage|Saisonpunkte) · (.+)$/,m=>`${tw(m[1])} · ${m[2]}`],
  [/^(.+) hat auf deinen Eintrag reagiert (.+)$/,m=>`${m[1]} reacted to your post ${m[2]}`],
  [/^(.+) und (\d+) weitere haben reagiert (.+)$/,m=>`${m[1]} and ${m[2]} others reacted ${m[3]}`],
@@ -1879,7 +1937,7 @@ function daysTrained(key){const set={};for(const s of S.sets)if(monthKey(s.ts)==
 function payload(){
   const o=overall();
   const tt=titleOf(o,streakInfo());
-  return {nick:S.nick,av:S.avatar,crew:S.crew||'',crews:Array.isArray(S.crews)?S.crews.slice(0,MAXCREWS):[],studio:S.studio||'',title:tt?tt.n:'',cls:classFor(S.bw).label,kw:o.sum,tier:o.arr.length?o.g:-1,hist:o.hist,cp:crewPtsMap(),...socialPayload()};
+  return {nick:S.nick,av:S.avatar,crew:S.crew||'',crews:Array.isArray(S.crews)?S.crews.slice(0,MAXCREWS):[],studio:S.studio||'',title:tt?tt.n:'',cls:classFor(S.bw).label,kw:o.sum,tier:o.arr.length?o.g:-1,hist:o.hist,cp:crewPtsMap(),rp:Math.round(o.avg),lr:lrMine(o),fo:cleanFo(S.fo),st:streakInfo().weeks,td:o.days,...socialPayload()};
 }
 
 
@@ -2082,7 +2140,7 @@ async function initCrew(){
     DB=db;
     initBackup();
     DB.collection('members').onSnapshot(
-      snap=>{members=snap.docs.map(d=>({id:d.id,...d.data()}));{const own=members.find(m=>m.id===UID);if(own&&mergeSocial(own)){save();syncCrew()}socialMerged=true}renderBoard();try{crewNotify()}catch(e){}if(tab==='train')renderTrain();else STALE.train=1;if(tab==='home')renderHome();else STALE.home=1},
+      snap=>{members=snap.docs.map(d=>({id:d.id,...d.data()}));{const own=members.find(m=>m.id===UID);if(own&&mergeSocial(own)){save();syncCrew()}socialMerged=true}renderBoard();if(tab==='ranks')renderRanks();else STALE.ranks=1;try{if(pfView)renderProf()}catch(e){}syncCrew();try{crewNotify()}catch(e){}if(tab==='train')renderTrain();else STALE.train=1;if(tab==='home')renderHome();else STALE.home=1},
       e=>{crewErr=(e&&e.code)||'error';renderSetup();renderBoard()}
     );
     renderSetup();syncCrew();
@@ -2090,7 +2148,8 @@ async function initCrew(){
 }
 function cleanMember(m){
   return {id:m.id,me:false,nick:String(m.nick||'Unbekannt').slice(0,20),av:AV_IDS.includes(m.av)?m.av:'legday',bw:Number(m.bw)||0,cls:String(m.cls||''),
-    kw:Number(m.kw)||0,tier:Number.isInteger(m.tier)&&m.tier>=0&&m.tier<=NT?m.tier:-1,hist:(m.hist&&typeof m.hist==='object')?m.hist:{},cp:cleanCp(m.cp),title:String(m.title||'').slice(0,24),crew:normCrew(m.crew),crews:[...new Set((Array.isArray(m.crews)&&m.crews.length?m.crews:[m.crew]).slice(0,5).map(normCrew).filter(Boolean))],studio:String(m.studio||'').slice(0,24),sk:normStudio(m.studio),ev:cleanEv(m.ev),rx:cleanRx(m.rx),du:cleanDu(m.du),da:cleanDa(m.da),dd:cleanDd(m.dd)};
+    kw:Number(m.kw)||0,tier:Number.isInteger(m.tier)&&m.tier>=0&&m.tier<=NT?m.tier:-1,hist:(m.hist&&typeof m.hist==='object')?m.hist:{},cp:cleanCp(m.cp),title:String(m.title||'').slice(0,24),crew:normCrew(m.crew),crews:[...new Set((Array.isArray(m.crews)&&m.crews.length?m.crews:[m.crew]).slice(0,5).map(normCrew).filter(Boolean))],studio:String(m.studio||'').slice(0,24),sk:normStudio(m.studio),ev:cleanEv(m.ev),rx:cleanRx(m.rx),du:cleanDu(m.du),da:cleanDa(m.da),dd:cleanDd(m.dd),
+    rp:m.rp!==undefined&&m.rp!==null&&Number.isFinite(Number(m.rp))?Math.max(0,Math.min(NT*100,Math.round(Number(m.rp)))):-1,lr:cleanLr(m.lr),fo:cleanFo(m.fo),st:Math.max(0,Math.min(520,Math.round(Number(m.st)||0))),td:Math.max(0,Math.min(20000,Math.round(Number(m.td)||0))),dl:cleanDl(m.dl)};
 }
 function entries(scope){
   scope=scope||cscope;const sk=normStudio(S.studio);
@@ -2110,15 +2169,15 @@ const hue=s=>{let h=0;for(const c of String(s))h=(h*31+c.charCodeAt(0))%360;retu
 const REACT=[['fire','🔥'],['muscle','💪'],['lol','😂']];
 const DUEL_DAYS=7,DUEL_WAIT=3*day;
 const LOSER_T=['Kuchenbeauftragter','Hantel-Sortierer','Handtuch-Halter','Protein-Lieferant','Spind-Aufräumer'];
-let leaveAsk=false,crewAddOpen=false,duelForm=false,duelOpp='',duelMet='days';
+let leaveAsk=false,crewAddOpen=false,duelForm=false,duelOpp='',duelMet='days',duelDur=7,duelX='',duelStake='',duelPre='',feedScope='crew',pfView=null,pfAll=false;
 function vib(p){if(S.vib===false)return;try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}}
 function addEv(e){const lim=Date.now()-30*day;S.ev=(Array.isArray(S.ev)?S.ev:[]).filter(z=>z&&z.ts>lim).slice(-11);S.ev.push({i:newId(),ts:Date.now(),...e})}
 const okUid=v=>typeof v==='string'&&v.length>0&&v.length<=128&&!v.includes('~');
 const okKey=k=>typeof k==='string'&&k.length<=180&&k.split('~').length===2&&okUid(k.split('~')[0])&&/^[A-Za-z0-9_-]{1,40}$/.test(k.split('~')[1]);
 const capN=(v,mx)=>{v=Number(v);return Number.isFinite(v)?Math.max(-mx,Math.min(mx,v)):0};
-function cleanEv(a){const lim=Date.now()+3600e3;return (Array.isArray(a)?a:[]).slice(-12).filter(e=>e&&/^[A-Za-z0-9_-]{1,40}$/.test(String(e.i))&&Number.isFinite(Number(e.ts))&&Number(e.ts)<=lim&&['pr','rank','tier','streak','duel','badge'].includes(e.k)).map(e=>({i:String(e.i),k:e.k,ts:Number(e.ts),l:String(e.l||'').slice(0,40),n:String(e.n||'').slice(0,28),kd:['kg','bw','cd'].includes(e.kd)?e.kd:'kg',ct:CDM[e.ct]?e.ct:undefined,s:e.s===1?1:undefined,v:e.k==='streak'?Math.round(capN(e.v,520)):capN(e.v,1e5),w:capN(e.w,1e5),t:Number.isInteger(e.t)&&e.t>=0&&e.t<=NT?e.t:0,m:e.m==='pts'?'pts':'days',o:String(e.o||'').slice(0,20)}))}
+function cleanEv(a){const lim=Date.now()+3600e3;return (Array.isArray(a)?a:[]).slice(-12).filter(e=>e&&/^[A-Za-z0-9_-]{1,40}$/.test(String(e.i))&&Number.isFinite(Number(e.ts))&&Number(e.ts)<=lim&&['pr','rank','tier','streak','duel','badge'].includes(e.k)).map(e=>({i:String(e.i),k:e.k,ts:Number(e.ts),l:String(e.l||'').slice(0,40),n:String(e.n||'').slice(0,28),kd:['kg','bw','cd'].includes(e.kd)?e.kd:'kg',ct:CDM[e.ct]?e.ct:undefined,s:e.s===1?1:undefined,v:e.k==='streak'?Math.round(capN(e.v,520)):capN(e.v,1e5),w:capN(e.w,1e5),t:Number.isInteger(e.t)&&e.t>=0&&e.t<=NT?e.t:0,m:e.m==='pts'?'pts':e.m==='lift'?'lift':'days',o:String(e.o||'').slice(0,20)}))}
 function cleanRx(o){const r={};if(o&&typeof o==='object'&&!Array.isArray(o))for(const [k,v] of Object.entries(o).slice(0,150))if(okKey(k)&&REACT.some(z=>z[0]===v))r[k]=v;return r}
-function cleanDu(a){const lim=Date.now()+3600e3;return (Array.isArray(a)?a:[]).slice(-8).filter(d=>d&&/^[A-Za-z0-9_-]{1,40}$/.test(String(d.i))&&okUid(d.o)&&Number.isFinite(Number(d.c))&&Number(d.c)<=lim).map(d=>({i:String(d.i),o:d.o,m:d.m==='pts'?'pts':'days',c:Number(d.c)}))}
+function cleanDu(a){const lim=Date.now()+3600e3;return (Array.isArray(a)?a:[]).slice(-8).filter(d=>d&&/^[A-Za-z0-9_-]{1,40}$/.test(String(d.i))&&okUid(d.o)&&Number.isFinite(Number(d.c))&&Number(d.c)<=lim).map(d=>{const o={i:String(d.i),o:d.o,m:d.m==='pts'?'pts':d.m==='lift'&&isBase(d.x)?'lift':'days',c:Number(d.c)};if(d.n===3||d.n===14)o.n=d.n;if(o.m==='lift')o.x=d.x;const st=typeof d.s==='string'?d.s.replace(/\s+/g,' ').trim().slice(0,40):'';if(st)o.s=st;return o})}
 function cleanDa(o){const r={};if(o&&typeof o==='object'&&!Array.isArray(o))for(const [k,v] of Object.entries(o).slice(-40))if(okKey(k)&&Number.isFinite(Number(v)))r[k]=Number(v);return r}
 function cleanDd(o){const r={};if(o&&typeof o==='object'&&!Array.isArray(o))for(const [k,v] of Object.entries(o).slice(0,60))if(/^\d{4}-\d\d-\d\d$/.test(k)&&Number.isFinite(Number(v)))r[k]=Math.max(0,Math.min(2000,Number(v)));return r}
 function ddMine(){const dp=compute(S.sets).dp||{},lim=isoDay(Date.now()-35*day),o={};for(const k in dp)if(k>=lim)o[k]=dp[k];return o}
@@ -2137,14 +2196,117 @@ function mergeSocial(r){
 let socialMerged=false;
 function socialPayload(){const now=Date.now();
   let rx=S.rx&&typeof S.rx==='object'?S.rx:{};const ks=Object.keys(rx);if(ks.length>100){const n={};for(const k of ks.slice(-100))n[k]=rx[k];rx=S.rx=n}
-  return {ev:(Array.isArray(S.ev)?S.ev:[]).filter(e=>e.ts>now-30*day).slice(-12),rx,du:(Array.isArray(S.du)?S.du:[]).filter(d=>d.c>now-21*day).slice(-8),dx:(Array.isArray(S.dx)?S.dx:[]).slice(-20),da:S.da&&typeof S.da==='object'?S.da:{},dd:ddMine()}}
+  return {ev:(Array.isArray(S.ev)?S.ev:[]).filter(e=>e.ts>now-30*day).slice(-12),rx,du:(Array.isArray(S.du)?S.du:[]).filter(d=>d.c>now-35*day).slice(-8),dx:(Array.isArray(S.dx)?S.dx:[]).slice(-20),da:S.da&&typeof S.da==='object'?S.da:{},dd:ddMine(),dl:dlMine()}}
 const crewOk=()=>!!(DB&&CAN!==false&&!S.example&&S.nick);
 function crewList(){return crewOk()?entries('crew'):[]}
 /* alle, mit denen man in irgendeiner Crew ist (für Duelle, Reaktionen, Titel) */
 function socialList(){if(!crewOk())return [];fixCrews();const set=new Set(S.crews),list=[];for(const m of members){if(m.id===UID)continue;const c=cleanMember(m);if(set.size?c.crews.some(x=>set.has(x)):!c.crews.length)list.push(c)}list.push({id:UID||'me',me:true,...payload(),nick:S.nick||'Du'});return list}
 const eid=e=>e.me?UID:e.id;
+/* ---------- Folgen, Profile und Freunde in den Rängen ---------- */
+const MAXFOLLOW=50;
+function isBase(id){if(!isBase.s)isBase.s=new Set(BASE.map(x=>x.id));return isBase.s.has(id)}
+function lrMine(o){const r={};for(const e of (o||overall()).arr)r[e.x.id]=Math.round(e.pts);return r}
+function cleanLr(o){const r={};if(o&&typeof o==='object'&&!Array.isArray(o))for(const [k,v] of Object.entries(o).slice(0,120)){const n=Number(v);if(isBase(k)&&Number.isFinite(n))r[k]=Math.max(0,Math.min(NT*100,Math.round(n)))}return r}
+function cleanFo(a){const r=[];if(Array.isArray(a))for(const u of a){if(okUid(u)&&!r.includes(u))r.push(u);if(r.length>=MAXFOLLOW)break}return r}
+function cleanDl(o){const r={};if(o&&typeof o==='object'&&!Array.isArray(o))for(const [k,m] of Object.entries(o).slice(0,8)){if(!isBase(k)||!m||typeof m!=='object')continue;const d={};for(const [dk,v] of Object.entries(m).slice(0,45)){const n=Number(v);if((dk==='0'||/^\d{4}-\d\d-\d\d$/.test(dk))&&Number.isFinite(n))d[dk]=Math.max(-1,Math.min(NT*100,Math.round(n)))}r[k]=d}return r}
+/* Übungen, um die gerade ein Duell läuft: nur für diese wird der Tagesverlauf geteilt */
+function duelLifts(){const lim=Date.now()-35*day,set=new Set();for(const d of (Array.isArray(S.du)?S.du:[]))if(d&&d.m==='lift'&&isBase(d.x)&&d.c>lim)set.add(d.x);
+  for(const m of members){if(m.id===UID||!Array.isArray(m.du))continue;for(const d of m.du)if(d&&d.o===UID&&d.m==='lift'&&isBase(d.x)&&Number(d.c)>lim)set.add(d.x)}return [...set].slice(0,8)}
+function dlMine(){const ls=duelLifts(),out={};if(!ls.length)return out;const lim=isoDay(Date.now()-35*day);
+  for(const id of ls){const x=L(id);if(!x)continue;const m={0:-1};let best;for(const z of S.sets.filter(q=>q.lift===id).sort((a,b)=>a.ts-b.ts)){const sc=scOf(x,z.w,z.r,setBw(z));if(best===undefined||sc>best)best=sc;const pt=Math.round(ptsOfS(x,best)),dk=isoDay(z.ts);if(dk<lim)m[0]=pt;else m[dk]=pt}out[id]=m}return out}
+/* Zuwachs an Rangpunkten bei einer Übung innerhalb der Duell-Tage */
+function liftGain(e,x,days){const m=(e.dl||{})[x];if(!m||!days||!days.length)return 0;let base=Number(m['0']);base=base>=0?base:null;let end=null;const last=days[days.length-1];
+  for(const k of Object.keys(m).filter(k=>k!=='0').sort()){const v=Number(m[k]);if(k<days[0])base=v;else if(k<=last){if(base===null)base=v;end=v}}
+  return end===null||base===null?0:Math.max(0,Math.round(end-base))}
+function meEntry(){return {id:UID||'me',me:true,...payload(),nick:S.nick||'Du'}}
+/* alle, deren Profil sichtbar ist: gemeinsame Crew oder gleiche Studio-Liga */
+function visList(){if(!crewOk())return [];fixCrews();const set=new Set(S.crews),sk=normStudio(S.studio),list=[];for(const m of members){if(m.id===UID)continue;const c=cleanMember(m);if(c.crews.some(x=>set.has(x))||(sk&&c.sk===sk))list.push(c)}list.push(meEntry());return list}
+/* Freunde: alle aus den eigenen Crews plus alle, denen man folgt */
+function friendList(){if(!crewOk())return [];const fo=new Set(cleanFo(S.fo)),soc=new Set(socialList().map(eid));return visList().filter(e=>e.me||soc.has(eid(e))||fo.has(eid(e)))}
+const isFo=u=>Array.isArray(S.fo)&&S.fo.includes(u);
+function foCount(u){let n=0;for(const m of members)if(m.id!==UID&&m.id!==u&&Array.isArray(m.fo)&&m.fo.includes(u))n++;if(u!==UID&&isFo(u))n++;return n}
+const rpOf=e=>e.me?Math.round(overall().avg):e.rp;
+const rpVal=e=>{const r=rpOf(e);return r>=0?r:Math.max(0,e.tier)*100};
+const ptsW=n=>n===1?'Punkt':'Punkte';
+function friendLadderHTML(){
+  if(!crewOk())return '';
+  const fl=friendList();
+  if(fl.length<2)return `<div class="card span2"><div class="lbl">Freunde in den Rängen</div><p class="note" style="margin:0">Sobald du mit Freunden in einer Crew bist, siehst du hier, auf welchem Rang sie gerade stehen.</p><button class="btn sm" data-act="gotab" data-v="crew" style="justify-self:start">Zur Crew</button></div>`;
+  const by={};for(const e of fl){const t=e.tier>=0?e.tier:-1;(by[t]=by[t]||[]).push(e)}
+  const rows=Object.keys(by).map(Number).sort((a,b)=>b-a).map(t=>{
+    const ppl=by[t].sort((a,b)=>rpVal(b)-rpVal(a));
+    return `<div class="flr${ppl.some(e=>e.me)?' cur':''}" style="--c:${t>=0?'var(--t'+t+')':'var(--dim)'}"><div class="lmini">${t>=0?emblem(t):''}</div><div class="flb"><b>${t>=0?TIERS[t]:'Noch ohne Rang'}</b><div class="flp">${ppl.map(e=>{const r=rpOf(e);return `<button class="pill dupick flc${e.me?' me':''}" data-act="prof" data-v="${esc(eid(e))}">${picHTML(e.me?S.avatar:e.av,'sm',e.me?myAvatarOpts():{tier:e.tier})}<span class="notr">${esc(e.me?S.nick:e.nick)}</span>${t>=0&&r>=0?`<i>${r}</i>`:''}</button>`}).join('')}</div></div></div>`}).join('');
+  const ranked=fl.filter(e=>e.tier>=0).sort((a,b)=>rpVal(b)-rpVal(a)),i=ranked.findIndex(e=>e.me);let hint='';
+  if(i>0){const up=ranked[i-1],g=rpVal(up)-rpVal(ranked[i]);hint=rpOf(up)>=0?(g>0?`<b class="notr">${esc(up.nick)}</b> <span>liegt ${g} ${g===1?'Rangpunkt':'Rangpunkte'} vor dir.</span>`:`<b class="notr">${esc(up.nick)}</b> <span>ist mit dir gleichauf.</span>`):''}
+  else if(i===0&&ranked.length>1)hint='<span>Du stehst unter deinen Freunden ganz oben.</span>';
+  return `<div class="card span2"><div class="est"><div class="lbl" style="margin:0">Freunde in den Rängen</div>${i>=0&&ranked.length>1?`<span class="chip">Platz ${i+1} von ${ranked.length}</span>`:''}</div>${hint?`<p class="note" style="margin:0">${hint}</p>`:''}<div class="flad">${rows}</div><p class="note" style="margin:0">Tippe auf eine Person, um ihr Profil zu sehen.</p></div>`;
+}
+function exFriendHTML(id,myPts,fl){
+  const fr=fl.filter(f=>!f.me&&f.lr&&f.lr[id]!==undefined);if(!fr.length)return '';
+  const all=[...fr.map(f=>({n:f.nick,p:f.lr[id]})),{me:1,p:myPts}].sort((a,b)=>b.p-a.p||(a.me?-1:1)),i=all.findIndex(z=>z.me);let t;
+  if(i===0){const g=myPts-all[1].p;t=g>0?`<b class="notr">${esc(all[1].n)}</b> <span>${g} ${ptsW(g)} hinter dir</span>`:`<span>gleichauf mit</span> <b class="notr">${esc(all[1].n)}</b>`}
+  else{const g=all[i-1].p-myPts;t=g>0?`<b class="notr">${esc(all[i-1].n)}</b> <span>${g} ${ptsW(g)} vor dir</span>`:`<span>gleichauf mit</span> <b class="notr">${esc(all[i-1].n)}</b>`}
+  return `<button class="exf" data-act="exfr" data-v="${esc(id)}"><span class="exfp">Platz ${i+1} von ${all.length}</span><span class="exft">${t}</span><span aria-hidden="true">›</span></button>`;
+}
+function lastTrainTxt(e){const dd=e.me?ddMine():(e.dd||{});let k=-1;for(let i=0;i<35;i++){if(Number(dd[isoDay(Date.now()-i*day)])>0){k=i;break}}return k<0?'':k===0?'Heute trainiert':k===1?'Gestern trainiert':`Zuletzt vor ${k} Tagen trainiert`}
+function openProf(id){if(!crewOk()||!id)return;pfView={t:'p',id};pfAll=false;renderProf();$('#profSheet').hidden=false;try{$('#profSheet .sheetin').scrollTop=0}catch(e){}navPush()}
+function openExBoard(id){if(!crewOk()||!L(id))return;pfView={t:'x',id};renderProf();$('#profSheet').hidden=false;try{$('#profSheet .sheetin').scrollTop=0}catch(e){}navPush()}
+function closeProf(){$('#profSheet').hidden=true;pfView=null}
+function renderProf(){
+  if(!pfView)return;const body=$('#pfBody'),X='<button class="iconx" data-act="pfclose" aria-label="Schließen">×</button>';
+  const P=(e,c)=>picHTML(e.me?S.avatar:e.av,c,e.me?myAvatarOpts():{tier:e.tier});
+  if(pfView.t==='x'){
+    const x=L(pfView.id),id=pfView.id,l=friendList().filter(e=>e.lr&&e.lr[id]!==undefined).sort((a,b)=>b.lr[id]-a.lr[id]||(a.me?-1:1)),mx=Math.max(1,...l.map(e=>e.lr[id]));
+    body.innerHTML=`<div class="plsh"><div style="min-width:0"><div class="lbl">Freunde bei dieser Übung</div><h2 id="pfTitle" class="nm-e">${exIcon(x)}<span>${esc(x.n)}</span></h2></div>${X}</div><div>${l.map((e,i)=>{const pt=e.lr[id],ti=Math.min(NT,Math.floor(pt/100));
+      return `<div class="row ${e.me?'me':''}" data-act="prof" data-v="${esc(eid(e))}" role="button" tabindex="0"><div class="pos p${i+1}">${i+1}</div>${P(e,'sm')}<div class="nm"><b><span class="notr">${esc(e.me?S.nick:e.nick)}</span>${e.me?'<em>Du</em>':''}</b><small style="color:var(--t${ti})">${TIERS[ti]}</small><div class="track" style="--c:${e.me?'var(--accent)':'var(--t2)'}"><i style="width:${Math.round(pt/mx*100)}%"></i></div></div><div class="val">${pt}</div></div>`}).join('')}</div><p class="note" style="margin:0">Die Zahl sind die Rangpunkte bei dieser Übung. Sie richten sich nach dem Körpergewicht, damit der Vergleich fair ist.</p>`;
+    return;
+  }
+  const vl=visList(),e=vl.find(z=>eid(z)===pfView.id);
+  if(!e){body.innerHTML=`<div class="plsh"><h2 id="pfTitle">Profil</h2>${X}</div><p class="note" style="margin:0">Dieses Profil ist nicht mehr sichtbar. Ihr seid in keiner gemeinsamen Crew mehr.</p>`;return}
+  const me=vl.find(z=>z.me),uid=eid(e),nick=e.me?S.nick:e.nick,now=Date.now(),key=monthKey(now),soc=socialList(),lt=loserTitles(soc)[uid];
+  const rp=rpOf(e),ti=e.tier,on=isFo(uid),canDuel=!e.me&&soc.some(z=>eid(z)===uid);
+  let h=`<div class="plsh"><div class="pfh">${P(e,'pfpic')}<div style="min-width:0"><div class="lbl">${e.me?'So sehen dich andere':'Profil'}</div><h2 id="pfTitle" class="notr">${esc(nick)}</h2><div class="dim sm"><span>${esc(e.cls?clsLabel(e.cls):'Klasse offen')}</span>${lt?` · <span>🍰 ${esc(lt)}</span>`:e.title?` · <span>${esc(e.title)}</span>`:''}</div></div></div>${X}</div>`;
+  h+=`<div class="pfcnt"><span><b>${foCount(uid)}</b><span${foCount(uid)===1?' class="notr"':''}>Follower</span></span><span><b>${e.me?cleanFo(S.fo).length:e.fo.length}</b><span>Folgt</span></span></div>`;
+  if(!e.me)h+=`<div class="btnrow"><button class="btn sm${on?' ghost':''}" data-act="follow" data-v="${esc(uid)}" aria-pressed="${on}"${on?'':' style="background:var(--fg);color:var(--bg);border-color:var(--fg)"'}>${on?'✓ Folge ich':'+ Folgen'}</button>${canDuel?`<button class="btn sm" data-act="duelto" data-v="${esc(uid)}">⚔️ Herausfordern</button>`:''}</div>`;
+  h+=`<div class="pfrk" style="--c:var(--t${Math.max(0,ti)})">${ti>=0?ring(ti,0):''}<div style="min-width:0"><div class="lbl">Gesamtrang</div><div class="tname" style="color:${ti>=0?'var(--t'+ti+')':'var(--dim)'}">${ti>=0?TIERS[ti]:'Noch ohne Rang'}</div>${rp>=0&&ti>=0?`<div class="dim">${rp} Rangpunkte</div>`:''}</div></div>`;
+  h+=`<div class="pfst"><div><b>${Number((e.hist||{})[key])||0}</b><span>Saisonpunkte</span></div><div><b>${e.td||0}</b><span>Trainingstage</span></div><div><b>${e.st||0}</b><span>Wochen-Serie</span></div></div>`;
+  if(!e.me){const mr=rpOf(me),rec=(S.duelRec||{})[uid];let c='';
+    if(me.tier>=0&&ti>=0&&rp>=0){const mx=Math.max(1,mr,rp);c+=`<div class="pfcmp"><span>Du</span><div class="track" style="--c:var(--accent)"><i style="width:${Math.round(mr/mx*100)}%"></i></div><b>${mr}</b><span class="notr">${esc(nick)}</span><div class="track" style="--c:var(--t10)"><i style="width:${Math.round(rp/mx*100)}%"></i></div><b>${rp}</b></div>`}
+    if(rec&&(rec.w||rec.l||rec.t))c+=`<div class="dim sm"><span>Eure Duelle:</span> <span>Du</span> <b style="color:var(--fg)">${rec.w} : ${rec.l}</b> <span class="notr">${esc(nick)}</span></div>`;
+    if(c)h+=`<div class="pfsec"><div class="lbl">Im Vergleich mit dir</div>${c}</div>`}
+  {const dd=e.me?ddMine():(e.dd||{});let dots='',n=0;for(let k=6;k>=0;k--){const t=now-k*day,o2=Number(dd[isoDay(t)])>0;if(o2)n++;dots+=`<span class="pfd${o2?' on':''}"><i></i><small class="notr">${new Date(t).toLocaleDateString(LOC(),{weekday:'short'}).slice(0,2)}</small></span>`}
+    const lt2=lastTrainTxt(e);h+=`<div class="pfsec"><div class="est"><div class="lbl" style="margin:0">Letzte 7 Tage</div><span class="dim sm">${n} von 7 Tagen trainiert</span></div><div class="pfdays">${dots}</div>${n===0&&lt2?`<div class="dim sm">${lt2}</div>`:''}</div>`}
+  {const ms=[];const d0=new Date();d0.setDate(1);for(let k=5;k>=0;k--){const d=new Date(d0.getFullYear(),d0.getMonth()-k,1);ms.push([monthKey(d.getTime()),d.toLocaleDateString(LOC(),{month:'short'})])}
+    const vs=ms.map(([k])=>Number((e.hist||{})[k])||0),mx=Math.max(1,...vs);
+    if(vs.some(v=>v>0))h+=`<div class="pfsec"><div class="lbl">Saisonpunkte pro Monat</div><div class="pfmon">${ms.map(([k,n],i)=>`<div class="pfm"><b>${vs[i]||''}</b><i style="height:${Math.max(2,Math.round(vs[i]/mx*100))}%"></i><span class="notr">${esc(n)}</span></div>`).join('')}</div></div>`}
+  {const lr=e.lr||{},mine=me.lr||{},arr=Object.keys(lr).map(id=>({x:L(id),p:lr[id]})).filter(z=>z.x).sort((a,b)=>b.p-a.p),shown=pfAll?arr:arr.slice(0,5);
+    h+=`<div class="pfsec"><div class="lbl">Übungen</div>${arr.length?`<div>${shown.map(({x,p})=>{const i=Math.min(NT,Math.floor(p/100)),pp=p-i*100,mp=mine[x.id];let c='';
+      if(!e.me){if(mp===undefined)c='Trainierst du noch nicht';else{const g=mp-p;c=g>0?`Du liegst ${g} ${ptsW(g)} vorn`:g<0?`${-g} ${ptsW(-g)} vor dir`:'Gleichauf mit dir'}}
+      return `<div class="ex pfx" style="--c:var(--t${i})"><div class="exh"><b class="nm-e"><span class="sm-e" style="color:var(--t${i})">${emblem(i)}</span>${exIcon(x)}${esc(x.n)}</b><span class="tn">${TIERS[i]}</span></div><div class="bar"><i style="width:${i<NT?pp:100}%"></i></div>${c?`<div class="dim sm">${c}</div>`:''}</div>`}).join('')}</div>${arr.length>5?`<button class="acc" data-act="pfall" aria-expanded="${pfAll}"><span>${pfAll?'Weniger anzeigen':'Alle Übungen anzeigen'}</span><span class="chev">▾</span></button>`:''}`:'<p class="note" style="margin:0">Noch keine Übungen mit Rang.</p>'}</div>`}
+  {const evs=[...(e.ev||[])].sort((a,b)=>b.ts-a.ts).slice(0,6).map(ev=>[evHTML(ev),ev.ts]).filter(z=>z[0]);
+    h+=`<div class="pfsec"><div class="lbl">Letzte Erfolge</div>${evs.length?`<div>${evs.map(([t,ts])=>`<div class="pfev"><div class="fdt">${t}</div><small>${agoOf(ts)}</small></div>`).join('')}</div>`:'<p class="note" style="margin:0">Noch keine Erfolge in den letzten Wochen.</p>'}</div>`}
+  body.innerHTML=h;
+}
+function renderFollow(){
+  const el=$('#followCard');if(!el)return;const ok=crewOk();el.hidden=!ok;if(!ok)return;
+  const by={};for(const e of visList())by[eid(e)]=e;const fo=cleanFo(S.fo).map(u=>by[u]).filter(Boolean),n=foCount(UID);
+  let h=`<div class="est"><div class="lbl" style="margin:0">Folge ich</div>${n?`<span class="dim sm"><b style="color:var(--fg)">${n}</b> <span${n===1?' class="notr"':''}>Follower</span></span>`:''}</div>`;
+  if(!fo.length)h+='<p class="note" style="margin:0">Tippe in der Rangliste auf eine Person. Im Profil siehst du ihre Ränge und Erfolge und kannst ihr folgen.</p>';
+  else h+='<div>'+fo.map(e=>{const lt=lastTrainTxt(e);return `<div class="frow" data-act="prof" data-v="${esc(eid(e))}" role="button" tabindex="0">${picHTML(e.av,'sm',{tier:e.tier})}<div class="nm"><b class="notr">${esc(e.nick)}</b><small>${e.tier>=0?`<span style="color:var(--t${e.tier})">${TIERS[e.tier]}</span>`:'<span>Noch ohne Rang</span>'}${lt?` · <span>${lt}</span>`:''}</small></div><span class="foa" aria-hidden="true">›</span></div>`}).join('')+'</div>';
+  el.innerHTML=h;
+}
+const EVS={pr:'neue Bestleistung',rank:'Rang-Aufstieg',tier:'neuer Gesamtrang',streak:'neue Wochen-Serie',badge:'neues Abzeichen',duel:'Duell gewonnen'};
+function followNotify(){
+  const fol=members.filter(m=>m.id!==UID&&Array.isArray(m.fo)&&m.fo.includes(UID)).map(m=>m.id);
+  if(!Array.isArray(S.foKnown)){S.foKnown=fol.slice(-200);save()}
+  else{const kn=new Set(S.foKnown),nw=fol.filter(u=>!kn.has(u));
+    if(nw.length){S.foKnown=[...S.foKnown,...nw].slice(-200);save();const by=visList().find(e=>!e.me&&e.id===nw[0]);if(by){toast(nw.length===1?`${by.nick} folgt dir jetzt`:`${by.nick} und ${nw.length-1} weitere folgen dir jetzt`);vib([20,40,20]);crewDot(true)}}}
+  const fo=cleanFo(S.fo);if(!fo.length)return;const seen=Number(S.foSeen)||0,lim=Date.now()-3*day;let top=null;
+  for(const e of visList()){if(e.me||!fo.includes(e.id))continue;for(const ev of e.ev)if(ev.ts>seen&&ev.ts>lim&&(!top||ev.ts>top.ev.ts))top={e,ev}}
+  if(top){S.foSeen=Date.now();save();toast(`${top.e.nick}: ${EVS[top.ev.k]||EVS.pr}`);crewDot(true)}
+}
 const DUEL_GRACE=2*day;
-function duelWindow(start){const d=new Date(start);d.setHours(12,0,0,0);const days=[];for(let k=0;k<DUEL_DAYS;k++){days.push(isoDay(d.getTime()));d.setDate(d.getDate()+1)}d.setHours(0,0,0,0);return {days,end:d.getTime()}}
+function duelWindow(start,n){const d=new Date(start);d.setHours(12,0,0,0);const days=[];for(let k=0;k<(n||DUEL_DAYS);k++){days.push(isoDay(d.getTime()));d.setDate(d.getDate()+1)}d.setHours(0,0,0,0);return {days,end:d.getTime()}}
 function allDuels(list){
   const by={};for(const e of list)by[eid(e)]=e;const out=[],now=Date.now();
   for(const ch of list){for(const d of (ch.du||[])){const op=by[d.o];if(!op||eid(op)===eid(ch))continue;
@@ -2152,15 +2314,17 @@ function allDuels(list){
     let state,start=0,end=0,days=null;
     if(resp===undefined)state=now-d.c<DUEL_WAIT?'pending':'expired';
     else if(!(resp>0))state='declined';
-    else{start=resp;const w=duelWindow(resp);days=w.days;end=w.end;state=now<end?'active':now<end+DUEL_GRACE?'grace':'done'}
-    const o={key,id:d.i,ch,op,m:d.m,c:d.c,state,start,end};
-    if(days){const sc=e=>days.reduce((s2,dk)=>{const v=Number((e.dd||{})[dk])||0;return s2+(d.m==='pts'?v:(v>0?1:0))},0);o.a=sc(ch);o.b=sc(op);o.left=days.filter(dk=>dk>=isoDay(now)).length}
+    else{start=resp;const w=duelWindow(resp,d.n);days=w.days;end=w.end;state=now<end?'active':now<end+DUEL_GRACE?'grace':'done'}
+    const o={key,id:d.i,ch,op,m:d.m,c:d.c,state,start,end,n:d.n||DUEL_DAYS,x:d.x,s:d.s};
+    if(days){const sc=e=>d.m==='lift'?liftGain(e,d.x,days):days.reduce((s2,dk)=>{const v=Number((e.dd||{})[dk])||0;return s2+(d.m==='pts'?v:(v>0?1:0))},0);o.a=sc(ch);o.b=sc(op);o.left=days.filter(dk=>dk>=isoDay(now)).length}
     out.push(o)}}
   return out;
 }
 function loserTitles(list){const r={},now=Date.now();for(const d of allDuels(list))if(d.state==='done'&&now-d.end-DUEL_GRACE<7*day&&d.a!==d.b){const l=d.a>d.b?d.op:d.ch;r[eid(l)]=LOSER_T[hue(d.id)%LOSER_T.length]}return r}
-const metQ=m=>m==='pts'?'Wer holt in 7 Tagen mehr Saisonpunkte?':'Wer hat in 7 Tagen mehr Trainingstage?';
-const metL=m=>m==='pts'?'Saisonpunkte':'Trainingstage';
+const liftN=x=>{const l=x&&L(x);return l?l.n:''};
+const metQ=d=>{const n=d.n||DUEL_DAYS;return d.m==='lift'?`<span>Wer steigert sich in ${n} Tagen mehr?</span> <span class="dulift">${exIcon(L(d.x))}<span>${esc(liftN(d.x))}</span></span>`:`<span>${d.m==='pts'?`Wer holt in ${n} Tagen mehr Saisonpunkte?`:`Wer hat in ${n} Tagen mehr Trainingstage?`}</span>`};
+const metL=m=>m==='pts'?'Saisonpunkte':m==='lift'?'Rangpunkte plus':'Trainingstage';
+const stakeHTML=d=>d.s?`<div class="dustake"><span aria-hidden="true">🎯</span> <span>Einsatz:</span> <b class="notr">${esc(d.s)}</b></div>`:'';
 function evHTML(e){
   const x={id:e.l,n:e.n,kind:e.kd,cdt:e.ct,sec:e.s===1?1:undefined};
   if(e.k==='pr')return `<span class="fdi" aria-hidden="true">🏆</span><span>Neue Bestleistung</span><span class="fdx">${esc(e.n)}</span><span class="fdv">${esc(maxText(x,e.v))}</span>`;
@@ -2172,8 +2336,9 @@ function evHTML(e){
 }
 function renderFeed(){
   const el=$('#feedCard');if(!el)return;const ok=crewOk();el.hidden=!ok;if(!ok)return;
-  const list=crewList(),now=Date.now(),items=[];
-  for(const e of list)for(const ev of (e.ev||[]))if(now-ev.ts<14*day)items.push({e,ev});
+  const foIds=cleanFo(S.fo);if(!foIds.length)feedScope='crew';
+  const list=feedScope==='fo'?visList():crewList(),now=Date.now(),items=[];
+  for(const e of list){if(feedScope==='fo'&&(e.me||!foIds.includes(e.id)))continue;for(const ev of (e.ev||[]))if(now-ev.ts<14*day)items.push({e,ev})}
   items.sort((a,b)=>b.ev.ts-a.ev.ts);
   const shown=feedOpen?items.slice(0,15):items.slice(0,3);
   const h=shown.map(({e,ev})=>{
@@ -2181,37 +2346,42 @@ function renderFeed(){
     for(const m of list){if(eid(m)===owner)continue;const r=(m.rx||{})[key];if(r){cnt[r]=(cnt[r]||0)+1;(names[r]=names[r]||[]).push(m.me?S.nick:m.nick)}}
     const mine=e.me?null:(S.rx||{})[key];
     const rx=REACT.map(([k,em])=>e.me?(cnt[k]?`<span class="rxb ro" title="${esc((names[k]||[]).join(', '))}">${em}<b>${cnt[k]}</b></span>`:''):`<button class="rxb${mine===k?' on':''}" data-act="react" data-v="${esc(key)}" data-e="${k}" aria-pressed="${mine===k}" aria-label="${em} ${cnt[k]||0}" title="${esc((names[k]||[]).join(', '))}">${em}${cnt[k]?`<b>${cnt[k]}</b>`:''}</button>`).join('');
-    return `<div class="fd${e.me?' me':''}">${picHTML(e.me?S.avatar:e.av,'sm',e.me?myAvatarOpts():{tier:e.tier})}<div class="fdb"><div class="fdh"><b>${esc(e.me?S.nick:e.nick)}</b>${e.me?'<em>Du</em>':''}<small>${agoOf(ev.ts)}</small></div><div class="fdt">${evHTML(ev)}</div>${rx?`<div class="fdr">${rx}</div>`:''}</div></div>`}).join('');
+    return `<div class="fd${e.me?' me':''}"><button class="pfb" data-act="prof" data-v="${esc(owner)}" aria-label="Profil ${esc(e.me?S.nick:e.nick)}">${picHTML(e.me?S.avatar:e.av,'sm',e.me?myAvatarOpts():{tier:e.tier})}</button><div class="fdb"><div class="fdh"><b data-act="prof" data-v="${esc(owner)}" style="cursor:pointer">${esc(e.me?S.nick:e.nick)}</b>${e.me?'<em>Du</em>':''}<small>${agoOf(ev.ts)}</small></div><div class="fdt">${evHTML(ev)}</div>${rx?`<div class="fdr">${rx}</div>`:''}</div></div>`}).join('');
   const more=items.length>3?`<button class="acc fdmore" data-act="feedmore" aria-expanded="${feedOpen}"><span>${feedOpen?'Weniger anzeigen':'Alle anzeigen ('+Math.min(15,items.length)+')'}</span><span class="chev">▾</span></button>`:'';
-  el.innerHTML=`<div class="lbl">Crew-Feed</div>${h?h+more:'<p class="note" style="margin:0">Noch ist es ruhig. Sobald jemand eine Bestleistung schafft oder aufsteigt, steht es hier, und ihr könnt euch gegenseitig anfeuern.</p>'}`;
+  el.innerHTML=`<div class="lbl">Crew-Feed</div>${foIds.length?`<div class="pills">${pillsHTML('feedsc',[['crew','Crew'],['fo','Folge ich']],feedScope)}</div>`:''}${h?h+more:feedScope==='fo'?'<p class="note" style="margin:0">Von den Athleten, denen du folgst, gibt es noch nichts Neues.</p>':'<p class="note" style="margin:0">Noch ist es ruhig. Sobald jemand eine Bestleistung schafft oder aufsteigt, steht es hier, und ihr könnt euch gegenseitig anfeuern.</p>'}`;
 }
 function renderDuels(){
   const el=$('#duelCard');if(!el)return;const ok=crewOk();el.hidden=!ok;if(!ok)return;
+  {const ae=document.activeElement;if(duelForm&&ae&&(ae.id==='duelStake'||ae.id==='duelLift')&&el.contains(ae)&&!renderDuels.force)return}
   const list=socialList(),now=Date.now(),me=list.find(e=>e.me),ds=allDuels(list).filter(d=>d.ch.me||d.op.me);
-  const actIds=new Set(crewList().map(eid)),others=list.filter(e=>!e.me&&actIds.has(eid(e)));
+  const actIds=new Set(crewList().map(eid)),others=list.filter(e=>!e.me&&(actIds.has(eid(e))||eid(e)===duelPre));
   const pic=e=>picHTML(e.me?S.avatar:e.av,'sm',e.me?myAvatarOpts():{tier:e.tier});
   let h='<div class="lbl">Duelle</div>';
-  for(const d of ds.filter(d=>d.state==='pending'&&d.op.me))h+=`<div class="du inc"><div class="duh">${pic(d.ch)}<div><b>${esc(d.ch.nick)}</b> <span>fordert dich heraus</span><div class="dim sm">${metQ(d.m)}</div></div></div><div class="btnrow"><button class="btn sm" data-act="duelok" data-v="${esc(d.key)}" style="background:var(--fg);color:var(--bg);border-color:var(--fg)">Annehmen</button><button class="btn sm ghost" data-act="duelno" data-v="${esc(d.key)}">Ablehnen</button></div></div>`;
+  for(const d of ds.filter(d=>d.state==='pending'&&d.op.me))h+=`<div class="du inc"><div class="duh">${pic(d.ch)}<div><b>${esc(d.ch.nick)}</b> <span>fordert dich heraus</span><div class="dim sm">${metQ(d)}</div>${stakeHTML(d)}</div></div><div class="btnrow"><button class="btn sm" data-act="duelok" data-v="${esc(d.key)}" style="background:var(--fg);color:var(--bg);border-color:var(--fg)">Annehmen</button><button class="btn sm ghost" data-act="duelno" data-v="${esc(d.key)}">Ablehnen</button></div></div>`;
   for(const d of ds.filter(d=>d.state==='active'||d.state==='grace'||d.state==='done'&&now-d.end<5*day)){
     const [mine,opp,ms,os]=d.ch.me?[d.ch,d.op,d.a,d.b]:[d.op,d.ch,d.b,d.a],mx=Math.max(1,ms,os),done=d.state==='done';
     const left=Math.max(1,d.left||1);
     const res=d.state==='grace'?'<span class="dim sm">Endstand wird ausgewertet</span>':done?(ms>os?'<span class="dures win">Gewonnen!</span>':ms<os?'<span class="dures lose">Verloren</span>':'<span class="dures">Unentschieden</span>'):`<span class="dim sm">${left===1?'noch 1 Tag':'noch '+left+' Tage'}</span>`;
     h+=`<div class="du${done?' done':''}"><div class="duvs"><div class="dus">${pic(mine)}<b class="dun">${ms}</b><div class="dubar"><i style="width:${Math.round(ms/mx*100)}%"></i></div></div><span class="duvsx">VS</span><div class="dus r">${pic(opp)}<b class="dun">${os}</b><div class="dubar o"><i style="width:${Math.round(os/mx*100)}%"></i></div></div></div>
-      <div class="dufoot"><span class="dim sm"><span>${metL(d.m)}</span> · <b>${esc(opp.nick)}</b></span>${res}</div></div>`;
+      ${stakeHTML(d)}<div class="dufoot"><span class="dim sm"><span>${metL(d.m)}</span>${d.m==='lift'?` · <span>${esc(liftN(d.x))}</span>`:''} · <b>${esc(opp.nick)}</b></span>${res}</div>${done?`<div class="dufoot"><button class="btn sm ghost" data-act="duelre" data-v="${esc(d.key)}">🔁 Revanche</button>${(r=>r&&(r.w||r.l||r.t)?`<span class="dim sm"><span>Bilanz</span> <b style="color:var(--fg)">${r.w} : ${r.l}</b></span>`:'')((S.duelRec||{})[eid(opp)])}</div>`:''}</div>`;
   }
-  for(const d of ds.filter(d=>d.state==='pending'&&d.ch.me))h+=`<div class="du"><div class="duh">${pic(d.op)}<div><span>Warte auf Antwort von</span> <b>${esc(d.op.nick)}</b><div class="dim sm">${metQ(d.m)}</div></div></div><button class="btn sm ghost" data-act="duelcancel" data-v="${esc(d.id)}" style="justify-self:start">Zurückziehen</button></div>`;
+  for(const d of ds.filter(d=>d.state==='pending'&&d.ch.me))h+=`<div class="du"><div class="duh">${pic(d.op)}<div><span>Warte auf Antwort von</span> <b>${esc(d.op.nick)}</b><div class="dim sm">${metQ(d)}</div>${stakeHTML(d)}</div></div><button class="btn sm ghost" data-act="duelcancel" data-v="${esc(d.id)}" style="justify-self:start">Zurückziehen</button></div>`;
   for(const d of ds.filter(d=>d.state==='declined'&&d.ch.me&&now-d.c<2*day))h+=`<div class="du"><div class="duh">${pic(d.op)}<div><b>${esc(d.op.nick)}</b> <span>hat abgelehnt. Feigling?</span></div></div></div>`;
   {const ids=new Set(list.map(eid)),gone=(Array.isArray(S.du)?S.du:[]).filter(d=>!ids.has(d.o)&&now-d.c<10*day).length;if(gone)h+=`<p class="note" style="margin:0">${gone===1?'Ein Duell wurde abgebrochen, weil jemand die Crew verlassen hat.':'Einige Duelle wurden abgebrochen, weil jemand die Crew verlassen hat.'}</p>`}
   const cool=S.duelCool&&typeof S.duelCool==='object'?S.duelCool:{};
   const busy=new Set([...ds.filter(d=>d.state==='pending'||d.state==='active'||d.state==='grace'||d.ch.me&&now-d.c<day).map(d=>eid(d.ch.me?d.op:d.ch)),...Object.keys(cool).filter(k=>now-cool[k]<day)]);
   const free=others.filter(e=>!busy.has(eid(e))),openMine=ds.filter(d=>d.ch.me&&(d.state==='pending'||d.state==='active'||d.state==='grace')).length;
-  if(!others.length)h+='<p class="note" style="margin:0">Lade Freunde in deine Crew ein, dann kannst du sie zu einem 7-Tage-Duell herausfordern.</p>';
+  if(!others.length)h+='<p class="note" style="margin:0">Lade Freunde in deine Crew ein, dann kannst du sie zu einem Duell herausfordern.</p>';
   else if(!free.length||openMine>=3)h+=ds.length?'':'<p class="note" style="margin:0">Gerade läuft schon mit allen ein Duell.</p>';
   else if(!duelForm)h+=`<button class="btn sm" data-act="duelnew" style="justify-self:start">⚔️ Neues Duell</button>`;
   else{if(!free.some(e=>eid(e)===duelOpp))duelOpp=eid(free[0]);
+    const myL=overall().arr.map(z=>z.x).sort((a,b)=>a.n.localeCompare(b.n));if(duelMet==='lift'&&!myL.length)duelMet='days';if(duelMet==='lift'&&!myL.some(x=>x.id===duelX))duelX=(myL.find(x=>x.id===tl)||myL[0]).id;
     h+=`<div class="dunew"><div class="lbl">Gegner</div><div class="pills wrap">${free.map(e=>`<button class="pill dupick" data-act="duelopp" data-v="${esc(eid(e))}" aria-pressed="${eid(e)===duelOpp}">${pic(e)}<span>${esc(e.nick)}</span></button>`).join('')}</div>
-      <div class="lbl">Worum geht’s?</div><div class="pills wrap">${pillsHTML('duelmet',[['days','Trainingstage'],['pts','Saisonpunkte']],duelMet)}</div>
-      <p class="note" style="margin:0"><span>${metQ(duelMet)}</span> <span>Der Verlierer trägt eine Woche lang einen peinlichen Titel.</span></p>
+      <div class="lbl">Worum geht’s?</div><div class="pills wrap">${pillsHTML('duelmet',[['days','Trainingstage'],['pts','Saisonpunkte'],...(myL.length?[['lift','Eine Übung']]:[])],duelMet)}</div>
+      ${duelMet==='lift'?`<select id="duelLift" class="dusel" aria-label="Übung">${myL.map(x=>`<option value="${esc(x.id)}"${x.id===duelX?' selected':''}>${esc(x.n)}</option>`).join('')}</select>`:''}
+      <div class="lbl">Dauer</div><div class="pills wrap">${pillsHTML('dueldur',[['3','3 Tage'],['7','7 Tage'],['14','14 Tage']],String(duelDur))}</div>
+      <label class="lbl" for="duelStake">Einsatz (freiwillig)</label><input id="duelStake" class="nm-in" type="text" maxlength="40" placeholder="z. B. Verlierer zahlt den Shake" autocomplete="off" value="${esc(duelStake)}">
+      <div class="note" style="display:grid;gap:4px"><div>${metQ({m:duelMet,n:duelDur,x:duelX})}</div><div>${duelMet==='lift'?'<span>Gezählt wird, wie viele Rangpunkte ihr bei dieser Übung im Duell zulegt. So haben auch Einsteiger eine faire Chance.</span> ':''}<span>Der Verlierer trägt eine Woche lang einen peinlichen Titel.</span></div></div>
       <div class="btnrow"><button class="btn sm" data-act="duelgo" style="background:var(--fg);color:var(--bg);border-color:var(--fg)">Herausfordern</button><button class="btn sm ghost" data-act="duelnew">Abbrechen</button></div></div>`}
   el.innerHTML=h;
 }
@@ -2223,7 +2393,8 @@ function showDuelResult(d){
   el.style.color=win?'var(--t11)':tie?'var(--accent)':'var(--t1)';
   const p=e=>'<span class="pic duxl"><svg viewBox="0 0 100 100" aria-hidden="true">'+avatarSVG(e.me?S.avatar:e.av,e.me?myAvatarOpts():{tier:e.tier})+'</svg></span>';
   el.innerHTML='<div class="fxbg" data-act="fxclose"></div>'+(win?'<div class="fxring"></div><div class="fxring r2"></div>'+sp:'')+
-    '<div class="fxcard"><div class="fxk">'+(win?'DUELL GEWONNEN':tie?'UNENTSCHIEDEN':'DUELL VERLOREN')+'</div><div class="duxr">'+p(mine)+'<span class="duxs">'+ms+' : '+os+'</span>'+p(opp)+'</div><div class="fxname">'+(win?'Stark!':tie?'Kopf an Kopf':'Knapp daneben')+'</div><div class="fxsub">'+esc(metL(d.m))+' · '+esc(opp.nick)+'</div>'+
+    '<div class="fxcard"><div class="fxk">'+(win?'DUELL GEWONNEN':tie?'UNENTSCHIEDEN':'DUELL VERLOREN')+'</div><div class="duxr">'+p(mine)+'<span class="duxs">'+ms+' : '+os+'</span>'+p(opp)+'</div><div class="fxname">'+(win?'Stark!':tie?'Kopf an Kopf':'Knapp daneben')+'</div><div class="fxsub"><span>'+metL(d.m)+'</span>'+(d.m==='lift'?' · <span>'+esc(liftN(d.x))+'</span>':'')+' · <span class="notr">'+esc(opp.nick)+'</span></div>'+
+    (d.s?'<div class="fxextra"><span aria-hidden="true">🎯</span><span><span>Einsatz:</span> <b class="notr">'+esc(d.s)+'</b></span></div>':'')+
     (!win&&!tie?'<div class="fxextra"><span aria-hidden="true">🍰</span><span>Dein Titel für 7 Tage: <b>'+esc(LOSER_T[hue(d.id)%LOSER_T.length])+'</b></span></div>':'')+'<button class="btn primary fxbtn" data-act="fxclose">Weiter</button></div>';
   fxPrev=document.activeElement;el.hidden=false;clearTimeout(fxT);fxT=setTimeout(closeRankUp,9000);
   if(win){sfx('rank');vib([80,50,80,50,80,50,250])}else{sfx(tie?'save':'del');vib([60])}
@@ -2234,7 +2405,8 @@ function checkDuelResults(){
   S.duelSeen=S.duelSeen&&typeof S.duelSeen==='object'?S.duelSeen:{};
   const d=allDuels(socialList()).find(d=>d.state==='done'&&(d.ch.me||d.op.me)&&!S.duelSeen[d.key]&&Date.now()-d.end<14*day);if(!d)return;
   S.duelSeen[d.key]=1;const [ms,os,opp]=d.ch.me?[d.a,d.b,d.op]:[d.b,d.a,d.ch];
-  if(ms>os){const eidD='dw'+hue(d.key)+String(d.id).slice(0,10);if(!(S.ev||[]).some(e=>e.i===eidD)){addEv({k:'duel',o:opp.nick.slice(0,20),v:ms,w:os,m:d.m});S.ev[S.ev.length-1].i=eidD}S.duelWon=S.duelWon&&typeof S.duelWon==='object'?S.duelWon:{};S.duelWon[d.key]=1;setTimeout(()=>checkBadges(),9500)}
+  {S.duelRec=S.duelRec&&typeof S.duelRec==='object'?S.duelRec:{};const ks=Object.keys(S.duelRec);if(ks.length>100)delete S.duelRec[ks[0]];const r=S.duelRec[eid(opp)]=S.duelRec[eid(opp)]||{w:0,l:0,t:0};if(ms>os)r.w++;else if(ms<os)r.l++;else r.t++}
+  if(ms>os){const eidD='dw'+hue(d.key)+String(d.id).slice(0,10);if(!(S.ev||[]).some(e=>e.i===eidD)){addEv({k:'duel',o:opp.nick.slice(0,20),v:ms,w:os,m:d.m,...(d.m==='lift'?{n:liftN(d.x).slice(0,28)}:{})});S.ev[S.ev.length-1].i=eidD}S.duelWon=S.duelWon&&typeof S.duelWon==='object'?S.duelWon:{};S.duelWon[d.key]=1;setTimeout(()=>checkBadges(),9500)}
   save();syncCrew();showDuelResult(d);if(tab==='crew')renderDuels();
 }
 function crewNotify(){
@@ -2245,6 +2417,7 @@ function crewNotify(){
     if(nw.length){S.rxSeen=[...S.rxSeen,...nw].slice(-300);save();const em=(REACT.find(z=>z[0]===nw[0].split('|')[2])||REACT[0])[1];
       toast(nw.length===1?`${who[nw[0]]} hat auf deinen Eintrag reagiert ${em}`:`${who[nw[0]]} und ${nw.length-1} weitere haben reagiert ${em}`);vib([20,40,20]);crewDot(true)}}
   checkBadges(2500);
+  try{followNotify()}catch(e){}
   S.duelNote=S.duelNote&&typeof S.duelNote==='object'?S.duelNote:{};
   {const lim=Date.now()-3*day;for(const k of Object.keys(S.duelNote))if(!(S.duelNote[k]>lim))delete S.duelNote[k]}
   for(const d of allDuels(list))if(d.op.me&&d.state==='pending'&&!S.duelNote[d.key]){const chId=eid(d.ch),recent=Object.entries(S.duelNote).some(([k,t])=>k.startsWith(chId+'~')&&Date.now()-t<12*3600e3);S.duelNote[d.key]=Date.now();save();if(recent)continue;toast(`${d.ch.nick} fordert dich zum Duell heraus ⚔️`);vib([40,60,40]);crewDot(true)}
@@ -2252,14 +2425,18 @@ function crewNotify(){
 }
 function socialAct(a,v,el){
   if(a==='react'){const e=el.dataset.e;if(!okKey(v)||!REACT.some(z=>z[0]===e))return;S.rx=S.rx&&typeof S.rx==='object'?S.rx:{};if(S.rx[v]===e){delete S.rx[v];S.rxDel=[...(Array.isArray(S.rxDel)?S.rxDel:[]).filter(k=>k!==v),v].slice(-50)}else{delete S.rx[v];S.rx[v]=e;S.rxDel=(Array.isArray(S.rxDel)?S.rxDel:[]).filter(k=>k!==v);vib(12)}save();renderFeed();syncCrew();{const b=[...document.querySelectorAll('#feedCard .rxb.on')].find(z=>z.dataset.v===v);if(b)b.classList.add('pop')}}
-  else if(a==='duelnew'){duelForm=!duelForm;renderDuels()}
+  else if(a==='duelnew'){duelForm=!duelForm;if(!duelForm){duelPre='';duelStake=''}renderDuels()}
   else if(a==='duelopp'){duelOpp=v;renderDuels()}
-  else if(a==='duelmet'){duelMet=v==='pts'?'pts':'days';renderDuels()}
-  else if(a==='duelgo'){if(!okUid(duelOpp))return;S.du=(Array.isArray(S.du)?S.du:[]).filter(d=>d.c>Date.now()-21*day);while(S.du.length>=8)S.du.shift();S.du.push({i:newId(),o:duelOpp,m:duelMet,c:Date.now()});duelForm=false;save();syncCrew();renderDuels();toast('Herausforderung gesendet ⚔️')}
-  else if(a==='duelok'||a==='duelno'){if(!okKey(v))return;S.da=S.da&&typeof S.da==='object'?S.da:{};S.da[v]=a==='duelok'?Date.now():-Date.now();{const lim=Date.now()-21*day,n={};for(const [k,x] of Object.entries(S.da))if(Math.abs(x)>lim)n[k]=x;S.da=n}save();syncCrew();renderDuels();if(a==='duelok'){toast('Duell angenommen! 7 Tage, los geht’s.');vib([40,60,40])}}
+  else if(a==='duelmet'){duelMet=v==='pts'?'pts':v==='lift'?'lift':'days';renderDuels()}
+  else if(a==='dueldur'){duelDur=v==='3'?3:v==='14'?14:7;renderDuels()}
+  else if(a==='duelre'){const d=allDuels(socialList()).find(z=>z.key===v);if(!d)return;const opp=d.ch.me?d.op:d.ch;duelForm=true;duelPre=duelOpp=eid(opp);duelMet=d.m;duelDur=d.n||7;duelX=d.x||'';duelStake=d.s||'';renderDuels();if(!$('#duelCard .dunew')||duelOpp!==eid(opp)){duelForm=false;renderDuels();toast('Gerade ist kein neues Duell mit dieser Person möglich.')}else{try{$('#duelCard .dunew').scrollIntoView({block:'center'})}catch(e){}}}
+  else if(a==='duelgo'){if(!okUid(duelOpp))return;S.du=(Array.isArray(S.du)?S.du:[]).filter(d=>d.c>Date.now()-35*day);while(S.du.length>=8)S.du.shift();{const nd={i:newId(),o:duelOpp,m:duelMet,c:Date.now()},si=$('#duelStake'),st=String(si?si.value:duelStake).replace(/\s+/g,' ').trim().slice(0,40);if(duelDur===3||duelDur===14)nd.n=duelDur;if(duelMet==='lift'){if(!isBase(duelX))return;nd.x=duelX}if(st)nd.s=st;S.du.push(nd)}duelForm=false;duelStake='';duelPre='';save();syncCrew();renderDuels();toast('Herausforderung gesendet ⚔️')}
+  else if(a==='duelok'||a==='duelno'){if(!okKey(v))return;S.da=S.da&&typeof S.da==='object'?S.da:{};S.da[v]=a==='duelok'?Date.now():-Date.now();{const lim=Date.now()-35*day,n={};for(const [k,x] of Object.entries(S.da))if(Math.abs(x)>lim)n[k]=x;S.da=n}save();syncCrew();renderDuels();if(a==='duelok'){const dn=((allDuels(socialList()).find(z=>z.key===v)||{}).n)||7;toast(`Duell angenommen! ${dn} Tage, los geht’s.`);vib([40,60,40])}}
   else if(a==='duelcancel'){const dd0=(Array.isArray(S.du)?S.du:[]).find(d=>d.i===v);if(dd0){S.duelCool=S.duelCool&&typeof S.duelCool==='object'?S.duelCool:{};S.duelCool[dd0.o]=Date.now();S.dx=[...(Array.isArray(S.dx)?S.dx:[]),v].slice(-20)}S.du=(Array.isArray(S.du)?S.du:[]).filter(d=>d.i!==v);save();syncCrew();renderDuels()}
 }
 setInterval(()=>{try{if(crewOk()){checkDuelResults();if(tab==='crew')renderDuels()}}catch(e){}},60000);
+document.addEventListener('input',e=>{const t=e.target;if(t&&t.id==='duelStake')duelStake=t.value});
+document.addEventListener('change',e=>{const t=e.target;if(t&&t.id==='duelLift'){duelX=t.value;renderDuels.force=1;try{renderDuels()}finally{renderDuels.force=0}try{$('#duelLift').focus()}catch(e2){}}});
 
 
 /* ---------- Trainingskalender (Heatmap) ---------- */
@@ -2332,7 +2509,7 @@ let rcState=null;
 let navDepth=0;
 function navPush(){if(!window.__standalone||navDepth)return;try{history.pushState({rr:1},'');navDepth=1}catch(e){}}
 if(window.__standalone)window.addEventListener('popstate',()=>{navDepth=0;
-  if(swOpenNow()){swClose()}else if(tourOpen()){endTour()}else if(rcState){closeRecap()}else if(!$('#planEdit').hidden){closePlanEdit()}else if(!$('#planSheet').hidden){closePlan()}else if(!$('#remind').hidden){closeRemind()}else if(!$('#sheet').hidden){closeSheet()}else if(!$('#fx').hidden){try{closeRankUp()}catch(e){$('#fx').hidden=true}}else if(tab!=='home'){setTab('home');return}else return;
+  if(swOpenNow()){swClose()}else if(tourOpen()){endTour()}else if(rcState){closeRecap()}else if(!$('#profSheet').hidden){closeProf()}else if(!$('#planEdit').hidden){closePlanEdit()}else if(!$('#planSheet').hidden){closePlan()}else if(!$('#remind').hidden){closeRemind()}else if(!$('#sheet').hidden){closeSheet()}else if(!$('#fx').hidden){try{closeRankUp()}catch(e){$('#fx').hidden=true}}else if(tab!=='home'){setTab('home');return}else return;
   if(tab!=='home')navPush()});
 function recapData(pk){
   const real=S.sets.filter(z=>L(z.lift)&&monthKey(z.ts)===pk);if(!real.length)return null;
@@ -2779,13 +2956,14 @@ function renderRanks(){
       ${DL?'<button class="btn sm" data-act="sharecard" style="justify-self:start">Rang-Karte speichern</button>':''}
       ${acc}${ladder}</div>`;
   }
+  const fl=has&&crewOk()?friendList():[];
   const list=has?`<div class="card span2"><div class="lbl">Deine Übungen</div><div>${[...o.arr].sort((a,b)=>b.pts-a.pts).map(e=>{
     const i=e.i,p=e.pts-i*100,t=e.x.t;
     const raw=i<NT?(e.x.kind==='cd'?vText(e.x,t[i]):e.x.kind==='bw'?(isSec(e.x)?fmtT(Math.max(0,t[i]-e.sc)):fmt(Math.max(0,t[i]-e.sc))+' Wdh'):fw(Math.max(0,(t[i]-e.sc)*S.bw))+' '+U()):'';
     return `<div class="ex" data-act="statopen" data-v="${esc(e.x.id)}" role="button" tabindex="0" aria-label="Statistik ${esc(e.x.n)}" style="--c:var(--t${i});cursor:pointer"><div class="exh"><b class="nm-e"><span class="sm-e" style="color:var(--t${i})">${emblem(i)}</span>${exIcon(e.x)}${esc(e.x.n)}</b><span class="tn">${TIERS[i]} ›</span></div><div class="bar"><i style="width:${i<NT?p:100}%"></i></div>
-      <div class="dim sm">${i<NT?`Nächster: ${TIERS[i+1]} · noch ${100-p} ${100-p===1?'Punkt':'Punkte'} ${e.x.kind==='cd'?'(Ziel: '+raw+')':'(etwa '+raw+')'}`:'Höchster Rang erreicht'}</div></div>`;
+      <div class="dim sm">${i<NT?`Nächster: ${TIERS[i+1]} · noch ${100-p} ${100-p===1?'Punkt':'Punkte'} ${e.x.kind==='cd'?'(Ziel: '+raw+')':'(etwa '+raw+')'}`:'Höchster Rang erreicht'}</div></div>${fl.length>1?exFriendHTML(e.x.id,Math.round(e.pts),fl):''}`;
   }).join('')}</div></div>`:'';
-  $('#rankGrid').innerHTML=hero+list+badgesHTML();
+  $('#rankGrid').innerHTML=hero+friendLadderHTML()+list+badgesHTML();
 }
 function renderSetup(){
   const el=$('#crewSetup'),box=$('#settingsBox');
@@ -2822,7 +3000,7 @@ function renderBoard(){
   const max=Math.max(1,...f.map(val)),LT=loserTitles(socialList());
   $('#board').innerHTML=f.length?f.map((e,i)=>{
     const lt=LT[e.me?UID:e.id],tr=(e.tier>=0?' · '+TIERS[e.tier]:'')+(lt?' · 🍰 '+lt:e.title?' · '+e.title:'');
-    return `<div class="row ${e.me?'me':''}"><div class="pos p${i+1}">${i+1}</div>${picHTML(e.me?S.avatar:e.av,'sm',e.me?myAvatarOpts():{tier:e.tier})}
+    return `<div class="row ${e.me?'me':''}"${okc?` data-act="prof" data-v="${esc(eid(e))}" role="button" tabindex="0"`:''}><div class="pos p${i+1}">${i+1}</div>${picHTML(e.me?S.avatar:e.av,'sm',e.me?myAvatarOpts():{tier:e.tier})}
       <div class="nm"><b>${esc(e.nick)}${e.me?'<em>Du</em>':''}</b><small>${esc(e.cls?clsLabel(e.cls):'Klasse offen')}${esc(tr)}</small><div class="track" style="--c:${e.me?'var(--accent)':'var(--t2)'}"><i style="width:${Math.round(val(e)/max*100)}%"></i></div></div>
       <div class="val">${val(e)}</div></div>`;
   }).join(''):'<p class="note">In dieser Klasse ist noch niemand.</p>';
@@ -2840,7 +3018,7 @@ function renderBoard(){
     if(!rv.up)h+=`<p class="note">Du führst die Saison an. Verteidige den ersten Platz.</p>`;
     rc.innerHTML=h;
   }
-  renderDuels();renderFeed();
+  renderDuels();renderFeed();renderFollow();
   const jb=$('#joinBanner'),pj=pendingJoin&&!(S.crews||[]).includes(pendingJoin);jb.hidden=!pj;
   if(pj)jb.innerHTML=`<div class="lbl">Einladung</div><div style="font-family:var(--display);font-weight:600;font-size:18px">Du wurdest in die Crew „${esc(pendingJoin)}“ eingeladen</div><p class="note" style="margin:0">${S.example?'Beim Beitreten werden die Beispieldaten entfernt, damit nur deine echten Werte zählen.':'Danach siehst du dich und deine Freunde in der gleichen Rangliste.'}</p><div class="btnrow"><button class="btn sm" data-act="crewjoin" data-v="${esc(pendingJoin)}" style="background:var(--fg);color:var(--bg);border-color:var(--fg)">Crew beitreten</button><button class="btn sm ghost" data-act="joinno">Nicht jetzt</button></div>`;
   const ic=$('#inviteCard');ic.hidden=!okc;
@@ -3121,7 +3299,7 @@ document.addEventListener('visibilitychange',()=>{if(!AC)return;if(document.hidd
 {const unlock=()=>{if(S.music&&S.music!=='off'&&!musStyle)musicApply();else if(AC&&AC.state==='suspended')AC.resume().catch(()=>{});document.removeEventListener('pointerdown',unlock,true);document.removeEventListener('keydown',unlock,true)};
  document.addEventListener('pointerdown',unlock,true);document.addEventListener('keydown',unlock,true)}
 document.addEventListener('click',e=>{const el=e.target.closest&&e.target.closest('button,[role="tab"],summary,.srow,[data-act]');if(!el||el.disabled)return;
-  const a=el.dataset.act||'';if(a==='save'||a==='music'||a==='sfx'||a==='sheetclose'&&el.id==='sheet'||a==='remclose'&&el.id==='remind'||a==='plclose'&&el.id==='planSheet'||a==='peclose'&&el.id==='planEdit'||a==='prclose'||a==='fxclose')return;
+  const a=el.dataset.act||'';if(a==='save'||a==='music'||a==='sfx'||a==='sheetclose'&&el.id==='sheet'||a==='remclose'&&el.id==='remind'||a==='plclose'&&el.id==='planSheet'||a==='pfclose'&&el.id==='profSheet'||a==='peclose'&&el.id==='planEdit'||a==='prclose'||a==='fxclose')return;
   sfx(el.getAttribute('role')==='tab'?'tab':(a==='del'||a==='exdel'||a==='clear')?'del':'tap')},true);
 function renderSndSw(){try{renderPushUI()}catch(e){}try{renderRestSw()}catch(e){}const m=$('#musSw'),f=$('#sfxSw'),cur=S.music||'off',vr=$('#vibRow'),vs=$('#vibSw');if(vr){const can=typeof navigator.vibrate==='function';vr.hidden=!can;if(can&&vs)vs.innerHTML=[['on','An'],['off','Aus']].map(([k,n])=>`<button data-act="vib" data-v="${k}" aria-pressed="${(S.vib!==false)===(k==='on')}">${n}</button>`).join('')}
   if(m)m.innerHTML=[['off','Aus'],['lofi','Gym Lo-Fi'],['ambient','Neon'],['phonk','Drift & Deadlift']].map(([k,n])=>`<button class="pill" data-act="music" data-v="${k}" aria-pressed="${cur===k}">${esc(n)}</button>`).join('');
@@ -3394,7 +3572,14 @@ document.addEventListener('click',e=>{
   else if(a==='remday'){const i=Number(v);S.remDays=Array.isArray(S.remDays)?S.remDays:[];S.remDays=S.remDays.includes(i)?S.remDays.filter(z=>z!==i):[...S.remDays,i];save();renderRemDays();updGcal()}
   else if(a==='remsave'){saveRemind()}
   else if(a==='fxclose'){closeRankUp();setTimeout(()=>{try{checkDuelResults()}catch(e){}},400)}
-  else if(/^(react|duel(new|opp|met|go|ok|no|cancel))$/.test(a))socialAct(a,v,t)
+  else if(/^(react|duel(new|opp|met|go|ok|no|cancel|dur|re))$/.test(a)){renderDuels.force=1;try{socialAct(a,v,t)}finally{renderDuels.force=0}}
+  else if(a==='prof'){openProf(v)}
+  else if(a==='exfr'){openExBoard(v)}
+  else if(a==='pfclose'){if(t.id!=='profSheet'||e.target===t)closeProf()}
+  else if(a==='pfall'){pfAll=!pfAll;renderProf()}
+  else if(a==='feedsc'){feedScope=v==='fo'?'fo':'crew';feedOpen=false;renderFeed()}
+  else if(a==='follow'){if(!okUid(v)||v===UID)return;S.fo=cleanFo(S.fo);if(S.fo.includes(v))S.fo=S.fo.filter(u=>u!==v);else{if(S.fo.length>=MAXFOLLOW){toast('Du folgst schon 50 Athleten. Entfolge erst jemandem.');return}S.fo.push(v);S.foSeen=Date.now();vib(12)}save();syncCrew();renderProf();renderFollow();renderFeed();if(tab==='ranks')renderRanks();else STALE.ranks=1}
+  else if(a==='duelto'){if(!okUid(v))return;closeProf();duelForm=true;duelPre=duelOpp=v;setTab('crew');renderDuels.force=1;try{renderDuels()}finally{renderDuels.force=0}if(!$('#duelCard .dunew')||duelOpp!==v){duelForm=false;duelPre='';renderDuels();toast('Gerade ist kein neues Duell mit dieser Person möglich.')}else setTimeout(()=>{try{$('#duelCard .dunew').scrollIntoView({block:'center'})}catch(e){}},60)}
   else if(a==='prclose'){clearTimeout(prT);const el=$('#pr');el.hidden=true;el.classList.remove('in','out')}
   else if(a==='bkpull'){const m=bkConflict;if(!m)return;readBackup(m).then(res=>{if(!res){toast('Die Daten vom anderen Gerät konnten nicht vollständig geladen werden.');return}bkConflict=null;applyBackup(res,m);bkReady=true;renderBkStatus();closeSheet();toast('Daten vom anderen Gerät geladen')}).catch(()=>toast('Laden hat nicht geklappt.'))}
   else if(a==='bkkeep'){if(!bkConflict)return;bkSeenSet(Number(bkConflict.ts)||Date.now());bkConflict=null;bkChunks=[];bkReady=true;renderBkStatus();scheduleBackup();toast('Dieses Gerät wird gesichert')}
@@ -3452,6 +3637,7 @@ document.addEventListener('keydown',e=>{
   if((e.key==='ArrowRight'||e.key==='ArrowLeft')&&rcState){const st=rcState;st.i=Math.max(0,Math.min(st.sl.length-1,st.i+(e.key==='ArrowRight'?1:-1)));renderRecap();return}
   if(e.key==='Escape'&&swOpenNow()){swClose();return}
   if(e.key==='Escape'&&tourOpen()){endTour();return}
+  if(e.key==='Escape'&&!$('#profSheet').hidden){closeProf();return}
   if(e.key==='Escape'&&!$('#planEdit').hidden){closePlanEdit();return}
   if(e.key==='Escape'&&!$('#planSheet').hidden){closePlan();return}
   if(e.key==='Escape'&&!$('#remind').hidden){closeRemind();return}
