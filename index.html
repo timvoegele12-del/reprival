@@ -573,6 +573,21 @@ section[data-view]{min-width:0}
 .heat i.fut{background:transparent}
 .heat i.now{outline:1.5px solid var(--accent);outline-offset:1px}
 .l1{background:rgba(122,231,255,.28)!important}.l2{background:rgba(122,231,255,.5)!important}.l3{background:rgba(122,231,255,.78)!important}.l4{background:var(--t11)!important;box-shadow:0 0 6px rgba(255,216,107,.6)}
+.restbar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(96px + env(safe-area-inset-bottom,0px));z-index:25;width:min(420px,calc(100% - 24px));display:flex;align-items:center;gap:12px;padding:10px 10px 10px 12px;border-radius:20px;background:rgba(17,20,24,.96);border:1px solid rgba(122,231,255,.35);box-shadow:0 14px 40px rgba(0,0,0,.5);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.restbar .rring{flex:none;width:46px;height:46px;position:relative}.restbar .rring svg{width:46px;height:46px;transform:rotate(-90deg)}
+.restbar .rring circle{fill:none;stroke-width:4}.restbar .rring .bg{stroke:rgba(255,255,255,.1)}.restbar .rring .fg{stroke:var(--accent);stroke-linecap:round;transition:stroke-dashoffset .25s linear}
+.restbar .rtx{flex:1;min-width:0;display:grid;gap:1px}.restbar .rtx small{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}.restbar .rtx b{font-family:var(--mono,monospace);font-size:24px;line-height:1.1;font-variant-numeric:tabular-nums}
+.restbar .rbtn{flex:none;min-width:44px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--panel-2);color:var(--fg);font:inherit;font-weight:700;font-size:13px;cursor:pointer;padding:0 8px}
+.restbar.done{border-color:rgba(155,225,93,.6)}.restbar.done .rtx b{color:#9be15d;font-family:var(--display);font-size:17px}
+body.resting{padding-bottom:calc(190px + env(safe-area-inset-bottom,0px))!important}
+body.resting #toast{bottom:calc(166px + env(safe-area-inset-bottom,0px))}
+.tsets{display:grid;gap:6px}.tsets:empty{display:none}.tsets .tsh{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.tsets .tsh small{color:var(--accent);font-size:12.5px;font-weight:700}
+.tsrow{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:14px;background:var(--panel-2);border:1px solid var(--line);color:var(--fg);font:inherit;text-align:left;width:100%;cursor:pointer;min-height:44px}
+.tsrow .pli{background:rgba(155,225,93,.15);color:#9be15d}.tsrow b{flex:1;font-family:var(--mono,monospace);font-size:15px}.tsrow .pr{font-size:11px}
+#v-train.wk .wkh{display:none!important}#v-train.wk.plan:not(.pick) .pk{display:none!important}
+.wkt{font-family:var(--mono,monospace);color:var(--dim);font-size:13px;font-variant-numeric:tabular-nums}
+.plstart{display:flex;gap:8px;flex-wrap:wrap}
+.btn .exi{display:inline-block;vertical-align:-5px;margin-right:6px;width:20px;height:20px}
 .pushcard{background:linear-gradient(135deg,rgba(122,231,255,.10),rgba(255,95,162,.06)),var(--panel);border-color:rgba(122,231,255,.28)}
 .pushcard .prow{display:flex;gap:14px;align-items:flex-start}.pushcard .bell{flex:none;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:rgba(122,231,255,.12)}
 .pushcard h3{margin:0 0 4px;font-family:var(--display);font-weight:800;font-size:17px}.pushcard p{margin:0;color:var(--dim);font-size:14px;line-height:1.45}
@@ -775,11 +790,11 @@ textarea{font-size:16px}
         <div class="card span2" id="bwCheck" hidden></div>
         <div class="card span2 plcard" id="planCard"></div>
         <div class="card span2">
-          <div class="lbl">Übung wählen</div>
-          <div class="exsearch"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><input id="exQ" type="search" placeholder="Übung suchen" aria-label="Übung suchen" autocomplete="off" enterkeyhint="go"><button class="exqx" data-act="exqclear" aria-label="Suche leeren" hidden>×</button></div>
-          <div class="pills gchips" id="groupChips"></div>
-          <div class="pills" id="trainChips"></div>
-          <div id="exTools"></div>
+          <div class="lbl pk">Übung wählen</div>
+          <div class="exsearch pk"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg><input id="exQ" type="search" placeholder="Übung suchen" aria-label="Übung suchen" autocomplete="off" enterkeyhint="go"><button class="exqx" data-act="exqclear" aria-label="Suche leeren" hidden>×</button></div>
+          <div class="pills gchips pk" id="groupChips"></div>
+          <div class="pills pk" id="trainChips"></div>
+          <div id="exTools" class="pk"></div>
           <div class="newex" id="newEx" hidden>
             <h3>Neue Übung</h3>
             <input id="exName" type="text" maxlength="28" placeholder="Name der Übung, z. B. Latziehen eng" autocomplete="off">
@@ -802,15 +817,16 @@ textarea{font-size:16px}
               </div></div>
           </div>
           <div class="est"><div><div class="lbl" id="plbl">Geschätztes Maximum</div><div class="big" id="prev">–</div></div></div>
-          <div id="dateRow" style="display:grid;gap:8px"><div class="lbl">Wann?</div><div class="pills" id="dayPills"></div></div>
+          <div id="dateRow" class="wkh" style="display:grid;gap:8px"><div class="lbl">Wann?</div><div class="pills" id="dayPills"></div></div>
           <div class="editbar" id="editBar" hidden><span id="editTxt"></span><span style="display:flex;gap:8px"><button class="btn sm ghost" data-act="editdel">Löschen</button><button class="btn sm ghost" data-act="editcancel">Abbrechen</button></span></div>
           <button class="btn primary" id="saveBtn" data-act="save">Satz speichern</button>
+          <div id="todaySets" class="tsets"></div>
           </div>
         </div>
-        <div class="card"><div class="lbl">Saisonpunkte</div><div class="big" id="spts">0</div><div class="dim" id="smonth"></div></div>
-        <div class="card"><div class="lbl">Trainingstage</div><div class="big" id="sdays">0</div><div class="dim">in diesem Monat</div></div>
-        <div class="card span2 chartwrap" id="chartCard"></div>
-        <div class="card span2"><div class="lbl" id="recLbl">Letztes Training</div><div id="recent"></div></div>
+        <div class="card wkh"><div class="lbl">Saisonpunkte</div><div class="big" id="spts">0</div><div class="dim" id="smonth"></div></div>
+        <div class="card wkh"><div class="lbl">Trainingstage</div><div class="big" id="sdays">0</div><div class="dim">in diesem Monat</div></div>
+        <div class="card span2 chartwrap wkh" id="chartCard"></div>
+        <div class="card span2 wkh"><div class="lbl" id="recLbl">Letztes Training</div><div id="recent"></div></div>
       </div>
     </section>
 
@@ -858,6 +874,7 @@ textarea{font-size:16px}
   </main>
 </div>
 
+<div class="restbar" id="restBar" hidden role="status" aria-live="polite"></div>
 <div class="tour" id="tour" hidden><div class="tspot" id="tSpot"></div><div class="tbub" id="tBub" role="dialog" aria-modal="true" aria-labelledby="tTitle" aria-describedby="tTxt"></div></div>
 <div class="sheet" id="planSheet" data-act="plclose" hidden>
   <div class="sheetin plsheet" role="dialog" aria-modal="true" aria-labelledby="plTitle"><div id="plBody" class="plbody"></div></div>
@@ -886,6 +903,7 @@ textarea{font-size:16px}
     <div style="display:grid;gap:8px"><span class="lbl">Musik</span><div class="pills wrap" id="musSw" role="group" aria-label="Hintergrundmusik"></div></div>
     <div class="wlrow"><span class="lbl">Klicktöne</span><div class="unitsw" id="sfxSw" role="group" aria-label="Klicktöne"></div></div>
     <div style="display:grid;gap:8px" id="pushRow" hidden><div class="wlrow"><span class="lbl">Benachrichtigungen</span><div class="unitsw" id="pushSw" role="group" aria-label="Benachrichtigungen"></div></div><p class="note" id="pushNote" style="margin:0" hidden></p></div>
+    <div style="display:grid;gap:8px"><div class="lbl">Pausentimer nach jedem Satz</div><div class="pills" id="restSw" role="group" aria-label="Pausentimer"></div><p class="note" style="margin:0">Pro Übung kannst du die Pause im Timer mit −15 / +15 anpassen. Die App merkt sich das für diese Übung.</p></div>
     <div class="wlrow" id="vibRow" hidden><span class="lbl">Vibration</span><div class="unitsw" id="vibSw" role="group" aria-label="Vibration"></div></div>
     <div style="display:grid;gap:8px"><div class="wlrow"><label class="lbl" for="profBw" id="profBwLbl">Körpergewicht</label><div class="unitsw" id="unitSw" role="group" aria-label="Gewichtseinheit"></div></div>
       <div class="step"><button data-act="bwm" aria-label="Körpergewicht verringern">−</button><input id="profBw" type="text" inputmode="decimal" autocomplete="off"><button data-act="bwp" aria-label="Körpergewicht erhöhen">+</button></div>
@@ -948,6 +966,8 @@ const BASE=[
   {id:'flymachine',n:'Butterfly (Maschine)',kind:'kg',g:'chest',ic:'fly',t:[.3,.5,.75,1,1.25,1.5]},
   {id:'cablefly',n:'Cable Crossover',kind:'kg',g:'chest',ic:'fly',t:[.1,.18,.27,.37,.48,.6]},
   {id:'pushup',n:'Liegestütze',kind:'bw',g:'chest',ic:'pushup',t:[5,12,20,30,40,55]},
+  {id:'chestpress',n:'Brustpresse (Maschine)',kind:'kg',g:'chest',ic:'chestpress',t:[.4,.6,.85,1.1,1.35,1.6]},
+  {id:'pullover',n:'Überzüge',kind:'kg',g:'chest',ic:'pullover',t:[.15,.25,.37,.5,.62,.75]},
   /* Rücken */
   {id:'dead',n:'Kreuzheben',kind:'kg',g:'back',ic:'dead',t:[1,1.25,1.5,1.85,2.2,2.6]},
   {id:'row',n:'Rudern',kind:'kg',g:'back',ic:'row',t:[.5,.7,.9,1.1,1.3,1.5]},
@@ -957,12 +977,16 @@ const BASE=[
   {id:'dbrow',n:'Kurzhantel-Rudern',kind:'kg',g:'back',ic:'row',per:1,t:[.25,.38,.55,.7,.85,1]},
   {id:'backext',n:'Rückenstrecker',kind:'bw',g:'back',ic:'backext',t:[8,15,22,30,40,50]},
   {id:'muscleup',n:'Muscle-Ups',kind:'bw',g:'back',ic:'muscleup',t:[1,2,4,6,9,12]},
+  {id:'machrow',n:'Rudern an der Maschine',kind:'kg',g:'back',ic:'cablerow',t:[.4,.6,.85,1.1,1.35,1.6]},
+  {id:'deadhang',n:'Hängen an der Stange',kind:'bw',sec:1,g:'back',ic:'deadhang',t:[10,25,40,60,90,120]},
   /* Schultern */
   {id:'ohp',n:'Schulterdrücken',kind:'kg',g:'shoulders',ic:'ohp',t:[.35,.5,.65,.8,.95,1.1]},
   {id:'dbohp',n:'Kurzhantel-Schulterdrücken',kind:'kg',g:'shoulders',ic:'ohp',per:1,t:[.15,.24,.34,.44,.54,.65]},
   {id:'lateral',n:'Seitheben',kind:'kg',g:'shoulders',ic:'lateral',per:1,t:[.05,.09,.14,.19,.24,.3]},
   {id:'facepull',n:'Face Pulls',kind:'kg',g:'shoulders',ic:'facepull',t:[.2,.32,.45,.58,.72,.88]},
   {id:'revfly',n:'Reverse Butterfly',kind:'kg',g:'shoulders',ic:'revfly',t:[.2,.33,.48,.63,.8,1]},
+  {id:'shoulderm',n:'Schulterpresse (Maschine)',kind:'kg',g:'shoulders',ic:'ohp',t:[.3,.45,.6,.75,.9,1.05]},
+  {id:'lateralm',n:'Seitheben (Maschine)',kind:'kg',g:'shoulders',ic:'lateral',t:[.15,.25,.35,.45,.55,.68]},
   /* Arme */
   {id:'curl',n:'Bizeps-Curls',kind:'kg',g:'arms',ic:'curl',t:[.15,.25,.35,.45,.55,.7]},
   {id:'dbcurl',n:'Kurzhantel-Curls',kind:'kg',g:'arms',ic:'curl',per:1,t:[.07,.12,.18,.24,.3,.37]},
@@ -971,6 +995,8 @@ const BASE=[
   {id:'pushdown',n:'Trizepsdrücken am Kabel',kind:'kg',g:'arms',ic:'pushdown',t:[.25,.38,.52,.67,.82,1]},
   {id:'skull',n:'French Press',kind:'kg',g:'arms',ic:'skull',t:[.15,.25,.37,.5,.62,.75]},
   {id:'closegrip',n:'Enges Bankdrücken',kind:'kg',g:'arms',ic:'bench',t:[.42,.64,.85,1.06,1.27,1.5]},
+  {id:'bicepsm',n:'Bizeps-Maschine',kind:'kg',g:'arms',ic:'curl',t:[.15,.25,.35,.45,.55,.68]},
+  {id:'tricepsm',n:'Trizeps-Maschine',kind:'kg',g:'arms',ic:'dips',t:[.3,.5,.7,.9,1.1,1.35]},
   /* Beine */
   {id:'squat',n:'Kniebeuge',kind:'kg',g:'legs',ic:'squat',t:[.75,1,1.25,1.5,1.75,2.1]},
   {id:'legpress',n:'Beinpresse',kind:'kg',g:'legs',ic:'legpress',t:[1,1.5,2,2.75,3.5,4.5]},
@@ -983,11 +1009,19 @@ const BASE=[
   {id:'hipthrust',n:'Hip Thrust',kind:'kg',g:'legs',ic:'hipthrust',t:[.5,.9,1.35,1.8,2.3,2.8]},
   {id:'calf',n:'Wadenheben',kind:'kg',g:'legs',ic:'calf',t:[.5,.85,1.25,1.65,2.05,2.5]},
   {id:'seatcalf',n:'Wadenheben sitzend',kind:'kg',g:'legs',ic:'calf',t:[.25,.45,.7,.95,1.2,1.5]},
+  {id:'hacksquat',n:'Hackenschmidt-Kniebeuge',kind:'kg',g:'legs',ic:'hack',t:[.6,.9,1.2,1.5,1.85,2.2]},
+  {id:'smithsquat',n:'Kniebeuge (Multipresse)',kind:'kg',g:'legs',ic:'squat',t:[.6,.85,1.1,1.35,1.6,1.9]},
+  {id:'abductor',n:'Abduktoren-Maschine',kind:'kg',g:'legs',ic:'abduct',t:[.4,.6,.85,1.1,1.35,1.6]},
+  {id:'adductor',n:'Adduktoren-Maschine',kind:'kg',g:'legs',ic:'abduct',t:[.4,.6,.85,1.1,1.35,1.6]},
+  {id:'wallsit',n:'Wandsitzen',kind:'bw',sec:1,g:'legs',ic:'wallsit',t:[30,45,60,90,120,180]},
   /* Bauch */
   {id:'crunch',n:'Crunches',kind:'bw',g:'core',ic:'crunch',t:[10,20,30,45,60,80]},
   {id:'legraise',n:'Beinheben hängend',kind:'bw',g:'core',ic:'legraise',t:[3,8,12,18,24,30]},
   {id:'abroller',n:'Ab-Roller',kind:'bw',g:'core',ic:'abroller',t:[3,8,12,18,25,35]},
   {id:'cablecrunch',n:'Kabel-Crunches',kind:'kg',g:'core',ic:'crunch',t:[.3,.5,.7,.9,1.1,1.35]},
+  {id:'abmachine',n:'Bauchmaschine',kind:'kg',g:'core',ic:'crunch',t:[.3,.5,.7,.9,1.1,1.35]},
+  {id:'plank',n:'Plank (Unterarmstütz)',kind:'bw',sec:1,g:'core',ic:'plank',t:[20,40,60,90,120,180]},
+  {id:'sideplank',n:'Seitstütz',kind:'bw',sec:1,g:'core',ic:'sideplank',t:[15,30,45,60,90,120]},
   /* Ausdauer */
   {id:'run',n:'Laufen',kind:'cd',g:'cardio',ic:'run',t:[2400,2100,1860,1680,1560,1440,1320,1230,1140,1065,990].map(z=>5000/z)},
   {id:'bike',n:'Radfahren',kind:'cd',g:'cardio',ic:'bike',t:[20,23,25,27,29,31,33,35,37,39,41].map(z=>z/3.6)},
@@ -996,7 +1030,7 @@ const BASE=[
 ];
 const GROUPS=[['all','Alle'],['chest','Brust'],['back','Rücken'],['shoulders','Schultern'],['arms','Arme'],['legs','Beine'],['core','Bauch'],['cardio','Ausdauer']];
 /* Piktogramme: so sieht die Übung aus */
-const ICO={"bench": "<path class=\"e\" d=\"M5 24 L26 24 M8 24 L8 29 M23 24 L23 29 M10 10 L28 10 M11.5 6.8 L11.5 13.2 M26.5 6.8 L26.5 13.2\"/><path class=\"b\" d=\"M4 29 L5 23 L9 21 L22 21 M19 21 L19 11\"/><circle class=\"h\" cx=\"25\" cy=\"20\" r=\"2.9\"/>", "incline": "<path class=\"e\" d=\"M7 27 L23 16 M15 22 L15 29 M10 7 L28 7 M11.5 3.8 L11.5 10.2 M26.5 3.8 L26.5 10.2\"/><path class=\"b\" d=\"M4 29 L5 25 L10 25 L21 17 M19 18 L19 8\"/><circle class=\"h\" cx=\"24.5\" cy=\"13\" r=\"2.9\"/>", "dbbench": "<path class=\"e\" d=\"M5 24 L26 24 M8 24 L8 29 M23 24 L23 29 M16.4 9 L21.6 9 M16.4 7 L16.4 11 M21.6 7 L21.6 11\"/><path class=\"b\" d=\"M4 29 L5 23 L9 21 L22 21 M19 21 L17 15 L19 10\"/><circle class=\"h\" cx=\"25\" cy=\"20\" r=\"2.9\"/>", "fly": "<path class=\"e\" d=\"M5 24 L26 24 M8 24 L8 29 M23 24 L23 29\"/><circle class=\"p\" cx=\"11.5\" cy=\"12\" r=\"2\"/><circle class=\"p\" cx=\"25.5\" cy=\"11\" r=\"2\"/><path class=\"b\" d=\"M4 29 L5 23 L9 21 L22 21 M19 21 L12 13 M19 21 L25 12\"/><circle class=\"h\" cx=\"25\" cy=\"20\" r=\"2.9\"/>", "pushup": "<path class=\"e\" d=\"M3 28 L29 28\"/><path class=\"b\" d=\"M4 27 L14 23.5 L23 20 M23 20 L23 27.5\"/><circle class=\"h\" cx=\"26.5\" cy=\"17.5\" r=\"2.9\"/>", "squat": "<path class=\"e\" d=\"M3 9 L29 9 M4.5 5.8 L4.5 12.2 M27.5 5.8 L27.5 12.2\"/><path class=\"b\" d=\"M16 8.5 L16 18 M16 18 L9 20 L10 28 M16 18 L23 20 L22 28 M16 10 L11 12 L10 9 M16 10 L21 12 L22 9\"/><circle class=\"h\" cx=\"16\" cy=\"5.3\" r=\"2.9\"/>", "frontsquat": "<circle class=\"e\" cx=\"20\" cy=\"10\" r=\"3.2\"/><path class=\"b\" d=\"M14 9 L13 18 L21 20 L19 28 L22 28 M14 10 L19 13 L20 10\"/><circle class=\"h\" cx=\"14\" cy=\"5.5\" r=\"2.9\"/>", "dead": "<circle class=\"e\" cx=\"12\" cy=\"24\" r=\"4.3\"/><path class=\"b\" d=\"M10.5 12.5 L19.5 14 L16.5 21 L19 28 M11 13 L12 21.5\"/><circle class=\"h\" cx=\"7.5\" cy=\"10\" r=\"2.9\"/>", "rdl": "<circle class=\"e\" cx=\"11.5\" cy=\"20.5\" r=\"3.1\"/><path class=\"b\" d=\"M10 13 L21 14 L20.5 21 L21.5 28 M10.5 13.5 L11.5 19\"/><circle class=\"h\" cx=\"7\" cy=\"10.5\" r=\"2.9\"/>", "ohp": "<path class=\"e\" d=\"M3 3.5 L29 3.5 M4.5 0.3 L4.5 6.7 M27.5 0.3 L27.5 6.7\"/><path class=\"b\" d=\"M16 11 L16 20 M16 20 L13 29 M16 20 L19 29 M16 12 L10 8 L10 3.5 M16 12 L22 8 L22 3.5\"/><circle class=\"h\" cx=\"16\" cy=\"8.5\" r=\"2.9\"/>", "row": "<circle class=\"e\" cx=\"14.5\" cy=\"19\" r=\"3.2\"/><path class=\"b\" d=\"M8.5 13.5 L21 15 L19 21.5 L21 28 M10 14 L16 10.5 L14.5 17\"/><circle class=\"h\" cx=\"5.5\" cy=\"11.5\" r=\"2.9\"/>", "dbrow": "<circle class=\"e\" cx=\"14.5\" cy=\"19\" r=\"3.2\"/><path class=\"b\" d=\"M8.5 13.5 L21 15 L19 21.5 L21 28 M10 14 L16 10.5 L14.5 17\"/><circle class=\"h\" cx=\"5.5\" cy=\"11.5\" r=\"2.9\"/>", "lat": "<path class=\"e\" d=\"M16 6 L16 1 M9 23 L23 23 M5 6 L27 6\"/><path class=\"b\" d=\"M16 15 L16 23 M13 23 L13 29 M19 23 L19 29 M16 16 L9 11 L8 6 M16 16 L23 11 L24 6\"/><circle class=\"h\" cx=\"16\" cy=\"12\" r=\"2.9\"/>", "cablerow": "<path class=\"e\" d=\"M6 25 L16 25 M12 18.5 L27 21 M27 16 L27 28\"/><path class=\"b\" d=\"M11 24 L10 12 M11 24 L19 19 L26 24 M10 13 L6 17 L12 18.5\"/><circle class=\"h\" cx=\"9.5\" cy=\"8.5\" r=\"2.9\"/>", "pullup": "<path class=\"e\" d=\"M3 4 L29 4\"/><path class=\"b\" d=\"M16 11.5 L16 21 M16 21 L14 29 M16 21 L19 28 M10 4 L9 10 L14 12.5 M22 4 L23 10 L18 12.5\"/><circle class=\"h\" cx=\"16\" cy=\"8.5\" r=\"2.9\"/>", "muscleup": "<path class=\"e\" d=\"M3 17 L29 17\"/><path class=\"b\" d=\"M16 9.5 L16 20 M16 20 L14.5 29 M16 20 L18.5 28 M16 11 L11 12 L11 17 M16 11 L21 12 L21 17\"/><circle class=\"h\" cx=\"16\" cy=\"6.5\" r=\"2.9\"/>", "dips": "<path class=\"e\" d=\"M6 17 L12 17 M20 17 L26 17 M9 17 L9 29 M23 17 L23 29\"/><path class=\"b\" d=\"M16 9.5 L16 20 M16 20 L14 25 L17 28 M16 11 L10 12 L9 17 M16 11 L22 12 L23 17\"/><circle class=\"h\" cx=\"16\" cy=\"6.5\" r=\"2.9\"/>", "curl": "<path class=\"e\" d=\"M18.4 12.5 L23.6 12.5 M18.4 10.5 L18.4 14.5 M23.6 10.5 L23.6 14.5\"/><path class=\"b\" d=\"M13 9 L13 19 M13 19 L11 28 M13 19 L16 28 M13 10 L14 17 L20 13\"/><circle class=\"h\" cx=\"13\" cy=\"6\" r=\"2.9\"/>", "hammer": "<path class=\"e\" d=\"M19 9.5 L21 15.5 M17.5 10 L21 9 M19 16 L22.5 15\"/><path class=\"b\" d=\"M13 9 L13 19 M13 19 L11 28 M13 19 L16 28 M13 10 L14 17 L20 12.5\"/><circle class=\"h\" cx=\"13\" cy=\"6\" r=\"2.9\"/>", "lateral": "<circle class=\"p\" cx=\"4\" cy=\"12.7\" r=\"2.1\"/><circle class=\"p\" cx=\"28\" cy=\"12.7\" r=\"2.1\"/><path class=\"b\" d=\"M16 9.5 L16 20 M16 20 L13 29 M16 20 L19 29 M16 11 L5 12.5 M16 11 L27 12.5\"/><circle class=\"h\" cx=\"16\" cy=\"6.5\" r=\"2.9\"/>", "revfly": "<circle class=\"p\" cx=\"14.5\" cy=\"5.8\" r=\"2.1\"/><path class=\"b\" d=\"M8.5 13.5 L21 15 L19 21.5 L21 28 M11 14 L14 7\"/><circle class=\"h\" cx=\"5.5\" cy=\"11.5\" r=\"2.9\"/>", "facepull": "<path class=\"e\" d=\"M25.5 9.5 L20 10\"/><circle class=\"e\" cx=\"27\" cy=\"9\" r=\"1.8\"/><path class=\"b\" d=\"M12 10 L12 20 M12 20 L10 28 M12 20 L15 28 M12 11 L15.5 7.5 L19.5 10\"/><circle class=\"h\" cx=\"13\" cy=\"7\" r=\"2.9\"/>", "pushdown": "<path class=\"e\" d=\"M21 4.5 L21 18\"/><circle class=\"e\" cx=\"21\" cy=\"2.8\" r=\"1.7\"/><path class=\"b\" d=\"M13 9 L14 19 M14 19 L12 28 M14 19 L17 28 M13.5 10 L14.5 16 L21 19\"/><circle class=\"h\" cx=\"13\" cy=\"6\" r=\"2.9\"/>", "skull": "<path class=\"e\" d=\"M5 24 L26 24 M8 24 L8 29 M23 24 L23 29\"/><circle class=\"e\" cx=\"24\" cy=\"15\" r=\"2.3\"/><path class=\"b\" d=\"M4 29 L5 23 L9 21 L22 21 M19 21 L17 12 L23 15\"/><circle class=\"h\" cx=\"25\" cy=\"20\" r=\"2.9\"/>", "legpress": "<path class=\"e\" d=\"M3 12 L7.5 25 L14 25 M20.5 12 L25.5 23\"/><path class=\"b\" d=\"M11 23 L6.5 12.5 M11 23 L16 14 L23 17.5 M7 14 L11 19\"/><circle class=\"h\" cx=\"4.5\" cy=\"8.5\" r=\"2.9\"/>", "legext": "<path class=\"e\" d=\"M6 22 L19 22 M12 22 L12 29 M7 8 L7 22\"/><circle class=\"e\" cx=\"26.5\" cy=\"15\" r=\"2\"/><path class=\"b\" d=\"M10 9 L10 20 M10 20 L18 20 L26 16 M10 11 L14 18\"/><circle class=\"h\" cx=\"10\" cy=\"6\" r=\"2.9\"/>", "legcurl": "<path class=\"e\" d=\"M3 22 L21 22 M6 22 L6 29 M18 22 L18 29\"/><circle class=\"e\" cx=\"21.5\" cy=\"9.5\" r=\"2\"/><path class=\"b\" d=\"M8 19 L18 19 L25 19 L22 11 M9 19 L9 15\"/><circle class=\"h\" cx=\"4.5\" cy=\"16.5\" r=\"2.9\"/>", "lunge": "<circle class=\"p\" cx=\"17.3\" cy=\"16.3\" r=\"1.9\"/><path class=\"b\" d=\"M15 7.5 L15 16 M15 16 L22 19 L22 28 M15 16 L11 26 L5 26 M15 8.5 L17 15\"/><circle class=\"h\" cx=\"15\" cy=\"4.5\" r=\"2.9\"/>", "hipthrust": "<path class=\"e\" d=\"M2 18 L8 18 M5 18 L5 29\"/><circle class=\"e\" cx=\"16\" cy=\"11.3\" r=\"3.2\"/><path class=\"b\" d=\"M7 17 L17 15 L24 18 L24 28\"/><circle class=\"h\" cx=\"3.8\" cy=\"13.8\" r=\"2.9\"/>", "calf": "<path class=\"e\" d=\"M9 26 L21 26 L21 29 M25 22 L25 14 M22.5 16.5 L25 14 L27.5 16.5\"/><path class=\"b\" d=\"M15 8 L15 18 M15 18 L14.5 24 L16.5 26 M15 9 L15 17\"/><circle class=\"h\" cx=\"15\" cy=\"5\" r=\"2.9\"/>", "crunch": "<path class=\"e\" d=\"M3 28 L29 28\"/><path class=\"b\" d=\"M17 27 L11 21 M17 27 L22 19 L26 27 M11 21 L9 23\"/><circle class=\"h\" cx=\"8.5\" cy=\"17\" r=\"2.9\"/>", "legraise": "<path class=\"e\" d=\"M5 3 L27 3\"/><path class=\"b\" d=\"M14.5 3 L14.5 11.5 M14.5 11.5 L14.5 20 M14.5 20 L27 20\"/><circle class=\"h\" cx=\"17.5\" cy=\"8\" r=\"2.9\"/>", "abroller": "<path class=\"e\" d=\"M2 28.5 L30 28.5\"/><circle class=\"e\" cx=\"25\" cy=\"25.5\" r=\"2.6\"/><path class=\"b\" d=\"M3 26.5 L8 26.5 L11 19 L20 17.5 M20 17.5 L24.5 24\"/><circle class=\"h\" cx=\"23.5\" cy=\"15\" r=\"2.9\"/>", "backext": "<path class=\"e\" d=\"M11 19 L19 23 M16 22 L18 29 M22 29 L24 26\"/><circle class=\"e\" cx=\"24.5\" cy=\"25\" r=\"1.8\"/><path class=\"b\" d=\"M25 26 L16 19.5 L7.5 12.5 M9 14 L12 12\"/><circle class=\"h\" cx=\"5\" cy=\"9.5\" r=\"2.9\"/>", "run": "<path class=\"b\" d=\"M18 8 L14 17 M14 17 L20 21 L19 28 M14 17 L10 23 L4 22 M17 10 L22 13 L24 10 M17 10 L11 12 L9 15\"/><circle class=\"h\" cx=\"19\" cy=\"5\" r=\"2.9\"/>", "bike": "<path class=\"e\" d=\"M8 23 L14 15 L22 15 L24 23 M14 15 L15 23\"/><circle class=\"e\" cx=\"8\" cy=\"23\" r=\"5\"/><circle class=\"e\" cx=\"24\" cy=\"23\" r=\"5\"/><path class=\"b\" d=\"M14 13 L20 8.5 M20 9 L23 14 M14 13 L20 17 L16 23\"/><circle class=\"h\" cx=\"21.5\" cy=\"5.5\" r=\"2.9\"/>", "rowerg": "<path class=\"e\" d=\"M3 27 L29 27 M14 17 L25 19\"/><circle class=\"e\" cx=\"27\" cy=\"20\" r=\"3\"/><path class=\"b\" d=\"M11 24 L8.5 13 M11 24 L17 18 L22 25 M9 14 L14 17\"/><circle class=\"h\" cx=\"7\" cy=\"9.5\" r=\"2.9\"/>", "swim": "<path class=\"e\" d=\"M2 21 L5 19.3 L8 21 L11 19.3 L14 21 L17 19.3 L20 21 L23 19.3 L26 21 L29 19.3\"/><path class=\"b\" d=\"M21.5 15.5 L7 16.5 L2 15 M18.5 15.5 L23 10 L29 9.5\"/><circle class=\"h\" cx=\"24\" cy=\"14.5\" r=\"2.9\"/>", "dumbbell": "<path class=\"e\" d=\"M7 16 L25 16 M8 9 L8 23 M11 11 L11 21 M24 9 L24 23 M21 11 L21 21\"/>", "burpee": "<path class=\"e\" d=\"M4 29 L28 29\"/><path class=\"b\" d=\"M16 8 L16 18 M16 18 L12 28 M16 18 L20 28 M16 10 L10 4 M16 10 L22 4\"/><circle class=\"h\" cx=\"16\" cy=\"5\" r=\"2.9\"/>"};
+const ICO={"bench": "<path class=\"e\" d=\"M5 24 L26 24 M8 24 L8 29 M23 24 L23 29 M10 10 L28 10 M11.5 6.8 L11.5 13.2 M26.5 6.8 L26.5 13.2\"/><path class=\"b\" d=\"M4 29 L5 23 L9 21 L22 21 M19 21 L19 11\"/><circle class=\"h\" cx=\"25\" cy=\"20\" r=\"2.9\"/>", "incline": "<path class=\"e\" d=\"M7 27 L23 16 M15 22 L15 29 M10 7 L28 7 M11.5 3.8 L11.5 10.2 M26.5 3.8 L26.5 10.2\"/><path class=\"b\" d=\"M4 29 L5 25 L10 25 L21 17 M19 18 L19 8\"/><circle class=\"h\" cx=\"24.5\" cy=\"13\" r=\"2.9\"/>", "dbbench": "<path class=\"e\" d=\"M5 24 L26 24 M8 24 L8 29 M23 24 L23 29 M16.4 9 L21.6 9 M16.4 7 L16.4 11 M21.6 7 L21.6 11\"/><path class=\"b\" d=\"M4 29 L5 23 L9 21 L22 21 M19 21 L17 15 L19 10\"/><circle class=\"h\" cx=\"25\" cy=\"20\" r=\"2.9\"/>", "fly": "<path class=\"e\" d=\"M5 24 L26 24 M8 24 L8 29 M23 24 L23 29\"/><circle class=\"p\" cx=\"11.5\" cy=\"12\" r=\"2\"/><circle class=\"p\" cx=\"25.5\" cy=\"11\" r=\"2\"/><path class=\"b\" d=\"M4 29 L5 23 L9 21 L22 21 M19 21 L12 13 M19 21 L25 12\"/><circle class=\"h\" cx=\"25\" cy=\"20\" r=\"2.9\"/>", "pushup": "<path class=\"e\" d=\"M3 28 L29 28\"/><path class=\"b\" d=\"M4 27 L14 23.5 L23 20 M23 20 L23 27.5\"/><circle class=\"h\" cx=\"26.5\" cy=\"17.5\" r=\"2.9\"/>", "squat": "<path class=\"e\" d=\"M3 9 L29 9 M4.5 5.8 L4.5 12.2 M27.5 5.8 L27.5 12.2\"/><path class=\"b\" d=\"M16 8.5 L16 18 M16 18 L9 20 L10 28 M16 18 L23 20 L22 28 M16 10 L11 12 L10 9 M16 10 L21 12 L22 9\"/><circle class=\"h\" cx=\"16\" cy=\"5.3\" r=\"2.9\"/>", "frontsquat": "<circle class=\"e\" cx=\"20\" cy=\"10\" r=\"3.2\"/><path class=\"b\" d=\"M14 9 L13 18 L21 20 L19 28 L22 28 M14 10 L19 13 L20 10\"/><circle class=\"h\" cx=\"14\" cy=\"5.5\" r=\"2.9\"/>", "dead": "<circle class=\"e\" cx=\"12\" cy=\"24\" r=\"4.3\"/><path class=\"b\" d=\"M10.5 12.5 L19.5 14 L16.5 21 L19 28 M11 13 L12 21.5\"/><circle class=\"h\" cx=\"7.5\" cy=\"10\" r=\"2.9\"/>", "rdl": "<circle class=\"e\" cx=\"11.5\" cy=\"20.5\" r=\"3.1\"/><path class=\"b\" d=\"M10 13 L21 14 L20.5 21 L21.5 28 M10.5 13.5 L11.5 19\"/><circle class=\"h\" cx=\"7\" cy=\"10.5\" r=\"2.9\"/>", "ohp": "<path class=\"e\" d=\"M3 3.5 L29 3.5 M4.5 0.3 L4.5 6.7 M27.5 0.3 L27.5 6.7\"/><path class=\"b\" d=\"M16 11 L16 20 M16 20 L13 29 M16 20 L19 29 M16 12 L10 8 L10 3.5 M16 12 L22 8 L22 3.5\"/><circle class=\"h\" cx=\"16\" cy=\"8.5\" r=\"2.9\"/>", "row": "<circle class=\"e\" cx=\"14.5\" cy=\"19\" r=\"3.2\"/><path class=\"b\" d=\"M8.5 13.5 L21 15 L19 21.5 L21 28 M10 14 L16 10.5 L14.5 17\"/><circle class=\"h\" cx=\"5.5\" cy=\"11.5\" r=\"2.9\"/>", "dbrow": "<circle class=\"e\" cx=\"14.5\" cy=\"19\" r=\"3.2\"/><path class=\"b\" d=\"M8.5 13.5 L21 15 L19 21.5 L21 28 M10 14 L16 10.5 L14.5 17\"/><circle class=\"h\" cx=\"5.5\" cy=\"11.5\" r=\"2.9\"/>", "lat": "<path class=\"e\" d=\"M16 6 L16 1 M9 23 L23 23 M5 6 L27 6\"/><path class=\"b\" d=\"M16 15 L16 23 M13 23 L13 29 M19 23 L19 29 M16 16 L9 11 L8 6 M16 16 L23 11 L24 6\"/><circle class=\"h\" cx=\"16\" cy=\"12\" r=\"2.9\"/>", "cablerow": "<path class=\"e\" d=\"M6 25 L16 25 M12 18.5 L27 21 M27 16 L27 28\"/><path class=\"b\" d=\"M11 24 L10 12 M11 24 L19 19 L26 24 M10 13 L6 17 L12 18.5\"/><circle class=\"h\" cx=\"9.5\" cy=\"8.5\" r=\"2.9\"/>", "pullup": "<path class=\"e\" d=\"M3 4 L29 4\"/><path class=\"b\" d=\"M16 11.5 L16 21 M16 21 L14 29 M16 21 L19 28 M10 4 L9 10 L14 12.5 M22 4 L23 10 L18 12.5\"/><circle class=\"h\" cx=\"16\" cy=\"8.5\" r=\"2.9\"/>", "muscleup": "<path class=\"e\" d=\"M3 17 L29 17\"/><path class=\"b\" d=\"M16 9.5 L16 20 M16 20 L14.5 29 M16 20 L18.5 28 M16 11 L11 12 L11 17 M16 11 L21 12 L21 17\"/><circle class=\"h\" cx=\"16\" cy=\"6.5\" r=\"2.9\"/>", "dips": "<path class=\"e\" d=\"M6 17 L12 17 M20 17 L26 17 M9 17 L9 29 M23 17 L23 29\"/><path class=\"b\" d=\"M16 9.5 L16 20 M16 20 L14 25 L17 28 M16 11 L10 12 L9 17 M16 11 L22 12 L23 17\"/><circle class=\"h\" cx=\"16\" cy=\"6.5\" r=\"2.9\"/>", "curl": "<path class=\"e\" d=\"M18.4 12.5 L23.6 12.5 M18.4 10.5 L18.4 14.5 M23.6 10.5 L23.6 14.5\"/><path class=\"b\" d=\"M13 9 L13 19 M13 19 L11 28 M13 19 L16 28 M13 10 L14 17 L20 13\"/><circle class=\"h\" cx=\"13\" cy=\"6\" r=\"2.9\"/>", "hammer": "<path class=\"e\" d=\"M19 9.5 L21 15.5 M17.5 10 L21 9 M19 16 L22.5 15\"/><path class=\"b\" d=\"M13 9 L13 19 M13 19 L11 28 M13 19 L16 28 M13 10 L14 17 L20 12.5\"/><circle class=\"h\" cx=\"13\" cy=\"6\" r=\"2.9\"/>", "lateral": "<circle class=\"p\" cx=\"4\" cy=\"12.7\" r=\"2.1\"/><circle class=\"p\" cx=\"28\" cy=\"12.7\" r=\"2.1\"/><path class=\"b\" d=\"M16 9.5 L16 20 M16 20 L13 29 M16 20 L19 29 M16 11 L5 12.5 M16 11 L27 12.5\"/><circle class=\"h\" cx=\"16\" cy=\"6.5\" r=\"2.9\"/>", "revfly": "<circle class=\"p\" cx=\"14.5\" cy=\"5.8\" r=\"2.1\"/><path class=\"b\" d=\"M8.5 13.5 L21 15 L19 21.5 L21 28 M11 14 L14 7\"/><circle class=\"h\" cx=\"5.5\" cy=\"11.5\" r=\"2.9\"/>", "facepull": "<path class=\"e\" d=\"M25.5 9.5 L20 10\"/><circle class=\"e\" cx=\"27\" cy=\"9\" r=\"1.8\"/><path class=\"b\" d=\"M12 10 L12 20 M12 20 L10 28 M12 20 L15 28 M12 11 L15.5 7.5 L19.5 10\"/><circle class=\"h\" cx=\"13\" cy=\"7\" r=\"2.9\"/>", "pushdown": "<path class=\"e\" d=\"M21 4.5 L21 18\"/><circle class=\"e\" cx=\"21\" cy=\"2.8\" r=\"1.7\"/><path class=\"b\" d=\"M13 9 L14 19 M14 19 L12 28 M14 19 L17 28 M13.5 10 L14.5 16 L21 19\"/><circle class=\"h\" cx=\"13\" cy=\"6\" r=\"2.9\"/>", "skull": "<path class=\"e\" d=\"M5 24 L26 24 M8 24 L8 29 M23 24 L23 29\"/><circle class=\"e\" cx=\"24\" cy=\"15\" r=\"2.3\"/><path class=\"b\" d=\"M4 29 L5 23 L9 21 L22 21 M19 21 L17 12 L23 15\"/><circle class=\"h\" cx=\"25\" cy=\"20\" r=\"2.9\"/>", "legpress": "<path class=\"e\" d=\"M3 12 L7.5 25 L14 25 M20.5 12 L25.5 23\"/><path class=\"b\" d=\"M11 23 L6.5 12.5 M11 23 L16 14 L23 17.5 M7 14 L11 19\"/><circle class=\"h\" cx=\"4.5\" cy=\"8.5\" r=\"2.9\"/>", "legext": "<path class=\"e\" d=\"M6 22 L19 22 M12 22 L12 29 M7 8 L7 22\"/><circle class=\"e\" cx=\"26.5\" cy=\"15\" r=\"2\"/><path class=\"b\" d=\"M10 9 L10 20 M10 20 L18 20 L26 16 M10 11 L14 18\"/><circle class=\"h\" cx=\"10\" cy=\"6\" r=\"2.9\"/>", "legcurl": "<path class=\"e\" d=\"M3 22 L21 22 M6 22 L6 29 M18 22 L18 29\"/><circle class=\"e\" cx=\"21.5\" cy=\"9.5\" r=\"2\"/><path class=\"b\" d=\"M8 19 L18 19 L25 19 L22 11 M9 19 L9 15\"/><circle class=\"h\" cx=\"4.5\" cy=\"16.5\" r=\"2.9\"/>", "lunge": "<circle class=\"p\" cx=\"17.3\" cy=\"16.3\" r=\"1.9\"/><path class=\"b\" d=\"M15 7.5 L15 16 M15 16 L22 19 L22 28 M15 16 L11 26 L5 26 M15 8.5 L17 15\"/><circle class=\"h\" cx=\"15\" cy=\"4.5\" r=\"2.9\"/>", "hipthrust": "<path class=\"e\" d=\"M2 18 L8 18 M5 18 L5 29\"/><circle class=\"e\" cx=\"16\" cy=\"11.3\" r=\"3.2\"/><path class=\"b\" d=\"M7 17 L17 15 L24 18 L24 28\"/><circle class=\"h\" cx=\"3.8\" cy=\"13.8\" r=\"2.9\"/>", "calf": "<path class=\"e\" d=\"M9 26 L21 26 L21 29 M25 22 L25 14 M22.5 16.5 L25 14 L27.5 16.5\"/><path class=\"b\" d=\"M15 8 L15 18 M15 18 L14.5 24 L16.5 26 M15 9 L15 17\"/><circle class=\"h\" cx=\"15\" cy=\"5\" r=\"2.9\"/>", "crunch": "<path class=\"e\" d=\"M3 28 L29 28\"/><path class=\"b\" d=\"M17 27 L11 21 M17 27 L22 19 L26 27 M11 21 L9 23\"/><circle class=\"h\" cx=\"8.5\" cy=\"17\" r=\"2.9\"/>", "legraise": "<path class=\"e\" d=\"M5 3 L27 3\"/><path class=\"b\" d=\"M14.5 3 L14.5 11.5 M14.5 11.5 L14.5 20 M14.5 20 L27 20\"/><circle class=\"h\" cx=\"17.5\" cy=\"8\" r=\"2.9\"/>", "abroller": "<path class=\"e\" d=\"M2 28.5 L30 28.5\"/><circle class=\"e\" cx=\"25\" cy=\"25.5\" r=\"2.6\"/><path class=\"b\" d=\"M3 26.5 L8 26.5 L11 19 L20 17.5 M20 17.5 L24.5 24\"/><circle class=\"h\" cx=\"23.5\" cy=\"15\" r=\"2.9\"/>", "backext": "<path class=\"e\" d=\"M11 19 L19 23 M16 22 L18 29 M22 29 L24 26\"/><circle class=\"e\" cx=\"24.5\" cy=\"25\" r=\"1.8\"/><path class=\"b\" d=\"M25 26 L16 19.5 L7.5 12.5 M9 14 L12 12\"/><circle class=\"h\" cx=\"5\" cy=\"9.5\" r=\"2.9\"/>", "run": "<path class=\"b\" d=\"M18 8 L14 17 M14 17 L20 21 L19 28 M14 17 L10 23 L4 22 M17 10 L22 13 L24 10 M17 10 L11 12 L9 15\"/><circle class=\"h\" cx=\"19\" cy=\"5\" r=\"2.9\"/>", "bike": "<path class=\"e\" d=\"M8 23 L14 15 L22 15 L24 23 M14 15 L15 23\"/><circle class=\"e\" cx=\"8\" cy=\"23\" r=\"5\"/><circle class=\"e\" cx=\"24\" cy=\"23\" r=\"5\"/><path class=\"b\" d=\"M14 13 L20 8.5 M20 9 L23 14 M14 13 L20 17 L16 23\"/><circle class=\"h\" cx=\"21.5\" cy=\"5.5\" r=\"2.9\"/>", "rowerg": "<path class=\"e\" d=\"M3 27 L29 27 M14 17 L25 19\"/><circle class=\"e\" cx=\"27\" cy=\"20\" r=\"3\"/><path class=\"b\" d=\"M11 24 L8.5 13 M11 24 L17 18 L22 25 M9 14 L14 17\"/><circle class=\"h\" cx=\"7\" cy=\"9.5\" r=\"2.9\"/>", "swim": "<path class=\"e\" d=\"M2 21 L5 19.3 L8 21 L11 19.3 L14 21 L17 19.3 L20 21 L23 19.3 L26 21 L29 19.3\"/><path class=\"b\" d=\"M21.5 15.5 L7 16.5 L2 15 M18.5 15.5 L23 10 L29 9.5\"/><circle class=\"h\" cx=\"24\" cy=\"14.5\" r=\"2.9\"/>", "dumbbell": "<path class=\"e\" d=\"M7 16 L25 16 M8 9 L8 23 M11 11 L11 21 M24 9 L24 23 M21 11 L21 21\"/>", "burpee": "<path class=\"e\" d=\"M4 29 L28 29\"/><path class=\"b\" d=\"M16 8 L16 18 M16 18 L12 28 M16 18 L20 28 M16 10 L10 4 M16 10 L22 4\"/><circle class=\"h\" cx=\"16\" cy=\"5\" r=\"2.9\"/>", "chestpress": "<path class=\"e\" d=\"M6 9 L9 26 L15 26 M12 26 L12 29 M25 10 L25 18\"/><path class=\"b\" d=\"M12 24 L9 10.5 M12 24 L19 24 L19 29 M10 12.5 L18 14 L24.5 14\"/><circle class=\"h\" cx=\"9.5\" cy=\"6.5\" r=\"2.9\"/>", "pullover": "<path class=\"e\" d=\"M5 24 L26 24 M8 24 L8 29 M23 24 L23 29 M27 6 L29.5 10 M25.8 6.7 L28.2 5.3 M28.3 10.7 L30.7 9.3\"/><path class=\"b\" d=\"M4 29 L5 23 L9 21 L20 21 M19 20 L25 13 L28 8\"/><circle class=\"h\" cx=\"23\" cy=\"20\" r=\"2.9\"/>", "plank": "<path class=\"e\" d=\"M2 28 L30 28\"/><path class=\"b\" d=\"M4 27 L13 23.5 L22 20 M22 20 L21 27 L26 27\"/><circle class=\"h\" cx=\"25.5\" cy=\"17.5\" r=\"2.9\"/>", "sideplank": "<path class=\"e\" d=\"M2 28 L30 28\"/><path class=\"b\" d=\"M5 27 L14 20.5 L21 14.5 M21 14.5 L22 27 L25 27 M19 15.5 L16 8\"/><circle class=\"h\" cx=\"24\" cy=\"9.5\" r=\"2.9\"/>", "hack": "<path class=\"e\" d=\"M22 4 L9 28 M8 28 L26 28\"/><path class=\"b\" d=\"M20 10 L14 17 M14 17 L22 19 L18 27 M19.5 10.5 L23 13\"/><circle class=\"h\" cx=\"21.5\" cy=\"7.5\" r=\"2.9\"/>", "abduct": "<path class=\"e\" d=\"M9 8 L9 21 M6 21 L24 21 M14 21 L14 29\"/><circle class=\"e\" cx=\"25.5\" cy=\"14\" r=\"1.6\"/><circle class=\"e\" cx=\"26.5\" cy=\"25\" r=\"1.6\"/><path class=\"b\" d=\"M12 9 L12 20 M12 20 L17 21 L25 15 M12 20 L17 21 L26 24\"/><circle class=\"h\" cx=\"12\" cy=\"6\" r=\"2.9\"/>", "deadhang": "<path class=\"e\" d=\"M4 3 L28 3\"/><path class=\"b\" d=\"M13 3 L14 13 M19 3 L18 13 M16 13.5 L16 22 M16 22 L15 30 M16 22 L17.5 30\"/><circle class=\"h\" cx=\"16\" cy=\"10.5\" r=\"2.9\"/>", "wallsit": "<path class=\"e\" d=\"M6 2 L6 29 M6 29 L28 29\"/><path class=\"b\" d=\"M8 10 L8 19 M8 19 L18 19 L18 28 M8.5 11 L14 16\"/><circle class=\"h\" cx=\"10\" cy=\"6.5\" r=\"2.9\"/>"};
 function exIcon(x){let k=x&&x.ic;if(!k&&x&&x.cdt){const b=BASE.find(z=>z.id===x.cdt);k=b&&b.ic}return `<svg class="exi" viewBox="0 0 32 32" aria-hidden="true">${ICO[k]||ICO.dumbbell}</svg>`}
 const CATS={
   kg:{push:{l:'Drücken',t:[.5,.75,1,1.25,1.5,1.75],h:'Brust, Schulter, Trizeps'},
@@ -1165,7 +1199,7 @@ const normCrew=s=>String(s||'').trim().toLowerCase().replace(/\s+/g,'-').replace
 /* Mehrere Crews: S.crews (max. 3), S.crew = gerade angezeigte Crew */
 const MAXCREWS=3;
 function fixCrews(){let a=Array.isArray(S.crews)?S.crews.map(normCrew).filter(Boolean):(S.crew?[normCrew(S.crew)]:[]);a=[...new Set(a)].slice(0,MAXCREWS);S.crew=normCrew(S.crew);if(S.crew&&!a.includes(S.crew)){if(a.length<MAXCREWS)a.unshift(S.crew);else S.crew=a[0]}if(!S.crew&&a.length)S.crew=a[0];S.crews=a}
-function joinCrew(c){fixCrews();if(S.crews.includes(c)){S.crew=c;return true}if(S.crews.length>=MAXCREWS){toast('Du bist schon in 3 Crews. Verlasse zuerst eine im Crew-Reiter.');return false}S.crews.push(c);S.crew=c;return true}
+function joinCrew(c){fixCrews();if(S.crews.includes(c)){S.crew=c;return true}if(S.crews.length>=MAXCREWS){toast('Du bist schon in 3 Crews. Verlasse zuerst eine im Crew-Reiter.');return false}S.crews.push(c);S.crew=c;S.crewJoin=S.crewJoin&&typeof S.crewJoin==='object'?S.crewJoin:{};S.crewJoin[c]=Date.now();return true}
 const inCrew=(c,k)=>k?c.crews.includes(k):!c.crews.length;
 /* Kopf-Anker je Avatar: x,y Kopfmitte, r Radius, ey Augenhöhe, hb Stirnband-Höhe, cy Ketten-Höhe */
 const ANCH={lycra:{x:66,y:31,r:6.5,ey:31.5,hb:0,cy:38.5,gx:69.5,wb:[62.3,44.5,-17]},chlor:{x:45,y:50,r:13,ey:50,hb:0,cy:61,wb:[78.5,39.5,39]},legday:{x:50,y:20,r:11,ey:21,hb:13,cy:32},pizza:{x:50,y:28,r:14,ey:25,hb:18,cy:42},spaghetti:{x:50,y:33,r:8,ey:32,hb:28,cy:41.5},bear:{x:50,y:43,r:15,ey:39,hb:32,cy:61},bulk:{x:50,y:29,r:17,ey:28,hb:0,cy:49},flag:{x:40,y:26,r:7.5,ey:26.5,hb:21,cy:34}};
@@ -1230,7 +1264,7 @@ LANG=S.lang==='en'?'en':'de';
 /* ---------- Sprache: Deutsch (Quelle) -> Englisch per Übersetzungsschicht ---------- */
 const D={
 // Navigation & allgemein
-'Start':'Home','Benachrichtigungen':'Notifications','Verpasse kein Duell':'Never miss a duel','Aktivieren':'Turn on','Später':'Later','Verstanden':'Got it',
+'Start':'Home','Pausentimer nach jedem Satz':'Rest timer after each set','Pro Übung kannst du die Pause im Timer mit −15 / +15 anpassen. Die App merkt sich das für diese Übung.':'Adjust the rest per exercise with −15 / +15 in the timer. The app remembers it for that exercise.','Pause':'Rest','Pause vorbei':'Rest over','Nächster Satz! 💪':'Next set! 💪','Pausentimer aus':'Rest timer off','Heute bei dieser Übung':'Today for this exercise','Ziel':'Goal','Noch kein Satz heute. Los geht’s!':'No set yet today. Let’s go!','Training läuft':'Workout running','Freies Training':'Free workout','Training beenden':'End workout','Wähle unten eine Übung und trag deinen ersten Satz ein.':'Pick an exercise below and log your first set.','Andere Übung':'Other exercise','Auswahl schließen':'Close picker','Training beendet':'Workout finished','Trainingsdauer':'Workout duration','Brustpresse (Maschine)':'Chest Press (Machine)','Überzüge':'Pullovers','Rudern an der Maschine':'Machine Row','Hängen an der Stange':'Dead Hang','Schulterpresse (Maschine)':'Shoulder Press (Machine)','Seitheben (Maschine)':'Lateral Raise (Machine)','Bizeps-Maschine':'Biceps Curl Machine','Trizeps-Maschine':'Triceps Machine','Hackenschmidt-Kniebeuge':'Hack Squat','Kniebeuge (Multipresse)':'Smith Machine Squat','Abduktoren-Maschine':'Hip Abduction Machine','Adduktoren-Maschine':'Hip Adduction Machine','Wandsitzen':'Wall Sit','Bauchmaschine':'Ab Crunch Machine','Plank (Unterarmstütz)':'Plank','Seitstütz':'Side Plank','Auf Zeit':'Timed','Dauer (Sekunden)':'Duration (seconds)','Wertung (Zeit)':'Score (time)','Zeit':'Time','Sek.':'sec','Bitte eine Dauer von 1 bis 900 Sekunden eintragen.':'Please enter a duration of 1 to 900 seconds.','Benachrichtigungen':'Notifications','Verpasse kein Duell':'Never miss a duel','Aktivieren':'Turn on','Später':'Later','Verstanden':'Got it',
 'Wir sagen dir Bescheid, wenn dich jemand herausfordert, auf deinen Eintrag reagiert oder dich in der Crew überholt.':'We let you know when someone challenges you, reacts to your entry or overtakes you in the crew.',
 'Damit RepRival dir Bescheid geben kann, füge die App zum Home-Bildschirm hinzu: in Safari auf Teilen → „Zum Home-Bildschirm“.':'So RepRival can notify you, add the app to your home screen: in Safari tap Share → “Add to Home Screen”.',
 'Auf dem iPhone gehen Benachrichtigungen nur, wenn RepRival auf dem Home-Bildschirm ist: in Safari auf Teilen → „Zum Home-Bildschirm“.':'On iPhone, notifications only work when RepRival is on your home screen: in Safari tap Share → “Add to Home Screen”.',
@@ -1422,6 +1456,7 @@ const PAT=[
  [/^Im Plan \((\d+)\/(\d+)\)$/,m=>`In plan (${m[1]}/${m[2]})`],
  [/^(\d+) Übungen$/,m=>`${m[1]} exercises`],[/^1 Übung$/,()=>'1 exercise'],
  [/^(\d+) Trainingstage$/,m=>`${m[1]} training days`],[/^Schritt (\d+) von (\d+)$/,m=>`Step ${m[1]} of ${m[2]}`],
+ [/^(\d+) Min\.$/,m=>`${m[1]} min`], [/^Pausentimer: (.+)$/,m=>`Rest timer: ${m[1]}`],[/^(\d+) Sätze heute$/,m=>`${m[1]} sets today`],[/^1 Satz heute$/,()=>'1 set today'],[/^Training beendet · (\d+) (Satz|Sätze) · (\d+) Min\.$/,m=>`Workout finished · ${m[1]} ${m[1]==='1'?'set':'sets'} · ${m[3]} min`],
  [/^Alle anzeigen \((\d+)\)$/,m=>`Show all (${m[1]})`],
  [/^Mehr anzeigen \((\d+) weitere\)$/,m=>`Show more (${m[1]} more)`],
  [/^(.+) (\d+) Wdh bearbeiten$/,m=>`Edit ${tw(m[1])} ${m[2]} reps`],
@@ -1644,15 +1679,18 @@ const fmtT=sec=>{sec=Math.max(0,Math.round(sec));const h=Math.floor(sec/3600),mi
 const parseT=v=>{v=String(v||'').trim().replace(',','.');if(!v)return NaN;if(v.includes(':')){const q=v.split(':');if(q.some(z=>z.trim()===''))return NaN;const p=q.map(Number);if(p.some(n=>!(n>=0)))return NaN;if(p[p.length-1]>=60)return NaN;if(p.length===3&&p[1]>=60)return NaN;return p.length===3?p[0]*3600+p[1]*60+p[2]:p.length===2?p[0]*60+p[1]:NaN}const n=Number(v);return n>0?Math.round(n*60):NaN};
 const MI=1.609344,DU=()=>S.dunit==='mi'?'mi':'km',dIn=km=>S.dunit==='mi'?km/MI:km,dOut=v=>S.dunit==='mi'?v*MI:v,SPD=()=>S.dunit==='mi'?'mph':'km/h';
 const refLbl=x=>{const m=cdm(x);return 'auf '+(m.du==='m'?m.ref+' m':fmt(m.ref/1000)+' km')};
-const vMain=(x,v)=>x.kind==='cd'&&!(v>0)?'–':x.kind==='cd'?(cdm(x).pu==='kmh'?fmt(dIn(v*3.6)):fmtT(cdm(x).ref/v)):x.kind==='bw'?fmt(v):fw(v);
-const vSub=x=>x.kind==='cd'?(cdm(x).pu==='kmh'?SPD()+' '+refLbl(x):refLbl(x)):x.kind==='bw'?'Wdh':U();
+const isSec=x=>!!(x&&x.kind==='bw'&&x.sec);
+const repTxt=(x,r)=>isSec(x)?fmtT(r):`${r} Wdh`;
+const setTxt=(x,z)=>x.kind==='cd'?`${distText(x,z.w)} · ${fmtT(z.r)}`:x.kind==='bw'?(z.w>0?`+${fw(z.w)} ${U()} × ${repTxt(x,z.r)}`:repTxt(x,z.r)):`${fw(z.w)} ${U()} × ${z.r}`;
+const vMain=(x,v)=>x.kind==='cd'&&!(v>0)?'–':x.kind==='cd'?(cdm(x).pu==='kmh'?fmt(dIn(v*3.6)):fmtT(cdm(x).ref/v)):x.kind==='bw'?(isSec(x)?fmtT(v):fmt(v)):fw(v);
+const vSub=x=>x.kind==='cd'?(cdm(x).pu==='kmh'?SPD()+' '+refLbl(x):refLbl(x)):x.kind==='bw'?(isSec(x)?'Zeit':'Wdh'):U();
 const vText=(x,v)=>vMain(x,v)+' '+vSub(x);
-const vTick=(x,v)=>x.kind==='cd'?vMain(x,v):x.kind==='bw'?fmt(v,v<20?1:0):fmt(toU(v),toU(v)<20?1:0);
+const vTick=(x,v)=>x.kind==='cd'?vMain(x,v):x.kind==='bw'?(isSec(x)?fmtT(v):fmt(v,v<20?1:0)):fmt(toU(v),toU(v)<20?1:0);
 const gainText=(x,a,b)=>{if(x.kind==='cd'){const m=cdm(x);if(m.pu==='kmh'){const d=dIn((b-a)*3.6);return (d>=0?'+':'')+fmt(d)+' '+SPD()}const z=m.ref/a-m.ref/b,az=Math.round(Math.abs(z));return (az<60?az+' Sek.':fmtT(az))+(z>=0?' schneller':' langsamer')}const d=b-a;return (d>=0?'+':'')+(x.kind==='bw'?fmt(d)+' Wdh':fw(d)+' '+U())};
-const maxText=(x,v)=>x.kind==='cd'?'≈ '+vText(x,v):x.kind==='bw'?'Wertung '+fmt(v)+' Wdh':'≈ '+fw(v)+' '+U()+' Maximum';
+const maxText=(x,v)=>x.kind==='cd'?'≈ '+vText(x,v):x.kind==='bw'?(isSec(x)?'Wertung '+fmtT(v):'Wertung '+fmt(v)+' Wdh'):'≈ '+fw(v)+' '+U()+' Maximum';
 const distText=(x,km)=>cdm(x).du==='m'?fmt(km*1000,0)+' m':fmt(dIn(km),2)+' '+DU();
 const paceText=(x,km,sec)=>{const m=cdm(x);if(!(km>0)||!(sec>0))return '';if(m.pu==='kmh')return fmt(dIn(km)/(sec/3600))+' '+SPD();if(m.pu==='500')return fmtT(sec/(km*2))+' /500 m';if(m.pu==='100')return fmtT(sec/(km*10))+' /100 m';return fmtT(sec/dIn(km))+' /'+DU()};
-const valOf=(x,w,r,bw)=>x.kind==='cd'?cdVal(x,w,r):x.kind==='bw'?Math.min(r,100)*(1+w/bw):e1(w,r);
+const valOf=(x,w,r,bw)=>x.kind==='cd'?cdVal(x,w,r):x.kind==='bw'?Math.min(r,isSec(x)?900:100)*(1+w/bw):e1(w,r);
 const scOf=(x,w,r,bw)=>x.kind==='kg'?valOf(x,w,r,bw)/bw:valOf(x,w,r,bw);
 const readTime=()=>{const g=id=>{const v=String($(id).value||'').trim().replace(',','.');return v===''?0:Number(v)};const h=g('#th'),m=g('#tm'),z=g('#ts');if(![h,m,z].every(n=>Number.isFinite(n)&&n>=0))return NaN;if(z>=60||(h>0&&m>=60))return NaN;if(!Number.isInteger(h)||!Number.isInteger(m))return NaN;return h*3600+m*60+z};
 const setTime=sec=>{if(!(sec>0)){$('#th').value='';$('#tm').value='';$('#ts').value='';return}const h=Math.floor(sec/3600),m=Math.floor(sec%3600/60),z=Math.round(sec%60);$('#th').value=h?String(h):'';$('#tm').value=String(m);$('#ts').value=String(z).padStart(2,'0')};
@@ -1780,7 +1818,7 @@ function goalFor(x,ti){
   if(ti>=NT||!x.t)return '';const T=x.t[ti],ls=lastSet(x.id),reach=(w,r,bw)=>tierOfS(x,scOf(x,w,r,bw))>ti;
   if(x.kind==='kg'){const st=S.unit==='lb'?5:2.5,r0=ls?Math.min(12,Math.max(1,Math.round(ls.r))):5;
     for(let r=r0;r<=12;r++){let wu=Math.ceil(toU(T*S.bw/(r<=1?1:1+r/30))/st-1e-9)*st;for(let k=0;k<5&&!reach(fromU(wu),r,S.bw);k++)wu+=st;if(fromU(wu)<=600&&reach(fromU(wu),r,S.bw))return `${fmt(wu,1)} ${U()} × ${r}`}return ''}
-  if(x.kind==='bw'){const w=ls?ls.w:0;let reps=Math.ceil(T/(1+w/S.bw)-1e-9);while(reps<=100&&!reach(w,reps,S.bw))reps++;if(reps>100)return '';return w>0?`+${fw(w)} ${U()} × ${reps}`:`${reps} Wdh`}
+  if(x.kind==='bw'){const w=ls?ls.w:0,mx=isSec(x)?900:100;let reps=Math.ceil(T/(1+w/S.bw)-1e-9);while(reps<=mx&&!reach(w,reps,S.bw))reps++;if(reps>mx)return '';return w>0?`+${fw(w)} ${U()} × ${repTxt(x,reps)}`:repTxt(x,reps)}
   const m=cdm(x);let km=ls&&ls.w>=m.min?ls.w:m.ref/1000;
   if(m.du==='m')km=Math.ceil(km*1000)/1000;else{const du=Math.ceil(dIn(km)*100-1e-9)/100;km=dOut(du);if(km<m.min)km=dOut(Math.ceil(dIn(m.min)*100)/100)}
   let sec=Math.floor(m.ref/(T*Math.pow(m.ref/(km*1000),m.ex)));while(sec>30&&!reach(km,sec,S.bw))sec--;return `${distText(x,km)} in ${fmtT(sec)}`;
@@ -1791,7 +1829,7 @@ function lastSet(lift){let b=null;for(const s of S.sets){if(s.lift===lift&&(!b||
    (at least 1% above the previous best, once per exercise and day, at most 3 per day), +100 once per rank step. */
 function compute(sets){return sets===S.sets?memo('compute',()=>computeRaw(sets)):computeRaw(sets)}
 function computeRaw(sets){
-  const arr=[...sets].sort((a,b)=>a.ts-b.ts),firstDay={},best={},top={},days={},prDay={},prCount={},hist={},dp={},prM={};let prs=0;
+  const arr=[...sets].sort((a,b)=>a.ts-b.ts),firstDay={},best={},top={},days={},prDay={},prCount={},hist={},dp={},prM={},adds=[];let prs=0;
   for(const s of arr){
     const x=L(s.lift);if(!x)continue;
     const sc=scOf(x,s.w,s.r,setBw(s)),m=monthKey(s.ts),dk=dayKey(s.ts);let add=0;
@@ -1803,9 +1841,9 @@ function computeRaw(sets){
     if(!cu&&!fd&&tt!==undefined&&ti>tt)add+=100*(ti-tt);
     if(tt===undefined||ti>tt)top[s.lift]=ti;
     if(prev===undefined||sc>prev)best[s.lift]=sc;
-    hist[m]=(hist[m]||0)+add;{const ik=isoDay(s.ts);dp[ik]=(dp[ik]||0)+add}
+    hist[m]=(hist[m]||0)+add;{const ik=isoDay(s.ts);dp[ik]=(dp[ik]||0)+add}if(add)adds.push([s.ts,add,m]);
   }
-  return {best,hist,dp,prs,prM};
+  return {best,hist,dp,prs,prM,adds};
 }
 function overall(){return memo('overall',overallRaw)}
 function overallRaw(){
@@ -1817,11 +1855,15 @@ function overallRaw(){
   const g=arr.length?Math.min(sg,cap):0;
   return {arr,sum,avg,g,sg,days,locked:arr.length>0&&sg>g,need:g<NT?Math.max(0,DAYS[g+1]-days):0,hist:c.hist};
 }
+function crewPtsMap(){const c=compute(S.sets),now=monthKey(Date.now()),pd=new Date();pd.setDate(1);pd.setMonth(pd.getMonth()-1);const pk=monthKey(pd.getTime()),out={[now]:{},[pk]:{}},J=S.crewJoin||{};
+  for(const code of (S.crews||[])){const j=Number(J[code])||0;let a=0,b=0;for(const [ts,add,m] of c.adds){if(ts<j)continue;if(m===now)a+=add;else if(m===pk)b+=add}out[now][code]=a;out[pk][code]=b}return out}
+function cleanCp(cp){const o={};if(!cp||typeof cp!=='object')return o;for(const [k,v] of Object.entries(cp).slice(0,3)){if(!/^\d{4}-\d{2}$/.test(k)||!v||typeof v!=='object')continue;o[k]={};for(const [c,n] of Object.entries(v).slice(0,5)){const nn=Number(n);if(Number.isFinite(nn)&&nn>=0)o[k][normCrew(c)]=Math.min(nn,1e6)}}return o}
+function crewPts(e,code,key){const cp=e&&e.cp&&e.cp[key];if(code&&cp&&typeof cp[code]==='number')return cp[code];return Number(((e&&e.hist)||{})[key])||0}
 function daysTrained(key){const set={};for(const s of S.sets)if(monthKey(s.ts)===key)set[dayKey(s.ts)]=1;return Object.keys(set).length}
 function payload(){
   const o=overall();
   const tt=titleOf(o,streakInfo());
-  return {nick:S.nick,av:S.avatar,crew:S.crew||'',crews:Array.isArray(S.crews)?S.crews.slice(0,MAXCREWS):[],studio:S.studio||'',title:tt?tt.n:'',cls:classFor(S.bw).label,kw:o.sum,tier:o.arr.length?o.g:-1,hist:o.hist,...socialPayload()};
+  return {nick:S.nick,av:S.avatar,crew:S.crew||'',crews:Array.isArray(S.crews)?S.crews.slice(0,MAXCREWS):[],studio:S.studio||'',title:tt?tt.n:'',cls:classFor(S.bw).label,kw:o.sum,tier:o.arr.length?o.g:-1,hist:o.hist,cp:crewPtsMap(),...socialPayload()};
 }
 
 
@@ -1874,7 +1916,7 @@ async function doBackup(){
     const rows=S.sets.map(z=>[z.lift,z.w,z.r,z.bw,z.ts,z.id]),n=Math.ceil(rows.length/BK_CH);
     for(let i=0;i<n;i++){const part=rows.slice(i*BK_CH,(i+1)*BK_CH),str=JSON.stringify(part);if(bkChunks[i]!==str){await DB.doc(bkPath('c'+i)).set({s:part});bkChunks[i]=str}}
     const ts=Date.now();
-    await DB.doc(bkPath('bk')).set({v:2,dev:DEV,ts,n,count:rows.length,bw:S.bw,nick:S.nick||'',crew:S.crew||'',crews:S.crews||[],plans:S.plans||[],studio:S.studio||'',avatar:S.avatar,custom:S.custom,bwLog:(S.bwLog||[]).slice(-1500),bwChecked:S.bwChecked||0,last:S.last||'',tips:S.tips||{},unit:S.unit==='lb'?'lb':'kg',lang:LANG,dunit:DU(),soc:{ev:S.ev||[],rx:S.rx||{},du:S.du||[],da:S.da||{},dx:S.dx||[],duelWon:S.duelWon||{},duelSeen:S.duelSeen||{},badges:S.badges||{},rxSeen:(S.rxSeen||[]).slice(-300)}});
+    await DB.doc(bkPath('bk')).set({v:2,dev:DEV,ts,n,count:rows.length,bw:S.bw,nick:S.nick||'',crew:S.crew||'',crews:S.crews||[],crewJoin:S.crewJoin||{},rest:S.rest,restBy:S.restBy||{},plans:S.plans||[],studio:S.studio||'',avatar:S.avatar,custom:S.custom,bwLog:(S.bwLog||[]).slice(-1500),bwChecked:S.bwChecked||0,last:S.last||'',tips:S.tips||{},unit:S.unit==='lb'?'lb':'kg',lang:LANG,dunit:DU(),soc:{ev:S.ev||[],rx:S.rx||{},du:S.du||[],da:S.da||{},dx:S.dx||[],duelWon:S.duelWon||{},duelSeen:S.duelSeen||{},badges:S.badges||{},rxSeen:(S.rxSeen||[]).slice(-300)}});
     bkSeenSet(ts);bkLast=ts;bkErr='';
   }catch(e){bkErr=(e&&e.code)||'error'}
   bkBusy=false;renderBkStatus();
@@ -1883,7 +1925,7 @@ async function readBackup(m){
   const parts=[],nn=Math.min(60,Number(m.n)||0),cache=[];
   for(let i=0;i<nn;i++){const c=await DB.doc(bkPath('c'+i)).get();const d=c.exists?c.data():null;if(!d||!Array.isArray(d.s))return null;parts.push(...d.s);cache[i]=JSON.stringify(d.s)}
   if(parts.length<Number(m.count||0))return null;
-  const o=cleanImport({bw:m.bw,nick:m.nick,crew:m.crew,crews:m.crews,plans:m.plans,studio:m.studio,avatar:m.avatar,custom:m.custom,bwLog:m.bwLog,bwChecked:m.bwChecked,sets:parts.filter(Array.isArray).map(a=>({lift:a[0],w:a[1],r:a[2],bw:a[3],ts:a[4],id:a[5]}))});
+  const o=cleanImport({bw:m.bw,nick:m.nick,crew:m.crew,crews:m.crews,plans:m.plans,crewJoin:m.crewJoin,rest:m.rest,restBy:m.restBy,studio:m.studio,avatar:m.avatar,custom:m.custom,bwLog:m.bwLog,bwChecked:m.bwChecked,sets:parts.filter(Array.isArray).map(a=>({lift:a[0],w:a[1],r:a[2],bw:a[3],ts:a[4],id:a[5]}))});
   return o?{o,cache}:null;
 }
 /* ---------- Einführung beim ersten Start ---------- */
@@ -1955,7 +1997,7 @@ function introAct(a,v){
 }
 function applyBackup(res,m){
   const o=res.o;
-  Object.assign(S,{bw:o.bw,nick:o.nick,crew:o.crew,crews:o.crews,plans:o.plans,studio:o.studio,avatar:o.avatar,custom:o.custom,bwLog:o.bwLog,bwChecked:o.bwChecked,sets:o.sets,example:false,introDone:1});fixCrews();
+  Object.assign(S,{bw:o.bw,nick:o.nick,crew:o.crew,crews:o.crews,plans:o.plans,crewJoin:o.crewJoin,rest:o.rest,restBy:o.restBy,studio:o.studio,avatar:o.avatar,custom:o.custom,bwLog:o.bwLog,bwChecked:o.bwChecked,sets:o.sets,example:false,introDone:1});fixCrews();
   try{if(!$('#intro').hidden)introClose()}catch(e){}
   if(m.tips&&typeof m.tips==='object'&&!Array.isArray(m.tips)){const t={};for(const k of Object.keys(m.tips).slice(0,40))if(/^[A-Za-z0-9]{1,20}$/.test(k))t[k]=1;S.tips=t}
   if(m.soc&&typeof m.soc==='object'){try{mergeSocial(m.soc);const ob=(o2)=>o2&&typeof o2==='object'&&!Array.isArray(o2)?o2:{};
@@ -2032,7 +2074,7 @@ async function initCrew(){
 }
 function cleanMember(m){
   return {id:m.id,me:false,nick:String(m.nick||'Unbekannt').slice(0,20),av:AV_IDS.includes(m.av)?m.av:'legday',bw:Number(m.bw)||0,cls:String(m.cls||''),
-    kw:Number(m.kw)||0,tier:Number.isInteger(m.tier)&&m.tier>=0&&m.tier<=NT?m.tier:-1,hist:(m.hist&&typeof m.hist==='object')?m.hist:{},title:String(m.title||'').slice(0,24),crew:normCrew(m.crew),crews:[...new Set((Array.isArray(m.crews)&&m.crews.length?m.crews:[m.crew]).slice(0,5).map(normCrew).filter(Boolean))],studio:String(m.studio||'').slice(0,24),sk:normStudio(m.studio),ev:cleanEv(m.ev),rx:cleanRx(m.rx),du:cleanDu(m.du),da:cleanDa(m.da),dd:cleanDd(m.dd)};
+    kw:Number(m.kw)||0,tier:Number.isInteger(m.tier)&&m.tier>=0&&m.tier<=NT?m.tier:-1,hist:(m.hist&&typeof m.hist==='object')?m.hist:{},cp:cleanCp(m.cp),title:String(m.title||'').slice(0,24),crew:normCrew(m.crew),crews:[...new Set((Array.isArray(m.crews)&&m.crews.length?m.crews:[m.crew]).slice(0,5).map(normCrew).filter(Boolean))],studio:String(m.studio||'').slice(0,24),sk:normStudio(m.studio),ev:cleanEv(m.ev),rx:cleanRx(m.rx),du:cleanDu(m.du),da:cleanDa(m.da),dd:cleanDd(m.dd)};
 }
 function entries(scope){
   scope=scope||cscope;const sk=normStudio(S.studio);
@@ -2042,7 +2084,7 @@ function entries(scope){
   return list;
 }
 function rivals(scope){
-  const key=monthKey(Date.now()),l=entries(scope).map(e=>({e,v:Number(e.hist[key])||0})).sort((a,b)=>b.v-a.v||b.e.kw-a.e.kw);
+  const key=monthKey(Date.now()),l=entries(scope).map(e=>({e,v:scope==='crew'?crewPts(e,S.crew,key):Number(e.hist[key])||0})).sort((a,b)=>b.v-a.v||b.e.kw-a.e.kw);
   const i=l.findIndex(z=>z.e.me);if(i<0||l.length<2)return null;
   return {i,n:l.length,me:l[i],up:i>0?l[i-1]:null,down:i<l.length-1?l[i+1]:null};
 }
@@ -2058,7 +2100,7 @@ function addEv(e){const lim=Date.now()-30*day;S.ev=(Array.isArray(S.ev)?S.ev:[])
 const okUid=v=>typeof v==='string'&&v.length>0&&v.length<=128&&!v.includes('~');
 const okKey=k=>typeof k==='string'&&k.length<=180&&k.split('~').length===2&&okUid(k.split('~')[0])&&/^[A-Za-z0-9_-]{1,40}$/.test(k.split('~')[1]);
 const capN=(v,mx)=>{v=Number(v);return Number.isFinite(v)?Math.max(-mx,Math.min(mx,v)):0};
-function cleanEv(a){const lim=Date.now()+3600e3;return (Array.isArray(a)?a:[]).slice(-12).filter(e=>e&&/^[A-Za-z0-9_-]{1,40}$/.test(String(e.i))&&Number.isFinite(Number(e.ts))&&Number(e.ts)<=lim&&['pr','rank','tier','streak','duel','badge'].includes(e.k)).map(e=>({i:String(e.i),k:e.k,ts:Number(e.ts),l:String(e.l||'').slice(0,40),n:String(e.n||'').slice(0,28),kd:['kg','bw','cd'].includes(e.kd)?e.kd:'kg',ct:CDM[e.ct]?e.ct:undefined,v:e.k==='streak'?Math.round(capN(e.v,520)):capN(e.v,1e5),w:capN(e.w,1e5),t:Number.isInteger(e.t)&&e.t>=0&&e.t<=NT?e.t:0,m:e.m==='pts'?'pts':'days',o:String(e.o||'').slice(0,20)}))}
+function cleanEv(a){const lim=Date.now()+3600e3;return (Array.isArray(a)?a:[]).slice(-12).filter(e=>e&&/^[A-Za-z0-9_-]{1,40}$/.test(String(e.i))&&Number.isFinite(Number(e.ts))&&Number(e.ts)<=lim&&['pr','rank','tier','streak','duel','badge'].includes(e.k)).map(e=>({i:String(e.i),k:e.k,ts:Number(e.ts),l:String(e.l||'').slice(0,40),n:String(e.n||'').slice(0,28),kd:['kg','bw','cd'].includes(e.kd)?e.kd:'kg',ct:CDM[e.ct]?e.ct:undefined,s:e.s===1?1:undefined,v:e.k==='streak'?Math.round(capN(e.v,520)):capN(e.v,1e5),w:capN(e.w,1e5),t:Number.isInteger(e.t)&&e.t>=0&&e.t<=NT?e.t:0,m:e.m==='pts'?'pts':'days',o:String(e.o||'').slice(0,20)}))}
 function cleanRx(o){const r={};if(o&&typeof o==='object'&&!Array.isArray(o))for(const [k,v] of Object.entries(o).slice(0,150))if(okKey(k)&&REACT.some(z=>z[0]===v))r[k]=v;return r}
 function cleanDu(a){const lim=Date.now()+3600e3;return (Array.isArray(a)?a:[]).slice(-8).filter(d=>d&&/^[A-Za-z0-9_-]{1,40}$/.test(String(d.i))&&okUid(d.o)&&Number.isFinite(Number(d.c))&&Number(d.c)<=lim).map(d=>({i:String(d.i),o:d.o,m:d.m==='pts'?'pts':'days',c:Number(d.c)}))}
 function cleanDa(o){const r={};if(o&&typeof o==='object'&&!Array.isArray(o))for(const [k,v] of Object.entries(o).slice(-40))if(okKey(k)&&Number.isFinite(Number(v)))r[k]=Number(v);return r}
@@ -2104,7 +2146,7 @@ function loserTitles(list){const r={},now=Date.now();for(const d of allDuels(lis
 const metQ=m=>m==='pts'?'Wer holt in 7 Tagen mehr Saisonpunkte?':'Wer hat in 7 Tagen mehr Trainingstage?';
 const metL=m=>m==='pts'?'Saisonpunkte':'Trainingstage';
 function evHTML(e){
-  const x={id:e.l,n:e.n,kind:e.kd,cdt:e.ct};
+  const x={id:e.l,n:e.n,kind:e.kd,cdt:e.ct,sec:e.s===1?1:undefined};
   if(e.k==='pr')return `<span class="fdi" aria-hidden="true">🏆</span><span>Neue Bestleistung</span><span class="fdx">${esc(e.n)}</span><span class="fdv">${esc(maxText(x,e.v))}</span>`;
   if(e.k==='rank')return `<span class="fdi" aria-hidden="true">⬆️</span><span>Rang-Aufstieg</span><span class="fdx">${esc(e.n)}</span><span class="fdv" style="color:var(--t${e.t})">${TIERS[e.t]}</span>`;
   if(e.k==='tier')return `<span class="fdi" aria-hidden="true">👑</span><span>Neuer Gesamtrang</span><span class="fdv" style="color:var(--t${e.t})">${TIERS[e.t]}</span>`;
@@ -2280,7 +2322,7 @@ function recapData(pk){
   const real=S.sets.filter(z=>L(z.lift)&&monthKey(z.ts)===pk);if(!real.length)return null;
   const c=compute(S.sets),days=new Set(real.map(z=>dayKey(z.ts))).size,by={};for(const z of real)by[z.lift]=(by[z.lift]||0)+1;
   const fav=Object.entries(by).sort((a,b)=>b[1]-a[1])[0],[y,m]=pk.split('-').map(Number);
-  let place=0,of=0;if(crewOk()){const l=crewList().map(e=>({me:e.me,v:Number((e.hist||{})[pk])||0})).sort((a,b)=>b.v-a.v);of=l.length;place=l.findIndex(e=>e.me)+1;if(of<2)place=0}
+  let place=0,of=0;if(crewOk()){const l=crewList().map(e=>({me:e.me,v:crewPts(e,S.crew,pk)})).sort((a,b)=>b.v-a.v);of=l.length;place=l.findIndex(e=>e.me)+1;if(of<2)place=0}
   return {pk,month:new Date(y,m-1,1).toLocaleDateString(LOC(),{month:'long'}),days,sets:real.length,prs:(c.prM||{})[pk]||0,pts:c.hist[pk]||0,fav:L(fav[0]).n,favN:fav[1],place,of,g:overall().g};
 }
 function recapSlides(d){
@@ -2446,6 +2488,39 @@ function renderHome(){
 
 
 
+
+/* ---------- Pausentimer ---------- */
+let restT=null,restIv=null;
+const RESTS=[[0,'Aus'],[60,'1:00'],[90,'1:30'],[120,'2:00'],[180,'3:00']];
+function restDefault(){return S.rest===undefined?90:S.rest}
+function restFor(id){const b=S.restBy&&S.restBy[id];return Number.isFinite(b)&&b>0?b:restDefault()}
+function renderRestSw(){const el=$('#restSw');if(el)el.innerHTML=RESTS.map(([v,n])=>`<button class="pill" data-act="restdef" data-v="${v}" aria-pressed="${restDefault()===v}">${n}</button>`).join('')}
+function startRest(id){const x=L(id);if(!x||x.kind==='cd'||!restDefault())return;const dur=restFor(id);restT={id,dur,end:Date.now()+dur*1000,done:false};document.body.classList.add('resting');renderRest();clearInterval(restIv);restIv=setInterval(tickRest,250)}
+function stopRest(){restT=null;clearInterval(restIv);restIv=null;const b=$('#restBar');if(b)b.hidden=true;document.body.classList.remove('resting')}
+function tickRest(){if(!restT)return stopRest();const left=Math.ceil((restT.end-Date.now())/1000);
+  if(left<=0&&!restT.done){restT.done=true;try{vib([220,90,220])}catch(e){}try{sfx('pr')}catch(e){}setTimeout(()=>{if(restT&&restT.done)stopRest()},6000)}
+  renderRest()}
+function renderRest(){const b=$('#restBar');if(!b||!restT)return;b.hidden=false;const left=Math.max(0,Math.ceil((restT.end-Date.now())/1000)),fr=Math.max(0,Math.min(1,left/restT.dur)),C=2*Math.PI*19;
+  b.classList.toggle('done',restT.done);
+  b.innerHTML=restT.done?`<div class="rring"><svg viewBox="0 0 46 46"><circle class="bg" cx="23" cy="23" r="19"/><circle class="fg" cx="23" cy="23" r="19" style="stroke:#9be15d" stroke-dasharray="${C}" stroke-dashoffset="0"/></svg></div><div class="rtx"><small>Pause vorbei</small><b>Nächster Satz! 💪</b></div><button class="rbtn" data-act="restskip" aria-label="Schließen">✕</button>`
+   :`<div class="rring"><svg viewBox="0 0 46 46"><circle class="bg" cx="23" cy="23" r="19"/><circle class="fg" cx="23" cy="23" r="19" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-fr)}"/></svg></div><div class="rtx"><small>Pause</small><b>${fmtT(left)}</b></div><button class="rbtn" data-act="restadj" data-v="-15" aria-label="15 Sekunden weniger">−15</button><button class="rbtn" data-act="restadj" data-v="15" aria-label="15 Sekunden mehr">+15</button><button class="rbtn" data-act="restskip" aria-label="Pause überspringen">✕</button>`}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&restT)tickRest()});
+
+/* ---------- Training-Modus: heutige Sätze, Dauer, freies Training ---------- */
+let wkPick=false;
+function renderTodaySets(){const el=$('#todaySets');if(!el)return;const x=L(tl);if(!x||nx){el.innerHTML='';return}
+  const k=dayKey(Date.now()),list=S.sets.filter(z=>z.lift===tl&&dayKey(z.ts)===k).sort((a,b)=>a.ts-b.ts);
+  const ap=activePlan(),hint=ap&&ap.id!=='free'?((planEx(ap).find(e=>e[0]===tl)||[])[1]||''):'';
+  const target=(()=>{const m=/^(\d+)\s*×/.exec(hint);return m?Number(m[1]):0})();
+  if(!list.length&&!hint){el.innerHTML='';return}
+  el.innerHTML=`<div class="tsh"><span class="lbl">Heute bei dieser Übung</span>${hint?`<small><span>Ziel</span> ${esc(hint)}${target?` · ${Math.min(list.length,target)}/${target}`:''}</small>`:''}</div>`+
+    (list.length?list.map((z,i)=>canEdit(z)?`<button class="tsrow" data-act="edit" data-v="${esc(z.id)}" aria-label="Satz ${i+1} bearbeiten"><span class="pli">${i+1}</span><b>${setTxt(x,z)}</b><span class="hchev" aria-hidden="true">✎</span></button>`:`<div class="tsrow"><span class="pli">${i+1}</span><b>${setTxt(x,z)}</b></div>`).join(''):'<p class="note" style="margin:0">Noch kein Satz heute. Los geht’s!</p>')}
+function wkElapsed(){if(!S.plan||!S.plan.st)return '';const sec=Math.max(0,Math.floor((Date.now()-S.plan.st)/1000));return fmtT(sec)}
+setInterval(()=>{const e=$('#wkTime');if(e&&!document.hidden)e.textContent=wkElapsed()},1000);
+function applyWk(){const v=$('#v-train');if(!v)return;const ap=activePlan();v.classList.toggle('wk',!!ap);v.classList.toggle('plan',!!ap&&ap.id!=='free');v.classList.toggle('pick',wkPick)}
+function endWorkout(){const ap=activePlan();if(!S.plan)return;const st=S.plan.st||Date.now(),k=dayKey(Date.now());
+  const n=S.sets.filter(z=>dayKey(z.ts)===k&&z.ts>=st-60000).length,mins=Math.max(1,Math.round((Date.now()-st)/60000));
+  S.plan=null;wkPick=false;stopRest();save();renderTrain();toast(n?`Training beendet · ${n} ${n===1?'Satz':'Sätze'} · ${mins} Min.`:'Training beendet')}
 /* ---------- Push-Nachrichten (nur Web-Version) ---------- */
 let pushSt=null,pushBusy=false;
 async function refreshPush(){if(!window.__rrPush)return;try{pushSt=await window.__rrPush.state()}catch(e){pushSt='unsupported'}renderPushUI()}
@@ -2497,26 +2572,31 @@ function endTour(){if(!tourOpen())return;tourI=-1;$('#tour').hidden=true;documen
   const f=tourAfter;tourAfter=null;if(f)setTimeout(f,250)}
 window.addEventListener('resize',()=>{if(tourOpen())tourPlace()});
 /* ---------- Trainingspläne + Muskelkarte ---------- */
-const MUSC={"bench": [["chest"], ["fdelt", "triceps"]], "incline": [["chest", "fdelt"], ["triceps"]], "dbbench": [["chest"], ["fdelt", "triceps"]], "flymachine": [["chest"], ["fdelt"]], "cablefly": [["chest"], ["fdelt"]], "pushup": [["chest"], ["triceps", "fdelt", "abs"]], "dead": [["hams", "glutes", "lowback"], ["traps", "quads", "forearms", "lats"]], "row": [["lats", "upback"], ["rdelt", "biceps", "lowback"]], "lat": [["lats"], ["biceps", "upback"]], "pullup": [["lats"], ["biceps", "upback", "forearms"]], "cablerow": [["lats", "upback"], ["biceps", "rdelt"]], "dbrow": [["lats", "upback"], ["biceps", "rdelt"]], "backext": [["lowback"], ["glutes", "hams"]], "muscleup": [["lats", "triceps"], ["chest", "biceps"]], "ohp": [["fdelt", "sdelt"], ["triceps", "traps"]], "dbohp": [["fdelt", "sdelt"], ["triceps", "traps"]], "lateral": [["sdelt"], ["traps"]], "facepull": [["rdelt", "upback"], ["traps"]], "revfly": [["rdelt"], ["upback"]], "curl": [["biceps"], ["forearms"]], "dbcurl": [["biceps"], ["forearms"]], "hammer": [["biceps", "forearms"], []], "dips": [["triceps", "chest"], ["fdelt"]], "pushdown": [["triceps"], []], "skull": [["triceps"], []], "closegrip": [["triceps", "chest"], ["fdelt"]], "squat": [["quads", "glutes"], ["hams", "lowback", "adductors"]], "legpress": [["quads", "glutes"], ["hams"]], "frontsquat": [["quads"], ["glutes", "abs"]], "rdl": [["hams", "glutes"], ["lowback"]], "legext": [["quads"], []], "legcurl": [["hams"], ["calves"]], "lunge": [["quads", "glutes"], ["hams", "adductors"]], "bulgarian": [["quads", "glutes"], ["hams"]], "hipthrust": [["glutes"], ["hams"]], "calf": [["calves"], []], "seatcalf": [["calves"], []], "crunch": [["abs"], ["obliques"]], "legraise": [["abs"], ["obliques", "forearms"]], "abroller": [["abs"], ["lats", "obliques"]], "cablecrunch": [["abs"], ["obliques"]], "run": [[], ["quads", "hams", "calves", "glutes"]], "bike": [["quads"], ["calves", "glutes"]], "rowerg": [[], ["lats", "quads", "biceps", "hams"]], "swim": [[], ["lats", "sdelt", "triceps"]]};
+const MUSC={"bench": [["chest"], ["fdelt", "triceps"]], "incline": [["chest", "fdelt"], ["triceps"]], "dbbench": [["chest"], ["fdelt", "triceps"]], "flymachine": [["chest"], ["fdelt"]], "cablefly": [["chest"], ["fdelt"]], "pushup": [["chest"], ["triceps", "fdelt", "abs"]], "dead": [["hams", "glutes", "lowback"], ["traps", "quads", "forearms", "lats"]], "row": [["lats", "upback"], ["rdelt", "biceps", "lowback"]], "lat": [["lats"], ["biceps", "upback"]], "pullup": [["lats"], ["biceps", "upback", "forearms"]], "cablerow": [["lats", "upback"], ["biceps", "rdelt"]], "dbrow": [["lats", "upback"], ["biceps", "rdelt"]], "backext": [["lowback"], ["glutes", "hams"]], "muscleup": [["lats", "triceps"], ["chest", "biceps"]], "ohp": [["fdelt", "sdelt"], ["triceps", "traps"]], "dbohp": [["fdelt", "sdelt"], ["triceps", "traps"]], "lateral": [["sdelt"], ["traps"]], "facepull": [["rdelt", "upback"], ["traps"]], "revfly": [["rdelt"], ["upback"]], "curl": [["biceps"], ["forearms"]], "dbcurl": [["biceps"], ["forearms"]], "hammer": [["biceps", "forearms"], []], "dips": [["triceps", "chest"], ["fdelt"]], "pushdown": [["triceps"], []], "skull": [["triceps"], []], "closegrip": [["triceps", "chest"], ["fdelt"]], "squat": [["quads", "glutes"], ["hams", "lowback", "adductors"]], "legpress": [["quads", "glutes"], ["hams"]], "frontsquat": [["quads"], ["glutes", "abs"]], "rdl": [["hams", "glutes"], ["lowback"]], "legext": [["quads"], []], "legcurl": [["hams"], ["calves"]], "lunge": [["quads", "glutes"], ["hams", "adductors"]], "bulgarian": [["quads", "glutes"], ["hams"]], "hipthrust": [["glutes"], ["hams"]], "calf": [["calves"], []], "seatcalf": [["calves"], []], "crunch": [["abs"], ["obliques"]],'chestpress':[['chest'],['fdelt','triceps']],'pullover':[['lats','chest'],['triceps']],'machrow':[['lats','upback'],['biceps','rdelt']],'deadhang':[['forearms'],['lats']],'shoulderm':[['fdelt','sdelt'],['triceps']],'lateralm':[['sdelt'],[]],'bicepsm':[['biceps'],[]],'tricepsm':[['triceps'],['chest']],'hacksquat':[['quads'],['glutes']],'smithsquat':[['quads','glutes'],['hams']],'abductor':[['glutes'],[]],'adductor':[['adductors'],[]],'wallsit':[['quads'],['glutes']],'abmachine':[['abs'],['obliques']],'plank':[['abs'],['obliques','fdelt']],'sideplank':[['obliques'],['abs']], "legraise": [["abs"], ["obliques", "forearms"]], "abroller": [["abs"], ["lats", "obliques"]], "cablecrunch": [["abs"], ["obliques"]], "run": [[], ["quads", "hams", "calves", "glutes"]], "bike": [["quads"], ["calves", "glutes"]], "rowerg": [[], ["lats", "quads", "biceps", "hams"]], "swim": [[], ["lats", "sdelt", "triceps"]]};
 const MNAME={chest:'Brust',fdelt:'Vordere Schulter',sdelt:'Seitliche Schulter',rdelt:'Hintere Schulter',traps:'Nacken',upback:'Oberer Rücken',lats:'Latissimus',lowback:'Unterer Rücken',biceps:'Bizeps',triceps:'Trizeps',forearms:'Unterarme',abs:'Bauch',obliques:'Seitlicher Bauch',quads:'Vordere Oberschenkel',hams:'Hintere Oberschenkel',glutes:'Po',adductors:'Adduktoren',calves:'Waden'};
 const ANAT={"front": {"sil": "<path d=\"M50 3 C56 3 59 8 59 14 C59 20 56 25 50 26 Z\"/><path d=\"M 50 3 C 44 3 41 8 41 14 C 41 20 44 25 50 26 Z\"/><path d=\"M50 24 L55 24 L56 31 L50 32 Z\"/><path d=\"M 50 24 L 45 24 L 44 31 L 50 32 Z\"/><path d=\"M73 114 C76 114 79 116 80 120 C80 125 78 129 75 129 C73 127 72 122 72 116 Z\"/><path d=\"M 27 114 C 24 114 21 116 20 120 C 20 125 22 129 25 129 C 27 127 28 122 28 116 Z\"/><path d=\"M57 147 C61 150 65 150 68 147 L67 156 C64 158 60 158 58 157 Z\"/><path d=\"M 43 147 C 39 150 35 150 32 147 L 33 156 C 36 158 40 158 42 157 Z\"/><path d=\"M60 192 L64 192 C66 196 68 199 69 201 L58 201 C58 198 59 195 60 192 Z\"/><path d=\"M 40 192 L 36 192 C 34 196 32 199 31 201 L 42 201 C 42 198 41 195 40 192 Z\"/><path d=\"M51 98 C54 99 58 100 62 99 L64 104 C60 103 55 104 51 105 Z\"/><path d=\"M 49 98 C 46 99 42 100 38 99 L 36 104 C 40 103 45 104 49 105 Z\"/>", "mus": {"traps": "M55 27 C59 30 64 31 69 33 L57 34 Z M 45 27 C 41 30 36 31 31 33 L 43 34 Z", "fdelt": "M58 36 C63 33 68 33 71 36 C70 42 69 47 68 51 C65 45 62 40 58 37 Z M 42 36 C 37 33 32 33 29 36 C 30 42 31 47 32 51 C 35 45 38 40 42 37 Z", "sdelt": "M71 36 C75 38 78 42 78 48 C78 52 76 55 73 57 C71 55 69 53 68 51 C69 46 70 41 71 36 Z M 29 36 C 25 38 22 42 22 48 C 22 52 24 55 27 57 C 29 55 31 53 32 51 C 31 46 30 41 29 36 Z", "chest": "M51 37 C57 35 63 37 67 42 C69 46 69 51 66 55 C61 59 55 59 51 57 Z M 49 37 C 43 35 37 37 33 42 C 31 46 31 51 34 55 C 39 59 45 59 49 57 Z", "biceps": "M70 56 C74 56 77 61 78 68 C78 74 77 78 74 81 C71 79 69 72 69 64 C69 61 69 58 70 56 Z M 30 56 C 26 56 23 61 22 68 C 22 74 23 78 26 81 C 29 79 31 72 31 64 C 31 61 31 58 30 56 Z", "forearms": "M74 83 C78 84 80 90 80 97 C80 104 78 110 76 113 L72 113 C71 106 70 98 71 90 C71 87 72 85 74 83 Z M 26 83 C 22 84 20 90 20 97 C 20 104 22 110 24 113 L 28 113 C 29 106 30 98 29 90 C 29 87 28 85 26 83 Z", "abs": "M51 60 L59 59 C60 70 60 82 59 95 C56 97 53 98 51 98 Z M 49 60 L 41 59 C 40 70 40 82 41 95 C 44 97 47 98 49 98 Z", "obliques": "M60 59 C64 60 67 63 67 69 C67 79 65 88 61 96 C61 84 61 72 60 59 Z M 40 59 C 36 60 33 63 33 69 C 33 79 35 88 39 96 C 39 84 39 72 40 59 Z", "quads": "M57 106 C61 104 66 105 68 111 C70 122 69 134 67 144 C64 148 60 148 57 145 C55 135 54 118 57 106 Z M 43 106 C 39 104 34 105 32 111 C 30 122 31 134 33 144 C 36 148 40 148 43 145 C 45 135 46 118 43 106 Z", "adductors": "M51 106 C53 106 55 106 56 107 C54 117 54 128 55 140 C53 132 51 120 51 106 Z M 49 106 C 47 106 45 106 44 107 C 46 117 46 128 45 140 C 47 132 49 120 49 106 Z", "calves": "M58 159 C62 158 65 159 66 165 C67 174 65 183 63 190 L60 190 C58 181 57 168 58 159 Z M 42 159 C 38 158 35 159 34 165 C 33 174 35 183 37 190 L 40 190 C 42 181 43 168 42 159 Z"}, "lines": "M51 69 L59.6 68.5 M51 79 L60 78.5 M51 88 L59.8 88 M 49 69 L 40.4 68.5 M 49 79 L 40 78.5 M 49 88 L 40.2 88"}, "back": {"sil": "<path d=\"M50 3 C56 3 59 8 59 14 C59 20 56 25 50 26 Z\"/><path d=\"M 50 3 C 44 3 41 8 41 14 C 41 20 44 25 50 26 Z\"/><path d=\"M50 24 L55 24 L56 28 L50 29 Z\"/><path d=\"M 50 24 L 45 24 L 44 28 L 50 29 Z\"/><path d=\"M73 114 C76 114 79 116 80 120 C80 125 78 129 75 129 C73 127 72 122 72 116 Z\"/><path d=\"M 27 114 C 24 114 21 116 20 120 C 20 125 22 129 25 129 C 27 127 28 122 28 116 Z\"/><path d=\"M57 152 C61 154 65 154 68 151 L68 157 C64 158 60 158 57 157 Z\"/><path d=\"M 43 152 C 39 154 35 154 32 151 L 32 157 C 36 158 40 158 43 157 Z\"/><path d=\"M59 185 L63 185 C65 192 67 197 68 201 L58 201 C58 196 58 190 59 185 Z\"/><path d=\"M 41 185 L 37 185 C 35 192 33 197 32 201 L 42 201 C 42 196 42 190 41 185 Z\"/>", "mus": {"traps": "M50 25 C54 27 61 30 70 34 C65 37 60 41 56 48 C54 53 52 58 50 62 Z M 50 25 C 46 27 39 30 30 34 C 35 37 40 41 44 48 C 46 53 48 58 50 62 Z", "rdelt": "M70 35 C75 37 78 42 78 48 C78 52 76 55 73 57 C71 51 69 45 65 39 Z M 30 35 C 25 37 22 42 22 48 C 22 52 24 55 27 57 C 29 51 31 45 35 39 Z", "upback": "M57 47 C61 42 66 40 70 43 C71 47 71 51 69 54 C65 56 60 57 55 57 C55 53 56 50 57 47 Z M 43 47 C 39 42 34 40 30 43 C 29 47 29 51 31 54 C 35 56 40 57 45 57 C 45 53 44 50 43 47 Z", "lats": "M54 59 C60 59 66 57 70 55 C71 66 69 77 64 88 C60 86 57 82 55 76 C54 70 54 64 54 59 Z M 46 59 C 40 59 34 57 30 55 C 29 66 31 77 36 88 C 40 86 43 82 45 76 C 46 70 46 64 46 59 Z", "lowback": "M51 66 L53 60 C54 70 55 80 59 88 C60 91 60 94 59 97 L51 97 Z M 49 66 L 47 60 C 46 70 45 80 41 88 C 40 91 40 94 41 97 L 49 97 Z", "triceps": "M70 56 C74 56 77 61 78 68 C78 74 77 78 74 81 C71 79 69 72 69 64 C69 61 69 58 70 56 Z M 30 56 C 26 56 23 61 22 68 C 22 74 23 78 26 81 C 29 79 31 72 31 64 C 31 61 31 58 30 56 Z", "forearms": "M74 83 C78 84 80 90 80 97 C80 104 78 110 76 113 L72 113 C71 106 70 98 71 90 C71 87 72 85 74 83 Z M 26 83 C 22 84 20 90 20 97 C 20 104 22 110 24 113 L 28 113 C 29 106 30 98 29 90 C 29 87 28 85 26 83 Z", "glutes": "M51 99 C57 97 64 98 68 104 C70 111 68 118 62 121 C57 122 53 121 51 119 Z M 49 99 C 43 97 36 98 32 104 C 30 111 32 118 38 121 C 43 122 47 121 49 119 Z", "hams": "M55 123 C60 122 66 123 68 129 C69 137 68 145 66 150 C63 152 60 152 57 150 C55 141 54 131 55 123 Z M 45 123 C 40 122 34 123 32 129 C 31 137 32 145 34 150 C 37 152 40 152 43 150 C 45 141 46 131 45 123 Z", "calves": "M57 159 C62 156 67 159 68 166 C69 173 66 180 63 183 L59 183 C56 176 55 167 57 159 Z M 43 159 C 38 156 33 159 32 166 C 31 173 34 180 37 183 L 41 183 C 44 176 45 167 43 159 Z"}}};
 const PLANS=[["p-push", "Push Day", [["bench", "4 × 6–8"], ["incline", "3 × 8–10"], ["ohp", "3 × 8–10"], ["lateral", "3 × 12–15"], ["pushdown", "3 × 10–12"], ["dips", "2 × max."]]], ["p-pull", "Pull Day", [["dead", "3 × 5"], ["pullup", "3 × 6–10"], ["row", "3 × 8–10"], ["lat", "3 × 10–12"], ["facepull", "3 × 15"], ["curl", "3 × 10–12"], ["hammer", "2 × 12"]]], ["p-legs", "Leg Day", [["squat", "4 × 6–8"], ["rdl", "3 × 8–10"], ["legpress", "3 × 10–12"], ["legcurl", "3 × 12"], ["legext", "3 × 12"], ["calf", "4 × 12–15"]]], ["p-upper", "Oberkörper", [["bench", "4 × 6–8"], ["row", "4 × 8"], ["ohp", "3 × 8–10"], ["lat", "3 × 10–12"], ["curl", "2 × 12"], ["pushdown", "2 × 12"]]], ["p-lower", "Unterkörper", [["squat", "4 × 6–8"], ["hipthrust", "3 × 8–10"], ["bulgarian", "3 × 10"], ["legcurl", "3 × 12"], ["seatcalf", "3 × 15"], ["legraise", "3 × 12"]]], ["p-full", "Ganzkörper", [["squat", "3 × 8"], ["bench", "3 × 8"], ["row", "3 × 8"], ["ohp", "3 × 10"], ["rdl", "3 × 10"], ["abroller", "3 × 10"]]], ["p-arms", "Arm Day", [["closegrip", "3 × 8"], ["curl", "3 × 10"], ["skull", "3 × 10"], ["hammer", "3 × 12"], ["pushdown", "3 × 12"], ["dbcurl", "2 × 15"]]], ["p-core", "Bauch", [["legraise", "3 × 12"], ["cablecrunch", "3 × 15"], ["abroller", "3 × 10"], ["crunch", "2 × 25"]]], ["p-bw", "Ohne Geräte", [["pushup", "4 × max."], ["pullup", "4 × max."], ["dips", "3 × max."], ["backext", "3 × 15"], ["crunch", "3 × 25"]]]].map(([id,n,ex])=>({id,n,ex}));
 const MAXPLANS=20,MAXPLEX=12;
 function musOf(ids){const p={},s={};for(const id of ids){let m=MUSC[id];if(!m){const x=L(id);if(x&&x.cdt)m=MUSC[x.cdt]}if(!m)continue;m[0].forEach(k=>p[k]=1);m[1].forEach(k=>s[k]=1)}for(const k in p)delete s[k];return {p,s}}
 function bodyMap(ids,cls){const {p,s}=musOf(ids);const one=v=>`<svg class="body" viewBox="0 0 100 205" aria-hidden="true"><g class="sil">${ANAT[v].sil}</g>${Object.entries(ANAT[v].mus).map(([k,d])=>`<path class="m${p[k]?' mp':s[k]?' ms':''}" d="${d}"/>`).join('')}${ANAT[v].lines?`<path class="ml" d="${ANAT[v].lines}"/>`:''}</svg>`;return `<div class="bmap ${cls||''}">${one('front')}${one('back')}</div>`}
-function planById(id){return PLANS.find(p=>p.id===id)||(Array.isArray(S.plans)?S.plans:[]).find(p=>p.id===id)||null}
+function planById(id){if(id==='free'){const k=dayKey(Date.now()),seen=[];for(const z of [...S.sets].sort((a,b)=>a.ts-b.ts))if(dayKey(z.ts)===k&&L(z.lift)&&!seen.includes(z.lift))seen.push(z.lift);return {id:'free',n:'Freies Training',ex:seen.map(i=>[i,''])}}return PLANS.find(p=>p.id===id)||(Array.isArray(S.plans)?S.plans:[]).find(p=>p.id===id)||null}
 function planEx(p){return (p&&Array.isArray(p.ex)?p.ex:[]).map(e=>Array.isArray(e)?e:[e,'']).filter(([id])=>L(id))}
 function doneToday(id){const k=dayKey(Date.now());return S.sets.some(z=>z.lift===id&&dayKey(z.ts)===k)}
 function activePlan(){if(!S.plan)return null;if(S.plan.d!==dayKey(Date.now())||!planById(S.plan.id)){S.plan=null;return null}return planById(S.plan.id)}
-function lastSetText(id){const x=L(id);let z=null;for(const q of S.sets)if(q.lift===id&&(!z||q.ts>z.ts))z=q;if(!z)return '';return x.kind==='cd'?`${distText(x,z.w)} · ${fmtT(z.r)}`:x.kind==='bw'?(z.w>0?`+${fw(z.w)} × ${z.r}`:`${z.r} Wdh`):`${fw(z.w)} ${U()} × ${z.r}`}
+function lastSetText(id){const x=L(id);let z=null;for(const q of S.sets)if(q.lift===id&&(!z||q.ts>z.ts))z=q;if(!z)return '';return setTxt(x,z)}
 function planTile(p){const ex=planEx(p);return `<button class="pltile" data-act="planview" data-v="${esc(p.id)}">${bodyMap(ex.map(e=>e[0]))}<b>${esc(p.n)}</b><small>${ex.length} ${ex.length===1?'Übung':'Übungen'}</small></button>`}
 function renderPlanCard(){const el=$('#planCard');if(!el)return;const ap=activePlan();
   if(ap){const ex=planEx(ap),done=ex.filter(([id])=>doneToday(id)).length,next=ex.find(([id])=>!doneToday(id)&&id!==tl);
-    el.innerHTML=`<div class="plhead"><div style="min-width:0"><div class="lbl">Aktiver Plan</div><b class="pln">${esc(ap.n)}</b></div><span class="mono plprog">${done}/${ex.length}</span></div><div class="bar"><i style="width:${ex.length?Math.round(done/ex.length*100):0}%"></i></div>
+    const free=ap.id==='free',ns=S.sets.filter(z=>dayKey(z.ts)===dayKey(Date.now())).length;
+    if(free){el.innerHTML=`<div class="plhead"><div style="min-width:0"><div class="lbl">Training läuft</div><b class="pln">${esc(ap.n)}</b></div><span class="wkt" aria-label="Trainingsdauer">⏱ <span id="wkTime">${wkElapsed()}</span></span></div>
+      ${ex.length?`<div class="pills plex">${ex.map(([id])=>`<button class="pill exp done" data-act="tlift" data-v="${esc(id)}" aria-pressed="${id===tl&&!nx}"><span class="ck" aria-hidden="true">✓</span>${esc(L(id).n)}</button>`).join('')}</div>`:'<p class="note" style="margin:0">Wähle unten eine Übung und trag deinen ersten Satz ein.</p>'}
+      <div class="btnrow"><span class="chip">${ns} ${ns===1?'Satz':'Sätze'} heute</span><button class="btn sm ghost" data-act="planend">Training beenden</button></div>`;applyWk();return}
+    el.innerHTML=`<div class="plhead"><div style="min-width:0"><div class="lbl">Aktiver Plan</div><b class="pln">${esc(ap.n)}</b></div><span style="display:grid;justify-items:end;gap:2px"><span class="mono plprog">${done}/${ex.length}</span><span class="wkt" aria-label="Trainingsdauer">⏱ <span id="wkTime">${wkElapsed()}</span></span></span></div><div class="bar"><i style="width:${ex.length?Math.round(done/ex.length*100):0}%"></i></div>
     <div class="pills plex">${ex.map(([id])=>`<button class="pill exp${doneToday(id)?' done':''}" data-act="tlift" data-v="${esc(id)}" aria-pressed="${id===tl&&!nx}">${doneToday(id)?'<span class="ck" aria-hidden="true">✓</span>':exIcon(L(id))}${esc(L(id).n)}</button>`).join('')}</div>
-    <div class="btnrow">${done===ex.length?'<span class="chip ok">Plan geschafft 💪</span>':next?`<button class="btn sm" data-act="tlift" data-v="${esc(next[0])}" style="background:var(--fg);color:var(--bg);border-color:var(--fg)">${exIcon(L(next[0]))}<span>Weiter:</span>&nbsp;${esc(L(next[0]).n)}</button>`:''}<button class="btn sm ghost" data-act="planview" data-v="${esc(ap.id)}">Plan ansehen</button><button class="btn sm ghost" data-act="planend">Beenden</button></div>`;return}
+    <div class="btnrow">${done===ex.length?'<span class="chip ok">Plan geschafft 💪</span>':next?`<button class="btn sm" data-act="tlift" data-v="${esc(next[0])}" style="background:var(--fg);color:var(--bg);border-color:var(--fg)">${exIcon(L(next[0]))}<span>Weiter:</span>&nbsp;${esc(L(next[0]).n)}</button>`:''}<button class="btn sm ghost" data-act="wkpick" aria-expanded="${wkPick}">${wkPick?'Auswahl schließen':'Andere Übung'}</button><button class="btn sm ghost" data-act="planview" data-v="${esc(ap.id)}">Plan ansehen</button><button class="btn sm ghost" data-act="planend">Beenden</button></div>`;applyWk();return}
   const own=Array.isArray(S.plans)?S.plans:[];
-  el.innerHTML=`<div class="lbl">Trainingspläne</div><div class="pltiles">${own.map(planTile).join('')}<button class="pltile add" data-act="planew"><span class="plus">+</span><b>Eigener Plan</b><small>z. B. Elias Pushday</small></button>${PLANS.map(planTile).join('')}</div>`}
+  applyWk();
+  el.innerHTML=`<div class="plhead"><div class="lbl">Trainingspläne</div><button class="btn sm" data-act="freestart" style="background:var(--fg);color:var(--bg);border-color:var(--fg)">▶ <span>Freies Training</span></button></div><div class="pltiles">${own.map(planTile).join('')}<button class="pltile add" data-act="planew"><span class="plus">+</span><b>Eigener Plan</b><small>z. B. Elias Pushday</small></button>${PLANS.map(planTile).join('')}</div>`}
 let plView=null,plDel=false,pe=null;
 function openPlan(id){plView=id;plDel=false;renderPlanSheet();$('#planSheet').hidden=false;try{$('#planSheet .sheetin').scrollTop=0}catch(e){}navPush()}
 function closePlan(){$('#planSheet').hidden=true;plView=null}
@@ -2529,7 +2609,7 @@ function renderPlanSheet(){const p=planById(plView);if(!p){closePlan();return}co
   <button class="btn primary" data-act="planstart">${ap&&ap.id===p.id?'Weiter trainieren':'Plan starten'}</button>
   <div class="btnrow">${own?`<button class="btn sm ghost" data-act="planedit" data-v="${esc(p.id)}">Bearbeiten</button><button class="btn sm ghost" data-act="plandel" data-v="${esc(p.id)}">${plDel?'Wirklich löschen? Nochmal tippen':'Löschen'}</button>`:`<button class="btn sm ghost" data-act="plancopy" data-v="${esc(p.id)}">Als eigenen Plan anpassen</button>`}</div>`}
 function startPlan(id,lift){const p=planById(id);if(!p)return;const ex=planEx(p);if(!ex.length)return;
-  S.plan={id:p.id,d:dayKey(Date.now())};const first=(lift&&L(lift))?lift:(ex.find(([i])=>!doneToday(i))||ex[0])[0];
+  S.plan={id:p.id,d:dayKey(Date.now()),st:(S.plan&&S.plan.id===p.id&&S.plan.st)||Date.now()};wkPick=false;const first=(lift&&L(lift))?lift:(ex.find(([i])=>!doneToday(i))||ex[0])[0];
   closePlan();tl=first;S.last=first;nx=null;exQ='';try{$('#exQ').value=''}catch(e){}editing=null;confirmDel=false;save();prefill();setTab('train');renderTrain()}
 function openPlanEdit(id,copyFrom){const src=planById(id||copyFrom);pe={id:id||null,n:src?src.n:'',ex:src?planEx(src).map(e=>[e[0],e[1]||'']):[],q:'',g:'all'};closePlan();renderPlanEdit();$('#planEdit').hidden=false;try{$('#planEdit .sheetin').scrollTop=0}catch(e){}navPush();if(!matchMedia('(pointer:coarse)').matches)setTimeout(()=>{try{$('#peName').focus()}catch(e){}},40)}
 function closePlanEdit(){$('#planEdit').hidden=true;pe=null}
@@ -2556,7 +2636,7 @@ function renderPeParts(){if(!pe)return;const inP=new Set(pe.ex.map(e=>e[0]));
 function renderTrain(){
   renderBwCheck();
   if(!L(tl))tl=BASE[0].id;
-  const x=L(tl),ex=nx&&nx.kind?{kind:nx.kind,cdt:nx.cdt}:x,bwk=ex.kind==='bw';
+  const x=L(tl),ex=nx&&nx.kind?(nx.kind==='tm'?{kind:'bw',sec:1}:{kind:nx.kind,cdt:nx.cdt}):x,bwk=ex.kind==='bw',seck=isSec(ex);
   const own=lifts().filter(l=>isCustom(l.id)).reverse(),std=lifts().filter(l=>!isCustom(l.id));
   const q=normQ(exQ);
   {const lastU={};for(const z of S.sets)if(!lastU[z.lift]||z.ts>lastU[z.lift])lastU[z.lift]=z.ts;
@@ -2565,7 +2645,7 @@ function renderTrain(){
   if(exG!=='all'&&exG!=='own'&&!GROUPS.some(g=>g[0]===exG))exG='all';if(exG==='own'&&!own.length)exG='all';
   let items=q?own.concat(std):exG==='all'?own.concat(std):exG==='own'?own:std.filter(l=>l.g===exG).sort((a,b)=>BASE.indexOf(a)-BASE.indexOf(b));
   if(q)items=items.filter(l=>normQ(l.n).includes(q)||normQ(tw(l.n)).includes(q));
-  renderPlanCard();
+  renderPlanCard();renderTodaySets();
   $('#groupChips').hidden=!!q;
   $('#groupChips').innerHTML=pillsHTML('exgroup',GROUPS.concat(own.length?[['own','Eigene']]:[]),exG);
   $('#trainChips').innerHTML=(q&&!items.length?`<span class="exnone">Nichts gefunden</span><button class="pill add" data-act="exfromq">+ „${esc(exQ.trim().slice(0,28))}“ anlegen</button>`:(q?'':`<button class="pill add" data-act="newex" aria-pressed="${!!nx}">+ Neue Übung</button>`)+items.map(l=>`<button class="pill exp" data-act="tlift" data-v="${esc(l.id)}" aria-pressed="${!nx&&l.id===tl}">${exIcon(l)}${esc(l.n)}</button>`).join(''));
@@ -2575,16 +2655,16 @@ function renderTrain(){
   const cdk=ex.kind==='cd',cm=cdm(ex);
   $('#wlbl').textContent=cdk?'Distanz ('+(cm.du==='m'?'m':DU())+')':bwk?'Zusatzgewicht ('+U()+', optional)':'Gewicht ('+U()+')';
   $('#w').placeholder=cdk?(cm.du==='m'?'2000':(S.dunit==='mi'?fmt(3.1):'5')):bwk?'0':(S.unit==='lb'?'175':'80');
-  $('#rlbl').textContent=cdk?'Zeit':'Wiederholungen';$('#repStep').hidden=cdk;$('#timeBox').hidden=!cdk;
-  {const b=(a,t)=>{const e=document.querySelector('[data-act="'+a+'"]');if(e)e.setAttribute('aria-label',t)};b('wm',cdk?'Distanz verringern':'Gewicht verringern');b('wp',cdk?'Distanz erhöhen':'Gewicht erhöhen');b('rm',cdk?'Zeit verringern':'Wiederholungen verringern');b('rp',cdk?'Zeit erhöhen':'Wiederholungen erhöhen')}
-  {const ri=$('#r');ri.placeholder=cdk?'26:30':'5';ri.setAttribute('inputmode',cdk?'text':'numeric')}
-  $('#plbl').textContent=cdk?'Hochgerechnet '+refLbl(ex):bwk?'Wertung in Wiederholungen':'Geschätztes Maximum';
+  $('#rlbl').textContent=cdk?'Zeit':seck?'Dauer (Sekunden)':'Wiederholungen';$('#repStep').hidden=cdk;$('#timeBox').hidden=!cdk;
+  {const b=(a,t)=>{const e=document.querySelector('[data-act="'+a+'"]');if(e)e.setAttribute('aria-label',t)};b('wm',cdk?'Distanz verringern':'Gewicht verringern');b('wp',cdk?'Distanz erhöhen':'Gewicht erhöhen');b('rm',cdk||seck?'Zeit verringern':'Wiederholungen verringern');b('rp',cdk||seck?'Zeit erhöhen':'Wiederholungen erhöhen')}
+  {const ri=$('#r');ri.placeholder=cdk?'26:30':seck?'45':'5';ri.setAttribute('inputmode',cdk?'text':'numeric')}
+  $('#plbl').textContent=cdk?'Hochgerechnet '+refLbl(ex):seck?'Wertung (Zeit)':bwk?'Wertung in Wiederholungen':'Geschätztes Maximum';
   if(cdk){const iv=num($('#w').value),km=cm.du==='m'?iv/1000:dOut(iv),sec=readTime(),okc=km>0&&sec>0;
     $('#prev').innerHTML=okc?(cm.pu==='kmh'?fmt(dIn(cdVal(ex,km,sec)*3.6))+' <span style="font-size:.45em;color:var(--dim)">'+SPD()+'</span>':fmtT(cm.ref/cdVal(ex,km,sec)))+' <span style="font-size:.4em;color:var(--dim)">'+esc(paceText(ex,km,sec))+'</span>':'–'}
   else{
   const w=num($('#w').value),r=parseInt($('#r').value,10),w0=w>0?w:0;
   const ok=bwk?(r>0):(w>0&&r>0);
-  $('#prev').innerHTML=ok?(bwk?fmt(valOf(ex,fromU(w0),r,S.bw))+' <span style="font-size:.45em;color:var(--dim)">Wdh</span>':fmt(e1(w,r))+' <span style="font-size:.45em;color:var(--dim)">'+U()+'</span>'):'–';}
+  $('#prev').innerHTML=ok?(bwk?(seck?fmtT(valOf(ex,fromU(w0),r,S.bw)):fmt(valOf(ex,fromU(w0),r,S.bw))+' <span style="font-size:.45em;color:var(--dim)">Wdh</span>'):fmt(e1(w,r))+' <span style="font-size:.45em;color:var(--dim)">'+U()+'</span>'):'–';}
   const key=monthKey(Date.now()),c=compute(S.sets);
   $('#spts').textContent=c.hist[key]||0;
   $('#smonth').textContent=monthName(key);
@@ -2611,7 +2691,7 @@ function renderTrain(){
   for(const z of today){if(!grp[z.lift]){grp[z.lift]=[];order.push(z.lift)}grp[z.lift].push(z)}
   $('#recent').innerHTML='<div style="display:grid;gap:12px">'+order.map(id=>{const xx=L(id);
     return `<div style="display:grid;gap:6px"><b>${esc(xx.n)}</b><div style="display:flex;flex-wrap:wrap;gap:6px">`+grp[id].map(z=>{
-      const t=xx.kind==='cd'?`${distText(xx,z.w)} · ${fmtT(z.r)}`:xx.kind==='bw'?(z.w>0?`+${fw(z.w)} × ${z.r}`:`${z.r} Wdh`):`${fw(z.w)} × ${z.r}`;
+      const t=setTxt(xx,z);
       return canEdit(z)?`<button class="chip" data-act="edit" data-v="${esc(z.id)}" aria-label="${esc(xx.n)} ${xx.kind==='cd'?distText(xx,z.w)+' in '+fmtT(z.r):t} bearbeiten" style="cursor:pointer;font-family:inherit">${t}</button>`:`<span class="chip" style="opacity:.6">${t}</span>`}).join('')+'</div></div>'}).join('')+
     `</div><div style="margin-top:10px">${canEdit(all[0])?tip('tapSet','Tippe auf einen Satz, um ihn zu ändern oder zu löschen.'):'<p class="note" style="margin:0">Diese Sätze sind älter als 7 Tage und deshalb fest eingetragen.</p>'}</div><button class="btn sm" data-act="stattab" style="justify-self:start;margin-top:10px">Alle Einträge in der Statistik</button>`;
 }
@@ -2620,7 +2700,7 @@ function renderNx(){
   if(!nx){la.hidden=false;return}
   const hasName=!!($('#exName').value||'').trim();
   $('#exKindWrap').hidden=!hasName;
-  $('#exKind').innerHTML=pillsHTML('exkind',[['kg','Mit Gewicht'],['bw','Nur Wiederholungen'],['cd','Ausdauer']],nx.kind||'');
+  $('#exKind').innerHTML=pillsHTML('exkind',[['kg','Mit Gewicht'],['bw','Nur Wiederholungen'],['tm','Auf Zeit'],['cd','Ausdauer']],nx.kind||'');
   $('#exCdtWrap').hidden=nx.kind!=='cd';
   if(nx.kind==='cd')$('#exCdt').innerHTML=pillsHTML('excdt',[['run','Laufen'],['bike','Radfahren'],['rowerg','Rudergerät'],['swim','Schwimmen']],nx.cdt||'run');
   la.hidden=!(hasName&&nx.kind);
@@ -2655,7 +2735,7 @@ function renderRanks(){
   }
   const list=has?`<div class="card span2"><div class="lbl">Deine Übungen</div><div>${[...o.arr].sort((a,b)=>b.pts-a.pts).map(e=>{
     const i=e.i,p=e.pts-i*100,t=e.x.t;
-    const raw=i<NT?(e.x.kind==='cd'?vText(e.x,t[i]):e.x.kind==='bw'?fmt(Math.max(0,t[i]-e.sc))+' Wdh':fw(Math.max(0,(t[i]-e.sc)*S.bw))+' '+U()):'';
+    const raw=i<NT?(e.x.kind==='cd'?vText(e.x,t[i]):e.x.kind==='bw'?(isSec(e.x)?fmtT(Math.max(0,t[i]-e.sc)):fmt(Math.max(0,t[i]-e.sc))+' Wdh'):fw(Math.max(0,(t[i]-e.sc)*S.bw))+' '+U()):'';
     return `<div class="ex" data-act="statopen" data-v="${esc(e.x.id)}" role="button" tabindex="0" aria-label="Statistik ${esc(e.x.n)}" style="--c:var(--t${i});cursor:pointer"><div class="exh"><b class="nm-e"><span class="sm-e" style="color:var(--t${i})">${emblem(i)}</span>${exIcon(e.x)}${esc(e.x.n)}</b><span class="tn">${TIERS[i]} ›</span></div><div class="bar"><i style="width:${i<NT?p:100}%"></i></div>
       <div class="dim sm">${i<NT?`Nächster: ${TIERS[i+1]} · noch ${100-p} ${100-p===1?'Punkt':'Punkte'} ${e.x.kind==='cd'?'(Ziel: '+raw+')':'(etwa '+raw+')'}`:'Höchster Rang erreicht'}</div></div>`;
   }).join('')}</div></div>`:'';
@@ -2691,7 +2771,7 @@ function renderBoard(){
   $('#modePills').innerHTML=pillsHTML('mode',[['season','Saison'],['total','Gesamt']],mode);
   $('#classPills').hidden=present.length<2;
   $('#classPills').innerHTML=pillsHTML('cls',[['all','Alle Klassen'],...present.map(c=>[c,clsLabel(c)])],cfilter);
-    const val=e=>mode==='season'?(Number(e.hist[key])||0):e.kw;
+    const val=e=>mode==='season'?(cscope==='crew'?crewPts(e,S.crew,key):Number(e.hist[key])||0):e.kw;
   const f=list.filter(e=>cfilter==='all'||e.cls===cfilter).sort((a,b)=>val(b)-val(a)||b.kw-a.kw);
   const max=Math.max(1,...f.map(val)),LT=loserTitles(socialList());
   $('#board').innerHTML=f.length?f.map((e,i)=>{
@@ -2700,7 +2780,7 @@ function renderBoard(){
       <div class="nm"><b>${esc(e.nick)}${e.me?'<em>Du</em>':''}</b><small>${esc(e.cls?clsLabel(e.cls):'Klasse offen')}${esc(tr)}</small><div class="track" style="--c:${e.me?'var(--accent)':'var(--t2)'}"><i style="width:${Math.round(val(e)/max*100)}%"></i></div></div>
       <div class="val">${val(e)}</div></div>`;
   }).join(''):'<p class="note">In dieser Klasse ist noch niemand.</p>';
-  const all=[...list].sort((a,b)=>(Number(b.hist[key])||0)-(Number(a.hist[key])||0)||b.kw-a.kw);
+  const sv=e=>cscope==='crew'?crewPts(e,S.crew,key):Number(e.hist[key])||0,all=[...list].sort((a,b)=>sv(b)-sv(a)||b.kw-a.kw);
   const place=all.findIndex(e=>e.me)+1,now=new Date();
   const left=Math.max(0,Math.ceil((new Date(now.getFullYear(),now.getMonth()+1,1)-now)/day));
   $('#seasonCard').innerHTML=`<div class="lbl">Saison ${esc(monthName(key))}</div>
@@ -2734,12 +2814,12 @@ function renderBoard(){
     if(ncv||ncf){const n3=$('#newCrewName');if(n3){n3.value=ncv;if(ncf)n3.focus()}}
   }
   const d=new Date(now.getFullYear(),now.getMonth()-1,1),pk=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
-  const pw=[...list].filter(e=>(Number(e.hist[pk])||0)>0).sort((a,b)=>Number(b.hist[pk])-Number(a.hist[pk]))[0];
+  const pv=e=>cscope==='crew'?crewPts(e,S.crew,pk):Number(e.hist[pk])||0,pw=[...list].filter(e=>pv(e)>0).sort((a,b)=>pv(b)-pv(a))[0];
   const pc=$('#prevCard');pc.hidden=!pw;
   if(pw)pc.innerHTML=`<div class="lbl">Sieger ${esc(monthName(pk))}</div><div class="rk">${picHTML(pw.me?S.avatar:pw.av,'',pw.me?myAvatarOpts():{tier:pw.tier})}<div><b style="font-family:var(--display)">${esc(pw.nick)}</b><div class="dim">${Number(pw.hist[pk])} Saisonpunkte</div></div></div>`;
 }
 const dayLabel=ts=>new Date(ts).toLocaleDateString(LOC(),{weekday:'short',day:'numeric',month:'long',year:'numeric'});
-const whatOf=(x,s)=>x.kind==='cd'?`${distText(x,s.w)} in ${fmtT(s.r)} · ${paceText(x,s.w,s.r)}`:x.kind==='bw'?(s.w>0?`+${fw(s.w)} ${U()} × ${s.r}`:`${s.r} Wdh`):`${fw(s.w)} ${U()} × ${s.r}`;
+const whatOf=(x,s)=>x.kind==='cd'?`${distText(x,s.w)} in ${fmtT(s.r)} · ${paceText(x,s.w,s.r)}`:x.kind==='bw'?(s.w>0?`+${fw(s.w)} ${U()} × ${repTxt(x,s.r)}`:repTxt(x,s.r)):`${fw(s.w)} ${U()} × ${s.r}`;
 const agoOf=ts=>{const d=Math.floor((new Date().setHours(0,0,0,0)-new Date(ts).setHours(0,0,0,0))/day+.5);return d<=0?'heute':d===1?'gestern':`vor ${d} Tagen`};
 const sinceOf=()=>statRange==='1m'?Date.now()-30*day:statRange==='3m'?Date.now()-90*day:statRange==='1y'?Date.now()-365*day:0;
 function applyStatQ(){const el=$('#statGrid');if(!el)return;const q=normQ(statQ);let n=0;
@@ -2772,7 +2852,7 @@ function renderStat(){
     el.innerHTML=h;applyStatQ();return;
   }
   const x=L(statLift),sets=S.sets.filter(s=>s.lift===statLift).sort((a,b)=>a.ts-b.ts);
-  const sc=c.best[statLift],ti=tierOfS(x,sc),p=ptsOfS(x,sc)-ti*100,unit=x.kind==='bw'?'Wdh':U();
+  const sc=c.best[statLift],ti=tierOfS(x,sc),p=ptsOfS(x,sc)-ti*100,unit=x.kind==='bw'?(isSec(x)?'Sek.':'Wdh'):U();
   const ser=seriesFor(statLift),bestV=ser[ser.length-1].best,firstV=ser[0].v,gain=bestV-firstV,pctg=firstV>0?gain/firstV*100:0;
   const since=sinceOf();
   // history rows: mark sets that raised the running best
@@ -2796,7 +2876,7 @@ const STALE={};const TABR=()=>({home:renderHome,train:renderTrain,ranks:renderRa
 function renderAll(){renderTop();const m=TABR();for(const k in m){if(k===tab){STALE[k]=0;m[k]()}else STALE[k]=1}}
 
 let pendAv='legday',impConfirm=false,DL=null;
-function exportData(){return JSON.stringify({v:1,bw:S.bw,nick:S.nick,crew:S.crew||'',crews:S.crews||[],plans:S.plans||[],studio:S.studio||'',avatar:S.avatar,custom:S.custom,bwLog:S.bwLog||[],bwChecked:S.bwChecked||0,sets:S.sets})}
+function exportData(){return JSON.stringify({v:1,bw:S.bw,nick:S.nick,crew:S.crew||'',crews:S.crews||[],crewJoin:S.crewJoin||{},rest:S.rest,restBy:S.restBy||{},plans:S.plans||[],studio:S.studio||'',avatar:S.avatar,custom:S.custom,bwLog:S.bwLog||[],bwChecked:S.bwChecked||0,sets:S.sets})}
 function cleanImport(o){
   if(!o||typeof o!=='object'||!Array.isArray(o.sets))return null;
   const custom=(Array.isArray(o.custom)?o.custom:[]).filter(c=>c&&typeof c.id==='string'&&typeof c.n==='string'&&(c.kind==='kg'||c.kind==='bw'||c.kind==='cd')&&Array.isArray(c.t)&&(c.t.length===6||c.t.length===NT)&&c.t.every(n=>Number.isFinite(n))).slice(0,50)
@@ -2811,7 +2891,7 @@ function cleanImport(o){
     if(!plausible(x,scOf(x,s.w,Math.round(s.r),bw)))continue;
     sets.push({id:/^[A-Za-z0-9_-]{1,24}$/.test(String(s.id))?String(s.id):newId(),lift:s.lift,w:s.w,r:Math.round(s.r),bw,ts:s.ts});
   }
-  return {bw:BW,nick:String(o.nick||'').slice(0,20),crew:normCrew(o.crew),plans:(Array.isArray(o.plans)?o.plans:[]).filter(p=>p&&typeof p==='object').slice(0,20).map(p=>({id:/^[A-Za-z0-9_-]{1,40}$/.test(String(p.id))?String(p.id):'u'+newId(),n:String(p.n||'Plan').slice(0,30),ex:(Array.isArray(p.ex)?p.ex:[]).slice(0,12).map(e=>Array.isArray(e)?[String(e[0]).slice(0,40),String(e[1]||'').slice(0,20)]:[String(e).slice(0,40),''])})),crews:Array.isArray(o.crews)?o.crews.map(normCrew).filter(Boolean).slice(0,MAXCREWS):(normCrew(o.crew)?[normCrew(o.crew)]:[]),studio:String(o.studio||'').slice(0,24),bwLog:(Array.isArray(o.bwLog)?o.bwLog:[]).filter(z=>z&&Number.isFinite(z.ts)&&z.bw>=30&&z.bw<=250).map(z=>({ts:z.ts,bw:Number(z.bw)})).slice(-2000),bwChecked:Number(o.bwChecked)||0,avatar:AV_IDS.includes(o.avatar)?o.avatar:'legday',custom,sets};
+  return {bw:BW,nick:String(o.nick||'').slice(0,20),crew:normCrew(o.crew),plans:(Array.isArray(o.plans)?o.plans:[]).filter(p=>p&&typeof p==='object').slice(0,20).map(p=>({id:/^[A-Za-z0-9_-]{1,40}$/.test(String(p.id))?String(p.id):'u'+newId(),n:String(p.n||'Plan').slice(0,30),ex:(Array.isArray(p.ex)?p.ex:[]).slice(0,12).map(e=>Array.isArray(e)?[String(e[0]).slice(0,40),String(e[1]||'').slice(0,20)]:[String(e).slice(0,40),''])})),crewJoin:(o.crewJoin&&typeof o.crewJoin==='object')?Object.fromEntries(Object.entries(o.crewJoin).slice(0,5).map(([k,v])=>[normCrew(k),Number(v)||0])):{},rest:Number.isFinite(o.rest)?Math.max(0,Math.min(600,o.rest)):undefined,restBy:(o.restBy&&typeof o.restBy==='object')?Object.fromEntries(Object.entries(o.restBy).slice(0,100).filter(([k,v])=>Number.isFinite(v)).map(([k,v])=>[String(k).slice(0,40),Math.max(15,Math.min(600,v))])):{},crews:Array.isArray(o.crews)?o.crews.map(normCrew).filter(Boolean).slice(0,MAXCREWS):(normCrew(o.crew)?[normCrew(o.crew)]:[]),studio:String(o.studio||'').slice(0,24),bwLog:(Array.isArray(o.bwLog)?o.bwLog:[]).filter(z=>z&&Number.isFinite(z.ts)&&z.bw>=30&&z.bw<=250).map(z=>({ts:z.ts,bw:Number(z.bw)})).slice(-2000),bwChecked:Number(o.bwChecked)||0,avatar:AV_IDS.includes(o.avatar)?o.avatar:'legday',custom,sets};
 }
 async function initDl(){try{if(window.claude&&window.claude.use){DL=await window.claude.use('downloads');const b=$('#bkFile');if(b)b.hidden=!DL;renderRanks();renderBoard()}}catch(e){DL=null}}
 function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
@@ -2997,7 +3077,7 @@ document.addEventListener('visibilitychange',()=>{if(!AC)return;if(document.hidd
 document.addEventListener('click',e=>{const el=e.target.closest&&e.target.closest('button,[role="tab"],summary,.srow,[data-act]');if(!el||el.disabled)return;
   const a=el.dataset.act||'';if(a==='save'||a==='music'||a==='sfx'||a==='sheetclose'&&el.id==='sheet'||a==='remclose'&&el.id==='remind'||a==='plclose'&&el.id==='planSheet'||a==='peclose'&&el.id==='planEdit'||a==='prclose'||a==='fxclose')return;
   sfx(el.getAttribute('role')==='tab'?'tab':(a==='del'||a==='exdel'||a==='clear')?'del':'tap')},true);
-function renderSndSw(){try{renderPushUI()}catch(e){}const m=$('#musSw'),f=$('#sfxSw'),cur=S.music||'off',vr=$('#vibRow'),vs=$('#vibSw');if(vr){const can=typeof navigator.vibrate==='function';vr.hidden=!can;if(can&&vs)vs.innerHTML=[['on','An'],['off','Aus']].map(([k,n])=>`<button data-act="vib" data-v="${k}" aria-pressed="${(S.vib!==false)===(k==='on')}">${n}</button>`).join('')}
+function renderSndSw(){try{renderPushUI()}catch(e){}try{renderRestSw()}catch(e){}const m=$('#musSw'),f=$('#sfxSw'),cur=S.music||'off',vr=$('#vibRow'),vs=$('#vibSw');if(vr){const can=typeof navigator.vibrate==='function';vr.hidden=!can;if(can&&vs)vs.innerHTML=[['on','An'],['off','Aus']].map(([k,n])=>`<button data-act="vib" data-v="${k}" aria-pressed="${(S.vib!==false)===(k==='on')}">${n}</button>`).join('')}
   if(m)m.innerHTML=[['off','Aus'],['lofi','Gym Lo-Fi'],['ambient','Neon'],['phonk','Drift & Deadlift']].map(([k,n])=>`<button class="pill" data-act="music" data-v="${k}" aria-pressed="${cur===k}">${esc(n)}</button>`).join('');
   if(f)f.innerHTML=[['on','An'],['off','Aus']].map(([k,n])=>`<button data-act="sfx" data-v="${k}" aria-pressed="${(S.sfx!==false)===(k==='on')}">${n}</button>`).join('')}
 
@@ -3028,7 +3108,8 @@ function createEx(){
   if(!nx.kind){toast('Wähle zuerst, wie du die Übung trainierst.');return false}
   const id='c'+newId();
   const cdt=nx.kind==='cd'?(CDM[nx.cdt]?nx.cdt:'run'):null;
-  S.custom.push(Object.assign({id,n,kind:nx.kind,t:cdt?BASE.find(b=>b.id===cdt).t.slice():CATS[nx.kind][nx.kind==='kg'?'push':'mid'].t.slice()},cdt?{cdt}:{}));
+  if(nx.kind==='tm')S.custom.push({id,n,kind:'bw',sec:1,t:BASE.find(b=>b.id==='plank').t.slice()});
+  else S.custom.push(Object.assign({id,n,kind:nx.kind,t:cdt?BASE.find(b=>b.id===cdt).t.slice():CATS[nx.kind][nx.kind==='kg'?'push':'mid'].t.slice()},cdt?{cdt}:{}));
   tl=id;S.last=id;nx=null;$('#newEx').hidden=true;confirmDel=false;renderNx();save();
   return true;
 }
@@ -3045,8 +3126,8 @@ function saveSet(){
   w=num($('#w').value);r=parseInt($('#r').value,10);
   if(w>0)w=Math.round(fromU(w)*1000)/1000;
   if(bwk&&!(w>0))w=0;
-  const ok=bwk?(r>=1&&r<=100&&w>=0&&w<=300):(w>0&&w<=600&&r>=1&&r<=30);
-  if(!ok){toast(bwk?'Bitte 1 bis 100 Wiederholungen eintragen.':'Bitte Gewicht und 1 bis 30 Wiederholungen eintragen.');return}}
+  const sk=isSec(x),ok=bwk?(r>=1&&r<=(sk?900:100)&&w>=0&&w<=300):(w>0&&w<=600&&r>=1&&r<=30);
+  if(!ok){toast(sk?'Bitte eine Dauer von 1 bis 900 Sekunden eintragen.':bwk?'Bitte 1 bis 100 Wiederholungen eintragen.':'Bitte Gewicht und 1 bis 30 Wiederholungen eintragen.');return}}
   const eset=editing?S.sets.find(z=>z.id===editing.id):null;
   if(eset&&!canEdit(eset)){editing=null;prefill();renderTrain();toast('Einträge älter als 7 Tage sind fest.');return}
   if(!plausible(x,scOf(x,w,r,eset?setBw(eset):S.bw))){toast(cdk?'Dieses Tempo wirkt unrealistisch. Bitte prüfe Distanz und Zeit.':'Dieser Wert wirkt unrealistisch. Bitte prüfe Gewicht und Wiederholungen.');return}
@@ -3066,7 +3147,7 @@ function saveSet(){
   else if(og<S.shown)S.shown=og;
   const ovUp=!!fx;
   if(!fx&&rankUp)fx={i:tierOfS(x,after.best[tl]),sub:x.n};
-  if(prInfo)addEv({k:'pr',l:tl,n:x.n,kd:x.kind,ct:x.cdt,v:newV});
+  if(prInfo)addEv(Object.assign({k:'pr',l:tl,n:x.n,kd:x.kind,ct:x.cdt,v:newV},isSec(x)?{s:1}:{}));
   if(rankUp)addEv({k:'rank',l:tl,n:x.n,t:tierOfS(x,after.best[tl])});
   if(ovUp)addEv({k:'tier',t:fx.i});
   {const st1=streakInfo();if(st0.thisWeek<2&&st1.thisWeek>=2&&st1.weeks>=2)addEv({k:'streak',v:st1.weeks})}
@@ -3079,16 +3160,17 @@ function saveSet(){
   if(fx)setTimeout(()=>sfx('rank'),350);else if(prInfo)setTimeout(()=>sfx('pr'),120);else sfx('save');
   if(fx||prInfo)setTimeout(()=>{try{musicLift()}catch(e){}},fx?500:250);
   if(gain>0)floatPts(gain);
+  startRest(tl);
 }
 function step(id,d,min,dec){
-  const cx=nx&&nx.kind?{kind:nx.kind,cdt:nx.cdt}:L(tl);
+  const cx=nx&&nx.kind?(nx.kind==='tm'?{kind:'bw',sec:1}:{kind:nx.kind,cdt:nx.cdt}):L(tl);
   const ls=nx?null:lastSet(tl);
   if(cx&&cx.kind==='cd'){const el=$(id),m=cdm(cx);
     if(id==='#w'){const stp=m.du==='m'?100:.5;let v=num(el.value);if(!(v>=0)){v=ls?(m.du==='m'?ls.w*1000:dIn(ls.w)):(m.du==='m'?m.ref:dIn(m.ref/1000))}v=Math.max(0,v+(d>0?stp:-stp));el.value=m.du==='m'?fmtIn(Math.round(v),0):fmtIn(v,3)}
     else{let v=parseT(el.value);if(!(v>0)){v=ls?ls.r:Math.round(m.ref/cdm(cx).ref*1500)}v=Math.max(15,v+(d>0?15:-15));el.value=fmtT(v)}
     renderTrain();return}
   const el=$(id);let v=num(el.value);
-  if(!(v>=0)){const s=ls;v=id==='#w'?(s?toU(s.w):(cx&&cx.kind==='bw'?0:toU(20))):(s?s.r:5)}
+  if(!(v>=0)){const s=ls;v=id==='#w'?(s?toU(s.w):(cx&&cx.kind==='bw'?0:toU(20))):(s?s.r:(isSec(cx)?30:5))}
   v=Math.max(min,v+d);el.value=dec?fmtIn(v,2):String(Math.round(v));renderTrain();
 }
 
@@ -3098,18 +3180,19 @@ document.addEventListener('click',e=>{
   const a=t.dataset.act,v=t.dataset.v;
   if((a==='tlift'||a==='edit')&&nx){nx=null;$('#newEx').hidden=true;renderNx()}
   if(a==='tlift'&&exQ){exQ='';$('#exQ').value=''}
+  if(a==='tlift'&&wkPick)wkPick=false;
   if(a==='tlift'){tl=v;S.last=v;save();confirmDel=false;editing=null;prefill();renderTrain()}
   else if(a==='save')saveSet();
   else if(a==='wm')step('#w',S.unit==='lb'?-5:-2.5,0,true);
   else if(a==='wp')step('#w',S.unit==='lb'?5:2.5,0,true);
-  else if(a==='rm')step('#r',-1,1,false);
-  else if(a==='rp')step('#r',1,1,false);
+  else if(a==='rm')step('#r',isSec(L(tl))?-5:-1,1,false);
+  else if(a==='rp')step('#r',isSec(L(tl))?5:1,1,false);
   else if(a==='del'){if(!canEdit(S.sets.find(z=>z.id===v))){toast('Einträge älter als 7 Tage sind fest.');return}S.sets=S.sets.filter(s=>s.id!==v);if(editing&&editing.id===v)editing=null;syncShown();save();renderAll();syncCrew()}
   else if(a==='clear'){S.sets=[];S.example=false;S.shown=0;save();renderAll();renderSetup();toast('Profil geleert. Trag deine eigenen Sätze ein.')}
   else if(a==='planview'){openPlan(v)}
   else if(a==='plclose'){if(t.id!=='planSheet'||e.target===t)closePlan()}
   else if(a==='planstart'){startPlan(plView,v)}
-  else if(a==='planend'){S.plan=null;save();renderTrain()}
+  else if(a==='planend'){endWorkout()}
   else if(a==='planew'){if((S.plans||[]).length>=MAXPLANS){toast('Du hast schon 20 eigene Pläne. Lösch zuerst einen.');return}openPlanEdit(null,null)}
   else if(a==='plancopy'){if((S.plans||[]).length>=MAXPLANS){toast('Du hast schon 20 eigene Pläne. Lösch zuerst einen.');return}openPlanEdit(null,v)}
   else if(a==='planedit'){openPlanEdit(v,null)}
@@ -3126,6 +3209,11 @@ document.addEventListener('click',e=>{
     if(id&&S.plans.some(p=>p.id===id))S.plans=S.plans.map(p=>p.id===id?{id,n,ex:pe.ex.slice(0,MAXPLEX)}:p);
     else{id='u'+newId();S.plans.unshift({id,n,ex:pe.ex.slice(0,MAXPLEX)})}
     save();closePlanEdit();renderTrain();openPlan(id);toast('Plan gespeichert')}
+  else if(a==='restadj'){if(!restT)return;const d=+v,nd=Math.max(15,Math.min(600,restT.dur+d));restT.end+=(nd-restT.dur)*1000;restT.dur=nd;restT.done=false;S.restBy=S.restBy&&typeof S.restBy==='object'?S.restBy:{};S.restBy[restT.id]=nd;save();renderRest()}
+  else if(a==='restskip'){stopRest()}
+  else if(a==='restdef'){S.rest=Math.max(0,Math.min(600,parseInt(v,10)||0));save();renderRestSw();if(!S.rest)stopRest();toast(S.rest?'Pausentimer: '+fmtT(S.rest):'Pausentimer aus')}
+  else if(a==='freestart'){S.plan={id:'free',d:dayKey(Date.now()),st:Date.now()};wkPick=false;save();setTab('train');renderTrain();window.scrollTo(0,0)}
+  else if(a==='wkpick'){wkPick=!wkPick;applyWk();renderPlanCard()}
   else if(a==='push'){pushSet(v==='on')}
   else if(a==='pushyes'){pushSet(true)}
   else if(a==='pushlater'){S.pushAsk=Date.now();save();renderPushUI()}
@@ -3235,7 +3323,7 @@ document.addEventListener('click',e=>{
     if(!o){toast('Das ist kein gültiges Backup. Füge den kompletten Text ein.');return}
     if(!o.sets.length){toast('Das Backup enthält keine gültigen Sätze. Deine Daten bleiben unverändert.');return}
     if(!impConfirm){impConfirm=true;$('#bkLoad').textContent=`Ja, ${o.sets.length} Sätze einspielen und aktuelle Daten ersetzen`;return}
-    S.bw=o.bw;S.nick=o.nick||S.nick;S.crew=o.crew;S.crews=o.crews;S.plans=o.plans;fixCrews();S.studio=o.studio||'';S.bwLog=o.bwLog;S.bwChecked=o.bwChecked;S.avatar=o.avatar;S.custom=o.custom;S.sets=o.sets;S.example=false;
+    S.bw=o.bw;S.nick=o.nick||S.nick;S.crew=o.crew;S.crews=o.crews;S.plans=o.plans;S.crewJoin=o.crewJoin;S.restBy=o.restBy;if(o.rest!==undefined)S.rest=o.rest;fixCrews();S.studio=o.studio||'';S.bwLog=o.bwLog;S.bwChecked=o.bwChecked;S.avatar=o.avatar;S.custom=o.custom;S.sets=o.sets;S.example=false;
     impConfirm=false;$('#bkLoad').textContent='Backup einspielen';
     S.shown=undefined;syncShown();save();closeSheet();tl=BASE[0].id;prefill();renderAll();renderSetup();syncCrew();toast('Backup eingespielt');
   }
@@ -3289,7 +3377,7 @@ document.addEventListener('click',e=>{
     toast(S.example?'Profil gespeichert. Für die Crew zuerst das Profil leeren.':'Profil gespeichert');
   }
   else if(a==='leave'){
-    fixCrews();if(S.crews.length>1){const old=S.crew;S.crews=S.crews.filter(c=>c!==old);S.crew=S.crews[0];cscope='crew';inviteTxt='';save();syncCrew();for(const k in STALE)STALE[k]=1;renderSetup();renderBoard();toast('Du hast die Crew '+old+' verlassen');return}
+    fixCrews();if(S.crews.length>1){const old=S.crew;S.crews=S.crews.filter(c=>c!==old);if(S.crewJoin)delete S.crewJoin[old];S.crew=S.crews[0];cscope='crew';inviteTxt='';save();syncCrew();for(const k in STALE)STALE[k]=1;renderSetup();renderBoard();toast('Du hast die Crew '+old+' verlassen');return}
     clearTimeout(wTimer);S.nick='';lastSent='';leaveCrewDoc();save();renderTop();renderSetup();renderBoard();if(tab==='train')renderTrain();else STALE.train=1;if(tab==='home')renderHome();else STALE.home=1;toast('Du hast die Crew verlassen');
   }
 });
