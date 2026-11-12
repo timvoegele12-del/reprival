@@ -581,6 +581,14 @@ section[data-view]{min-width:0}
 .restbar.done{border-color:rgba(155,225,93,.6)}.restbar.done .rtx b{color:#9be15d;font-family:var(--display);font-size:17px}
 body.resting{padding-bottom:calc(190px + env(safe-area-inset-bottom,0px))!important}
 body.resting #toast{bottom:calc(166px + env(safe-area-inset-bottom,0px))}
+.swbtn{margin-top:8px;width:100%;min-height:46px;font-weight:700}
+.swatch{position:fixed;inset:0;z-index:140;background:radial-gradient(ellipse at 50% 30%,#13303a 0%,#07080a 70%);display:grid;grid-template-rows:auto 1fr auto;padding:calc(env(safe-area-inset-top,0px) + 18px) 18px calc(env(safe-area-inset-bottom,0px) + 18px);text-align:center;color:var(--fg)}
+.swatch .swh{display:grid;gap:4px}.swatch .swh small{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}.swatch .swh h2{margin:0;font-family:var(--display);font-size:22px}
+.swatch .swmid{display:grid;place-content:center;gap:10px}.swatch .swbig{font-family:var(--mono,monospace);font-weight:700;font-size:clamp(72px,24vw,150px);line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.swatch .swsub{color:var(--dim);font-size:15px}.swatch.cd .swbig{color:var(--accent)}.swatch.res .swbig{color:#9be15d}
+.swatch .swbtns{display:grid;gap:10px}.swatch .swstop{min-height:120px;border-radius:28px;border:0;background:#ff5f6d;color:#fff;font:inherit;font-family:var(--display);font-weight:800;font-size:28px;cursor:pointer}
+.swatch .swgo{min-height:64px;border-radius:20px;border:0;background:var(--fg);color:var(--bg);font:inherit;font-weight:800;font-size:18px;cursor:pointer}
+.swatch .swsec{min-height:48px;border-radius:16px;border:1px solid var(--line);background:transparent;color:var(--dim);font:inherit;font-weight:700;cursor:pointer}
 .tsets{display:grid;gap:6px}.tsets:empty{display:none}.tsets .tsh{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.tsets .tsh small{color:var(--accent);font-size:12.5px;font-weight:700}
 .tsrow{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:14px;background:var(--panel-2);border:1px solid var(--line);color:var(--fg);font:inherit;text-align:left;width:100%;cursor:pointer;min-height:44px}
 .tsrow .pli{background:rgba(155,225,93,.15);color:#9be15d}.tsrow b{flex:1;font-family:var(--mono,monospace);font-size:15px}.tsrow .pr{font-size:11px}
@@ -814,7 +822,8 @@ textarea{font-size:16px}
                 <label><input id="th" type="text" inputmode="numeric" maxlength="2" placeholder="0" autocomplete="off" aria-label="Stunden"><span>Std.</span></label><b>:</b>
                 <label><input id="tm" type="text" inputmode="numeric" maxlength="3" placeholder="26" autocomplete="off" aria-label="Minuten"><span>Min.</span></label><b>:</b>
                 <label><input id="ts" type="text" inputmode="numeric" maxlength="2" placeholder="30" autocomplete="off" aria-label="Sekunden"><span>Sek.</span></label>
-              </div></div>
+              </div>
+              <button class="btn sm swbtn" data-act="swopen" id="swBtn" hidden>⏱ <span>Zeit stoppen</span></button></div>
           </div>
           <div class="est"><div><div class="lbl" id="plbl">Geschätztes Maximum</div><div class="big" id="prev">–</div></div></div>
           <div id="dateRow" class="wkh" style="display:grid;gap:8px"><div class="lbl">Wann?</div><div class="pills" id="dayPills"></div></div>
@@ -875,6 +884,7 @@ textarea{font-size:16px}
 </div>
 
 <div class="restbar" id="restBar" hidden role="status" aria-live="polite"></div>
+<div class="swatch" id="swatch" hidden role="dialog" aria-modal="true" aria-labelledby="swTitle"></div>
 <div class="tour" id="tour" hidden><div class="tspot" id="tSpot"></div><div class="tbub" id="tBub" role="dialog" aria-modal="true" aria-labelledby="tTitle" aria-describedby="tTxt"></div></div>
 <div class="sheet" id="planSheet" data-act="plclose" hidden>
   <div class="sheetin plsheet" role="dialog" aria-modal="true" aria-labelledby="plTitle"><div id="plBody" class="plbody"></div></div>
@@ -1264,7 +1274,7 @@ LANG=S.lang==='en'?'en':'de';
 /* ---------- Sprache: Deutsch (Quelle) -> Englisch per Übersetzungsschicht ---------- */
 const D={
 // Navigation & allgemein
-'Start':'Home','Pausentimer nach jedem Satz':'Rest timer after each set','Pro Übung kannst du die Pause im Timer mit −15 / +15 anpassen. Die App merkt sich das für diese Übung.':'Adjust the rest per exercise with −15 / +15 in the timer. The app remembers it for that exercise.','Pause':'Rest','Pause vorbei':'Rest over','Nächster Satz! 💪':'Next set! 💪','Pausentimer aus':'Rest timer off','Heute bei dieser Übung':'Today for this exercise','Ziel':'Goal','Noch kein Satz heute. Los geht’s!':'No set yet today. Let’s go!','Training läuft':'Workout running','Freies Training':'Free workout','Training beenden':'End workout','Wähle unten eine Übung und trag deinen ersten Satz ein.':'Pick an exercise below and log your first set.','Andere Übung':'Other exercise','Auswahl schließen':'Close picker','Training beendet':'Workout finished','Trainingsdauer':'Workout duration','Brustpresse (Maschine)':'Chest Press (Machine)','Überzüge':'Pullovers','Rudern an der Maschine':'Machine Row','Hängen an der Stange':'Dead Hang','Schulterpresse (Maschine)':'Shoulder Press (Machine)','Seitheben (Maschine)':'Lateral Raise (Machine)','Bizeps-Maschine':'Biceps Curl Machine','Trizeps-Maschine':'Triceps Machine','Hackenschmidt-Kniebeuge':'Hack Squat','Kniebeuge (Multipresse)':'Smith Machine Squat','Abduktoren-Maschine':'Hip Abduction Machine','Adduktoren-Maschine':'Hip Adduction Machine','Wandsitzen':'Wall Sit','Bauchmaschine':'Ab Crunch Machine','Plank (Unterarmstütz)':'Plank','Seitstütz':'Side Plank','Auf Zeit':'Timed','Dauer (Sekunden)':'Duration (seconds)','Wertung (Zeit)':'Score (time)','Zeit':'Time','Sek.':'sec','Bitte eine Dauer von 1 bis 900 Sekunden eintragen.':'Please enter a duration of 1 to 900 seconds.','Benachrichtigungen':'Notifications','Verpasse kein Duell':'Never miss a duel','Aktivieren':'Turn on','Später':'Later','Verstanden':'Got it',
+'Start':'Home','Zeit stoppen':'Time it','Stoppuhr':'Stopwatch','Geh in Position …':'Get into position …','Sofort starten':'Start now','Halten! Tippe auf Stopp, wenn du fertig bist.':'Hold it! Tap Stop when you are done.','Stopp':'Stop','Stark! 💪':'Strong! 💪','Nur eintragen':'Just fill in','Nochmal':'Again','Pausentimer nach jedem Satz':'Rest timer after each set','Pro Übung kannst du die Pause im Timer mit −15 / +15 anpassen. Die App merkt sich das für diese Übung.':'Adjust the rest per exercise with −15 / +15 in the timer. The app remembers it for that exercise.','Pause':'Rest','Pause vorbei':'Rest over','Nächster Satz! 💪':'Next set! 💪','Pausentimer aus':'Rest timer off','Heute bei dieser Übung':'Today for this exercise','Ziel':'Goal','Noch kein Satz heute. Los geht’s!':'No set yet today. Let’s go!','Training läuft':'Workout running','Freies Training':'Free workout','Training beenden':'End workout','Wähle unten eine Übung und trag deinen ersten Satz ein.':'Pick an exercise below and log your first set.','Andere Übung':'Other exercise','Auswahl schließen':'Close picker','Training beendet':'Workout finished','Trainingsdauer':'Workout duration','Brustpresse (Maschine)':'Chest Press (Machine)','Überzüge':'Pullovers','Rudern an der Maschine':'Machine Row','Hängen an der Stange':'Dead Hang','Schulterpresse (Maschine)':'Shoulder Press (Machine)','Seitheben (Maschine)':'Lateral Raise (Machine)','Bizeps-Maschine':'Biceps Curl Machine','Trizeps-Maschine':'Triceps Machine','Hackenschmidt-Kniebeuge':'Hack Squat','Kniebeuge (Multipresse)':'Smith Machine Squat','Abduktoren-Maschine':'Hip Abduction Machine','Adduktoren-Maschine':'Hip Adduction Machine','Wandsitzen':'Wall Sit','Bauchmaschine':'Ab Crunch Machine','Plank (Unterarmstütz)':'Plank','Seitstütz':'Side Plank','Auf Zeit':'Timed','Dauer (Sekunden)':'Duration (seconds)','Wertung (Zeit)':'Score (time)','Zeit':'Time','Sek.':'sec','Bitte eine Dauer von 1 bis 900 Sekunden eintragen.':'Please enter a duration of 1 to 900 seconds.','Benachrichtigungen':'Notifications','Verpasse kein Duell':'Never miss a duel','Aktivieren':'Turn on','Später':'Later','Verstanden':'Got it',
 'Wir sagen dir Bescheid, wenn dich jemand herausfordert, auf deinen Eintrag reagiert oder dich in der Crew überholt.':'We let you know when someone challenges you, reacts to your entry or overtakes you in the crew.',
 'Damit RepRival dir Bescheid geben kann, füge die App zum Home-Bildschirm hinzu: in Safari auf Teilen → „Zum Home-Bildschirm“.':'So RepRival can notify you, add the app to your home screen: in Safari tap Share → “Add to Home Screen”.',
 'Auf dem iPhone gehen Benachrichtigungen nur, wenn RepRival auf dem Home-Bildschirm ist: in Safari auf Teilen → „Zum Home-Bildschirm“.':'On iPhone, notifications only work when RepRival is on your home screen: in Safari tap Share → “Add to Home Screen”.',
@@ -1456,7 +1466,7 @@ const PAT=[
  [/^Im Plan \((\d+)\/(\d+)\)$/,m=>`In plan (${m[1]}/${m[2]})`],
  [/^(\d+) Übungen$/,m=>`${m[1]} exercises`],[/^1 Übung$/,()=>'1 exercise'],
  [/^(\d+) Trainingstage$/,m=>`${m[1]} training days`],[/^Schritt (\d+) von (\d+)$/,m=>`Step ${m[1]} of ${m[2]}`],
- [/^(\d+) Min\.$/,m=>`${m[1]} min`], [/^Pausentimer: (.+)$/,m=>`Rest timer: ${m[1]}`],[/^(\d+) Sätze heute$/,m=>`${m[1]} sets today`],[/^1 Satz heute$/,()=>'1 set today'],[/^Training beendet · (\d+) (Satz|Sätze) · (\d+) Min\.$/,m=>`Workout finished · ${m[1]} ${m[1]==='1'?'set':'sets'} · ${m[3]} min`],
+ [/^(\d+) Min\.$/,m=>`${m[1]} min`], [/^(\d+:\d{2}) eingetragen$/,m=>`${m[1]} filled in`],[/^Pausentimer: (.+)$/,m=>`Rest timer: ${m[1]}`],[/^(\d+) Sätze heute$/,m=>`${m[1]} sets today`],[/^1 Satz heute$/,()=>'1 set today'],[/^Training beendet · (\d+) (Satz|Sätze) · (\d+) Min\.$/,m=>`Workout finished · ${m[1]} ${m[1]==='1'?'set':'sets'} · ${m[3]} min`],
  [/^Alle anzeigen \((\d+)\)$/,m=>`Show all (${m[1]})`],
  [/^Mehr anzeigen \((\d+) weitere\)$/,m=>`Show more (${m[1]} more)`],
  [/^(.+) (\d+) Wdh bearbeiten$/,m=>`Edit ${tw(m[1])} ${m[2]} reps`],
@@ -2316,7 +2326,7 @@ let rcState=null;
 let navDepth=0;
 function navPush(){if(!window.__standalone||navDepth)return;try{history.pushState({rr:1},'');navDepth=1}catch(e){}}
 if(window.__standalone)window.addEventListener('popstate',()=>{navDepth=0;
-  if(tourOpen()){endTour()}else if(rcState){closeRecap()}else if(!$('#planEdit').hidden){closePlanEdit()}else if(!$('#planSheet').hidden){closePlan()}else if(!$('#remind').hidden){closeRemind()}else if(!$('#sheet').hidden){closeSheet()}else if(!$('#fx').hidden){try{closeRankUp()}catch(e){$('#fx').hidden=true}}else if(tab!=='home'){setTab('home');return}else return;
+  if(swOpenNow()){swClose()}else if(tourOpen()){endTour()}else if(rcState){closeRecap()}else if(!$('#planEdit').hidden){closePlanEdit()}else if(!$('#planSheet').hidden){closePlan()}else if(!$('#remind').hidden){closeRemind()}else if(!$('#sheet').hidden){closeSheet()}else if(!$('#fx').hidden){try{closeRankUp()}catch(e){$('#fx').hidden=true}}else if(tab!=='home'){setTab('home');return}else return;
   if(tab!=='home')navPush()});
 function recapData(pk){
   const real=S.sets.filter(z=>L(z.lift)&&monthKey(z.ts)===pk);if(!real.length)return null;
@@ -2489,6 +2499,29 @@ function renderHome(){
 
 
 
+
+/* ---------- Stoppuhr für Übungen auf Zeit ---------- */
+let sw=null,swIv=null,swLock=null;
+function swOpen(){const x=nx&&nx.kind==='tm'?{n:(($('#exName')||{}).value||'Neue Übung')}:L(tl);sw={phase:'cd',go:Date.now()+5000,name:x?x.n:'',res:0,beep:5};
+  $('#swatch').hidden=false;document.documentElement.style.overflow='hidden';navPush();
+  try{if(navigator.wakeLock)navigator.wakeLock.request('screen').then(l=>{swLock=l}).catch(()=>{})}catch(e){}
+  clearInterval(swIv);swIv=setInterval(swTick,100);swRender()}
+function swClose(){clearInterval(swIv);swIv=null;sw=null;$('#swatch').hidden=true;document.documentElement.style.overflow='';try{swLock&&swLock.release()}catch(e){}swLock=null}
+function swOpenNow(){return !!sw}
+function swTick(){if(!sw)return;const now=Date.now();
+  if(sw.phase==='cd'){const left=Math.ceil((sw.go-now)/1000);if(left<sw.beep&&left>0){sw.beep=left;try{sfx('tap')}catch(e){}}
+    if(now>=sw.go){sw.phase='run';sw.t0=sw.go;try{vib(120)}catch(e){}try{sfx('save')}catch(e){}}}
+  swRender()}
+function swRender(){const el=$('#swatch');if(!sw||!el)return;const now=Date.now();el.classList.toggle('cd',sw.phase==='cd');el.classList.toggle('res',sw.phase==='res');
+  const head=`<div class="swh"><small>Stoppuhr</small><h2 id="swTitle">${esc(sw.name)}</h2></div>`;
+  if(sw.phase==='cd'){const left=Math.max(1,Math.ceil((sw.go-now)/1000));
+    el.dataset.ph='cd';
+    el.innerHTML=head+`<div class="swmid"><div class="swbig">${left}</div><div class="swsub">Geh in Position …</div></div><div class="swbtns"><button class="swgo" data-act="swnow">Sofort starten</button><button class="swsec" data-act="swclose">Abbrechen</button></div>`;return}
+  if(sw.phase==='run'){const t=Math.max(0,(now-sw.t0)/1000),tt=Math.floor(t*10)/10;
+    const big=el.querySelector('.swbig');if(big&&el.dataset.ph==='run'){big.textContent=fmtT(Math.floor(t))+'.'+Math.floor((tt%1)*10);return}
+    el.dataset.ph='run';el.innerHTML=head+`<div class="swmid"><div class="swbig">${fmtT(Math.floor(t))}.0</div><div class="swsub">Halten! Tippe auf Stopp, wenn du fertig bist.</div></div><div class="swbtns"><button class="swstop" data-act="swstop">Stopp</button></div>`;return}
+  el.dataset.ph='res';el.innerHTML=head+`<div class="swmid"><div class="swbig">${fmtT(sw.res)}</div><div class="swsub">Stark! 💪</div></div><div class="swbtns"><button class="swgo" data-act="swsave">Satz speichern</button><button class="swsec" data-act="swuse">Nur eintragen</button><button class="swsec" data-act="swagain">Nochmal</button></div>`}
+function swApply(){if(!sw)return;const r=$('#r');r.value=String(Math.max(1,sw.res));r.dispatchEvent(new Event('input',{bubbles:true}))}
 /* ---------- Pausentimer ---------- */
 let restT=null,restIv=null;
 const RESTS=[[0,'Aus'],[60,'1:00'],[90,'1:30'],[120,'2:00'],[180,'3:00']];
@@ -2655,7 +2688,7 @@ function renderTrain(){
   const cdk=ex.kind==='cd',cm=cdm(ex);
   $('#wlbl').textContent=cdk?'Distanz ('+(cm.du==='m'?'m':DU())+')':bwk?'Zusatzgewicht ('+U()+', optional)':'Gewicht ('+U()+')';
   $('#w').placeholder=cdk?(cm.du==='m'?'2000':(S.dunit==='mi'?fmt(3.1):'5')):bwk?'0':(S.unit==='lb'?'175':'80');
-  $('#rlbl').textContent=cdk?'Zeit':seck?'Dauer (Sekunden)':'Wiederholungen';$('#repStep').hidden=cdk;$('#timeBox').hidden=!cdk;
+  $('#rlbl').textContent=cdk?'Zeit':seck?'Dauer (Sekunden)':'Wiederholungen';{const sb=$('#swBtn');if(sb)sb.hidden=!seck}$('#repStep').hidden=cdk;$('#timeBox').hidden=!cdk;
   {const b=(a,t)=>{const e=document.querySelector('[data-act="'+a+'"]');if(e)e.setAttribute('aria-label',t)};b('wm',cdk?'Distanz verringern':'Gewicht verringern');b('wp',cdk?'Distanz erhöhen':'Gewicht erhöhen');b('rm',cdk||seck?'Zeit verringern':'Wiederholungen verringern');b('rp',cdk||seck?'Zeit erhöhen':'Wiederholungen erhöhen')}
   {const ri=$('#r');ri.placeholder=cdk?'26:30':seck?'45':'5';ri.setAttribute('inputmode',cdk?'text':'numeric')}
   $('#plbl').textContent=cdk?'Hochgerechnet '+refLbl(ex):seck?'Wertung (Zeit)':bwk?'Wertung in Wiederholungen':'Geschätztes Maximum';
@@ -3209,6 +3242,13 @@ document.addEventListener('click',e=>{
     if(id&&S.plans.some(p=>p.id===id))S.plans=S.plans.map(p=>p.id===id?{id,n,ex:pe.ex.slice(0,MAXPLEX)}:p);
     else{id='u'+newId();S.plans.unshift({id,n,ex:pe.ex.slice(0,MAXPLEX)})}
     save();closePlanEdit();renderTrain();openPlan(id);toast('Plan gespeichert')}
+  else if(a==='swopen'){swOpen()}
+  else if(a==='swclose'){swClose()}
+  else if(a==='swnow'){if(sw&&sw.phase==='cd'){sw.go=Date.now();swTick()}}
+  else if(a==='swstop'){if(sw&&sw.phase==='run'){sw.res=Math.max(1,Math.round((Date.now()-sw.t0)/1000));sw.phase='res';try{vib(60)}catch(e){}swRender()}}
+  else if(a==='swagain'){if(sw){sw.phase='cd';sw.go=Date.now()+5000;sw.beep=5;delete $('#swatch').dataset.ph;swRender()}}
+  else if(a==='swuse'){swApply();const t=sw?sw.res:0;swClose();toast(fmtT(t)+' eingetragen')}
+  else if(a==='swsave'){swApply();swClose();setTimeout(()=>{const b=$('#saveBtn');if(b)b.click()},30)}
   else if(a==='restadj'){if(!restT)return;const d=+v,nd=Math.max(15,Math.min(600,restT.dur+d));restT.end+=(nd-restT.dur)*1000;restT.dur=nd;restT.done=false;S.restBy=S.restBy&&typeof S.restBy==='object'?S.restBy:{};S.restBy[restT.id]=nd;save();renderRest()}
   else if(a==='restskip'){stopRest()}
   else if(a==='restdef'){S.rest=Math.max(0,Math.min(600,parseInt(v,10)||0));save();renderRestSw();if(!S.rest)stopRest();toast(S.rest?'Pausentimer: '+fmtT(S.rest):'Pausentimer aus')}
@@ -3397,6 +3437,7 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape'&&!$('#fx').hidden){closeRankUp();return}
   if(e.key==='Escape'&&rcState){closeRecap();return}
   if((e.key==='ArrowRight'||e.key==='ArrowLeft')&&rcState){const st=rcState;st.i=Math.max(0,Math.min(st.sl.length-1,st.i+(e.key==='ArrowRight'?1:-1)));renderRecap();return}
+  if(e.key==='Escape'&&swOpenNow()){swClose();return}
   if(e.key==='Escape'&&tourOpen()){endTour();return}
   if(e.key==='Escape'&&!$('#planEdit').hidden){closePlanEdit();return}
   if(e.key==='Escape'&&!$('#planSheet').hidden){closePlan();return}
