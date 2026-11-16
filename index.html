@@ -898,7 +898,10 @@ html[data-theme="light"] :is(.fx,.swatch,.recap,.prfx){color-scheme:dark;--bg:#0
 .sugo{appearance:none;-webkit-appearance:none;font:inherit;color:inherit;text-align:left;cursor:pointer;display:grid;gap:2px;align-content:start;padding:9px 10px;border-radius:12px;border:1px solid var(--line);background:var(--panel);min-height:58px;min-width:0}
 .sugo b{font-size:12px;color:var(--dim);font-weight:700}.sugo span{font-family:var(--display);font-weight:700;font-size:14px;overflow-wrap:anywhere}
 .sugo em{font-style:normal;font-size:11px;font-weight:700;color:var(--t11)}
-.sugo.rec{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}.sugo.rec b{color:var(--accent)}
+.sugo{position:relative}
+.sugo.rec b{color:var(--accent)}.sugo.sel{padding-bottom:30px}
+.sugo.sel{border-color:var(--fg);background:var(--w08);box-shadow:inset 0 0 0 1px var(--fg)}
+.sugo.sel::after{content:"✓";position:absolute;bottom:8px;right:8px;width:18px;height:18px;border-radius:50%;background:var(--fg);color:var(--bg);font-size:11px;font-weight:800;display:grid;place-items:center}
 .sugo:active{transform:scale(.97)}
 @media (max-width:360px){.sugopts{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .plbtnrow{display:flex;justify-content:flex-start}
@@ -3651,8 +3654,12 @@ function renderSug(){
   const ls=lastSession(tl);if(!ls){el.hidden=true;return}
   const bw=S.bw,best=compute(S.sets).best[tl],cu=isCustom(tl),sc=z=>scOf(x,z.w,z.r,setBw(z));
   const top=ls.sets.reduce((a,z)=>sc(z)>sc(a)?z:a,ls.sets[0]);
-  const opts=sugOpts(x,top).map(([l,w,r,rec])=>{const s2=scOf(x,w,r,bw);const up=!cu&&best!==undefined&&tierOfS(x,s2)>tierOfS(x,best),pr=!cu&&best!==undefined&&s2>best*1.01;
-    return `<button class="sugo${rec?' rec':''}" data-act="sugfill" data-w="${w}" data-r="${r}"><b>${rec?'Empfohlen':l}</b><span>${esc(setTxt(x,{w,r}))}</span>${rec&&l!=='Wie letztes Mal'?`<em style="color:var(--dim);font-weight:600">${esc(l)}</em>`:''}${up?'<em>🎯 Rang-Aufstieg</em>':pr?'<em>🏆 Bestleistung</em>':''}</button>`}).join('');
+  const nv=v=>{const n=num(String(v||''));return Number.isFinite(n)?n:0},wIn=nv($('#w').value),rIn=nv($('#r').value),tIn=(()=>{try{return readTime()}catch(e){return NaN}})();
+  const same=(w,r)=>{try{if(x.kind==='cd'){const d=cdm(x).du==='m'?Math.round(w*1000):Number(fmtIn(dIn(w),3).replace(',','.'));return Math.abs(wIn-d)<1e-6&&Math.round(tIn)===Math.round(r)}
+    const ew=w>0?Number(fmtIn(toU(w),1).replace(',','.')):0;return Math.abs(wIn-ew)<1e-6&&Math.round(rIn)===r}catch(e){return false}};
+  let selSeen=false;
+  const opts=sugOpts(x,top).map(([l,w,r,rec])=>{const s2=scOf(x,w,r,bw),sel=!selSeen&&same(w,r);if(sel)selSeen=true;const up=!cu&&best!==undefined&&tierOfS(x,s2)>tierOfS(x,best),pr=!cu&&best!==undefined&&s2>best*1.01;
+    return `<button class="sugo${rec?' rec':''}${sel?' sel':''}" data-act="sugfill" data-w="${w}" data-r="${r}" aria-pressed="${sel}"><b>${rec?'Empfohlen':l}</b><span>${esc(setTxt(x,{w,r}))}</span>${rec&&l!=='Wie letztes Mal'?`<em style="color:var(--dim);font-weight:600">${esc(l)}</em>`:''}${up?'<em>🎯 Rang-Aufstieg</em>':pr?'<em>🏆 Bestleistung</em>':''}</button>`}).join('');
   const lt=ls.sets.slice(0,6).map(z=>setTxt(x,z)).join(' · ')+(ls.sets.length>6?' …':'');
   el.innerHTML=`<div class="sugh"><span class="lbl" style="margin:0">Letztes Mal</span><small>${agoOf(ls.ts)}</small></div><div class="suglast">${esc(lt)}</div><div class="lbl" style="margin:2px 0 0">Heute versuchen</div><div class="sugopts">${opts}</div>`;
   el.hidden=false;
