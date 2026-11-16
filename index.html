@@ -119,15 +119,17 @@
 .rrl-legal{text-align:center;font-size:13px;color:var(--dim);margin-top:4px}
 </style></head><body>
 <title>RepRival</title>
+<script>try{var __t=(JSON.parse(localStorage.getItem('eisenrang-v1')||'{}')||{}).theme;if(__t==='auto')__t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';if(__t==='light')document.documentElement.dataset.theme='light'}catch(e){}</script>
 <style>@font-face{font-family:'Manrope';src:url(manrope.woff) format('woff');font-weight:200 800;font-display:swap}@font-face{font-family:'Unbounded';src:url(unbounded.woff) format('woff');font-weight:200 900;font-display:swap}@font-face{font-family:'JetBrains Mono';src:url(jetbrainsmono.woff) format('woff');font-weight:100 800;font-display:swap}</style>
 <style>
 /* Layout: creator-style bento grid on near-black. Greeting row on top, one view at a time (Training / Ränge / Crew), floating pill dock at the bottom. Big wide numerals, soft rounded panels, one ice-blue highlight. */
 :root{
   color-scheme:dark;
-  --bg:#07080a; --panel:#111316; --panel-2:#181b1f; --line:rgba(255,255,255,.09);
+  --bg:#07080a; --panel:#111316; --panel-2:#181b1f; --line:var(--w09);
   --fg:#f4f5f7; --dim:#8b929b; --accent:#7ae7ff; --accent-ink:#04141a;
   --good:#5be3a0; --bad:#ff8a7a;
-  --t0:#8b929b; --t1:#d08a4e; --t2:#b9c2cc; --t3:#f2c14e; --t4:#9be15d; --t5:#4be3a5; --t6:#43d0e8; --t7:#5a9bff; --t8:#8f7bff; --t9:#c27bff; --t10:#ff5fa2; --t11:#ffd86b;
+  --sil:#262c33;--mus:#3a424c;--off:#3a4048;--ph:#5c636b;--dockbg:rgba(24,27,31,.82);--dockbg2:rgba(12,14,17,.9);--headbg:rgba(7,8,10,.78);--restbg:rgba(17,20,24,.96);--warm:#ffb469;--scrim:rgba(0,0,0,.62);--w03:rgba(255,255,255,.03);--w04:rgba(255,255,255,.04);--w05:rgba(255,255,255,.05);--w06:rgba(255,255,255,.06);--w07:rgba(255,255,255,.07);--w08:rgba(255,255,255,.08);--w09:rgba(255,255,255,.09);--w10:rgba(255,255,255,.1);--w18:rgba(255,255,255,.18);--w20:rgba(255,255,255,.2);--w22:rgba(255,255,255,.22);--w25:rgba(255,255,255,.25);
+  --t0:#8b929b; --t1:#d08a4e; --t2:#b9c2cc; --t3:#f2c14e; --t4:var(--t4); --t5:#4be3a5; --t6:#43d0e8; --t7:#5a9bff; --t8:#8f7bff; --t9:#c27bff; --t10:#ff5fa2; --t11:#ffd86b;
   --display:"Unbounded","Arial Black",system-ui,sans-serif;
   --body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
@@ -163,7 +165,7 @@ p{margin:0}
 .bwbox span{font-size:12px;color:var(--dim);font-weight:700}
 
 input{background:var(--panel-2);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-family:var(--mono);font-size:20px;width:100%;min-width:0}
-input::placeholder{color:#5c636b}
+input::placeholder{color:var(--ph)}
 
 .banner{margin-top:6px;border:1px dashed var(--line);border-radius:16px;padding:12px 14px;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;font-size:14px;color:var(--dim)}
 main{padding-top:12px}
@@ -175,7 +177,7 @@ section[data-view]{min-width:0}
 .card h3{margin:0;font-family:var(--display);font-weight:600;font-size:15px}
 
 .btn{border:1px solid var(--line);background:var(--panel-2);border-radius:16px;padding:12px 18px;font-weight:700;cursor:pointer;min-height:46px}
-.btn:hover{border-color:rgba(255,255,255,.25)}
+.btn:hover{border-color:var(--w25)}
 .btn.primary{background:var(--fg);color:var(--bg);border-color:var(--fg);font-family:var(--display);font-weight:600;font-size:15px;min-height:56px;width:100%}
 .btn.primary:active{transform:scale(.985)}
 .btn.sm{min-height:38px;padding:8px 14px;font-size:14px;border-radius:12px}
@@ -195,7 +197,7 @@ section[data-view]{min-width:0}
 .pill[aria-pressed="true"] .exi .e{stroke:#0b7f99}.pill[aria-pressed="true"] .exi .p{fill:#0b7f99}
 .gchips{gap:6px}.gchips .pill{min-height:40px;padding:8px 13px;font-size:13px;background:transparent}
 .gchips .pill[aria-pressed="true"]{background:rgba(122,231,255,.14);color:var(--accent);border-color:rgba(122,231,255,.4)}
-.expic{width:52px;height:52px;flex:none;margin-left:auto;display:grid;place-items:center;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid var(--line)}.expic .exi{width:36px;height:36px}
+.expic{width:52px;height:52px;flex:none;margin-left:auto;display:grid;place-items:center;border-radius:14px;background:var(--w04);border:1px solid var(--line)}.expic .exi{width:36px;height:36px}
 .nm-e .exi{width:20px;height:20px;display:inline-block;vertical-align:-4px;margin-right:6px;color:var(--fg)}
 .plcard{gap:12px}
 .pltiles{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;margin:0 -4px;padding:2px 4px 4px;scroll-snap-type:x proximity}.pltiles::-webkit-scrollbar{display:none}
@@ -205,7 +207,7 @@ section[data-view]{min-width:0}
 .pltile:active{transform:scale(.97)}
 .bmap{display:flex;justify-content:center;gap:6px}.bmap .body{height:64px;width:auto}
 .bmap.big .body{height:200px}.bmap.mid .body{height:130px}.bmap.big{gap:22px;padding:6px 0}
-.body .sil path{fill:#262c33}.body .m{fill:#3a424c;stroke:var(--panel);stroke-width:1.1}.pltile .body .m,.pltile .body .ml{stroke:var(--panel-2)}
+.body .sil path{fill:var(--sil)}.body .m{fill:var(--mus);stroke:var(--panel);stroke-width:1.1}.pltile .body .m,.pltile .body .ml{stroke:var(--panel-2)}
 .body .m.mp{fill:#ff7a59}.body .m.ms{fill:#a8553f}.body .ml{fill:none;stroke:var(--panel);stroke-width:.8}
 .mlegend{display:flex;justify-content:center;gap:16px;font-size:12px;color:var(--dim)}.mlegend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}.mlegend i.mp{background:#ff7a59}.mlegend i.ms{background:#a8553f}
 .plbody{display:grid;gap:14px}.plsh{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.plsh h2{overflow-wrap:anywhere}
@@ -214,9 +216,9 @@ section[data-view]{min-width:0}
 .plist{display:grid;gap:8px}
 .plrow{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:10px 12px;border-radius:16px;background:var(--panel-2);border:1px solid var(--line);color:var(--fg);font:inherit;cursor:pointer;min-height:56px}
 .plrow .exi{width:30px;height:30px}.pltx{min-width:0;flex:1;display:grid;gap:2px}.pltx b{font-weight:700;font-size:15px;overflow-wrap:anywhere}.pltx small{color:var(--dim);font-size:12.5px}.pltx small .mono{color:var(--accent);font-size:12.5px}
-.pli{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;background:rgba(255,255,255,.06);color:var(--dim)}
+.pli{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;background:var(--w06);color:var(--dim)}
 .plhead{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}.pln{display:block;font-family:var(--display);font-weight:800;font-size:20px;overflow-wrap:anywhere}.plprog{color:var(--accent);font-size:15px}
-.plex .pill.done{border-color:rgba(155,225,93,.45);color:#9be15d}.plex .ck{font-weight:800;width:22px;text-align:center}
+.plex .pill.done{border-color:rgba(155,225,93,.45);color:var(--t4)}.plex .ck{font-weight:800;width:22px;text-align:center}
 .pesel{display:grid;gap:6px}.perow{display:flex;align-items:center;gap:8px;padding:6px 6px 6px 10px;border-radius:14px;background:var(--panel-2);border:1px solid var(--line)}.perow b{flex:1;min-width:0;font-size:14px;overflow-wrap:anywhere}
 .peadd{display:flex;flex-wrap:wrap;gap:8px}.peadd .pill[aria-pressed="true"]::after{content:'✓';margin-left:2px;font-weight:800}
 .srn{display:flex;align-items:center;gap:10px;min-width:0}.srn .exi{width:28px;height:28px}.srn b{font-family:var(--display);font-weight:700;font-size:17px;overflow-wrap:anywhere}
@@ -261,14 +263,14 @@ section[data-view]{min-width:0}
 .x{background:none;border:0;color:var(--dim);cursor:pointer;font-size:22px;line-height:1;padding:8px;min-width:40px;min-height:40px;border-radius:10px}
 .x:hover{color:var(--bad)}
 
-.ring{--p:0;--c:var(--t0);position:relative;width:76px;height:76px;border-radius:50%;flex:none;display:grid;place-items:center;background:conic-gradient(var(--c) calc(var(--p)*1%),rgba(255,255,255,.08) 0)}
+.ring{--p:0;--c:var(--t0);position:relative;width:76px;height:76px;border-radius:50%;flex:none;display:grid;place-items:center;background:conic-gradient(var(--c) calc(var(--p)*1%),var(--w08) 0)}
 .ring::before{content:"";position:absolute;inset:7px;border-radius:50%;background:var(--panel)}
 .ring span{position:relative;font-family:var(--display);font-weight:800;font-size:20px;color:var(--c)}
 .ring.xl{width:104px;height:104px}.ring.xl::before{inset:9px}.ring.xl span{font-size:30px}
 .rk{display:flex;align-items:center;gap:16px;min-width:0}
 .tname{font-family:var(--display);font-weight:800;font-size:clamp(18px,5.4vw,24px);line-height:1.1;color:var(--c);overflow-wrap:anywhere;letter-spacing:-.01em}
 .tname.xl{font-size:clamp(22px,7vw,32px)}
-.bar{height:8px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden}
+.bar{height:8px;border-radius:99px;background:var(--w08);overflow:hidden}
 .bar i{display:block;height:100%;background:var(--c);border-radius:99px}
 .next{display:flex;justify-content:space-between;align-items:baseline;gap:4px 12px;flex-wrap:wrap}
 .next b{font-family:var(--display);font-weight:600;font-size:14px}
@@ -299,7 +301,7 @@ section[data-view]{min-width:0}
 .prstamp{font-family:var(--display);font-weight:800;letter-spacing:.14em;font-size:clamp(20px,7vw,28px);color:#ffd86b;border:3px solid #ffd86b;border-radius:10px;padding:4px 12px;transform:rotate(-6deg);text-shadow:0 0 18px rgba(255,216,107,.5)}
 .prval{font-family:var(--mono);font-size:15px}
 .prd{color:var(--good);font-weight:700;font-size:13px}
-.prshine{position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,rgba(255,255,255,.22) 50%,transparent 65%);transform:translateX(-120%);pointer-events:none}
+.prshine{position:absolute;inset:0;background:linear-gradient(110deg,transparent 35%,var(--w22) 50%,transparent 65%);transform:translateX(-120%);pointer-events:none}
 .prfx.in .prcard{animation:prin .5s cubic-bezier(.2,1.3,.3,1) both}
 .prfx.in .prstamp{animation:prstamp .55s .12s cubic-bezier(.2,1.6,.3,1) both}
 .prfx.in .prshine{animation:prshine 1s .45s ease-out both}
@@ -310,7 +312,7 @@ section[data-view]{min-width:0}
 @keyframes prout{to{opacity:0;transform:translateY(-24px) scale(.96)}}
 .floatpts{position:fixed;z-index:95;transform:translate(-50%,-50%);font-family:var(--display);font-weight:800;font-size:22px;color:var(--accent);text-shadow:0 2px 12px rgba(0,0,0,.6);pointer-events:none;animation:floatup 1.2s ease-out forwards}
 @keyframes floatup{0%{opacity:0;transform:translate(-50%,-30%) scale(.7)}20%{opacity:1;transform:translate(-50%,-90%) scale(1.15)}100%{opacity:0;transform:translate(-50%,-260%) scale(1)}}
-.fxextra{display:flex;align-items:center;gap:10px;margin-top:6px;padding:8px 14px 8px 8px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,216,107,.4);color:var(--fg);font-size:14px;animation:fxup .6s .85s ease-out both}
+.fxextra{display:flex;align-items:center;gap:10px;margin-top:6px;padding:8px 14px 8px 8px;border-radius:999px;background:var(--w06);border:1px solid rgba(255,216,107,.4);color:var(--fg);font-size:14px;animation:fxup .6s .85s ease-out both}
 .fxextra .pic{width:40px;height:40px}
 @media (prefers-reduced-motion:reduce){.prfx.in .prcard,.prfx.in .prstamp,.prfx.in .prshine,.prfx.out .prcard,.floatpts{animation-duration:.01s!important;animation-delay:0s!important}}
 .fx{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:24px;overflow:hidden}
@@ -352,7 +354,7 @@ section[data-view]{min-width:0}
 .nm b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700}
 .nm em{font-style:normal;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-left:6px}
 .nm small{color:var(--dim);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.track{height:4px;border-radius:9px;background:rgba(255,255,255,.07);overflow:hidden}
+.track{height:4px;border-radius:9px;background:var(--w07);overflow:hidden}
 .track i{display:block;height:100%;background:var(--c);border-radius:9px}
 .val{font-family:var(--mono);font-size:18px;text-align:right}
 .note{font-size:13px;color:var(--dim)}
@@ -372,7 +374,7 @@ section[data-view]{min-width:0}
 .crewform{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
 .crewform input{font-family:var(--body);font-size:17px}
 
-.dock{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:9;display:flex;gap:4px;padding:6px;border-radius:999px;background:rgba(24,27,31,.82);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border:1px solid var(--line);max-width:calc(100% - 32px)}
+.dock{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:9;display:flex;gap:4px;padding:6px;border-radius:999px;background:var(--dockbg);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border:1px solid var(--line);max-width:calc(100% - 32px)}
 .dock button{border:0;background:transparent;border-radius:999px;padding:12px 20px;font-family:var(--display);font-weight:600;font-size:13px;color:var(--dim);cursor:pointer;min-height:46px}
 .dock button[aria-selected="true"]{background:var(--fg);color:var(--bg)}
 .dock button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:7px 12px;min-height:52px;border-radius:22px}
@@ -394,13 +396,13 @@ section[data-view]{min-width:0}
 #streakCard.htile{padding:0}#streakCard.htile .htb{padding:14px;min-height:128px;align-content:start;border-radius:24px}
 .stkmini{display:flex;gap:4px}.stkmini i{flex:1;max-width:14px;aspect-ratio:1;border-radius:50%;background:var(--panel-2);border:1px solid var(--line)}
 .stkmini i.on{background:var(--accent);border-color:var(--accent)}.stkmini i.today:not(.on){border:1.5px dashed rgba(122,231,255,.7)}
-.htflame{width:26px;height:26px;color:#3a4048;flex:none}.htflame.hot{color:#ff9f43;filter:drop-shadow(0 0 6px rgba(255,159,67,.5))}.htflame svg{width:100%;height:100%;display:block}
+.htflame{width:26px;height:26px;color:var(--off);flex:none}.htflame.hot{color:#ff9f43;filter:drop-shadow(0 0 6px rgba(255,159,67,.5))}.htflame svg{width:100%;height:100%;display:block}
 .hbody{appearance:none;-webkit-appearance:none;border:0;background:none;padding:6px 0 0;margin:0;cursor:pointer;display:grid;justify-items:center;gap:10px;width:100%;color:inherit;font:inherit;border-radius:18px}
 .hbody:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 .lvmap{display:flex;justify-content:center;gap:18px}
 .lvmap .lvb{height:212px;width:auto;overflow:visible}
 .lvmap.sm .lvb{height:150px}.lvmap.sm{gap:12px}
-.lvb .sil path{fill:#262c33}
+.lvb .sil path{fill:var(--sil)}
 .lvb .m{fill:#323941;stroke:var(--panel);stroke-width:1.6;stroke-linejoin:round;fill-opacity:.92}
 .lvb .ml{fill:none;stroke:rgba(0,0,0,.35);stroke-width:1}
 .lvb .hring{fill:var(--panel-2);stroke:var(--accent);stroke-width:1.2}
@@ -447,7 +449,7 @@ section[data-view]{min-width:0}
 .pic.sm{width:38px;height:38px}
 .who{cursor:pointer;border-radius:16px}
 .who:hover .hi small{color:var(--accent)}
-.sheet{position:fixed;inset:0;z-index:30;display:grid;place-items:end center;background:rgba(0,0,0,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+.sheet{position:fixed;inset:0;z-index:30;display:grid;place-items:end center;background:var(--scrim);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
   padding:16px max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
 .sheetin{width:100%;max-width:520px;max-height:100%;overflow-y:auto;background:var(--panel);border:1px solid var(--line);border-radius:28px;padding:20px;display:grid;gap:16px}
 .sheetin h2{margin:0;font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-.01em}
@@ -560,7 +562,7 @@ section[data-view]{min-width:0}
 .inform .note{color:var(--dim);font-size:13px;margin:0}
 .inbot{display:grid;gap:12px;max-width:440px;width:100%;margin-inline:auto}
 .indots{display:flex;justify-content:center;gap:7px}
-.indots span{width:8px;height:8px;border-radius:99px;background:rgba(255,255,255,.2);transition:width .25s,background .25s}
+.indots span{width:8px;height:8px;border-radius:99px;background:var(--w20);transition:width .25s,background .25s}
 .indots span.on{width:24px;background:var(--accent)}
 .inbtns{display:flex;gap:8px}
 .inbtns .primary{flex:1;width:auto}
@@ -597,7 +599,7 @@ section[data-view]{min-width:0}
 .dus.r{grid-template-columns:minmax(0,1fr) 38px}
 .dus.r .pic{order:2}.dus.r .dun{order:1;text-align:right}
 .dun{font-family:var(--display);font-weight:800;font-size:26px;line-height:1}
-.dubar{grid-column:1/-1;height:6px;border-radius:9px;background:rgba(255,255,255,.08);overflow:hidden;order:3}
+.dubar{grid-column:1/-1;height:6px;border-radius:9px;background:var(--w08);overflow:hidden;order:3}
 .dubar i{display:block;height:100%;background:var(--accent);border-radius:9px;transition:width .6s}
 .dubar.o i{background:var(--t10)}
 .duvsx{font-family:var(--display);font-weight:800;color:var(--dim);font-size:13px}
@@ -631,7 +633,7 @@ section[data-view]{min-width:0}
 .pfcmp{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:6px 10px;align-items:center;font-size:13px}
 .pfcmp .track{height:8px}.pfcmp b{font-family:var(--mono);font-weight:500}
 .pfdays{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
-.pfd{display:grid;gap:4px;justify-items:center}.pfd i{width:100%;max-width:34px;aspect-ratio:1;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid var(--line);display:block}
+.pfd{display:grid;gap:4px;justify-items:center}.pfd i{width:100%;max-width:34px;aspect-ratio:1;border-radius:10px;background:var(--w06);border:1px solid var(--line);display:block}
 .pfd.on i{background:var(--accent);border-color:var(--accent)}.pfd small{font-size:11px;color:var(--dim)}
 .pfmon{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;align-items:end;height:96px}
 .pfm{display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:3px;height:100%;justify-items:center;font-size:11px;color:var(--dim)}
@@ -649,34 +651,34 @@ section[data-view]{min-width:0}
 .duxl{width:84px;height:84px;border-radius:24px}
 .duxs{font-family:var(--display);font-weight:800;font-size:34px;color:var(--fg);white-space:nowrap}
 .dock button.dot{position:relative}
-.dock button.dot::after{content:'';position:absolute;top:6px;right:calc(50% - 17px);width:8px;height:8px;border-radius:50%;background:#ff5fa2;box-shadow:0 0 0 2px rgba(24,27,31,.9)}
+.dock button.dot::after{content:'';position:absolute;top:6px;right:calc(50% - 17px);width:8px;height:8px;border-radius:50%;background:#ff5fa2;box-shadow:0 0 0 2px var(--dockbg2)}
 @media (prefers-reduced-motion:reduce){.rxb.pop,.duxr{animation:none!important}}
 /* Heatmap + Abzeichen */
 .heatm{display:grid;grid-template-columns:repeat(26,minmax(0,1fr));font-size:10px;color:var(--dim);font-weight:700;margin-bottom:-8px;white-space:nowrap;overflow:hidden}
 .heat{display:grid;grid-template-columns:repeat(26,minmax(0,1fr));grid-template-rows:repeat(7,auto);grid-auto-flow:column;gap:3px}
-.heat i,.heatl i{display:block;aspect-ratio:1;border-radius:3px;background:rgba(255,255,255,.06)}
+.heat i,.heatl i{display:block;aspect-ratio:1;border-radius:3px;background:var(--w06)}
 .heat i.fut{background:transparent}
 .heat i.now{outline:1.5px solid var(--accent);outline-offset:1px}
 .l1{background:rgba(122,231,255,.28)!important}.l2{background:rgba(122,231,255,.5)!important}.l3{background:rgba(122,231,255,.78)!important}.l4{background:var(--t11)!important;box-shadow:0 0 6px rgba(255,216,107,.6)}
-.restbar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(96px + env(safe-area-inset-bottom,0px));z-index:25;width:min(420px,calc(100% - 24px));display:flex;align-items:center;gap:12px;padding:10px 10px 10px 12px;border-radius:20px;background:rgba(17,20,24,.96);border:1px solid rgba(122,231,255,.35);box-shadow:0 14px 40px rgba(0,0,0,.5);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.restbar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(96px + env(safe-area-inset-bottom,0px));z-index:25;width:min(420px,calc(100% - 24px));display:flex;align-items:center;gap:12px;padding:10px 10px 10px 12px;border-radius:20px;background:var(--restbg);border:1px solid rgba(122,231,255,.35);box-shadow:0 14px 40px rgba(0,0,0,.5);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
 .restbar .rring{flex:none;width:46px;height:46px;position:relative}.restbar .rring svg{width:46px;height:46px;transform:rotate(-90deg)}
-.restbar .rring circle{fill:none;stroke-width:4}.restbar .rring .bg{stroke:rgba(255,255,255,.1)}.restbar .rring .fg{stroke:var(--accent);stroke-linecap:round;transition:stroke-dashoffset .25s linear}
+.restbar .rring circle{fill:none;stroke-width:4}.restbar .rring .bg{stroke:var(--w10)}.restbar .rring .fg{stroke:var(--accent);stroke-linecap:round;transition:stroke-dashoffset .25s linear}
 .restbar .rtx{flex:1;min-width:0;display:grid;gap:1px}.restbar .rtx small{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--dim)}.restbar .rtx b{font-family:var(--mono,monospace);font-size:24px;line-height:1.1;font-variant-numeric:tabular-nums}
 .restbar .rbtn{flex:none;min-width:44px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--panel-2);color:var(--fg);font:inherit;font-weight:700;font-size:13px;cursor:pointer;padding:0 8px}
-.restbar.done{border-color:rgba(155,225,93,.6)}.restbar.done .rtx b{color:#9be15d;font-family:var(--display);font-size:17px}
+.restbar.done{border-color:rgba(155,225,93,.6)}.restbar.done .rtx b{color:var(--t4);font-family:var(--display);font-size:17px}
 body.resting{padding-bottom:calc(190px + env(safe-area-inset-bottom,0px))!important}
 body.resting #toast{bottom:calc(166px + env(safe-area-inset-bottom,0px))}
 .swbtn{margin-top:8px;width:100%;min-height:46px;font-weight:700}
 .swatch{position:fixed;inset:0;z-index:140;background:radial-gradient(ellipse at 50% 30%,#13303a 0%,#07080a 70%);display:grid;grid-template-rows:auto 1fr auto;padding:calc(env(safe-area-inset-top,0px) + 18px) 18px calc(env(safe-area-inset-bottom,0px) + 18px);text-align:center;color:var(--fg)}
 .swatch .swh{display:grid;gap:4px}.swatch .swh small{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}.swatch .swh h2{margin:0;font-family:var(--display);font-size:22px}
 .swatch .swmid{display:grid;place-content:center;gap:10px}.swatch .swbig{font-family:var(--mono,monospace);font-weight:700;font-size:clamp(72px,24vw,150px);line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
-.swatch .swsub{color:var(--dim);font-size:15px}.swatch.cd .swbig{color:var(--accent)}.swatch.res .swbig{color:#9be15d}
+.swatch .swsub{color:var(--dim);font-size:15px}.swatch.cd .swbig{color:var(--accent)}.swatch.res .swbig{color:var(--t4)}
 .swatch .swbtns{display:grid;gap:10px}.swatch .swstop{min-height:120px;border-radius:28px;border:0;background:#ff5f6d;color:#fff;font:inherit;font-family:var(--display);font-weight:800;font-size:28px;cursor:pointer}
 .swatch .swgo{min-height:64px;border-radius:20px;border:0;background:var(--fg);color:var(--bg);font:inherit;font-weight:800;font-size:18px;cursor:pointer}
 .swatch .swsec{min-height:48px;border-radius:16px;border:1px solid var(--line);background:transparent;color:var(--dim);font:inherit;font-weight:700;cursor:pointer}
 .tsets{display:grid;gap:6px}.tsets:empty{display:none}.tsets .tsh{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.tsets .tsh small{color:var(--accent);font-size:12.5px;font-weight:700}
 .tsrow{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:14px;background:var(--panel-2);border:1px solid var(--line);color:var(--fg);font:inherit;text-align:left;width:100%;cursor:pointer;min-height:44px}
-.tsrow .pli{background:rgba(155,225,93,.15);color:#9be15d}.tsrow b{flex:1;font-family:var(--mono,monospace);font-size:15px}.tsrow .pr{font-size:11px}
+.tsrow .pli{background:rgba(155,225,93,.15);color:var(--t4)}.tsrow b{flex:1;font-family:var(--mono,monospace);font-size:15px}.tsrow .pr{font-size:11px}
 #v-train.wk .wkh{display:none!important}#v-train.wk.plan:not(.pick) .pk{display:none!important}
 .wkt{font-family:var(--mono,monospace);color:var(--dim);font-size:13px;font-variant-numeric:tabular-nums}
 .plstart{display:flex;gap:8px;flex-wrap:wrap}
@@ -693,13 +695,13 @@ body.resting #toast{bottom:calc(166px + env(safe-area-inset-bottom,0px))}
 .tav.hop{animation:thop .6s cubic-bezier(.3,1.6,.5,1)}@keyframes thop{0%{transform:translateY(0) scale(1)}35%{transform:translateY(-10px) scale(1.06,.95)}70%{transform:translateY(0) scale(.97,1.04)}100%{transform:none}}
 .ttx{min-width:0;display:grid;gap:4px}.ttx small{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
 .ttx h3{margin:0;font-family:var(--display);font-weight:800;font-size:19px;line-height:1.15}.ttx p{margin:0;color:var(--dim);font-size:14.5px;line-height:1.45}
-.tft{display:flex;align-items:center;justify-content:space-between;gap:10px}.tdots{display:flex;gap:6px}.tdots i{width:7px;height:7px;border-radius:9px;background:rgba(255,255,255,.18);transition:width .3s,background .3s}.tdots i.on{width:20px;background:var(--accent)}
+.tft{display:flex;align-items:center;justify-content:space-between;gap:10px}.tdots{display:flex;gap:6px}.tdots i{width:7px;height:7px;border-radius:9px;background:var(--w18);transition:width .3s,background .3s}.tdots i.on{width:20px;background:var(--accent)}
 .tbtns{display:flex;gap:8px;align-items:center}.tskip{background:none;border:0;color:var(--dim);font:inherit;font-size:13.5px;padding:10px 6px;cursor:pointer;min-height:40px}
 @media (prefers-reduced-motion:reduce){.tspot,.tbub,.tbub::after{transition:none}.tav.hop{animation:none}}
 .calhd{display:flex;justify-content:space-between;align-items:flex-end;gap:8px}.calmn{color:var(--fg);font-weight:700}
 .calwd,.calg{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
 .calwd span{text-align:center;font-size:11px;font-weight:700;color:var(--dim);text-transform:uppercase}
-.calg i{display:grid;place-items:center;aspect-ratio:1;border-radius:9px;background:rgba(255,255,255,.05);font-style:normal;max-height:46px}
+.calg i{display:grid;place-items:center;aspect-ratio:1;border-radius:9px;background:var(--w05);font-style:normal;max-height:46px}
 .calg i span{font-size:13px;font-weight:600;color:var(--dim)}.calg i.l1 span,.calg i.l2 span{color:var(--fg);font-weight:800}.calg i.l3 span{color:#062026;font-weight:800}.calg i.l4 span{color:#2a1d00;font-weight:800}
 .calg i.pad,.calg i.fut{background:transparent}.calg i.fut span{opacity:.45}
 .calg i.now{outline:2px solid var(--accent);outline-offset:1px}
@@ -717,12 +719,12 @@ body.resting #toast{bottom:calc(166px + env(safe-area-inset-bottom,0px))}
 .bd small{font-size:11px;color:var(--dim);line-height:1.3;opacity:.8}
 .bd.ok{border-color:rgba(255,216,107,.45);background:linear-gradient(180deg,rgba(255,216,107,.1),transparent)}
 .bd.ok .bdi{filter:none;opacity:1}.bd.ok b{color:var(--fg)}
-.bdp{width:80%;height:4px;border-radius:9px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:3px}
+.bdp{width:80%;height:4px;border-radius:9px;background:var(--w08);overflow:hidden;margin-top:3px}
 .bdp i{display:block;height:100%;background:var(--accent)}
 /* Monatsrückblick */
 .recap{position:fixed;inset:0;z-index:105;background:radial-gradient(90% 60% at 50% 30%,rgba(122,231,255,.16),transparent 70%),#05070a;display:grid;grid-template-rows:auto 1fr;padding:calc(12px + env(safe-area-inset-top,0px)) 16px calc(20px + env(safe-area-inset-bottom,0px))}
 .rcbars{display:flex;gap:5px;max-width:480px;width:100%;margin-inline:auto;padding-right:44px}
-.rcbars i{flex:1;height:4px;border-radius:9px;background:rgba(255,255,255,.18);overflow:hidden}
+.rcbars i{flex:1;height:4px;border-radius:9px;background:var(--w18);overflow:hidden}
 .rcbars i b{display:block;height:100%;width:0;background:var(--fg)}
 .rcbars i.done b{width:100%}
 .rcbars i.run b{animation:rcfill 5.2s linear forwards}
@@ -750,7 +752,7 @@ textarea{width:100%;background:var(--panel-2);border:1px solid var(--line);borde
 .stknum{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 .stknum .big{font-size:clamp(34px,10vw,48px)}
 .stknum .dim{font-size:13px;line-height:1.35;max-width:220px}
-.stkflame{width:44px;height:44px;flex:none;color:#3a4048;transition:color .3s}
+.stkflame{width:44px;height:44px;flex:none;color:var(--off);transition:color .3s}
 .stkflame svg{width:100%;height:100%;display:block}
 .stkflame.hot{color:#ff9f43;filter:drop-shadow(0 0 10px rgba(255,159,67,.55));animation:stkfl 2.4s ease-in-out infinite}
 @keyframes stkfl{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.07) rotate(-3deg)}}
@@ -769,7 +771,7 @@ textarea{width:100%;background:var(--panel-2);border:1px solid var(--line);borde
 @keyframes stkchk{to{stroke-dashoffset:0}}
 .stkfoot{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:10px;font-size:13px;color:var(--dim);font-weight:600}
 .stkmsg{margin:0;color:var(--dim);font-size:14px;font-weight:600;text-align:center;text-wrap:balance}
-.stkmsg.hot{color:#ffb469}
+.stkmsg.hot{color:var(--warm)}
 @media (prefers-reduced-motion:reduce){.stkflame.hot,.stkd.pop i,.stkd.pop i svg path{animation:none!important;stroke-dashoffset:0}}
 .dots{display:flex;gap:8px;align-items:center}
 .dots i{width:16px;height:16px;border-radius:50%;border:2px solid var(--line);display:block}
@@ -779,7 +781,7 @@ textarea{width:100%;background:var(--panel-2);border:1px solid var(--line);borde
 .chartwrap svg{display:block;width:100%;height:auto}
 .chartwrap .empty{color:var(--dim);font-size:14px}
 .srow{cursor:pointer;gap:10px}
-.srow:hover{border-color:rgba(255,255,255,.25)}
+.srow:hover{border-color:var(--w25)}
 .srowin{display:flex;justify-content:space-between;align-items:center;gap:12px}
 .srowin .big{font-size:clamp(22px,6.5vw,30px)}
 .spark{width:110px;flex:none}
@@ -787,7 +789,7 @@ textarea{width:100%;background:var(--panel-2);border:1px solid var(--line);borde
 .hday{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);padding:16px 0 4px}
 .hday:first-child{padding-top:4px}
 .pr{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--good);border:1px solid var(--line);border-radius:999px;padding:4px 9px;white-space:nowrap}
-.ex[data-act]:hover{background:rgba(255,255,255,.03)}
+.ex[data-act]:hover{background:var(--w03)}
 @media (max-width:420px){.dock button{padding:7px 9px}}
 @media (max-width:370px){.dock{gap:2px;padding:5px}.dock button{padding:7px 5px}.dock button span{font-size:10px}}
 .dock{max-width:calc(100vw - 20px)}.dock button{min-width:0;flex:1 1 auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -809,7 +811,7 @@ textarea{width:100%;background:var(--panel-2);border:1px solid var(--line);borde
 .hl b{white-space:normal;overflow-wrap:anywhere}
 
 /* ---------- Handy-Modus: App-Leiste oben, Tab-Leiste unten, kompakter ---------- */
-html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background-color:#07080a}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background-color:var(--bg)}
 /* kein Doppeltipp-Zoom (Zwei-Finger-Zoom bleibt erlaubt) */
 *{touch-action:manipulation}
 .head{padding-top:calc(18px + env(safe-area-inset-top,0px))}
@@ -822,7 +824,7 @@ textarea{font-size:16px}
 @media (prefers-reduced-motion:no-preference){.btn,.pill,.acc,.hrank,.hgoal,.dock button{transition:transform .12s ease,background-color .2s ease,color .2s ease}.btn:active,.pill:active,.acc:active{transform:scale(.96)}}
 @media (max-width:640px){
   body{padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px));padding-bottom:calc(96px + env(safe-area-inset-bottom,0px));overscroll-behavior-y:none}
-  .head{position:sticky;top:0;z-index:8;margin-inline:-12px;padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 10px 16px;background:rgba(7,8,10,.78);-webkit-backdrop-filter:saturate(1.4) blur(18px);backdrop-filter:saturate(1.4) blur(18px);border-bottom:1px solid transparent;transition:border-color .2s ease}
+  .head{position:sticky;top:0;z-index:8;margin-inline:-12px;padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 10px 16px;background:var(--headbg);-webkit-backdrop-filter:saturate(1.4) blur(18px);backdrop-filter:saturate(1.4) blur(18px);border-bottom:1px solid transparent;transition:border-color .2s ease}
   .head.scrolled{border-bottom-color:var(--line)}
   .ptitle{display:block;margin:0;font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:-.02em;line-height:1.1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .head .who{order:2;flex:none;padding:2px;border-radius:50%}
@@ -837,7 +839,7 @@ textarea{font-size:16px}
   .step button{font-size:26px}
   .tgrid input{height:58px}.tgrid b{line-height:58px}
   .steppers{gap:16px}
-  .dock{left:0;right:0;transform:none;bottom:0;max-width:none;width:100%;border-radius:0;border:0;border-top:1px solid var(--line);padding:6px max(6px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(6px,env(safe-area-inset-left,0px));gap:0;background:rgba(12,14,17,.9);justify-content:space-around}
+  .dock{left:0;right:0;transform:none;bottom:0;max-width:none;width:100%;border-radius:0;border:0;border-top:1px solid var(--line);padding:6px max(6px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(6px,env(safe-area-inset-left,0px));gap:0;background:var(--dockbg2);justify-content:space-around}
   .dock button,.dock button[aria-selected="true"]{flex:1 1 0;background:transparent;color:var(--dim);padding:4px 2px;min-height:54px;border-radius:14px;gap:4px}
   .dock button svg{width:22px;height:22px;padding:4px 16px;box-sizing:content-box;border-radius:999px}
   .dock button[aria-selected="true"]{color:var(--fg)}
@@ -848,9 +850,41 @@ textarea{font-size:16px}
   #toast{bottom:calc(82px + env(safe-area-inset-bottom,0px))}
   .sheet{padding:0;padding-top:max(24px,env(safe-area-inset-top,0px))}
   .sheetin{max-width:none;border-radius:24px 24px 0 0;border-bottom:0;padding:12px 18px calc(22px + env(safe-area-inset-bottom,0px))}
-  .sheetin::before{content:'';justify-self:center;width:40px;height:5px;border-radius:9px;background:rgba(255,255,255,.18);margin-bottom:2px}
+  .sheetin::before{content:'';justify-self:center;width:40px;height:5px;border-radius:9px;background:var(--w18);margin-bottom:2px}
 }
 @media (max-width:370px){.dock button svg{padding:4px 10px}}
+
+/* ---------- Heller Modus ---------- */
+html[data-theme="light"]{color-scheme:light;
+  --bg:#eef0f3; --panel:#ffffff; --panel-2:#f3f5f7; --line:rgba(16,24,40,.11);
+  --fg:#12161b; --dim:#5b636d; --accent:#0a7d96; --accent-ink:#ffffff;
+  --good:#138a52; --bad:#d23b2a;
+  --t0:#6b737d; --t1:#b0662c; --t2:#7a8591; --t3:#b98a10; --t4:#4c9a1c; --t5:#109a6a; --t6:#0b93ab; --t7:#2f6ee0; --t8:#6450e6; --t9:#9446d8; --t10:#df2f7c; --t11:#c79512;
+  --sil:#dfe3e8;--mus:#cdd3da;--off:#c3c9d0;--ph:#98a0a9;--dockbg:rgba(255,255,255,.9);--dockbg2:rgba(255,255,255,.94);--headbg:rgba(238,240,243,.86);--restbg:rgba(255,255,255,.97);--warm:#c26410;--scrim:rgba(16,24,40,.38);
+  --w03:rgba(16,24,40,.03);--w04:rgba(16,24,40,.04);--w05:rgba(16,24,40,.05);--w06:rgba(16,24,40,.06);--w07:rgba(16,24,40,.07);--w08:rgba(16,24,40,.08);--w09:rgba(16,24,40,.09);--w10:rgba(16,24,40,.1);--w18:rgba(16,24,40,.18);--w20:rgba(16,24,40,.2);--w22:rgba(16,24,40,.22);--w25:rgba(16,24,40,.25);}
+html[data-theme="light"] body{background-image:radial-gradient(60% 300px at 12% 0,rgba(10,125,150,.08),transparent 70%)}
+html[data-theme="light"] .card{box-shadow:0 1px 2px rgba(16,24,40,.05)}
+html[data-theme="light"] .hhero{background:radial-gradient(120% 90% at 100% 0%,rgba(10,125,150,.08),transparent 60%),var(--panel)}
+html[data-theme="light"] .inlogo{background:linear-gradient(90deg,var(--fg) 30%,var(--accent));-webkit-background-clip:text;background-clip:text}
+html[data-theme="light"] .tbub,html[data-theme="light"] .restbar{box-shadow:0 14px 40px rgba(16,24,40,.18)}
+html[data-theme="light"] .lvb .ml{stroke:rgba(16,24,40,.18)}
+html[data-theme="light"] .head{border-bottom-color:var(--line)}
+/* Vollbild-Effekte bleiben dunkel */
+html[data-theme="light"] :is(.fx,.swatch,.recap,.prfx){color-scheme:dark;--bg:#07080a; --panel:#111316; --panel-2:#181b1f; --line:rgba(255,255,255,.09);--fg:#f4f5f7; --dim:#8b929b; --accent:#7ae7ff; --accent-ink:#04141a;--good:#5be3a0; --bad:#ff8a7a;--t0:#8b929b; --t1:#d08a4e; --t2:#b9c2cc; --t3:#f2c14e; --t4:#9be15d; --t5:#4be3a5; --t6:#43d0e8; --t7:#5a9bff; --t8:#8f7bff; --t9:#c27bff; --t10:#ff5fa2; --t11:#ffd86b;--sil:#262c33;--mus:#3a424c;--off:#3a4048;--ph:#5c636b;--dockbg:rgba(24,27,31,.82);--dockbg2:rgba(12,14,17,.9);--headbg:rgba(7,8,10,.78);--restbg:rgba(17,20,24,.96);--warm:#ffb469;--scrim:rgba(0,0,0,.62);--w03:rgba(255,255,255,.03);--w04:rgba(255,255,255,.04);--w05:rgba(255,255,255,.05);--w06:rgba(255,255,255,.06);--w07:rgba(255,255,255,.07);--w08:rgba(255,255,255,.08);--w09:rgba(255,255,255,.09);--w10:rgba(255,255,255,.1);--w18:rgba(255,255,255,.18);--w20:rgba(255,255,255,.2);--w22:rgba(255,255,255,.22);--w25:rgba(255,255,255,.25);color:var(--fg)}
+.thsw{display:flex;gap:6px}
+.cgcard{background:radial-gradient(110% 80% at 100% 0%,rgba(91,227,160,.10),transparent 60%),var(--panel);border-color:rgba(91,227,160,.28)}
+.cgcard.won{border-color:rgba(255,216,107,.5);background:radial-gradient(110% 80% at 100% 0%,rgba(255,216,107,.14),transparent 60%),var(--panel)}
+.cgq{font-family:var(--display);font-weight:700;font-size:17px;line-height:1.3}
+.cgnum{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.cgnum b{font-family:var(--display);font-weight:800;font-size:34px;line-height:1}.cgnum span{color:var(--dim);font-size:14px}
+.cgbar{height:12px;border-radius:99px;background:var(--w08);overflow:hidden;display:flex}
+.cgbar i{display:block;height:100%;background:var(--c,var(--good));border-right:2px solid var(--panel);min-width:0}.cgbar i:last-child{border-right:0}
+.cgcard.won .cgbar i{--c:var(--t11)}
+.cgm{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:10px;align-items:center;padding:6px 0}
+.cgm .pic.sm{width:30px;height:30px}.cgm b{font-family:var(--mono);font-weight:500}
+.cgm .cgsw{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:6px;background:var(--c)}
+.cgset{display:grid;gap:10px;border-top:1px solid var(--line);padding-top:12px}
+.cgfoot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.htile .cgbar{height:7px}
 </style>
 
 <div class="wrap">
@@ -938,6 +972,7 @@ textarea{font-size:16px}
         <div class="card span2" id="crewSwitch" hidden></div>
         <div class="card span2" id="seasonCard"></div>
         <div class="card span2" id="scopeCard" hidden><div class="pills wrap" id="scopePills"></div></div>
+        <div class="card span2 cgcard" id="crewGoal" hidden></div>
         <div class="card span2" id="duelCard" hidden></div>
         <div class="card span2" id="rivalCard" hidden></div>
         <div class="card span2" id="feedCard" hidden></div>
@@ -955,6 +990,7 @@ textarea{font-size:16px}
           <div class="howin">
             <ul class="rules">
               <li><span>Jeder Trainingstag</span><b>+10</b></li>
+              <li><span>Crew-Wochenziel gemeinsam geschafft</span><b>+30</b></li>
               <li><span>Neue Bestleistung bei einer Übung</span><b>+25</b></li>
               <li><span>Aufstieg in den nächsten Rang</span><b>+100</b></li>
             </ul>
@@ -1001,6 +1037,7 @@ textarea{font-size:16px}
     <div style="display:grid;gap:8px"><label class="lbl" for="profName">Dein Name</label>
       <input id="profName" class="nm-in" type="text" maxlength="20" placeholder="z. B. Benchbär" autocomplete="off"></div>
     <div class="wlrow"><span class="lbl">Sprache</span><div class="unitsw" id="langSw" role="group" aria-label="Sprache"></div></div>
+    <div style="display:grid;gap:8px"><span class="lbl">Darstellung</span><div class="pills wrap" id="themeSw" role="group" aria-label="Darstellung"></div></div>
     <div class="wlrow"><span class="lbl">Strecken</span><div class="unitsw" id="distSw" role="group" aria-label="Streckeneinheit"></div></div>
     <div style="display:grid;gap:8px"><span class="lbl">Musik</span><div class="pills wrap" id="musSw" role="group" aria-label="Hintergrundmusik"></div></div>
     <div class="wlrow"><span class="lbl">Klicktöne</span><div class="unitsw" id="sfxSw" role="group" aria-label="Klicktöne"></div></div>
@@ -1366,7 +1403,7 @@ LANG=S.lang==='en'?'en':'de';
 /* ---------- Sprache: Deutsch (Quelle) -> Englisch per Übersetzungsschicht ---------- */
 const D={
 // Navigation & allgemein
-'Start':'Home','Hier siehst du deinen Körper: Jeder Muskel steigt mit deinem Training auf. Darunter deine Serie, dein Rang und dein nächstes Ziel.':'This is your body: every muscle levels up as you train. Below are your streak, your rank and your next goal.','Trag deinen ersten Satz ein, dann wächst dein Körper mit.':'Log your first set and your body grows with you.','Deine Muskeln ansehen':'View your muscles','Stärkster Muskel:':'Strongest muscle:','Noch untrainiert:':'Not trained yet:','Aufholen:':'Catch up:','Alle Muskeln ansehen ›':'View all muscles ›','So wächst dein Körper ›':'How your body grows ›','Dein Körper':'Your body','Deine Muskeln':'Your muscles','Jeder Muskel steigt mit seiner stärksten Übung auf. Hauptmuskeln zählen voll, mittrainierte Muskeln zu 60 Prozent. Je höher die Stufe, desto kräftiger wird dein Körper.':'Each muscle levels up with its strongest exercise. Main muscles count fully, assisting muscles at 60 percent. The higher the level, the stronger your body looks.','Noch nicht trainiert. Probier':'Not trained yet. Try','Noch nicht trainiert.':'Not trained yet.','oder':'or','Stärkste Übung:':'Strongest exercise:','Höchste Stufe erreicht':'Highest level reached','Körper':'Body','Nach deinem ersten Satz bekommst du deinen Rang.':'You get your rank after your first set.','Push, Pull, Beine …':'Push, pull, legs …','Fertige Pläne oder dein eigener':'Ready-made plans or your own','🎯 Nächster Rang mit':'🎯 Next rank with','Crew-Saison':'Crew season','Du führst vor':'You lead ahead of','Rangliste und Duelle':'Leaderboard and duels','Mit Freunden trainieren':'Train with friends','Lade Freunde ein und fordere sie heraus':'Invite friends and challenge them','Crew, Rangliste und Duelle':'Crew, leaderboard and duels','Woche geschafft':'Week done','Noch 1 Tag diese Woche':'1 more day this week','Noch 2 Tage diese Woche':'2 more days this week','Freunde in den Rängen':'Friends on the rank ladder','Sobald du mit Freunden in einer Crew bist, siehst du hier, auf welchem Rang sie gerade stehen.':'Once you share a crew with friends, you will see here which rank they are on right now.','Zur Crew':'Go to crew','Du stehst unter deinen Freunden ganz oben.':'You are at the top among your friends.','ist mit dir gleichauf.':'is level with you.','Tippe auf eine Person, um ihr Profil zu sehen.':'Tap a person to see their profile.','gleichauf mit':'level with','Freunde bei dieser Übung':'Friends on this exercise','Die Zahl sind die Rangpunkte bei dieser Übung. Sie richten sich nach dem Körpergewicht, damit der Vergleich fair ist.':'The number shows the rank points on this exercise. They are relative to body weight to keep the comparison fair.','So sehen dich andere':'How others see you','Follower':'Followers','Folgt':'Following','+ Folgen':'+ Follow','✓ Folge ich':'✓ Following','⚔️ Herausfordern':'⚔️ Challenge','Gesamtrang':'Overall rank','Im Vergleich mit dir':'Compared with you','Eure Duelle:':'Your duels:','Letzte 7 Tage':'Last 7 days','Saisonpunkte pro Monat':'Season points per month','Alle Übungen anzeigen':'Show all exercises','Gleichauf mit dir':'Level with you','Trainierst du noch nicht':'You don’t train this yet','Noch keine Übungen mit Rang.':'No ranked exercises yet.','Letzte Erfolge':'Recent achievements','Noch keine Erfolge in den letzten Wochen.':'No achievements in the last few weeks.','Dieses Profil ist nicht mehr sichtbar. Ihr seid in keiner gemeinsamen Crew mehr.':'This profile is no longer visible. You no longer share a crew.','Folge ich':'Following','Tippe in der Rangliste auf eine Person. Im Profil siehst du ihre Ränge und Erfolge und kannst ihr folgen.':'Tap a person in the leaderboard. Their profile shows their ranks and achievements, and you can follow them.','Heute trainiert':'Trained today','Gestern trainiert':'Trained yesterday','Von den Athleten, denen du folgst, gibt es noch nichts Neues.':'Nothing new yet from the athletes you follow.','Du folgst schon 50 Athleten. Entfolge erst jemandem.':'You already follow 50 athletes. Unfollow someone first.','Gerade ist kein neues Duell mit dieser Person möglich.':'A new duel with this person is not possible right now.','Rangpunkte plus':'Rank points gained','Einsatz:':'Stake:','Einsatz (freiwillig)':'Stake (optional)','z. B. Verlierer zahlt den Shake':'e.g. loser buys the shake','Eine Übung':'One exercise','Dauer':'Duration','3 Tage':'3 days','7 Tage':'7 days','14 Tage':'14 days','Gezählt wird, wie viele Rangpunkte ihr bei dieser Übung im Duell zulegt. So haben auch Einsteiger eine faire Chance.':'What counts is how many rank points each of you gains on this exercise during the duel. That gives beginners a fair chance too.','🔁 Revanche':'🔁 Rematch','Bilanz':'Record','Mit eingeschalteten Benachrichtigungen meldet sich RepRival auch, wenn du die App während der Pause verlässt.':'With notifications turned on, RepRival also alerts you when you leave the app during your rest.','Zeit stoppen':'Time it','Stoppuhr':'Stopwatch','Geh in Position …':'Get into position …','Sofort starten':'Start now','Halten! Tippe auf Stopp, wenn du fertig bist.':'Hold it! Tap Stop when you are done.','Stopp':'Stop','Stark! 💪':'Strong! 💪','Nur eintragen':'Just fill in','Nochmal':'Again','Pausentimer nach jedem Satz':'Rest timer after each set','Pro Übung kannst du die Pause im Timer mit −15 / +15 anpassen. Die App merkt sich das für diese Übung.':'Adjust the rest per exercise with −15 / +15 in the timer. The app remembers it for that exercise.','Pause':'Rest','Pause vorbei':'Rest over','Nächster Satz! 💪':'Next set! 💪','Pausentimer aus':'Rest timer off','Heute bei dieser Übung':'Today for this exercise','Ziel':'Goal','Noch kein Satz heute. Los geht’s!':'No set yet today. Let’s go!','Training läuft':'Workout running','Freies Training':'Free workout','Training beenden':'End workout','Wähle unten eine Übung und trag deinen ersten Satz ein.':'Pick an exercise below and log your first set.','Andere Übung':'Other exercise','Auswahl schließen':'Close picker','Training beendet':'Workout finished','Trainingsdauer':'Workout duration','Brustpresse (Maschine)':'Chest Press (Machine)','Überzüge':'Pullovers','Rudern an der Maschine':'Machine Row','Hängen an der Stange':'Dead Hang','Schulterpresse (Maschine)':'Shoulder Press (Machine)','Seitheben (Maschine)':'Lateral Raise (Machine)','Bizeps-Maschine':'Biceps Curl Machine','Trizeps-Maschine':'Triceps Machine','Hackenschmidt-Kniebeuge':'Hack Squat','Kniebeuge (Multipresse)':'Smith Machine Squat','Abduktoren-Maschine':'Hip Abduction Machine','Adduktoren-Maschine':'Hip Adduction Machine','Wandsitzen':'Wall Sit','Bauchmaschine':'Ab Crunch Machine','Plank (Unterarmstütz)':'Plank','Seitstütz':'Side Plank','Auf Zeit':'Timed','Dauer (Sekunden)':'Duration (seconds)','Wertung (Zeit)':'Score (time)','Zeit':'Time','Sek.':'sec','Bitte eine Dauer von 1 bis 900 Sekunden eintragen.':'Please enter a duration of 1 to 900 seconds.','Benachrichtigungen':'Notifications','Verpasse kein Duell':'Never miss a duel','Aktivieren':'Turn on','Später':'Later','Verstanden':'Got it',
+'Start':'Home','Darstellung':'Appearance','🌙 Dunkel':'🌙 Dark','☀️ Hell':'☀️ Light','Wie Gerät':'Match device','Crew-Ziel dieser Woche':'This week’s crew goal','🏆 Geschafft':'🏆 Done','Letzter Tag':'Last day','Jeder trainiert mindestens 2 Tage':'Everyone trains at least 2 days','Mitglieder mit 2 Tagen':'members with 2 days','✓ dabei':'✓ in','Stark, ihr habt es als Team geschafft. Jeder bekommt +30 Saisonpunkte für die Crew.':'Great, you did it as a team. Everyone gets +30 season points for the crew.','Lade Freunde ein, zusammen ist es leichter.':'Invite friends, it’s easier together.','Jeder Trainingstag von euch zählt.':'Every training day of yours counts.','Standardziel':'Default goal','Ziel von dir gesetzt':'Goal set by you','Ziel gesetzt von':'Goal set by','Ziel ändern':'Change goal','Schließen':'Close','Worum spielt ihr diese Woche?':'What are you playing for this week?','Alle dabei':'Everyone in','Locker':'Easy','Normal':'Normal','Hart':'Hard','Alle':'All','Das neue Ziel gilt sofort für die ganze Crew bis Sonntag. Ab Montag startet ein neues Wochenziel.':'The new goal applies right away to the whole crew until Sunday. A new weekly goal starts on Monday.','Neues Crew-Ziel gesetzt':'New crew goal set','Teamplayer':'Team Player','Schafft 3 Crew-Wochenziele':'Complete 3 weekly crew goals','Crew-Ziel':'Crew goal','Crew-Wochenziel gemeinsam geschafft':'Weekly crew goal completed together','Hier siehst du deinen Körper: Jeder Muskel steigt mit deinem Training auf. Darunter deine Serie, dein Rang und dein nächstes Ziel.':'This is your body: every muscle levels up as you train. Below are your streak, your rank and your next goal.','Trag deinen ersten Satz ein, dann wächst dein Körper mit.':'Log your first set and your body grows with you.','Deine Muskeln ansehen':'View your muscles','Stärkster Muskel:':'Strongest muscle:','Noch untrainiert:':'Not trained yet:','Aufholen:':'Catch up:','Alle Muskeln ansehen ›':'View all muscles ›','So wächst dein Körper ›':'How your body grows ›','Dein Körper':'Your body','Deine Muskeln':'Your muscles','Jeder Muskel steigt mit seiner stärksten Übung auf. Hauptmuskeln zählen voll, mittrainierte Muskeln zu 60 Prozent. Je höher die Stufe, desto kräftiger wird dein Körper.':'Each muscle levels up with its strongest exercise. Main muscles count fully, assisting muscles at 60 percent. The higher the level, the stronger your body looks.','Noch nicht trainiert. Probier':'Not trained yet. Try','Noch nicht trainiert.':'Not trained yet.','oder':'or','Stärkste Übung:':'Strongest exercise:','Höchste Stufe erreicht':'Highest level reached','Körper':'Body','Nach deinem ersten Satz bekommst du deinen Rang.':'You get your rank after your first set.','Push, Pull, Beine …':'Push, pull, legs …','Fertige Pläne oder dein eigener':'Ready-made plans or your own','🎯 Nächster Rang mit':'🎯 Next rank with','Crew-Saison':'Crew season','Du führst vor':'You lead ahead of','Rangliste und Duelle':'Leaderboard and duels','Mit Freunden trainieren':'Train with friends','Lade Freunde ein und fordere sie heraus':'Invite friends and challenge them','Crew, Rangliste und Duelle':'Crew, leaderboard and duels','Woche geschafft':'Week done','Noch 1 Tag diese Woche':'1 more day this week','Noch 2 Tage diese Woche':'2 more days this week','Freunde in den Rängen':'Friends on the rank ladder','Sobald du mit Freunden in einer Crew bist, siehst du hier, auf welchem Rang sie gerade stehen.':'Once you share a crew with friends, you will see here which rank they are on right now.','Zur Crew':'Go to crew','Du stehst unter deinen Freunden ganz oben.':'You are at the top among your friends.','ist mit dir gleichauf.':'is level with you.','Tippe auf eine Person, um ihr Profil zu sehen.':'Tap a person to see their profile.','gleichauf mit':'level with','Freunde bei dieser Übung':'Friends on this exercise','Die Zahl sind die Rangpunkte bei dieser Übung. Sie richten sich nach dem Körpergewicht, damit der Vergleich fair ist.':'The number shows the rank points on this exercise. They are relative to body weight to keep the comparison fair.','So sehen dich andere':'How others see you','Follower':'Followers','Folgt':'Following','+ Folgen':'+ Follow','✓ Folge ich':'✓ Following','⚔️ Herausfordern':'⚔️ Challenge','Gesamtrang':'Overall rank','Im Vergleich mit dir':'Compared with you','Eure Duelle:':'Your duels:','Letzte 7 Tage':'Last 7 days','Saisonpunkte pro Monat':'Season points per month','Alle Übungen anzeigen':'Show all exercises','Gleichauf mit dir':'Level with you','Trainierst du noch nicht':'You don’t train this yet','Noch keine Übungen mit Rang.':'No ranked exercises yet.','Letzte Erfolge':'Recent achievements','Noch keine Erfolge in den letzten Wochen.':'No achievements in the last few weeks.','Dieses Profil ist nicht mehr sichtbar. Ihr seid in keiner gemeinsamen Crew mehr.':'This profile is no longer visible. You no longer share a crew.','Folge ich':'Following','Tippe in der Rangliste auf eine Person. Im Profil siehst du ihre Ränge und Erfolge und kannst ihr folgen.':'Tap a person in the leaderboard. Their profile shows their ranks and achievements, and you can follow them.','Heute trainiert':'Trained today','Gestern trainiert':'Trained yesterday','Von den Athleten, denen du folgst, gibt es noch nichts Neues.':'Nothing new yet from the athletes you follow.','Du folgst schon 50 Athleten. Entfolge erst jemandem.':'You already follow 50 athletes. Unfollow someone first.','Gerade ist kein neues Duell mit dieser Person möglich.':'A new duel with this person is not possible right now.','Rangpunkte plus':'Rank points gained','Einsatz:':'Stake:','Einsatz (freiwillig)':'Stake (optional)','z. B. Verlierer zahlt den Shake':'e.g. loser buys the shake','Eine Übung':'One exercise','Dauer':'Duration','3 Tage':'3 days','7 Tage':'7 days','14 Tage':'14 days','Gezählt wird, wie viele Rangpunkte ihr bei dieser Übung im Duell zulegt. So haben auch Einsteiger eine faire Chance.':'What counts is how many rank points each of you gains on this exercise during the duel. That gives beginners a fair chance too.','🔁 Revanche':'🔁 Rematch','Bilanz':'Record','Mit eingeschalteten Benachrichtigungen meldet sich RepRival auch, wenn du die App während der Pause verlässt.':'With notifications turned on, RepRival also alerts you when you leave the app during your rest.','Zeit stoppen':'Time it','Stoppuhr':'Stopwatch','Geh in Position …':'Get into position …','Sofort starten':'Start now','Halten! Tippe auf Stopp, wenn du fertig bist.':'Hold it! Tap Stop when you are done.','Stopp':'Stop','Stark! 💪':'Strong! 💪','Nur eintragen':'Just fill in','Nochmal':'Again','Pausentimer nach jedem Satz':'Rest timer after each set','Pro Übung kannst du die Pause im Timer mit −15 / +15 anpassen. Die App merkt sich das für diese Übung.':'Adjust the rest per exercise with −15 / +15 in the timer. The app remembers it for that exercise.','Pause':'Rest','Pause vorbei':'Rest over','Nächster Satz! 💪':'Next set! 💪','Pausentimer aus':'Rest timer off','Heute bei dieser Übung':'Today for this exercise','Ziel':'Goal','Noch kein Satz heute. Los geht’s!':'No set yet today. Let’s go!','Training läuft':'Workout running','Freies Training':'Free workout','Training beenden':'End workout','Wähle unten eine Übung und trag deinen ersten Satz ein.':'Pick an exercise below and log your first set.','Andere Übung':'Other exercise','Auswahl schließen':'Close picker','Training beendet':'Workout finished','Trainingsdauer':'Workout duration','Brustpresse (Maschine)':'Chest Press (Machine)','Überzüge':'Pullovers','Rudern an der Maschine':'Machine Row','Hängen an der Stange':'Dead Hang','Schulterpresse (Maschine)':'Shoulder Press (Machine)','Seitheben (Maschine)':'Lateral Raise (Machine)','Bizeps-Maschine':'Biceps Curl Machine','Trizeps-Maschine':'Triceps Machine','Hackenschmidt-Kniebeuge':'Hack Squat','Kniebeuge (Multipresse)':'Smith Machine Squat','Abduktoren-Maschine':'Hip Abduction Machine','Adduktoren-Maschine':'Hip Adduction Machine','Wandsitzen':'Wall Sit','Bauchmaschine':'Ab Crunch Machine','Plank (Unterarmstütz)':'Plank','Seitstütz':'Side Plank','Auf Zeit':'Timed','Dauer (Sekunden)':'Duration (seconds)','Wertung (Zeit)':'Score (time)','Zeit':'Time','Sek.':'sec','Bitte eine Dauer von 1 bis 900 Sekunden eintragen.':'Please enter a duration of 1 to 900 seconds.','Benachrichtigungen':'Notifications','Verpasse kein Duell':'Never miss a duel','Aktivieren':'Turn on','Später':'Later','Verstanden':'Got it',
 'Wir sagen dir Bescheid, wenn dich jemand herausfordert, auf deinen Eintrag reagiert oder dich in der Crew überholt.':'We let you know when someone challenges you, reacts to your entry or overtakes you in the crew.',
 'Damit RepRival dir Bescheid geben kann, füge die App zum Home-Bildschirm hinzu: in Safari auf Teilen → „Zum Home-Bildschirm“.':'So RepRival can notify you, add the app to your home screen: in Safari tap Share → “Add to Home Screen”.',
 'Auf dem iPhone gehen Benachrichtigungen nur, wenn RepRival auf dem Home-Bildschirm ist: in Safari auf Teilen → „Zum Home-Bildschirm“.':'On iPhone, notifications only work when RepRival is on your home screen: in Safari tap Share → “Add to Home Screen”.',
@@ -1601,6 +1638,15 @@ const PAT=[
  [/^Duell angenommen! (\d+) Tage, los geht’s\.$/,m=>`Duel accepted! ${m[1]} days, let’s go.`],
  [/^Platz (\d+) von (\d+)$/,m=>`#${m[1]} of ${m[2]}`],
  [/^Stufe (\d+)$/,m=>`Level ${m[1]}`],
+ [/^Sammelt gemeinsam (\d+) Saisonpunkte$/,m=>`Earn ${m[1]} season points together`],
+ [/^Schafft gemeinsam (\d+) Trainingstage$/,m=>`Reach ${m[1]} training days together`],
+ [/^von (\d+) (Trainingstage|Saisonpunkte|Mitglieder mit 2 Tagen)$/,m=>`of ${m[1]} ${({'Trainingstage':'training days','Saisonpunkte':'season points','Mitglieder mit 2 Tagen':'members with 2 days'})[m[2]]}`],
+ [/^noch (\d+) Tage$/,m=>`${m[1]} days left`],
+ [/^(\d+) von 2 Tagen$/,m=>`${m[1]} of 2 days`],
+ [/^Es fehlen noch (\d+)\.$/,m=>`${m[1]} to go.`],
+ [/^Es fehlen noch (\d+) (Person|Personen)\.$/,m=>`${m[1]} ${m[1]==='1'?'person':'people'} to go.`],
+ [/^🔥 (\d+) Wochen in Folge geschafft$/,m=>`🔥 ${m[1]} weeks in a row`],
+ [/^🏆 Crew-Ziel geschafft! (.+) hat als Team gewonnen$/,m=>`🏆 Crew goal done! ${m[1]} won as a team`],
  [/^· Stufe (\d+)$/,m=>`· Level ${m[1]}`],
  [/^ist (\d+) Punkte vor dir$/,m=>`is ${m[1]} points ahead of you`],
  [/^💪 (.+): jetzt Stufe (\d+)$/,m=>`💪 ${tw(m[1])}: now level ${m[2]}`],
@@ -1981,7 +2027,9 @@ function overallRaw(){
   return {arr,sum,avg,g,sg,days,locked:arr.length>0&&sg>g,need:g<NT?Math.max(0,DAYS[g+1]-days):0,hist:c.hist};
 }
 function crewPtsMap(){const c=compute(S.sets),now=monthKey(Date.now()),pd=new Date();pd.setDate(1);pd.setMonth(pd.getMonth()-1);const pk=monthKey(pd.getTime()),out={[now]:{},[pk]:{}},J=S.crewJoin||{};
-  for(const code of (S.crews||[])){const j=Number(J[code])||0;let a=0,b=0;for(const [ts,add,m] of c.adds){if(ts<j)continue;if(m===now)a+=add;else if(m===pk)b+=add}out[now][code]=a;out[pk][code]=b}return out}
+  for(const code of (S.crews||[])){const j=Number(J[code])||0;let a=0,b=0;for(const [ts,add,m] of c.adds){if(ts<j)continue;if(m===now)a+=add;else if(m===pk)b+=add}
+    for(const [k,ts] of Object.entries(S.cgWon&&typeof S.cgWon==='object'?S.cgWon:{})){const [cc,w]=k.split('|');if(cc!==code||!w)continue;const m=monthKey(new Date(w+'T12:00:00').getTime()+6*day);if(m===now)a+=30;else if(m===pk)b+=30}
+    out[now][code]=a;out[pk][code]=b}return out}
 function cleanCp(cp){const o={};if(!cp||typeof cp!=='object')return o;for(const [k,v] of Object.entries(cp).slice(0,3)){if(!/^\d{4}-\d{2}$/.test(k)||!v||typeof v!=='object')continue;o[k]={};for(const [c,n] of Object.entries(v).slice(0,5)){const nn=Number(n);if(Number.isFinite(nn)&&nn>=0)o[k][normCrew(c)]=Math.min(nn,1e6)}}return o}
 function crewPts(e,code,key){const cp=e&&e.cp&&e.cp[key];if(code&&cp&&typeof cp[code]==='number')return cp[code];return Number(((e&&e.hist)||{})[key])||0}
 function daysTrained(key){const set={};for(const s of S.sets)if(monthKey(s.ts)===key)set[dayKey(s.ts)]=1;return Object.keys(set).length}
@@ -2200,7 +2248,7 @@ async function initCrew(){
 function cleanMember(m){
   return {id:m.id,me:false,nick:String(m.nick||'Unbekannt').slice(0,20),av:AV_IDS.includes(m.av)?m.av:'legday',bw:Number(m.bw)||0,cls:String(m.cls||''),
     kw:Number(m.kw)||0,tier:Number.isInteger(m.tier)&&m.tier>=0&&m.tier<=NT?m.tier:-1,hist:(m.hist&&typeof m.hist==='object')?m.hist:{},cp:cleanCp(m.cp),title:String(m.title||'').slice(0,24),crew:normCrew(m.crew),crews:[...new Set((Array.isArray(m.crews)&&m.crews.length?m.crews:[m.crew]).slice(0,5).map(normCrew).filter(Boolean))],studio:String(m.studio||'').slice(0,24),sk:normStudio(m.studio),ev:cleanEv(m.ev),rx:cleanRx(m.rx),du:cleanDu(m.du),da:cleanDa(m.da),dd:cleanDd(m.dd),
-    rp:m.rp!==undefined&&m.rp!==null&&Number.isFinite(Number(m.rp))?Math.max(0,Math.min(NT*100,Math.round(Number(m.rp)))):-1,lr:cleanLr(m.lr),fo:cleanFo(m.fo),st:Math.max(0,Math.min(520,Math.round(Number(m.st)||0))),td:Math.max(0,Math.min(20000,Math.round(Number(m.td)||0))),dl:cleanDl(m.dl)};
+    rp:m.rp!==undefined&&m.rp!==null&&Number.isFinite(Number(m.rp))?Math.max(0,Math.min(NT*100,Math.round(Number(m.rp)))):-1,lr:cleanLr(m.lr),fo:cleanFo(m.fo),st:Math.max(0,Math.min(520,Math.round(Number(m.st)||0))),td:Math.max(0,Math.min(20000,Math.round(Number(m.td)||0))),dl:cleanDl(m.dl),cg:cleanCg(m.cg)};
 }
 function entries(scope){
   scope=scope||cscope;const sk=normStudio(S.studio);
@@ -2209,6 +2257,53 @@ function entries(scope){
   list.push({id:UID||'me',me:true,...payload(),nick:S.nick||'Du'});
   return list;
 }
+/* ---------- Crew-Ziele: ein gemeinsames Wochenziel pro Crew ---------- */
+const CG_M=['days','pts','all'];
+function weekMon(ts){const d=new Date(ts);d.setHours(12,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7));return isoDay(d.getTime())}
+function weekDays(w){const [y,m,dd]=w.split('-').map(Number),o=[];for(let k=0;k<7;k++)o.push(isoDay(new Date(y,m-1,dd+k,12).getTime()));return o}
+function cleanCg(o){const r={};if(o&&typeof o==='object'&&!Array.isArray(o))for(const [k,a] of Object.entries(o).slice(0,5)){const c=normCrew(k);if(!c||!Array.isArray(a))continue;
+  const l=a.slice(-2).filter(g=>g&&/^\d{4}-\d\d-\d\d$/.test(g.w)&&CG_M.includes(g.m)&&Number.isInteger(g.t)&&g.t>=1&&g.t<=20000&&Number.isFinite(Number(g.c))).map(g=>({w:g.w,m:g.m,t:g.t,c:Number(g.c)}));if(l.length)r[c]=l}return r}
+function cgMine(){const cur=weekMon(Date.now()),prev=weekMon(Date.now()-7*day),r={};for(const [k,a] of Object.entries(cleanCg(S.cg)))if(inCrewCode(k)){const l=a.filter(g=>g.w===cur||g.w===prev);if(l.length)r[k]=l}return r}
+const inCrewCode=k=>{fixCrews();return S.crews.includes(k)};
+function cgDefault(n,m){n=Math.max(1,n);return m==='pts'?Math.max(60,n*100):m==='all'?n:Math.max(4,n*3)}
+function cgPresets(n,m){n=Math.max(1,n);if(m==='all')return [[n,'Alle']];return m==='pts'?[[n*60,'Locker'],[n*100,'Normal'],[n*160,'Hart']]:[[Math.max(2,n*2),'Locker'],[Math.max(4,n*3),'Normal'],[Math.max(5,n*4),'Hart']]}
+/* gültiges Ziel einer Crew für eine Woche: die neueste Einstellung eines Mitglieds, sonst ein Standardziel */
+function crewGoal(code,w,list){let best=null,by=null;for(const e of list){const a=(e.me?cgMine():e.cg||{})[code];if(!Array.isArray(a))continue;for(const g of a)if(g.w===w&&(!best||g.c>best.c)){best=g;by=e}}
+  if(best)return {...best,by};return {w,m:'days',t:cgDefault(list.length,'days'),c:0,by:null,auto:true}}
+function cgProgress(g,list){const days=weekDays(g.w),out=list.map(e=>{const dd=e.me?ddMine():(e.dd||{});let d=0,p=0;for(const k of days){const v=Number(dd[k])||0;if(v>0){d++;p+=v}}const v=g.m==='pts'?p:g.m==='all'?(d>=2?1:0):d;return {e,v,d,p}});
+  const sum=out.reduce((a,z)=>a+z.v,0);return {list:out.sort((a,b)=>b.v-a.v||b.d-a.d),sum,done:sum>=g.t}}
+const cgQ=g=>g.m==='pts'?`Sammelt gemeinsam ${g.t} Saisonpunkte`:g.m==='all'?'Jeder trainiert mindestens 2 Tage':`Schafft gemeinsam ${g.t} Trainingstage`;
+const cgUnit=m=>m==='pts'?'Saisonpunkte':m==='all'?'Mitglieder mit 2 Tagen':'Trainingstage';
+let cgForm=false,cgM='days';
+function crewGoalNow(){if(!crewOk()||!S.crew)return null;const list=crewList(),w=weekMon(Date.now()),g=crewGoal(S.crew,w,list);return {g,list,pr:cgProgress(g,list)}}
+function renderCrewGoal(){
+  const el=$('#crewGoal');if(!el)return;const ok=crewOk()&&!!S.crew;el.hidden=!ok;if(!ok)return;
+  const {g,list,pr}=crewGoalNow(),now=Date.now(),end=new Date(weekDays(g.w)[6]+'T23:59:59').getTime(),left=Math.max(0,Math.ceil((end-now)/day)),pct=v=>Math.min(100,v/g.t*100);
+  el.classList.toggle('won',pr.done);
+  const seg=pr.list.filter(z=>z.v>0).map((z,i)=>`<i style="width:${pct(z.v)}%;--c:${z.e.me?'var(--accent)':`hsl(${hue(eid(z.e))} 62% 58%)`}" title="${esc(z.e.nick)}"></i>`).join('');
+  const streak=cgStreak(S.crew);
+  let h=`<div class="est"><div class="lbl" style="margin:0">Crew-Ziel dieser Woche</div><span class="dim sm">${pr.done?'🏆 Geschafft':left<=1?'Letzter Tag':`noch ${left} Tage`}</span></div>
+    <div class="cgq">${cgQ(g)}</div>
+    <div class="cgnum"><b>${Math.min(pr.sum,99999)}</b><span>von ${g.t} ${cgUnit(g.m)}</span></div>
+    <div class="cgbar" role="img" aria-label="${pr.sum} von ${g.t}">${seg}</div>
+    <div>${pr.list.map(z=>`<div class="cgm">${picHTML(z.e.me?S.avatar:z.e.av,'sm',z.e.me?myAvatarOpts():{tier:z.e.tier})}<div class="nm"><b class="notr" style="font-family:var(--body);font-weight:700"><span class="cgsw" style="--c:${z.e.me?'var(--accent)':`hsl(${hue(eid(z.e))} 62% 58%)`}"></span>${esc(z.e.me?S.nick:z.e.nick)}</b><small>${g.m==='all'?(z.d>=2?'<span>✓ dabei</span>':`<span>${z.d} von 2 Tagen</span>`):g.m==='pts'?`<span>${z.d} ${z.d===1?'Trainingstag':'Trainingstage'}</span>`:''}</small></div><b>${g.m==='all'?(z.d>=2?'✓':'·'):'+'+z.v}</b></div>`).join('')}</div>`;
+  if(pr.done)h+=`<p class="note" style="margin:0">Stark, ihr habt es als Team geschafft. Jeder bekommt +30 Saisonpunkte für die Crew.</p>`;
+  else{const miss=g.t-pr.sum;h+=`<p class="note" style="margin:0">${g.m==='all'?`<span>Es fehlen noch ${miss} ${miss===1?'Person':'Personen'}.</span>`:`<span>Es fehlen noch ${miss}.</span>`} ${list.length<2?'<span>Lade Freunde ein, zusammen ist es leichter.</span>':'<span>Jeder Trainingstag von euch zählt.</span>'}</p>`}
+  h+=`<div class="cgfoot"><span class="dim sm">${g.auto?'<span>Standardziel</span>':g.by&&g.by.me?'<span>Ziel von dir gesetzt</span>':`<span>Ziel gesetzt von</span> <b class="notr">${esc(g.by?g.by.nick:'')}</b>`}${streak>1?` · <span>🔥 ${streak} Wochen in Folge geschafft</span>`:''}</span><button class="btn sm ghost" data-act="cgedit" aria-expanded="${cgForm}">${cgForm?'Schließen':'Ziel ändern'}</button></div>`;
+  if(cgForm){const n=list.length,ps=cgPresets(n,cgM);
+    h+=`<div class="cgset"><div class="lbl">Worum spielt ihr diese Woche?</div><div class="pills wrap">${pillsHTML('cgm',[['days','Trainingstage'],['pts','Saisonpunkte'],['all','Alle dabei']],cgM)}</div>
+      <div class="pills wrap">${ps.map(([t,l])=>`<button class="pill" data-act="cgset" data-v="${t}"><span>${l}</span> · <b>${t}</b></button>`).join('')}</div>
+      <p class="note" style="margin:0">Das neue Ziel gilt sofort für die ganze Crew bis Sonntag. Ab Montag startet ein neues Wochenziel.</p></div>`}
+  el.innerHTML=h;
+}
+function cgStreak(code){const won=S.cgWon&&typeof S.cgWon==='object'?S.cgWon:{};let n=0,t=Date.now();const cur=weekMon(t);if(!won[code+'|'+cur])t-=7*day;for(let k=0;k<60;k++){if(won[code+'|'+weekMon(t)]){n++;t-=7*day}else break}return n}
+/* Ziel erreicht? (diese und letzte Woche, für alle Crews) */
+function checkCrewGoals(){if(!crewOk()||S.example)return;fixCrews();S.cgWon=S.cgWon&&typeof S.cgWon==='object'?S.cgWon:{};let hit=null;
+  for(const code of S.crews){const list=members.filter(m=>m.id!==UID).map(cleanMember).filter(c=>c.crews.includes(code));list.push({id:UID||'me',me:true,...payload(),nick:S.nick||'Du'});
+    for(const w of [weekMon(Date.now()-7*day),weekMon(Date.now())]){const key=code+'|'+w;if(S.cgWon[key])continue;const g=crewGoal(code,w,list),pr=cgProgress(g,list);if(pr.done){S.cgWon[key]=Date.now();hit=hit||{code,g,cur:w===weekMon(Date.now())}}}}
+  {const ks=Object.keys(S.cgWon);if(ks.length>80)for(const k of ks.slice(0,ks.length-80))delete S.cgWon[k]}
+  if(hit){save();syncCrew();if(hit.cur){setTimeout(()=>{toast(`🏆 Crew-Ziel geschafft! ${crewName(hit.code)} hat als Team gewonnen`);sfx('pr');vib([40,60,40,60,160])},600);crewDot(true)}setTimeout(()=>checkBadges(),2500);if(tab==='crew')renderCrewGoal()}}
+const crewName=c=>{try{return S.crewNames&&S.crewNames[c]?S.crewNames[c]:c}catch(e){return c}};
 function rivals(scope){
   const key=monthKey(Date.now()),l=entries(scope).map(e=>({e,v:scope==='crew'?crewPts(e,S.crew,key):Number(e.hist[key])||0})).sort((a,b)=>b.v-a.v||b.e.kw-a.e.kw);
   const i=l.findIndex(z=>z.e.me);if(i<0||l.length<2)return null;
@@ -2247,7 +2342,7 @@ function mergeSocial(r){
 let socialMerged=false;
 function socialPayload(){const now=Date.now();
   let rx=S.rx&&typeof S.rx==='object'?S.rx:{};const ks=Object.keys(rx);if(ks.length>100){const n={};for(const k of ks.slice(-100))n[k]=rx[k];rx=S.rx=n}
-  return {ev:(Array.isArray(S.ev)?S.ev:[]).filter(e=>e.ts>now-30*day).slice(-12),rx,du:(Array.isArray(S.du)?S.du:[]).filter(d=>d.c>now-35*day).slice(-8),dx:(Array.isArray(S.dx)?S.dx:[]).slice(-20),da:S.da&&typeof S.da==='object'?S.da:{},dd:ddMine(),dl:dlMine()}}
+  return {ev:(Array.isArray(S.ev)?S.ev:[]).filter(e=>e.ts>now-30*day).slice(-12),rx,du:(Array.isArray(S.du)?S.du:[]).filter(d=>d.c>now-35*day).slice(-8),dx:(Array.isArray(S.dx)?S.dx:[]).slice(-20),da:S.da&&typeof S.da==='object'?S.da:{},dd:ddMine(),dl:dlMine(),cg:cgMine()}}
 const crewOk=()=>!!(DB&&CAN!==false&&!S.example&&S.nick);
 function crewList(){return crewOk()?entries('crew'):[]}
 /* alle, mit denen man in irgendeiner Crew ist (für Duelle, Reaktionen, Titel) */
@@ -2470,6 +2565,7 @@ function crewNotify(){
       toast(nw.length===1?`${who[nw[0]]} hat auf deinen Eintrag reagiert ${em}`:`${who[nw[0]]} und ${nw.length-1} weitere haben reagiert ${em}`);vib([20,40,20]);crewDot(true)}}
   checkBadges(2500);
   try{followNotify()}catch(e){}
+  try{checkCrewGoals()}catch(e){}
   S.duelNote=S.duelNote&&typeof S.duelNote==='object'?S.duelNote:{};
   {const lim=Date.now()-3*day;for(const k of Object.keys(S.duelNote))if(!(S.duelNote[k]>lim))delete S.duelNote[k]}
   for(const d of allDuels(list))if(d.op.me&&d.state==='pending'&&!S.duelNote[d.key]){const chId=eid(d.ch),recent=Object.entries(S.duelNote).some(([k,t])=>k.startsWith(chId+'~')&&Date.now()-t<12*3600e3);S.duelNote[d.key]=Date.now();save();if(recent)continue;toast(`${d.ch.nick} fordert dich zum Duell heraus ⚔️`);vib([40,60,40]);crewDot(true)}
@@ -2533,13 +2629,14 @@ const BADGES=[
   ['g4','⚡','Aufsteiger','Erreiche den Gesamtrang Pump-Pirat',s=>[s.g,4]],
   ['g8','👑','Kraftpaket','Erreiche den Gesamtrang Kraftkoloss',s=>[s.g,8]],
   ['duel','⚔️','Duellant','Gewinne ein Duell',s=>[s.duels,1]],
-  ['fans','❤️','Crew-Liebling','Bekomme 10 Reaktionen von deiner Crew',s=>[s.rx,10]]
+  ['fans','❤️','Crew-Liebling','Bekomme 10 Reaktionen von deiner Crew',s=>[s.rx,10]],
+  ['team','🤝','Teamplayer','Schafft 3 Crew-Wochenziele',s=>[s.team,3]]
 ];
 function badgeStats(){
   const real=S.example?[]:S.sets.filter(z=>L(z.lift)),c=compute(S.sets),days=new Set(real.map(z=>dayKey(z.ts))),dset=new Set(real.map(z=>isoDay(z.ts)));
   let early=0,night=0,wknd=0;for(const z of real){const h=new Date(z.ts).getHours();if(h<7)early=1;if(h>=22)night=1;const d=new Date(z.ts);if(d.getDay()===6){const n=new Date(z.ts);n.setDate(n.getDate()+1);if(dset.has(isoDay(n.getTime())))wknd=1}}
   return {sets:real.length,prs:S.example?0:(c.prs||0),days:days.size,best:S.example?0:streakInfo().best,lifts:new Set(real.filter(z=>!isCustom(z.lift)&&BASE.some(b=>b.id===z.lift)).map(z=>z.lift)).size,
-    cardio:real.filter(z=>(L(z.lift)||{}).kind==='cd').length,early,night,wknd,g:S.example?0:overall().g,duels:Math.max(Number(S.duelWins)||0,S.duelWon?Object.keys(S.duelWon).length:0,(S.ev||[]).some(e=>e.k==='duel')?1:0),rx:Array.isArray(S.rxSeen)?new Set(S.rxSeen.map(k=>k.split('|').slice(0,2).join('|'))).size:0};
+    cardio:real.filter(z=>(L(z.lift)||{}).kind==='cd').length,team:S.cgWon&&typeof S.cgWon==='object'?Object.keys(S.cgWon).length:0,early,night,wknd,g:S.example?0:overall().g,duels:Math.max(Number(S.duelWins)||0,S.duelWon?Object.keys(S.duelWon).length:0,(S.ev||[]).some(e=>e.k==='duel')?1:0),rx:Array.isArray(S.rxSeen)?new Set(S.rxSeen.map(k=>k.split('|').slice(0,2).join('|'))).size:0};
 }
 function badgeList(){const st=badgeStats();return BADGES.map(([id,ic,n,d,f])=>{const [v,need]=f(st);return {id,ic,n,d,v:Math.min(v,need),need,ok:v>=need}})}
 function checkBadges(delay){
@@ -2734,7 +2831,9 @@ function renderHome(){
   if(gl){hg.dataset.v=gx.id;hg.innerHTML=`<div class="lbl">Nächstes Ziel</div><div class="htv">${esc(gx.n)}</div><small><span>🎯 Nächster Rang mit</span> <b>${gl}</b></small>`}
   else{hg.dataset.v='';hg.innerHTML=`<div class="lbl">Trainingspläne</div><div class="htv">Push, Pull, Beine …</div><small>Fertige Pläne oder dein eigener</small>`}
   const rm=$('#rivalMini'),okc=DB&&CAN!==false&&!S.example&&S.nick,rv2=okc?rivals():null;
-  if(rv2){const g=rv2.up?rv2.up.v-rv2.me.v:0,t=rv2.up?(g>0?`<b class="notr">${esc(rv2.up.e.nick)}</b> <span>ist ${g} Punkte vor dir</span>`:`<span>Gleichauf mit</span> <b class="notr">${esc(rv2.up.e.nick)}</b>`):`<span>Du führst vor</span> <b class="notr">${esc(rv2.down.e.nick)}</b>`;
+  const cgn=okc&&S.crew?(()=>{try{return crewGoalNow()}catch(e){return null}})():null;
+  if(cgn){const {g,pr}=cgn;rm.innerHTML=`<div class="lbl">Crew-Ziel</div><div class="htnum">${Math.min(pr.sum,99999)}<span class="dim" style="font-size:15px;font-weight:600"> / ${g.t}</span></div><div class="cgbar"><i style="width:${Math.min(100,pr.sum/g.t*100)}%;--c:${pr.done?'var(--t11)':'var(--good)'}"></i></div><small>${pr.done?'<span>🏆 Geschafft</span>':`<span>${cgUnit(g.m)}</span>`}</small>`}
+  else if(rv2){const g=rv2.up?rv2.up.v-rv2.me.v:0,t=rv2.up?(g>0?`<b class="notr">${esc(rv2.up.e.nick)}</b> <span>ist ${g} Punkte vor dir</span>`:`<span>Gleichauf mit</span> <b class="notr">${esc(rv2.up.e.nick)}</b>`):`<span>Du führst vor</span> <b class="notr">${esc(rv2.down.e.nick)}</b>`;
     rm.innerHTML=`<div class="lbl">Crew-Saison</div><div class="htnum">Platz ${rv2.i+1}</div><small>${t}</small>`}
   else rm.innerHTML=`<div class="lbl">Crew</div><div class="htv">${okc?'Rangliste und Duelle':'Mit Freunden trainieren'}</div><small>${okc?'Lade Freunde ein und fordere sie heraus':'Crew, Rangliste und Duelle'}</small>`;
 }
@@ -3116,7 +3215,7 @@ function renderBoard(){
     if(!rv.up)h+=`<p class="note">Du führst die Saison an. Verteidige den ersten Platz.</p>`;
     rc.innerHTML=h;
   }
-  renderDuels();renderFeed();renderFollow();
+  renderCrewGoal();renderDuels();renderFeed();renderFollow();
   const jb=$('#joinBanner'),pj=pendingJoin&&!(S.crews||[]).includes(pendingJoin);jb.hidden=!pj;
   if(pj)jb.innerHTML=`<div class="lbl">Einladung</div><div style="font-family:var(--display);font-weight:600;font-size:18px">Du wurdest in die Crew „${esc(pendingJoin)}“ eingeladen</div><p class="note" style="margin:0">${S.example?'Beim Beitreten werden die Beispieldaten entfernt, damit nur deine echten Werte zählen.':'Danach siehst du dich und deine Freunde in der gleichen Rangliste.'}</p><div class="btnrow"><button class="btn sm" data-act="crewjoin" data-v="${esc(pendingJoin)}" style="background:var(--fg);color:var(--bg);border-color:var(--fg)">Crew beitreten</button><button class="btn sm ghost" data-act="joinno">Nicht jetzt</button></div>`;
   const ic=$('#inviteCard');ic.hidden=!okc;
@@ -3399,7 +3498,12 @@ document.addEventListener('visibilitychange',()=>{if(!AC)return;if(document.hidd
 document.addEventListener('click',e=>{const el=e.target.closest&&e.target.closest('button,[role="tab"],summary,.srow,[data-act]');if(!el||el.disabled)return;
   const a=el.dataset.act||'';if(a==='save'||a==='music'||a==='sfx'||a==='sheetclose'&&el.id==='sheet'||a==='remclose'&&el.id==='remind'||a==='plclose'&&el.id==='planSheet'||a==='pfclose'&&el.id==='profSheet'||a==='musclose'&&el.id==='musSheet'||a==='peclose'&&el.id==='planEdit'||a==='prclose'||a==='fxclose')return;
   sfx(el.getAttribute('role')==='tab'?'tab':(a==='del'||a==='exdel'||a==='clear')?'del':'tap')},true);
-function renderSndSw(){try{renderPushUI()}catch(e){}try{renderRestSw()}catch(e){}const m=$('#musSw'),f=$('#sfxSw'),cur=S.music||'off',vr=$('#vibRow'),vs=$('#vibSw');if(vr){const can=typeof navigator.vibrate==='function';vr.hidden=!can;if(can&&vs)vs.innerHTML=[['on','An'],['off','Aus']].map(([k,n])=>`<button data-act="vib" data-v="${k}" aria-pressed="${(S.vib!==false)===(k==='on')}">${n}</button>`).join('')}
+function themeNow(){const t=S.theme==='light'||S.theme==='auto'?S.theme:'dark';return t==='auto'?(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'):t}
+function applyTheme(){const t=themeNow(),h=document.documentElement;if(t==='light')h.dataset.theme='light';else delete h.dataset.theme;
+  for(const m of document.querySelectorAll('meta[name="theme-color"]'))m.setAttribute('content',t==='light'?'#eef0f3':'#07080a')}
+function renderThemeSw(){const el=$('#themeSw');if(!el)return;const cur=S.theme==='light'||S.theme==='auto'?S.theme:'dark';el.innerHTML=[['dark','🌙 Dunkel'],['light','☀️ Hell'],['auto','Wie Gerät']].map(([k,n])=>`<button class="pill" data-act="theme" data-v="${k}" aria-pressed="${cur===k}">${n}</button>`).join('')}
+try{applyTheme();matchMedia('(prefers-color-scheme: light)').addEventListener('change',()=>{if(S.theme==='auto')applyTheme()})}catch(e){}
+function renderSndSw(){try{renderPushUI()}catch(e){}try{renderThemeSw()}catch(e){}try{renderRestSw()}catch(e){}const m=$('#musSw'),f=$('#sfxSw'),cur=S.music||'off',vr=$('#vibRow'),vs=$('#vibSw');if(vr){const can=typeof navigator.vibrate==='function';vr.hidden=!can;if(can&&vs)vs.innerHTML=[['on','An'],['off','Aus']].map(([k,n])=>`<button data-act="vib" data-v="${k}" aria-pressed="${(S.vib!==false)===(k==='on')}">${n}</button>`).join('')}
   if(m)m.innerHTML=[['off','Aus'],['lofi','Gym Lo-Fi'],['ambient','Neon'],['phonk','Drift & Deadlift']].map(([k,n])=>`<button class="pill" data-act="music" data-v="${k}" aria-pressed="${cur===k}">${esc(n)}</button>`).join('');
   if(f)f.innerHTML=[['on','An'],['off','Aus']].map(([k,n])=>`<button data-act="sfx" data-v="${k}" aria-pressed="${(S.sfx!==false)===(k==='on')}">${n}</button>`).join('')}
 
@@ -3628,6 +3732,11 @@ document.addEventListener('click',e=>{
   else if(a==='editdel'){if(editing&&canEdit(S.sets.find(z=>z.id===editing.id))){S.sets=S.sets.filter(z=>z.id!==editing.id);editing=null;syncShown();save();prefill();renderAll();syncCrew()}}
   else if(a==='gotab'){setTab(v)}
   else if(a==='feedmore'){feedOpen=!feedOpen;renderFeed()}
+  else if(a==='cgedit'){cgForm=!cgForm;if(cgForm){const c=crewGoalNow();cgM=c&&!c.g.auto?c.g.m:'days'}renderCrewGoal()}
+  else if(a==='cgm'){cgM=CG_M.includes(v)?v:'days';renderCrewGoal()}
+  else if(a==='cgset'){const t=Math.round(Number(v));if(!S.crew||!(t>=1&&t<=20000))return;S.cg=cleanCg(S.cg);const w=weekMon(Date.now()),prev=weekMon(Date.now()-7*day);
+    const l=(S.cg[S.crew]||[]).filter(g=>g.w===prev);l.push({w,m:cgM,t,c:Date.now()});S.cg[S.crew]=l;cgForm=false;save();syncCrew();renderCrewGoal();toast('Neues Crew-Ziel gesetzt');vib(12)}
+  else if(a==='theme'){S.theme=v==='light'||v==='auto'?v:'dark';save();applyTheme();renderThemeSw();vib(8)}
   else if(a==='musopen'){openMus()}
   else if(a==='musclose'){if(t.id!=='musSheet'||e.target===t)closeMus()}
   else if(a==='musgo'){closeMus();if(v&&L(v)){tl=v;S.last=v;nx=null;exQ='';try{$('#exQ').value=''}catch(e2){}editing=null;confirmDel=false;save();prefill()}setTab('train');renderTrain()}
