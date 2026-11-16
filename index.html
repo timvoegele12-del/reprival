@@ -874,6 +874,31 @@ html[data-theme="light"] .head{border-bottom-color:var(--line)}
 /* Vollbild-Effekte bleiben dunkel */
 html[data-theme="light"] :is(.fx,.swatch,.recap,.prfx){color-scheme:dark;--bg:#07080a; --panel:#111316; --panel-2:#181b1f; --line:rgba(255,255,255,.09);--fg:#f4f5f7; --dim:#8b929b; --accent:#7ae7ff; --accent-ink:#04141a;--good:#5be3a0; --bad:#ff8a7a;--t0:#8b929b; --t1:#d08a4e; --t2:#b9c2cc; --t3:#f2c14e; --t4:#9be15d; --t5:#4be3a5; --t6:#43d0e8; --t7:#5a9bff; --t8:#8f7bff; --t9:#c27bff; --t10:#ff5fa2; --t11:#ffd86b;--sil:#262c33;--mus:#3a424c;--off:#3a4048;--ph:#5c636b;--dockbg:rgba(24,27,31,.82);--dockbg2:rgba(12,14,17,.9);--headbg:rgba(7,8,10,.78);--restbg:rgba(17,20,24,.96);--warm:#ffb469;--scrim:rgba(0,0,0,.62);--w03:rgba(255,255,255,.03);--w04:rgba(255,255,255,.04);--w05:rgba(255,255,255,.05);--w06:rgba(255,255,255,.06);--w07:rgba(255,255,255,.07);--w08:rgba(255,255,255,.08);--w09:rgba(255,255,255,.09);--w10:rgba(255,255,255,.1);--w18:rgba(255,255,255,.18);--w20:rgba(255,255,255,.2);--w22:rgba(255,255,255,.22);--w25:rgba(255,255,255,.25);color:var(--fg)}
 .thsw{display:flex;gap:6px}
+.sugbox{display:grid;gap:8px;padding:12px;border-radius:16px;background:var(--panel-2);border:1px solid var(--line)}
+.sugh{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+.sugh small{color:var(--dim);font-size:12px}
+.suglast{font-size:13px;color:var(--fg);overflow-wrap:anywhere}
+.sugopts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.sugo{appearance:none;-webkit-appearance:none;font:inherit;color:inherit;text-align:left;cursor:pointer;display:grid;gap:2px;align-content:start;padding:9px 10px;border-radius:12px;border:1px solid var(--line);background:var(--panel);min-height:58px;min-width:0}
+.sugo b{font-size:12px;color:var(--dim);font-weight:700}.sugo span{font-family:var(--display);font-weight:700;font-size:14px;overflow-wrap:anywhere}
+.sugo em{font-style:normal;font-size:11px;font-weight:700;color:var(--t11)}
+.sugo.rec{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}.sugo.rec b{color:var(--accent)}
+.sugo:active{transform:scale(.97)}
+@media (max-width:360px){.sugopts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.plbtnrow{display:flex;justify-content:flex-start}
+.pbar{display:flex;align-items:center;justify-content:center;height:96px;gap:2px;padding:6px 0}
+.pbar .sl{width:70px;height:10px;border-radius:3px;background:linear-gradient(var(--w25),var(--w10));flex:none}
+.pbar .cl{width:10px;height:26px;border-radius:2px;background:var(--w25);flex:none}
+.pbar .pl{border-radius:4px;flex:none;display:grid;place-items:center;font-size:9px;font-weight:800;color:#0b0d10;border:1px solid rgba(0,0,0,.25)}
+.pbar .end{width:18px;height:10px;border-radius:0 3px 3px 0;background:var(--w25);flex:none}
+.plist{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.plist span{font-family:var(--mono);font-size:13px;padding:4px 9px;border-radius:99px;background:var(--panel-2);border:1px solid var(--line)}
+.wurow{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;padding:9px 0;border-top:1px solid var(--line);align-items:baseline}
+.wurow:first-child{border-top:0}.wurow b{font-family:var(--display);font-size:15px}.wurow small{color:var(--dim);font-size:12px;grid-column:2}
+.wurow .wun{font-family:var(--mono);color:var(--dim);font-size:13px}
+.impsum{display:grid;gap:6px;padding:12px;border-radius:14px;background:var(--panel-2);border:1px solid var(--line);font-size:14px}
+.impsum b{font-family:var(--display)}
+.impun{font-size:12px;color:var(--dim);overflow-wrap:anywhere}
 .cgcard{background:radial-gradient(110% 80% at 100% 0%,rgba(91,227,160,.10),transparent 60%),var(--panel);border-color:rgba(91,227,160,.28)}
 .cgcard.won{border-color:rgba(255,216,107,.5);background:radial-gradient(110% 80% at 100% 0%,rgba(255,216,107,.14),transparent 60%),var(--panel)}
 .cgq{font-family:var(--display);font-weight:700;font-size:17px;line-height:1.3}
@@ -933,6 +958,7 @@ html[data-theme="light"] :is(.fx,.swatch,.recap,.prfx){color-scheme:dark;--bg:#0
             <div class="btnrow"><button class="btn sm ghost" data-act="excancel">Abbrechen</button></div>
           </div>
           <div class="curex" id="curEx"></div>
+          <div class="sugbox" id="sugBox" hidden></div>
           <div id="logArea" style="display:contents">
           <div class="steppers">
             <div><div class="lbl" id="wlbl">Gewicht (kg)</div>
@@ -946,6 +972,7 @@ html[data-theme="light"] :is(.fx,.swatch,.recap,.prfx){color-scheme:dark;--bg:#0
               </div>
               <button class="btn sm swbtn" data-act="swopen" id="swBtn" hidden>⏱ <span>Zeit stoppen</span></button></div>
           </div>
+          <div id="plBtnRow" class="plbtnrow" hidden><button class="btn sm ghost" data-act="plates">🏋️ <span>Scheiben &amp; Aufwärmen</span></button></div>
           <div class="est"><div><div class="lbl" id="plbl">Geschätztes Maximum</div><div class="big" id="prev">–</div></div></div>
           <div id="dateRow" class="wkh" style="display:grid;gap:8px"><div class="lbl">Wann?</div><div class="pills" id="dayPills"></div></div>
           <div class="editbar" id="editBar" hidden><span id="editTxt"></span><span style="display:flex;gap:8px"><button class="btn sm ghost" data-act="editdel">Löschen</button><button class="btn sm ghost" data-act="editcancel">Abbrechen</button></span></div>
@@ -1014,6 +1041,9 @@ html[data-theme="light"] :is(.fx,.swatch,.recap,.prfx){color-scheme:dark;--bg:#0
 <div class="sheet" id="planSheet" data-act="plclose" hidden>
   <div class="sheetin plsheet" role="dialog" aria-modal="true" aria-labelledby="plTitle"><div id="plBody" class="plbody"></div></div>
 </div>
+<div class="sheet" id="toolSheet" data-act="toolclose" hidden>
+  <div class="sheetin plsheet" role="dialog" aria-modal="true" aria-labelledby="toolTitle"><div id="toolBody" class="plbody"></div></div>
+</div>
 <div class="sheet" id="musSheet" data-act="musclose" hidden>
   <div class="sheetin plsheet" role="dialog" aria-modal="true" aria-labelledby="musTitle"><div id="musBody" class="plbody"></div></div>
 </div>
@@ -1065,6 +1095,14 @@ html[data-theme="light"] :is(.fx,.swatch,.recap,.prfx){color-scheme:dark;--bg:#0
         <p class="note">Zusätzlich kannst du deine Daten als Text oder Datei sichern, zum Beispiel für die Datei-Version der App.</p>
         <textarea id="bkTxt" rows="4" spellcheck="false" placeholder="Hier erscheint dein Backup. Zum Einspielen den Text hier einfügen."></textarea>
         <div class="btnrow"><button class="btn sm" data-act="bkmake">Backup erzeugen und kopieren</button><button class="btn sm" data-act="bkfile" id="bkFile" hidden>Als Datei speichern</button><button class="btn sm" data-act="bkload" id="bkLoad">Backup einspielen</button></div>
+      </div>
+    </details>
+    <details class="how" id="impBox"><summary>Aus Strong oder Hevy übernehmen</summary>
+      <div class="howin">
+        <p class="note">Du kommst von einer anderen App? Exportiere dort deine Trainings als CSV-Datei (in Strong und Hevy jeweils in den Einstellungen unter „Daten exportieren“) und wähle die Datei hier aus. Importierte Sätze zählen sofort für deine Ränge, Muskeln und Statistik, bringen aber keine Saisonpunkte.</p>
+        <input type="file" id="impFile" accept=".csv,text/csv,text/plain" hidden>
+        <div class="btnrow"><button class="btn sm" data-act="impcsv">CSV-Datei auswählen</button></div>
+        <div id="impRes" style="display:grid;gap:10px"></div>
       </div>
     </details>
     <div id="acctRow" style="display:grid;gap:10px" hidden><div class="lbl">Konto</div><div class="btnrow"><button class="btn sm ghost" data-act="pwchange">Passwort ändern</button><button class="btn sm ghost" data-act="logout" id="logoutBtn">Abmelden</button><button class="btn sm ghost" data-act="acctdel" id="acctDel" style="color:var(--bad)">Konto löschen</button></div>
@@ -1406,7 +1444,7 @@ LANG=S.lang==='en'?'en':'de';
 /* ---------- Sprache: Deutsch (Quelle) -> Englisch per Übersetzungsschicht ---------- */
 const D={
 // Navigation & allgemein
-'Start':'Home','Punkte für Bestleistungen und Aufstiege gibt es ab deinem nächsten Trainingstag mit dieser Übung':'Points for personal bests and rank-ups start on your next training day with this exercise','Eigene Übungen bringen keine Punkte für Bestleistungen.':'Custom exercises don’t earn points for personal bests.','Im Verhältnis zu deinem Körpergewicht ist das noch kein neuer Bestwert.':'Relative to your body weight, this isn’t a new best yet.','Für +25 Punkte muss die Bestleistung mindestens 1 Prozent besser sein.':'A personal best needs to be at least 1 percent better for +25 points.','Pro Übung zählt eine Bestleistung am Tag. Die gab es heute schon.':'One personal best per exercise counts per day. You already had it today.','Pro Tag zählen höchstens 3 Bestleistungen. Die hast du heute schon.':'At most 3 personal bests count per day. You already have them today.','Diese Bestleistung bringt heute keine Punkte.':'This personal best earns no points today.','Aufstieg in den nächsten Rang (pro Rang)':'Moving up to the next rank (per rank)','Gut zu wissen: Der erste Tag mit einer neuen Übung ist dein Startwert. Dafür gibt es +10 für den Trainingstag, aber noch keine Punkte für Bestleistung oder Aufstieg. Eine Bestleistung zählt, wenn sie mindestens 1 Prozent besser ist, einmal pro Übung und Tag und höchstens 3 am Tag. In der Crew zählen nur Punkte ab deinem Beitritt.':'Good to know: your first day with a new exercise is your starting value. You get +10 for the training day, but no points for a personal best or rank-up yet. A personal best counts if it is at least 1 percent better, once per exercise per day and at most 3 per day. In the crew, only points from when you joined count.','Darstellung':'Appearance','🌙 Dunkel':'🌙 Dark','☀️ Hell':'☀️ Light','Wie Gerät':'Match device','Crew-Ziel dieser Woche':'This week’s crew goal','🏆 Geschafft':'🏆 Done','Letzter Tag':'Last day','Jeder trainiert mindestens 2 Tage':'Everyone trains at least 2 days','Mitglieder mit 2 Tagen':'members with 2 days','✓ dabei':'✓ in','Stark, ihr habt es als Team geschafft. Jeder bekommt +30 Saisonpunkte für die Crew.':'Great, you did it as a team. Everyone gets +30 season points for the crew.','Lade Freunde ein, zusammen ist es leichter.':'Invite friends, it’s easier together.','Jeder Trainingstag von euch zählt.':'Every training day of yours counts.','Standardziel':'Default goal','Ziel von dir gesetzt':'Goal set by you','Ziel gesetzt von':'Goal set by','Ziel ändern':'Change goal','Schließen':'Close','Worum spielt ihr diese Woche?':'What are you playing for this week?','Alle dabei':'Everyone in','Locker':'Easy','Normal':'Normal','Hart':'Hard','Alle':'All','Das neue Ziel gilt sofort für die ganze Crew bis Sonntag. Ab Montag startet ein neues Wochenziel.':'The new goal applies right away to the whole crew until Sunday. A new weekly goal starts on Monday.','Neues Crew-Ziel gesetzt':'New crew goal set','Teamplayer':'Team Player','Schafft 3 Crew-Wochenziele':'Complete 3 weekly crew goals','Crew-Ziel':'Crew goal','Crew-Wochenziel gemeinsam geschafft':'Weekly crew goal completed together','Hier siehst du deinen Körper: Jeder Muskel steigt mit deinem Training auf. Darunter deine Serie, dein Rang und dein nächstes Ziel.':'This is your body: every muscle levels up as you train. Below are your streak, your rank and your next goal.','Trag deinen ersten Satz ein, dann wächst dein Körper mit.':'Log your first set and your body grows with you.','Deine Muskeln ansehen':'View your muscles','Stärkster Muskel:':'Strongest muscle:','Noch untrainiert:':'Not trained yet:','Aufholen:':'Catch up:','Alle Muskeln ansehen ›':'View all muscles ›','So wächst dein Körper ›':'How your body grows ›','Dein Körper':'Your body','Deine Muskeln':'Your muscles','Jeder Muskel steigt mit seiner stärksten Übung auf. Hauptmuskeln zählen voll, mittrainierte Muskeln zu 60 Prozent. Je höher die Stufe, desto kräftiger wird dein Körper.':'Each muscle levels up with its strongest exercise. Main muscles count fully, assisting muscles at 60 percent. The higher the level, the stronger your body looks.','Noch nicht trainiert. Probier':'Not trained yet. Try','Noch nicht trainiert.':'Not trained yet.','oder':'or','Stärkste Übung:':'Strongest exercise:','Höchste Stufe erreicht':'Highest level reached','Körper':'Body','Nach deinem ersten Satz bekommst du deinen Rang.':'You get your rank after your first set.','Push, Pull, Beine …':'Push, pull, legs …','Fertige Pläne oder dein eigener':'Ready-made plans or your own','🎯 Nächster Rang mit':'🎯 Next rank with','Crew-Saison':'Crew season','Du führst vor':'You lead ahead of','Rangliste und Duelle':'Leaderboard and duels','Mit Freunden trainieren':'Train with friends','Lade Freunde ein und fordere sie heraus':'Invite friends and challenge them','Crew, Rangliste und Duelle':'Crew, leaderboard and duels','Woche geschafft':'Week done','Noch 1 Tag diese Woche':'1 more day this week','Noch 2 Tage diese Woche':'2 more days this week','Freunde in den Rängen':'Friends on the rank ladder','Sobald du mit Freunden in einer Crew bist, siehst du hier, auf welchem Rang sie gerade stehen.':'Once you share a crew with friends, you will see here which rank they are on right now.','Zur Crew':'Go to crew','Du stehst unter deinen Freunden ganz oben.':'You are at the top among your friends.','ist mit dir gleichauf.':'is level with you.','Tippe auf eine Person, um ihr Profil zu sehen.':'Tap a person to see their profile.','gleichauf mit':'level with','Freunde bei dieser Übung':'Friends on this exercise','Die Zahl sind die Rangpunkte bei dieser Übung. Sie richten sich nach dem Körpergewicht, damit der Vergleich fair ist.':'The number shows the rank points on this exercise. They are relative to body weight to keep the comparison fair.','So sehen dich andere':'How others see you','Follower':'Followers','Folgt':'Following','+ Folgen':'+ Follow','✓ Folge ich':'✓ Following','⚔️ Herausfordern':'⚔️ Challenge','Gesamtrang':'Overall rank','Im Vergleich mit dir':'Compared with you','Eure Duelle:':'Your duels:','Letzte 7 Tage':'Last 7 days','Saisonpunkte pro Monat':'Season points per month','Alle Übungen anzeigen':'Show all exercises','Gleichauf mit dir':'Level with you','Trainierst du noch nicht':'You don’t train this yet','Noch keine Übungen mit Rang.':'No ranked exercises yet.','Letzte Erfolge':'Recent achievements','Noch keine Erfolge in den letzten Wochen.':'No achievements in the last few weeks.','Dieses Profil ist nicht mehr sichtbar. Ihr seid in keiner gemeinsamen Crew mehr.':'This profile is no longer visible. You no longer share a crew.','Folge ich':'Following','Tippe in der Rangliste auf eine Person. Im Profil siehst du ihre Ränge und Erfolge und kannst ihr folgen.':'Tap a person in the leaderboard. Their profile shows their ranks and achievements, and you can follow them.','Heute trainiert':'Trained today','Gestern trainiert':'Trained yesterday','Von den Athleten, denen du folgst, gibt es noch nichts Neues.':'Nothing new yet from the athletes you follow.','Du folgst schon 50 Athleten. Entfolge erst jemandem.':'You already follow 50 athletes. Unfollow someone first.','Gerade ist kein neues Duell mit dieser Person möglich.':'A new duel with this person is not possible right now.','Rangpunkte plus':'Rank points gained','Einsatz:':'Stake:','Einsatz (freiwillig)':'Stake (optional)','z. B. Verlierer zahlt den Shake':'e.g. loser buys the shake','Eine Übung':'One exercise','Dauer':'Duration','3 Tage':'3 days','7 Tage':'7 days','14 Tage':'14 days','Gezählt wird, wie viele Rangpunkte ihr bei dieser Übung im Duell zulegt. So haben auch Einsteiger eine faire Chance.':'What counts is how many rank points each of you gains on this exercise during the duel. That gives beginners a fair chance too.','🔁 Revanche':'🔁 Rematch','Bilanz':'Record','Mit eingeschalteten Benachrichtigungen meldet sich RepRival auch, wenn du die App während der Pause verlässt.':'With notifications turned on, RepRival also alerts you when you leave the app during your rest.','Zeit stoppen':'Time it','Stoppuhr':'Stopwatch','Geh in Position …':'Get into position …','Sofort starten':'Start now','Halten! Tippe auf Stopp, wenn du fertig bist.':'Hold it! Tap Stop when you are done.','Stopp':'Stop','Stark! 💪':'Strong! 💪','Nur eintragen':'Just fill in','Nochmal':'Again','Pausentimer nach jedem Satz':'Rest timer after each set','Pro Übung kannst du die Pause im Timer mit −15 / +15 anpassen. Die App merkt sich das für diese Übung.':'Adjust the rest per exercise with −15 / +15 in the timer. The app remembers it for that exercise.','Pause':'Rest','Pause vorbei':'Rest over','Nächster Satz! 💪':'Next set! 💪','Pausentimer aus':'Rest timer off','Heute bei dieser Übung':'Today for this exercise','Ziel':'Goal','Noch kein Satz heute. Los geht’s!':'No set yet today. Let’s go!','Training läuft':'Workout running','Freies Training':'Free workout','Training beenden':'End workout','Wähle unten eine Übung und trag deinen ersten Satz ein.':'Pick an exercise below and log your first set.','Andere Übung':'Other exercise','Auswahl schließen':'Close picker','Training beendet':'Workout finished','Trainingsdauer':'Workout duration','Brustpresse (Maschine)':'Chest Press (Machine)','Überzüge':'Pullovers','Rudern an der Maschine':'Machine Row','Hängen an der Stange':'Dead Hang','Schulterpresse (Maschine)':'Shoulder Press (Machine)','Seitheben (Maschine)':'Lateral Raise (Machine)','Bizeps-Maschine':'Biceps Curl Machine','Trizeps-Maschine':'Triceps Machine','Hackenschmidt-Kniebeuge':'Hack Squat','Kniebeuge (Multipresse)':'Smith Machine Squat','Abduktoren-Maschine':'Hip Abduction Machine','Adduktoren-Maschine':'Hip Adduction Machine','Wandsitzen':'Wall Sit','Bauchmaschine':'Ab Crunch Machine','Plank (Unterarmstütz)':'Plank','Seitstütz':'Side Plank','Auf Zeit':'Timed','Dauer (Sekunden)':'Duration (seconds)','Wertung (Zeit)':'Score (time)','Zeit':'Time','Sek.':'sec','Bitte eine Dauer von 1 bis 900 Sekunden eintragen.':'Please enter a duration of 1 to 900 seconds.','Benachrichtigungen':'Notifications','Verpasse kein Duell':'Never miss a duel','Aktivieren':'Turn on','Später':'Later','Verstanden':'Got it',
+'Start':'Home','Letztes Mal':'Last time','Heute versuchen':'Try today','Empfohlen':'Recommended','Wie letztes Mal':'Same as last time','+1 Wdh':'+1 rep','+2 Wdh':'+2 reps','+5 Sek.':'+5 sec','+10 Sek.':'+10 sec','🎯 Rang-Aufstieg':'🎯 Rank up','🏆 Bestleistung':'🏆 Personal best','Scheiben & Aufwärmen':'Plates & warm-up','pro Seite':'per side','pro Seite:':'per side:','ist weniger als die Stange':'is less than the bar','Nur die Stange':'Just the bar','Mit normalen Scheiben nicht genau möglich. Es fehlen pro Seite':'Not exactly possible with standard plates. Missing per side','Gerechnet mit einer Stange von':'Calculated with a bar of','Leere Stange':'Empty bar','Aufwärmsätze musst du nicht eintragen. Danach geht es mit deinem Arbeitsgewicht los.':'You don’t need to log warm-up sets. After them, start with your working weight.','Aus Strong oder Hevy übernehmen':'Import from Strong or Hevy','Du kommst von einer anderen App? Exportiere dort deine Trainings als CSV-Datei (in Strong und Hevy jeweils in den Einstellungen unter „Daten exportieren“) und wähle die Datei hier aus. Importierte Sätze zählen sofort für deine Ränge, Muskeln und Statistik, bringen aber keine Saisonpunkte.':'Coming from another app? Export your workouts there as a CSV file (in Strong and Hevy under “Export data” in the settings) and pick the file here. Imported sets count right away for your ranks, muscles and stats, but earn no season points.','CSV-Datei auswählen':'Choose CSV file','-Datei erkannt':' file detected','Sätze an':'sets on','Trainingstagen':'training days','Als eigene Übung angelegt:':'Added as custom exercises:','Nicht übernommen:':'Not imported:','Schon vorhanden und übersprungen:':'Already there, skipped:','Aufwärmsätze ausgelassen:':'Warm-up sets left out:','In welcher Einheit hast du in Strong eingetragen?':'Which unit did you use in Strong?','kg und km':'kg and km','lb und Meilen':'lb and miles','Es gibt nichts Neues zu übernehmen.':'There is nothing new to import.','Die Datei ist leer oder keine CSV-Datei.':'The file is empty or not a CSV file.','Das sieht nicht wie ein Export aus Strong oder Hevy aus.':'This doesn’t look like an export from Strong or Hevy.','Die Datei konnte nicht gelesen werden.':'The file could not be read.','Die Datei ist zu groß (höchstens 15 MB).':'The file is too large (max. 15 MB).','Punkte für Bestleistungen und Aufstiege gibt es ab deinem nächsten Trainingstag mit dieser Übung':'Points for personal bests and rank-ups start on your next training day with this exercise','Eigene Übungen bringen keine Punkte für Bestleistungen.':'Custom exercises don’t earn points for personal bests.','Im Verhältnis zu deinem Körpergewicht ist das noch kein neuer Bestwert.':'Relative to your body weight, this isn’t a new best yet.','Für +25 Punkte muss die Bestleistung mindestens 1 Prozent besser sein.':'A personal best needs to be at least 1 percent better for +25 points.','Pro Übung zählt eine Bestleistung am Tag. Die gab es heute schon.':'One personal best per exercise counts per day. You already had it today.','Pro Tag zählen höchstens 3 Bestleistungen. Die hast du heute schon.':'At most 3 personal bests count per day. You already have them today.','Diese Bestleistung bringt heute keine Punkte.':'This personal best earns no points today.','Aufstieg in den nächsten Rang (pro Rang)':'Moving up to the next rank (per rank)','Gut zu wissen: Der erste Tag mit einer neuen Übung ist dein Startwert. Dafür gibt es +10 für den Trainingstag, aber noch keine Punkte für Bestleistung oder Aufstieg. Eine Bestleistung zählt, wenn sie mindestens 1 Prozent besser ist, einmal pro Übung und Tag und höchstens 3 am Tag. In der Crew zählen nur Punkte ab deinem Beitritt.':'Good to know: your first day with a new exercise is your starting value. You get +10 for the training day, but no points for a personal best or rank-up yet. A personal best counts if it is at least 1 percent better, once per exercise per day and at most 3 per day. In the crew, only points from when you joined count.','Darstellung':'Appearance','🌙 Dunkel':'🌙 Dark','☀️ Hell':'☀️ Light','Wie Gerät':'Match device','Crew-Ziel dieser Woche':'This week’s crew goal','🏆 Geschafft':'🏆 Done','Letzter Tag':'Last day','Jeder trainiert mindestens 2 Tage':'Everyone trains at least 2 days','Mitglieder mit 2 Tagen':'members with 2 days','✓ dabei':'✓ in','Stark, ihr habt es als Team geschafft. Jeder bekommt +30 Saisonpunkte für die Crew.':'Great, you did it as a team. Everyone gets +30 season points for the crew.','Lade Freunde ein, zusammen ist es leichter.':'Invite friends, it’s easier together.','Jeder Trainingstag von euch zählt.':'Every training day of yours counts.','Standardziel':'Default goal','Ziel von dir gesetzt':'Goal set by you','Ziel gesetzt von':'Goal set by','Ziel ändern':'Change goal','Schließen':'Close','Worum spielt ihr diese Woche?':'What are you playing for this week?','Alle dabei':'Everyone in','Locker':'Easy','Normal':'Normal','Hart':'Hard','Alle':'All','Das neue Ziel gilt sofort für die ganze Crew bis Sonntag. Ab Montag startet ein neues Wochenziel.':'The new goal applies right away to the whole crew until Sunday. A new weekly goal starts on Monday.','Neues Crew-Ziel gesetzt':'New crew goal set','Teamplayer':'Team Player','Schafft 3 Crew-Wochenziele':'Complete 3 weekly crew goals','Crew-Ziel':'Crew goal','Crew-Wochenziel gemeinsam geschafft':'Weekly crew goal completed together','Hier siehst du deinen Körper: Jeder Muskel steigt mit deinem Training auf. Darunter deine Serie, dein Rang und dein nächstes Ziel.':'This is your body: every muscle levels up as you train. Below are your streak, your rank and your next goal.','Trag deinen ersten Satz ein, dann wächst dein Körper mit.':'Log your first set and your body grows with you.','Deine Muskeln ansehen':'View your muscles','Stärkster Muskel:':'Strongest muscle:','Noch untrainiert:':'Not trained yet:','Aufholen:':'Catch up:','Alle Muskeln ansehen ›':'View all muscles ›','So wächst dein Körper ›':'How your body grows ›','Dein Körper':'Your body','Deine Muskeln':'Your muscles','Jeder Muskel steigt mit seiner stärksten Übung auf. Hauptmuskeln zählen voll, mittrainierte Muskeln zu 60 Prozent. Je höher die Stufe, desto kräftiger wird dein Körper.':'Each muscle levels up with its strongest exercise. Main muscles count fully, assisting muscles at 60 percent. The higher the level, the stronger your body looks.','Noch nicht trainiert. Probier':'Not trained yet. Try','Noch nicht trainiert.':'Not trained yet.','oder':'or','Stärkste Übung:':'Strongest exercise:','Höchste Stufe erreicht':'Highest level reached','Körper':'Body','Nach deinem ersten Satz bekommst du deinen Rang.':'You get your rank after your first set.','Push, Pull, Beine …':'Push, pull, legs …','Fertige Pläne oder dein eigener':'Ready-made plans or your own','🎯 Nächster Rang mit':'🎯 Next rank with','Crew-Saison':'Crew season','Du führst vor':'You lead ahead of','Rangliste und Duelle':'Leaderboard and duels','Mit Freunden trainieren':'Train with friends','Lade Freunde ein und fordere sie heraus':'Invite friends and challenge them','Crew, Rangliste und Duelle':'Crew, leaderboard and duels','Woche geschafft':'Week done','Noch 1 Tag diese Woche':'1 more day this week','Noch 2 Tage diese Woche':'2 more days this week','Freunde in den Rängen':'Friends on the rank ladder','Sobald du mit Freunden in einer Crew bist, siehst du hier, auf welchem Rang sie gerade stehen.':'Once you share a crew with friends, you will see here which rank they are on right now.','Zur Crew':'Go to crew','Du stehst unter deinen Freunden ganz oben.':'You are at the top among your friends.','ist mit dir gleichauf.':'is level with you.','Tippe auf eine Person, um ihr Profil zu sehen.':'Tap a person to see their profile.','gleichauf mit':'level with','Freunde bei dieser Übung':'Friends on this exercise','Die Zahl sind die Rangpunkte bei dieser Übung. Sie richten sich nach dem Körpergewicht, damit der Vergleich fair ist.':'The number shows the rank points on this exercise. They are relative to body weight to keep the comparison fair.','So sehen dich andere':'How others see you','Follower':'Followers','Folgt':'Following','+ Folgen':'+ Follow','✓ Folge ich':'✓ Following','⚔️ Herausfordern':'⚔️ Challenge','Gesamtrang':'Overall rank','Im Vergleich mit dir':'Compared with you','Eure Duelle:':'Your duels:','Letzte 7 Tage':'Last 7 days','Saisonpunkte pro Monat':'Season points per month','Alle Übungen anzeigen':'Show all exercises','Gleichauf mit dir':'Level with you','Trainierst du noch nicht':'You don’t train this yet','Noch keine Übungen mit Rang.':'No ranked exercises yet.','Letzte Erfolge':'Recent achievements','Noch keine Erfolge in den letzten Wochen.':'No achievements in the last few weeks.','Dieses Profil ist nicht mehr sichtbar. Ihr seid in keiner gemeinsamen Crew mehr.':'This profile is no longer visible. You no longer share a crew.','Folge ich':'Following','Tippe in der Rangliste auf eine Person. Im Profil siehst du ihre Ränge und Erfolge und kannst ihr folgen.':'Tap a person in the leaderboard. Their profile shows their ranks and achievements, and you can follow them.','Heute trainiert':'Trained today','Gestern trainiert':'Trained yesterday','Von den Athleten, denen du folgst, gibt es noch nichts Neues.':'Nothing new yet from the athletes you follow.','Du folgst schon 50 Athleten. Entfolge erst jemandem.':'You already follow 50 athletes. Unfollow someone first.','Gerade ist kein neues Duell mit dieser Person möglich.':'A new duel with this person is not possible right now.','Rangpunkte plus':'Rank points gained','Einsatz:':'Stake:','Einsatz (freiwillig)':'Stake (optional)','z. B. Verlierer zahlt den Shake':'e.g. loser buys the shake','Eine Übung':'One exercise','Dauer':'Duration','3 Tage':'3 days','7 Tage':'7 days','14 Tage':'14 days','Gezählt wird, wie viele Rangpunkte ihr bei dieser Übung im Duell zulegt. So haben auch Einsteiger eine faire Chance.':'What counts is how many rank points each of you gains on this exercise during the duel. That gives beginners a fair chance too.','🔁 Revanche':'🔁 Rematch','Bilanz':'Record','Mit eingeschalteten Benachrichtigungen meldet sich RepRival auch, wenn du die App während der Pause verlässt.':'With notifications turned on, RepRival also alerts you when you leave the app during your rest.','Zeit stoppen':'Time it','Stoppuhr':'Stopwatch','Geh in Position …':'Get into position …','Sofort starten':'Start now','Halten! Tippe auf Stopp, wenn du fertig bist.':'Hold it! Tap Stop when you are done.','Stopp':'Stop','Stark! 💪':'Strong! 💪','Nur eintragen':'Just fill in','Nochmal':'Again','Pausentimer nach jedem Satz':'Rest timer after each set','Pro Übung kannst du die Pause im Timer mit −15 / +15 anpassen. Die App merkt sich das für diese Übung.':'Adjust the rest per exercise with −15 / +15 in the timer. The app remembers it for that exercise.','Pause':'Rest','Pause vorbei':'Rest over','Nächster Satz! 💪':'Next set! 💪','Pausentimer aus':'Rest timer off','Heute bei dieser Übung':'Today for this exercise','Ziel':'Goal','Noch kein Satz heute. Los geht’s!':'No set yet today. Let’s go!','Training läuft':'Workout running','Freies Training':'Free workout','Training beenden':'End workout','Wähle unten eine Übung und trag deinen ersten Satz ein.':'Pick an exercise below and log your first set.','Andere Übung':'Other exercise','Auswahl schließen':'Close picker','Training beendet':'Workout finished','Trainingsdauer':'Workout duration','Brustpresse (Maschine)':'Chest Press (Machine)','Überzüge':'Pullovers','Rudern an der Maschine':'Machine Row','Hängen an der Stange':'Dead Hang','Schulterpresse (Maschine)':'Shoulder Press (Machine)','Seitheben (Maschine)':'Lateral Raise (Machine)','Bizeps-Maschine':'Biceps Curl Machine','Trizeps-Maschine':'Triceps Machine','Hackenschmidt-Kniebeuge':'Hack Squat','Kniebeuge (Multipresse)':'Smith Machine Squat','Abduktoren-Maschine':'Hip Abduction Machine','Adduktoren-Maschine':'Hip Adduction Machine','Wandsitzen':'Wall Sit','Bauchmaschine':'Ab Crunch Machine','Plank (Unterarmstütz)':'Plank','Seitstütz':'Side Plank','Auf Zeit':'Timed','Dauer (Sekunden)':'Duration (seconds)','Wertung (Zeit)':'Score (time)','Zeit':'Time','Sek.':'sec','Bitte eine Dauer von 1 bis 900 Sekunden eintragen.':'Please enter a duration of 1 to 900 seconds.','Benachrichtigungen':'Notifications','Verpasse kein Duell':'Never miss a duel','Aktivieren':'Turn on','Später':'Later','Verstanden':'Got it',
 'Wir sagen dir Bescheid, wenn dich jemand herausfordert, auf deinen Eintrag reagiert oder dich in der Crew überholt.':'We let you know when someone challenges you, reacts to your entry or overtakes you in the crew.',
 'Damit RepRival dir Bescheid geben kann, füge die App zum Home-Bildschirm hinzu: in Safari auf Teilen → „Zum Home-Bildschirm“.':'So RepRival can notify you, add the app to your home screen: in Safari tap Share → “Add to Home Screen”.',
 'Auf dem iPhone gehen Benachrichtigungen nur, wenn RepRival auf dem Home-Bildschirm ist: in Safari auf Teilen → „Zum Home-Bildschirm“.':'On iPhone, notifications only work when RepRival is on your home screen: in Safari tap Share → “Add to Home Screen”.',
@@ -1642,6 +1680,11 @@ const PAT=[
  [/^Duell angenommen! (\d+) Tage, los geht’s\.$/,m=>`Duel accepted! ${m[1]} days, let’s go.`],
  [/^Platz (\d+) von (\d+)$/,m=>`#${m[1]} of ${m[2]}`],
  [/^Stufe (\d+)$/,m=>`Level ${m[1]}`],
+ [/^(\d+) Sek\. schneller$/,m=>`${m[1]} sec faster`],
+ [/^(\d+) Sätze übernehmen$/,m=>`Import ${m[1]} sets`],
+ [/^(\d+) Sätze übernommen$/,m=>`${m[1]} sets imported`],
+ [/^deine Ränge sind aktualisiert$/,()=>'your ranks are updated'],
+ [/^Aufwärmen vor (.+)$/,m=>`Warm-up before ${m[1]}`],
  [/^\+(\d+) Saisonpunkte$/,m=>`+${m[1]} season points`],
  [/^Startwert für (.+): (.+)$/,m=>`Starting value for ${tw(m[1])}: ${tw(m[2])}`],
 
@@ -2006,11 +2049,13 @@ function lastSet(lift){let b=null;for(const s of S.sets){if(s.lift===lift&&(!b||
 /* Points are recomputed from the whole set log. Anti-farming: +10 per training day, +25 for a real personal best
    (at least 1% above the previous best, once per exercise and day, at most 3 per day), +100 once per rank step. */
 function compute(sets){return sets===S.sets?memo('compute',()=>computeRaw(sets)):computeRaw(sets)}
+const isImp=z=>typeof z.id==='string'&&z.id.slice(0,3)==='imp';
 function computeRaw(sets){
   const arr=[...sets].sort((a,b)=>a.ts-b.ts),firstDay={},best={},top={},days={},prDay={},prCount={},hist={},dp={},prM={},adds=[];let prs=0;
   for(const s of arr){
     const x=L(s.lift);if(!x)continue;
     const sc=scOf(x,s.w,s.r,setBw(s)),m=monthKey(s.ts),dk=dayKey(s.ts);let add=0;
+    if(isImp(s)){if(firstDay[s.lift]===undefined)firstDay[s.lift]=dk;const ti0=tierOfS(x,sc);if(top[s.lift]===undefined||ti0>top[s.lift])top[s.lift]=ti0;if(best[s.lift]===undefined||sc>best[s.lift])best[s.lift]=sc;continue}
     if(!days[dk]){days[dk]=1;add+=10}
     const prev=best[s.lift],pk=dk+'|'+s.lift;
     const cu=isCustom(s.lift);if(firstDay[s.lift]===undefined)firstDay[s.lift]=dk;const fd=firstDay[s.lift]===dk;
@@ -2665,7 +2710,7 @@ let rcState=null;
 let navDepth=0;
 function navPush(){if(!window.__standalone||navDepth)return;try{history.pushState({rr:1},'');navDepth=1}catch(e){}}
 if(window.__standalone)window.addEventListener('popstate',()=>{navDepth=0;
-  if(swOpenNow()){swClose()}else if(tourOpen()){endTour()}else if(rcState){closeRecap()}else if(!$('#musSheet').hidden){closeMus()}else if(!$('#profSheet').hidden){closeProf()}else if(!$('#planEdit').hidden){closePlanEdit()}else if(!$('#planSheet').hidden){closePlan()}else if(!$('#remind').hidden){closeRemind()}else if(!$('#sheet').hidden){closeSheet()}else if(!$('#fx').hidden){try{closeRankUp()}catch(e){$('#fx').hidden=true}}else if(tab!=='home'){setTab('home');return}else return;
+  if(swOpenNow()){swClose()}else if(tourOpen()){endTour()}else if(rcState){closeRecap()}else if(!$('#toolSheet').hidden){closeTool()}else if(!$('#musSheet').hidden){closeMus()}else if(!$('#profSheet').hidden){closeProf()}else if(!$('#planEdit').hidden){closePlanEdit()}else if(!$('#planSheet').hidden){closePlan()}else if(!$('#remind').hidden){closeRemind()}else if(!$('#sheet').hidden){closeSheet()}else if(!$('#fx').hidden){try{closeRankUp()}catch(e){$('#fx').hidden=true}}else if(tab!=='home'){setTab('home');return}else return;
   if(tab!=='home')navPush()});
 function recapData(pk){
   const real=S.sets.filter(z=>L(z.lift)&&monthKey(z.ts)===pk);if(!real.length)return null;
@@ -3110,6 +3155,7 @@ function renderTrain(){
       else if(isCustom(tl))ce.innerHTML=`<div class="embwrap cust">${custIcon()}</div><div style="min-width:0"><b>${esc(x.n)}</b><small>Eigene Übung · bisher bestes ${x.kind==='cd'?'Tempo '+vText(x,sc):x.kind==='bw'?'Ergebnis '+fmt(sc)+' Wdh':'Maximum ≈ '+fw(sc*S.bw)+' '+U()} · zählt nicht zum Rang</small></div>${pic}`;
       else{const ti=tierOfS(x,sc),pp=ptsOfS(x,sc)-ti*100;ce.innerHTML=`<div class="embwrap" style="color:var(--t${ti})">${emblem(ti)}</div><div style="min-width:0"><b>${esc(x.n)}</b><small><span style="color:var(--t${ti});font-weight:700">${TIERS[ti]}</span>${ti<NT?` · noch ${100-pp} ${100-pp===1?'Punkt':'Punkte'} bis ${TIERS[ti+1]}`:' · höchster Rang'}</small>${(()=>{const g=ti<NT?goalFor(x,ti):'';return g?`<small class="goal"><span>🎯 Dein nächster Rang mit</span> <b>${g}</b></small>`:''})()}${per}</div>${pic}`}}}
   $('#saveBtn').textContent=es?'Änderung speichern':nx?'Übung anlegen und Satz speichern':'Satz speichern · '+x.n;
+  try{renderSug()}catch(e){}
   const all=S.sets.filter(z=>L(z.lift)).sort((a,b)=>b.ts-a.ts);
   if(!all.length){$('#recLbl').textContent='Letztes Training';$('#recent').innerHTML='<p class="dim" style="margin:0">Noch keine Sätze. Das Eisen wartet.</p>';return}
   const dk0=dayKey(all[0].ts),dd=Math.max(0,Math.round((Date.now()-all[0].ts)/day));
@@ -3503,7 +3549,7 @@ document.addEventListener('visibilitychange',()=>{if(!AC)return;if(document.hidd
 {const unlock=()=>{if(S.music&&S.music!=='off'&&!musStyle)musicApply();else if(AC&&AC.state==='suspended')AC.resume().catch(()=>{});document.removeEventListener('pointerdown',unlock,true);document.removeEventListener('keydown',unlock,true)};
  document.addEventListener('pointerdown',unlock,true);document.addEventListener('keydown',unlock,true)}
 document.addEventListener('click',e=>{const el=e.target.closest&&e.target.closest('button,[role="tab"],summary,.srow,[data-act]');if(!el||el.disabled)return;
-  const a=el.dataset.act||'';if(a==='save'||a==='music'||a==='sfx'||a==='sheetclose'&&el.id==='sheet'||a==='remclose'&&el.id==='remind'||a==='plclose'&&el.id==='planSheet'||a==='pfclose'&&el.id==='profSheet'||a==='musclose'&&el.id==='musSheet'||a==='peclose'&&el.id==='planEdit'||a==='prclose'||a==='fxclose')return;
+  const a=el.dataset.act||'';if(a==='save'||a==='music'||a==='sfx'||a==='sheetclose'&&el.id==='sheet'||a==='remclose'&&el.id==='remind'||a==='plclose'&&el.id==='planSheet'||a==='pfclose'&&el.id==='profSheet'||a==='musclose'&&el.id==='musSheet'||a==='toolclose'&&el.id==='toolSheet'||a==='peclose'&&el.id==='planEdit'||a==='prclose'||a==='fxclose')return;
   sfx(el.getAttribute('role')==='tab'?'tab':(a==='del'||a==='exdel'||a==='clear')?'del':'tap')},true);
 function themeNow(){const t=S.theme==='light'||S.theme==='auto'?S.theme:'dark';return t==='auto'?(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'):t}
 function applyTheme(){const t=themeNow(),h=document.documentElement;if(t==='light')h.dataset.theme='light';else delete h.dataset.theme;
@@ -3531,6 +3577,142 @@ function setTab(t){
   {const pt=$('#pgTitle');if(pt)pt.textContent={home:'RepRival',train:'Training',ranks:'Ränge',stat:'Statistik',crew:'Crew'}[t]||'RepRival'}
   window.scrollTo(0,0);
 }
+/* ---------- Vorschlag fürs nächste Training ---------- */
+const BAR=new Set(['bench','incline','dead','row','ohp','closegrip','squat','frontsquat','rdl','hipthrust']);
+function lastSession(id){const today=dayKey(Date.now()),ss=S.sets.filter(z=>z.lift===id&&dayKey(z.ts)!==today);if(!ss.length)return null;
+  const lt=Math.max(...ss.map(z=>z.ts)),dk=dayKey(lt);return {ts:lt,sets:ss.filter(z=>dayKey(z.ts)===dk).sort((a,b)=>a.ts-b.ts)}}
+function sugOpts(x,top){const w=top.w,r=top.r;
+  if(x.kind==='cd'){const r2=Math.max(30,Math.round(r*.98));return [['Wie letztes Mal',w,r,0],[`${r-r2} Sek. schneller`,w,r2,1]]}
+  if(isSec(x))return [['Wie letztes Mal',w,r,0],['+5 Sek.',w,r+5,1],['+10 Sek.',w,r+10,0]];
+  if(x.kind==='bw')return [['Wie letztes Mal',w,r,0],['+1 Wdh',w,Math.min(100,r+1),1],['+2 Wdh',w,Math.min(100,r+2),0]];
+  const st=S.unit==='lb'?(x.per?2.5:5)/LB:(x.per?2:2.5),heavy=r>=8;
+  return [['Wie letztes Mal',w,r,0],['+1 Wdh',w,Math.min(30,r+1),heavy?0:1],[`+${fw(st)} ${U()}`,Math.round((w+st)*1000)/1000,heavy?Math.max(3,r-2):r,heavy?1:0]]}
+function renderSug(){
+  const el=$('#sugBox'),pb=$('#plBtnRow'),x=L(tl);
+  if(pb)pb.hidden=!(x&&BAR.has(x.id)&&!editing&&!nx);
+  if(!el)return;if(!x||nx||editing||S.example){el.hidden=true;return}
+  const ls=lastSession(tl);if(!ls){el.hidden=true;return}
+  const bw=S.bw,best=compute(S.sets).best[tl],cu=isCustom(tl),sc=z=>scOf(x,z.w,z.r,setBw(z));
+  const top=ls.sets.reduce((a,z)=>sc(z)>sc(a)?z:a,ls.sets[0]);
+  const opts=sugOpts(x,top).map(([l,w,r,rec])=>{const s2=scOf(x,w,r,bw);const up=!cu&&best!==undefined&&tierOfS(x,s2)>tierOfS(x,best),pr=!cu&&best!==undefined&&s2>best*1.01;
+    return `<button class="sugo${rec?' rec':''}" data-act="sugfill" data-w="${w}" data-r="${r}"><b>${rec?'Empfohlen':l}</b><span>${esc(setTxt(x,{w,r}))}</span>${rec&&l!=='Wie letztes Mal'?`<em style="color:var(--dim);font-weight:600">${esc(l)}</em>`:''}${up?'<em>🎯 Rang-Aufstieg</em>':pr?'<em>🏆 Bestleistung</em>':''}</button>`}).join('');
+  const lt=ls.sets.slice(0,6).map(z=>setTxt(x,z)).join(' · ')+(ls.sets.length>6?' …':'');
+  el.innerHTML=`<div class="sugh"><span class="lbl" style="margin:0">Letztes Mal</span><small>${agoOf(ls.ts)}</small></div><div class="suglast">${esc(lt)}</div><div class="lbl" style="margin:2px 0 0">Heute versuchen</div><div class="sugopts">${opts}</div>`;
+  el.hidden=false;
+}
+/* ---------- Scheiben- und Aufwärmrechner ---------- */
+const PLC={25:'#e5484d',20:'#3e7bfa',15:'#f5c443',10:'#3dbb6c',5:'#e9ecef',2.5:'#30343a',1.25:'#b8bec6',45:'#3e7bfa',35:'#f5c443'};
+function platesFor(side){const lb=S.unit==='lb',P=lb?[45,35,25,10,5,2.5]:[25,20,15,10,5,2.5,1.25],out=[];let r=side+1e-9;for(const q of P){while(r>=q){out.push(q);r-=q}}return {out,rest:r>.01?r:0}}
+function barSVG(pl){const lb=S.unit==='lb',mx=lb?45:25;return `<div class="pbar" aria-hidden="true"><i class="sl"></i><i class="cl"></i>${pl.map(q=>{const h=Math.round(34+52*Math.min(1,q/mx)),w=q>=10?16:q>=5?12:9;return `<i class="pl" style="height:${h}px;width:${w}px;background:${PLC[q]||'#999'};${q===2.5&&!lb?'color:#fff;':''}">${q>=10?fmt(q):''}</i>`}).join('')}<i class="end"></i></div>`}
+function renderPlates(){
+  const x=L(tl),lb=S.unit==='lb',bar=lb?45:20,u=U();let wv=parseFloat(String($('#w').value||'').replace(',','.'));
+  if(!(wv>0)){const ls=lastSet(tl);wv=ls?Math.round(toU(ls.w)*100)/100:bar}
+  const side=(wv-bar)/2,{out,rest}=platesFor(Math.max(0,side)),rnd=v=>Math.round(v/(lb?5:2.5))*(lb?5:2.5);
+  let h=`<div class="plsh"><div style="min-width:0"><div class="lbl">${esc(x?x.n:'')}</div><h2 id="toolTitle">Scheiben &amp; Aufwärmen</h2></div><button class="iconx" data-act="toolclose" aria-label="Schließen">×</button></div>`;
+  if(wv<bar)h+=`<p class="note" style="margin:0">${fmt(wv)} ${u} <span>ist weniger als die Stange</span> (${bar} ${u}).</p>`;
+  else{h+=`<div style="display:grid;gap:8px;text-align:center"><div class="lbl" style="margin:0">${fmt(wv)} ${u} · <span>pro Seite</span> ${fmt(Math.max(0,side))} ${u}</div>${barSVG(out)}<div class="plist">${out.length?out.map(q=>`<span>${fmt(q)}</span>`).join(''):'<span>Nur die Stange</span>'}</div>${rest?`<p class="note" style="margin:0"><span>Mit normalen Scheiben nicht genau möglich. Es fehlen pro Seite</span> ${fmt(rest)} ${u}.</p>`:''}<p class="note" style="margin:0"><span>Gerechnet mit einer Stange von</span> ${bar} ${u}.</p></div>`;
+    const ws=[[bar,10,'Leere Stange']];for(const [f,rp] of [[.4,5],[.6,3],[.8,2]]){const v=rnd(wv*f);if(v>ws[ws.length-1][0]&&v<wv)ws.push([v,rp,''])}
+    if(wv>=bar+10)h+=`<div class="pfsec"><div class="lbl">Aufwärmen vor ${fmt(wv)} ${u}</div><div>${ws.map(([v,rp,t])=>{const p=platesFor((v-bar)/2).out;return `<div class="wurow"><b>${fmt(v)} ${u}</b><span class="wun">× ${rp}</span><small>${t?`<span>${t}</span>`:`<span>pro Seite:</span> ${p.map(fmt).join(' + ')||'–'}`}</small></div>`}).join('')}</div><p class="note" style="margin:0">Aufwärmsätze musst du nicht eintragen. Danach geht es mit deinem Arbeitsgewicht los.</p></div>`}
+  $('#toolBody').innerHTML=h}
+function openPlates(){renderPlates();$('#toolSheet').hidden=false;navPush()}
+function closeTool(){$('#toolSheet').hidden=true}
+/* ---------- Import aus Strong und Hevy (CSV) ---------- */
+const IMP_ALIAS=[
+ ['bench','bench press|bench press barbell|barbell bench press|flat bench press'],['incline','incline bench press|incline bench press barbell|incline barbell bench press'],
+ ['dbbench','bench press dumbbell|dumbbell bench press|incline bench press dumbbell'],['flymachine','chest fly machine|pec deck|butterfly|pec deck machine|chest fly'],
+ ['cablefly','cable crossover|cable fly|cable fly crossovers|chest fly cable'],['pushup','push up|push ups|pushup|push up bodyweight'],['chestpress','chest press machine|chest press|seated chest press'],
+ ['pullover','pullover|pullover dumbbell|dumbbell pullover'],['dead','deadlift|deadlift barbell|conventional deadlift|barbell deadlift'],['row','bent over row|bent over row barbell|barbell row|pendlay row'],
+ ['lat','lat pulldown|lat pulldown cable|lat pulldown machine|lat pulldown wide grip'],['pullup','pull up|pull ups|chin up|chin up bodyweight|pull up bodyweight|weighted pull up|pull up weighted|pullup'],
+ ['cablerow','seated row cable|seated cable row|cable row|seated row'],['dbrow','dumbbell row|bent over one arm row dumbbell|one arm dumbbell row|bent over row dumbbell'],
+ ['backext','back extension|hyperextension|back extension hyperextension'],['muscleup','muscle up'],['machrow','seated row machine|machine row|iso lateral row machine|row machine'],
+ ['deadhang','dead hang|hang'],['ohp','overhead press|overhead press barbell|military press|standing military press|shoulder press barbell'],
+ ['dbohp','shoulder press dumbbell|seated shoulder press dumbbell|dumbbell shoulder press|arnold press dumbbell'],['lateral','lateral raise|lateral raise dumbbell|dumbbell lateral raise'],
+ ['facepull','face pull|face pull cable'],['revfly','reverse fly|reverse fly machine|rear delt fly|reverse fly dumbbell'],['shoulderm','shoulder press machine|machine shoulder press'],
+ ['lateralm','lateral raise machine'],['curl','bicep curl barbell|barbell curl|ez bar curl|bicep curl ez bar'],['dbcurl','bicep curl dumbbell|dumbbell curl|bicep curl'],
+ ['hammer','hammer curl|hammer curl dumbbell'],['dips','dip|dips|triceps dip|chest dip|triceps dip bodyweight'],['pushdown','triceps pushdown|triceps pushdown cable|triceps pushdown cable straight bar|triceps rope pushdown|tricep pushdown'],
+ ['skull','skullcrusher|skullcrusher barbell|skull crusher|lying triceps extension'],['closegrip','close grip bench press|bench press close grip|bench press close grip barbell'],
+ ['bicepsm','preacher curl machine|bicep curl machine|machine bicep curl'],['tricepsm','triceps extension machine|tricep extension machine|seated dip machine'],
+ ['squat','squat|squat barbell|back squat|barbell squat|full squat'],['legpress','leg press|leg press machine'],['frontsquat','front squat|front squat barbell'],
+ ['rdl','romanian deadlift|romanian deadlift barbell|stiff leg deadlift|romanian deadlift dumbbell'],['legext','leg extension|leg extension machine'],
+ ['legcurl','leg curl|lying leg curl|lying leg curl machine|seated leg curl|seated leg curl machine'],['lunge','lunge|lunge dumbbell|lunge barbell|walking lunge|walking lunge dumbbell'],
+ ['bulgarian','bulgarian split squat|bulgarian split squat dumbbell|split squat'],['hipthrust','hip thrust|hip thrust barbell|glute bridge barbell'],
+ ['calf','standing calf raise|calf raise|standing calf raise machine|calf press on leg press'],['seatcalf','seated calf raise|seated calf raise machine'],
+ ['hacksquat','hack squat|hack squat machine'],['smithsquat','squat smith machine|smith machine squat'],['abductor','hip abductor machine|hip abduction|abductor machine'],
+ ['adductor','hip adductor machine|hip adduction|adductor machine'],['wallsit','wall sit'],['crunch','crunch|crunches|crunch bodyweight'],['legraise','hanging leg raise|leg raise hanging|hanging knee raise'],
+ ['abroller','ab wheel|ab roller|ab wheel rollout'],['cablecrunch','cable crunch'],['abmachine','crunch machine|ab crunch machine'],['plank','plank'],['sideplank','side plank'],
+ ['run','running|running treadmill|treadmill|run|outdoor run'],['bike','cycling|cycling indoor|bike|stationary bike'],['rowerg','rowing machine|rowing|rowing ergometer|rower'],['swim','swimming|swim']];
+const nqi=t=>String(t||'').toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').replace(/[^a-z0-9]+/g,' ').trim();
+let IMPMAP=null;
+function impMap(){if(IMPMAP)return IMPMAP;IMPMAP={};for(const [id,a] of IMP_ALIAS)for(const k of a.split('|'))IMPMAP[nqi(k)]=id;
+  for(const x of BASE){IMPMAP[nqi(x.n)]=x.id;if(typeof D!=='undefined'&&D[x.n])IMPMAP[nqi(D[x.n])]=IMPMAP[nqi(D[x.n])]||x.id}return IMPMAP}
+function impMatch(name){const m=impMap(),k=nqi(name);if(m[k])return m[k];const k2=nqi(String(name).replace(/\([^)]*\)/g,''));if(m[k2])return m[k2];
+  const c=S.custom.find(z=>nqi(z.n)===k);return c?c.id:null}
+function parseCsv(t){t=String(t).replace(/^﻿/,'');const first=t.split(/\r?\n/)[0]||'',d=(first.split(';').length>first.split(',').length)?';':',',rows=[];let row=[],f='',q=false;
+  for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else q=false}else f+=c}
+    else if(c==='"')q=true;else if(c===d){row.push(f);f=''}else if(c==='\n'||c==='\r'){if(c==='\r'&&t[i+1]==='\n')i++;row.push(f);f='';if(row.some(v=>v!==''))rows.push(row);row=[]}else f+=c}
+  row.push(f);if(row.some(v=>v!==''))rows.push(row);return rows}
+const IMON={jan:0,feb:1,mar:2,mae:2,'mär':2,apr:3,may:4,mai:4,jun:5,jul:6,aug:7,sep:8,oct:9,okt:9,nov:10,dec:11,dez:11};
+function impDate(v){v=String(v||'').trim();if(!v)return NaN;let m=/^(\d{4})-(\d\d)-(\d\d)[ T](\d\d):(\d\d)(?::(\d\d))?/.exec(v);if(m)return new Date(+m[1],+m[2]-1,+m[3],+m[4],+m[5],+(m[6]||0)).getTime();
+  m=/^(\d{1,2})\.?\s+([A-Za-zäÄ]{3})[a-zä]*\.?\s+(\d{4}),?\s+(\d{1,2}):(\d\d)/.exec(v);if(m){const mo=IMON[m[2].toLowerCase()];if(mo!==undefined)return new Date(+m[3],mo,+m[1],+m[4],+m[5]).getTime()}
+  m=/^(\d{1,2})\.(\d{1,2})\.(\d{4}),?\s+(\d{1,2}):(\d\d)/.exec(v);if(m)return new Date(+m[3],+m[2]-1,+m[1],+m[4],+m[5]).getTime();
+  const t=Date.parse(v);return Number.isFinite(t)?t:NaN}
+const numI=v=>{const n=parseFloat(String(v==null?'':v).replace(',','.'));return Number.isFinite(n)?n:0};
+let impPend=null,impUnit='kg';
+function impAnalyze(text){
+  const rows=parseCsv(text);if(rows.length<2)return {err:'Die Datei ist leer oder keine CSV-Datei.'};
+  const h=rows[0].map(c=>nqi(c)),col=n=>h.indexOf(n);let fmt0=null;
+  if(col('exercise title')>=0&&col('start time')>=0)fmt0='hevy';else if(col('exercise name')>=0&&col('date')>=0)fmt0='strong';
+  if(!fmt0)return {err:'Das sieht nicht wie ein Export aus Strong oder Hevy aus.'};
+  const out=[],unk={},skip={warm:0,bad:0};
+  for(let i=1;i<rows.length;i++){const r=rows[i],g=n=>{const k=col(n);return k>=0?r[k]:''};
+    let name,ts,wkg=0,reps=0,dist=0,secs=0,warm=false,wlb=false;
+    if(fmt0==='hevy'){name=g('exercise title');ts=impDate(g('start time'));const wk=g('weight kg'),wl=g('weight lbs');if(wk!=='')wkg=numI(wk);else if(wl!==''){wkg=numI(wl);wlb=true}
+      reps=numI(g('reps'));dist=numI(g('distance km'))||numI(g('distance miles'))*1.609344;secs=numI(g('duration seconds'));warm=/warm/i.test(g('set type'))}
+    else{name=g('exercise name');ts=impDate(g('date'));const so=String(g('set order')).trim();if(/rest/i.test(so))continue;warm=/^w$/i.test(so);wkg=numI(g('weight'));wlb=true;reps=numI(g('reps'));dist=numI(g('distance'));secs=numI(g('seconds'))}
+    if(!name||!Number.isFinite(ts)||ts>Date.now()+day){skip.bad++;continue}
+    if(warm){skip.warm++;continue}
+    out.push({name:String(name).trim().slice(0,40),ts:ts+i,wkg,wlb:fmt0==='strong'?'ask':wlb,reps:Math.round(reps),dist,secs:Math.round(secs)})}
+  return {fmt:fmt0,rows:out,skip}}
+function impBuild(a,unit){
+  const lbf=v=>v*0.45359237,sets=[],newCust={},unk={};let bad=0;
+  const kindOf=rs=>{let kg=0,bw=0,sec=0,cd=0;for(const z of rs){if(z.dist>0&&z.secs>0)cd++;else if(z.reps>0&&z.wkg>0)kg++;else if(z.reps>0)bw++;else if(z.secs>0)sec++}const m=Math.max(kg,bw,sec,cd);return m===0?null:m===kg?'kg':m===bw?'bw':m===sec?'tm':'cd'};
+  const byName={};for(const z of a.rows)(byName[z.name]=byName[z.name]||[]).push(z);
+  let custLeft=Math.max(0,50-S.custom.length);
+  for(const [name,rs] of Object.entries(byName)){
+    let id=impMatch(name);
+    if(!id){const k=kindOf(rs);if(!k||k==='cd'||custLeft<=0){unk[name]=rs.length;continue}
+      id='imp'+newId().slice(0,8);custLeft--;newCust[id]=k==='tm'?{id,n:name.slice(0,28),kind:'bw',sec:1,t:BASE.find(b=>b.id==='plank').t.slice()}:{id,n:name.slice(0,28),kind:k,t:CATS[k][k==='kg'?'push':'mid'].t.slice()}}
+    const x=L(id)||newCust[id];
+    for(const z of rs){const w=z.wlb===true||(z.wlb==='ask'&&unit==='lb')?lbf(z.wkg):z.wkg;let o=null;
+      if(x.kind==='cd'){const km=z.wlb==='ask'&&unit==='lb'?z.dist*1.609344:z.dist;if(km>0&&z.secs>=30)o={w:Math.round(km*1000)/1000,r:z.secs}}
+      else if(isSec(x)){if(z.secs>0)o={w:0,r:Math.min(900,z.secs)}}
+      else if(x.kind==='bw'){if(z.reps>0)o={w:Math.max(0,Math.round(w*100)/100),r:Math.min(100,z.reps)}}
+      else if(z.reps>0&&w>0)o={w:Math.round(w*100)/100,r:Math.min(30,z.reps)};
+      if(!o){bad++;continue}
+      const xx=x;if(!newCust[id]&&!plausible(xx,scOf(xx,o.w,o.r,S.bw))){bad++;continue}
+      sets.push({lift:id,w:o.w,r:o.r,ts:z.ts})}}
+  // schon vorhandene Sätze nicht doppelt übernehmen
+  const have={};for(const z of S.sets){const k=z.lift+'|'+dayKey(z.ts)+'|'+Math.round(z.w*100)+'|'+z.r;have[k]=(have[k]||0)+1}
+  const fin=[];let dup=0;for(const z of sets.sort((p,q)=>p.ts-q.ts)){const k=z.lift+'|'+dayKey(z.ts)+'|'+Math.round(z.w*100)+'|'+z.r;if(have[k]>0){have[k]--;dup++;continue}fin.push(z)}
+  const room=Math.max(0,19000-S.sets.length);
+  return {sets:fin.slice(-room),cust:Object.values(newCust),unk,bad,dup,days:new Set(fin.map(z=>dayKey(z.ts))).size,ex:new Set(fin.map(z=>z.lift)).size}}
+function renderImp(){const el=$('#impRes');if(!el)return;if(!impPend){el.innerHTML='';return}
+  if(impPend.err){el.innerHTML=`<p class="note" style="margin:0;color:var(--bad);font-weight:600">${esc(impPend.err)}</p>`;return}
+  const b=impBuild(impPend.a,impUnit),un=Object.keys(b.unk);impPend.b=b;
+  el.innerHTML=`<div class="impsum"><div><b>${impPend.a.fmt==='hevy'?'Hevy':'Strong'}</b><span>-Datei erkannt</span></div>
+    ${b.sets.length?`<div><b>${b.sets.length}</b> <span>Sätze an</span> <b>${b.days}</b> <span>Trainingstagen</span> · <b>${b.ex}</b> <span>Übungen</span></div>`:''}
+    ${b.cust.length?`<div class="impun"><span>Als eigene Übung angelegt:</span> ${esc(b.cust.map(c=>c.n).join(', '))}</div>`:''}
+    ${un.length?`<div class="impun"><span>Nicht übernommen:</span> ${esc(un.slice(0,12).join(', '))}${un.length>12?' …':''}</div>`:''}
+    ${b.dup?`<div class="impun"><span>Schon vorhanden und übersprungen:</span> ${b.dup}</div>`:''}
+    ${impPend.a.skip.warm?`<div class="impun"><span>Aufwärmsätze ausgelassen:</span> ${impPend.a.skip.warm}</div>`:''}</div>
+    ${impPend.a.fmt==='strong'?`<div style="display:grid;gap:6px"><div class="lbl">In welcher Einheit hast du in Strong eingetragen?</div><div class="pills">${pillsHTML('impunit',[['kg','kg und km'],['lb','lb und Meilen']],impUnit)}</div></div>`:''}
+    ${b.sets.length?`<div class="btnrow"><button class="btn primary" data-act="impgo">${b.sets.length} Sätze übernehmen</button><button class="btn sm ghost" data-act="impcancel">Abbrechen</button></div>`:'<div class="btnrow"><p class="note" style="margin:0">Es gibt nichts Neues zu übernehmen.</p><button class="btn sm ghost" data-act="impcancel">Schließen</button></div>'}`}
+function impRun(){const b=impPend&&impPend.b;if(!b||!b.sets.length)return;
+  for(const c of b.cust)if(!S.custom.some(z=>z.id===c.id))S.custom.push(c);
+  for(const z of b.sets)S.sets.push({id:'imp'+newId().slice(0,12),lift:z.lift,w:z.w,r:z.r,bw:S.bw,ts:z.ts});
+  if(S.example){S.example=false}
+  const n=b.sets.length;impPend=null;S.shown=undefined;syncShown();save();renderImp();renderAll();syncCrew();try{$('#impFile').value=''}catch(e){}
+  toast(`${n} Sätze übernommen · deine Ränge sind aktualisiert`);vib([20,40,20])}
 function prefill(){
   const s=lastSet(tl);fillIn(L(tl),s);
 }
@@ -3752,6 +3934,13 @@ document.addEventListener('click',e=>{
   else if(a==='editdel'){if(editing&&canEdit(S.sets.find(z=>z.id===editing.id))){S.sets=S.sets.filter(z=>z.id!==editing.id);editing=null;syncShown();save();prefill();renderAll();syncCrew()}}
   else if(a==='gotab'){setTab(v)}
   else if(a==='feedmore'){feedOpen=!feedOpen;renderFeed()}
+  else if(a==='sugfill'){const x=L(tl);if(!x)return;fillIn(x,{w:Number(t.dataset.w),r:Number(t.dataset.r)});renderTrain();vib(8);try{$('#saveBtn').scrollIntoView({block:'nearest',behavior:'smooth'})}catch(e2){}}
+  else if(a==='plates'){openPlates()}
+  else if(a==='toolclose'){if(t.id!=='toolSheet'||e.target===t)closeTool()}
+  else if(a==='impcsv'){$('#impFile').click()}
+  else if(a==='impunit'){impUnit=v==='lb'?'lb':'kg';renderImp()}
+  else if(a==='impcancel'){impPend=null;renderImp();try{$('#impFile').value=''}catch(e2){}}
+  else if(a==='impgo'){impRun()}
   else if(a==='cgedit'){cgForm=!cgForm;if(cgForm){const c=crewGoalNow();cgM=c&&!c.g.auto?c.g.m:'days'}renderCrewGoal()}
   else if(a==='cgm'){cgM=CG_M.includes(v)?v:'days';renderCrewGoal()}
   else if(a==='cgset'){const t=Math.round(Number(v));if(!S.crew||!(t>=1&&t<=20000))return;S.cg=cleanCg(S.cg);const w=weekMon(Date.now()),prev=weekMon(Date.now()-7*day);
@@ -3852,6 +4041,8 @@ document.addEventListener('click',e=>{
 });
 ['#w','#r','#th','#tm','#ts'].forEach(s=>$(s).addEventListener('input',renderTrain));
 $('#exName').addEventListener('input',renderNx);
+$('#impFile').addEventListener('change',e=>{const f=e.target.files&&e.target.files[0];if(!f)return;if(f.size>15e6){impPend={err:'Die Datei ist zu groß (höchstens 15 MB).'};renderImp();return}
+  const rd=new FileReader();rd.onload=()=>{try{const a=impAnalyze(rd.result);impUnit=S.unit==='lb'?'lb':'kg';impPend=a.err?{err:a.err}:{a}}catch(err){impPend={err:'Die Datei konnte nicht gelesen werden.'}}renderImp()};rd.onerror=()=>{impPend={err:'Die Datei konnte nicht gelesen werden.'};renderImp()};rd.readAsText(f)});
 window.addEventListener('rr-toast',e=>{try{toast(String(e.detail||''))}catch(x){}});
 document.addEventListener('input',e=>{if(e.target&&e.target.id==='inBw'){const er=$('#inErr');if(er)er.hidden=true}});
 $('#remTime').addEventListener('input',()=>{const v=$('#remTime').value;if(/^\d\d:\d\d$/.test(v)){S.remTime=v;save()}updGcal()});
@@ -3868,6 +4059,7 @@ document.addEventListener('keydown',e=>{
   if((e.key==='ArrowRight'||e.key==='ArrowLeft')&&rcState){const st=rcState;st.i=Math.max(0,Math.min(st.sl.length-1,st.i+(e.key==='ArrowRight'?1:-1)));renderRecap();return}
   if(e.key==='Escape'&&swOpenNow()){swClose();return}
   if(e.key==='Escape'&&tourOpen()){endTour();return}
+  if(e.key==='Escape'&&!$('#toolSheet').hidden){closeTool();return}
   if(e.key==='Escape'&&!$('#musSheet').hidden){closeMus();return}
   if(e.key==='Escape'&&!$('#profSheet').hidden){closeProf();return}
   if(e.key==='Escape'&&!$('#planEdit').hidden){closePlanEdit();return}
