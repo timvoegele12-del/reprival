@@ -129,7 +129,7 @@
   --fg:#f4f5f7; --dim:#8b929b; --accent:#7ae7ff; --accent-ink:#04141a;
   --good:#5be3a0; --bad:#ff8a7a;
   --sil:#262c33;--mus:#3a424c;--off:#3a4048;--ph:#5c636b;--dockbg:rgba(24,27,31,.82);--dockbg2:rgba(12,14,17,.9);--headbg:rgba(7,8,10,.78);--restbg:rgba(17,20,24,.96);--warm:#ffb469;--scrim:rgba(0,0,0,.62);--w03:rgba(255,255,255,.03);--w04:rgba(255,255,255,.04);--w05:rgba(255,255,255,.05);--w06:rgba(255,255,255,.06);--w07:rgba(255,255,255,.07);--w08:rgba(255,255,255,.08);--w09:rgba(255,255,255,.09);--w10:rgba(255,255,255,.1);--w18:rgba(255,255,255,.18);--w20:rgba(255,255,255,.2);--w22:rgba(255,255,255,.22);--w25:rgba(255,255,255,.25);
-  --t0:#8b929b; --t1:#d08a4e; --t2:#b9c2cc; --t3:#f2c14e; --t4:var(--t4); --t5:#4be3a5; --t6:#43d0e8; --t7:#5a9bff; --t8:#8f7bff; --t9:#c27bff; --t10:#ff5fa2; --t11:#ffd86b;
+  --t0:#8b929b; --t1:#d08a4e; --t2:#b9c2cc; --t3:#f2c14e; --t4:#9be15d; --t5:#4be3a5; --t6:#43d0e8; --t7:#5a9bff; --t8:#8f7bff; --t9:#c27bff; --t10:#ff5fa2; --t11:#ffd86b;
   --display:"Unbounded","Arial Black",system-ui,sans-serif;
   --body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
@@ -229,6 +229,8 @@ section[data-view]{min-width:0}
 .curex small.goal b{display:inline;font-family:var(--mono);font-size:13px;color:var(--accent);font-weight:600}
 .curex b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(18px,5.6vw,22px);line-height:1.15;overflow-wrap:anywhere}
 .curex small{display:block;color:var(--dim);font-size:13px;margin-top:2px}
+.curex>div[style*="min-width:0"]{flex:1 1 auto}.curex b{overflow-wrap:break-word;hyphens:auto}
+@media (max-width:380px){.curex .expic{display:none}.curex .embwrap,.curex .emb{width:44px;height:44px;min-width:44px}.curex{gap:12px}}
 .newex{display:grid;gap:12px;border-top:1px solid var(--line);padding-top:14px}
 .newex input{font-family:var(--body);font-size:17px}
 
@@ -346,6 +348,7 @@ section[data-view]{min-width:0}
 .exh{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .exh b{font-weight:700;overflow-wrap:anywhere}
 .exh .tn{font-family:var(--display);font-weight:600;font-size:13px;color:var(--c);text-align:right}
+.exh .tn{white-space:nowrap;flex:none}.exh>.dim.sm{text-align:right}
 
 .row{display:grid;grid-template-columns:30px 38px minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 10px;margin-inline:-10px;border-top:1px solid var(--line)}
 .row:first-child{border-top:0}
@@ -441,6 +444,7 @@ section[data-view]{min-width:0}
 .csnow b{font-family:var(--display);font-weight:700;font-size:18px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .csnow .chev{margin-left:auto;color:var(--dim);transition:transform .2s}.csnow[aria-expanded="true"] .chev{transform:rotate(180deg)}
 .csnow .dim{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1 auto}.csnow>span:first-child{flex:none}
+.csnow.inv b{flex:none}.csnow.inv .dim{flex:1 1 0}
 .csopen{display:grid;gap:12px;border-top:1px solid var(--line);padding-top:12px}
 .srv{display:flex;align-items:center;gap:10px;border-top:1px solid var(--line);padding-top:12px;margin-top:2px;font-size:14px;color:var(--dim)}.srv b{color:var(--fg)}.srv .pic.sm{width:28px;height:28px;flex:none}
 #rivalCard{display:none!important}
@@ -487,7 +491,7 @@ section[data-view]{min-width:0}
 .intop{display:flex;justify-content:space-between;align-items:center;gap:8px;max-width:480px;width:100%;margin-inline:auto;min-height:44px}
 .intop .pills{padding:2px}
 .intop .pill{min-height:36px;padding:7px 14px;font-size:13px}
-.instage{overflow-y:auto;display:flex;flex-direction:column;max-width:440px;width:100%;margin-inline:auto;min-height:0;scrollbar-width:none}
+.instage{-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(to bottom,#000 calc(100% - 22px),transparent);padding-bottom:18px;overflow-y:auto;display:flex;flex-direction:column;max-width:440px;width:100%;margin-inline:auto;min-height:0;scrollbar-width:none}
 .instage::-webkit-scrollbar{display:none}
 .ininner{margin-block:auto;display:grid;justify-items:center;gap:16px;text-align:center;padding-block:8px;width:100%}
 .ininner h2{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(24px,7vw,32px);line-height:1.12;letter-spacing:-.01em;text-wrap:balance}
@@ -1686,6 +1690,7 @@ const MON={Januar:'January',Februar:'February','März':'March',April:'April',Mai
 const tw=s=>D[s]!==undefined?D[s]:s;
 const unitEn=u=>u==='Wdh'?'reps':u;
 const PAT=[
+[/^([+-]?\d+) Sek\.$/,m=>`${m[1]} sec`],
  [/^(\d+) (Satz|Sätze)$/,m=>`${m[1]} ${m[1]==='1'?'set':'sets'}`],
  [/^Distanz \((.+)\)$/,m=>`Distance (${m[1]})`],
  [/^Hochgerechnet auf (.+)$/,m=>'Projected over '+m[1]],
@@ -1993,7 +1998,7 @@ const vMain=(x,v)=>x.kind==='cd'&&!(v>0)?'–':x.kind==='cd'?(cdm(x).pu==='kmh'?
 const vSub=x=>x.kind==='cd'?(cdm(x).pu==='kmh'?SPD()+' '+refLbl(x):refLbl(x)):x.kind==='bw'?(isSec(x)?'Zeit':'Wdh'):U();
 const vText=(x,v)=>vMain(x,v)+' '+vSub(x);
 const vTick=(x,v)=>x.kind==='cd'?vMain(x,v):x.kind==='bw'?(isSec(x)?fmtT(v):fmt(v,v<20?1:0)):fmt(toU(v),toU(v)<20?1:0);
-const gainText=(x,a,b)=>{if(x.kind==='cd'){const m=cdm(x);if(m.pu==='kmh'){const d=dIn((b-a)*3.6);return (d>=0?'+':'')+fmt(d)+' '+SPD()}const z=m.ref/a-m.ref/b,az=Math.round(Math.abs(z));return (az<60?az+' Sek.':fmtT(az))+(z>=0?' schneller':' langsamer')}const d=b-a;return (d>=0?'+':'')+(x.kind==='bw'?fmt(d)+' Wdh':fw(d)+' '+U())};
+const gainText=(x,a,b)=>{if(x.kind==='cd'){const m=cdm(x);if(m.pu==='kmh'){const d=dIn((b-a)*3.6);return (d>=0?'+':'')+fmt(d)+' '+SPD()}const z=m.ref/a-m.ref/b,az=Math.round(Math.abs(z));return (az<60?az+' Sek.':fmtT(az))+(z>=0?' schneller':' langsamer')}const d=b-a;return (d>=0?'+':'')+(x.kind==='bw'?(x.sec?(Math.abs(d)<60?fmt(d)+' Sek.':(d<0?'-':'')+fmtT(Math.abs(d))):fmt(d)+' Wdh'):fw(d)+' '+U())};
 const maxText=(x,v)=>x.kind==='cd'?'≈ '+vText(x,v):x.kind==='bw'?(isSec(x)?'Wertung '+fmtT(v):'Wertung '+fmt(v)+' Wdh'):'≈ '+fw(v)+' '+U()+' Maximum';
 const distText=(x,km)=>cdm(x).du==='m'?fmt(km*1000,0)+' m':fmt(dIn(km),2)+' '+DU();
 const paceText=(x,km,sec)=>{const m=cdm(x);if(!(km>0)||!(sec>0))return '';if(m.pu==='kmh')return fmt(dIn(km)/(sec/3600))+' '+SPD();if(m.pu==='500')return fmtT(sec/(km*2))+' /500 m';if(m.pu==='100')return fmtT(sec/(km*10))+' /100 m';return fmtT(sec/dIn(km))+' /'+DU()};
@@ -2302,7 +2307,7 @@ function inRankHTML(){const v=inRankVal();if(!v)return `<div class="inrk0"><span
 function inAvInfo(){const a=AVATARS.find(x=>x.id===inAv)||AVATARS[0];return `<b>${esc(a.n)}</b><small>${esc(a.tag)}</small>`}
 function introGo(n){introKeep();n=Math.max(0,Math.min(IN_N-1,n));if(n===inStep)return;const d=n>inStep?1:-1;inStep=n;renderIntro(d);try{$('#intro .instage').scrollTop=0;const h=$('#intro h2');h.setAttribute('tabindex','-1');h.focus({preventScroll:true})}catch(e){}}
 function introAct(a,v){
-  if(a==='innext'){if(inStep===1){introKeep();if(!inBwKg()){const er=$('#inErr');if(er){er.textContent=S.unit==='lb'?'Bitte ein Körpergewicht zwischen 66 und 551 lb eintragen.':'Bitte ein Körpergewicht zwischen 30 und 250 kg eintragen.';er.hidden=false}try{$('#inBw').focus()}catch(e){}return}}introGo(inStep+1)}
+  if(a==='innext'){if(inStep===1){introKeep();if(!inBwKg()){const er=$('#inErr');if(er){er.textContent=S.unit==='lb'?'Bitte ein Körpergewicht zwischen 66 und 551 lb eintragen.':'Bitte ein Körpergewicht zwischen 30 und 250 kg eintragen.';er.hidden=false;setTimeout(()=>{try{er.scrollIntoView({block:'nearest',behavior:'smooth'})}catch(e){}},60)}try{$('#inBw').focus({preventScroll:true})}catch(e){}return}}introGo(inStep+1)}
   else if(a==='inback')introGo(inStep-1);
   else if(a==='inskip'){introGo(1);try{$('#inNick').focus()}catch(e){}}
   else if(a==='inlift'){introKeep();inLift=IN_LIFTS.includes(v)?v:'bench';renderIntro()}
@@ -2313,7 +2318,7 @@ function introAct(a,v){
   else if(a==='inlater'){introKeep();S.introDone=1;save();introClose()}
   else if(a==='indone'){
     introKeep();const n=inNick.trim().slice(0,20),bIn=num(inBwV),b=Math.round(fromU(bIn)*100)/100;
-    if(!(b>=30&&b<=250)){const er=$('#inErr');if(er){er.textContent=S.unit==='lb'?'Bitte ein Körpergewicht zwischen 66 und 551 lb eintragen.':'Bitte ein Körpergewicht zwischen 30 und 250 kg eintragen.';er.hidden=false}try{$('#inBw').focus()}catch(e){}return}
+    if(!(b>=30&&b<=250)){const er=$('#inErr');if(er){er.textContent=S.unit==='lb'?'Bitte ein Körpergewicht zwischen 66 und 551 lb eintragen.':'Bitte ein Körpergewicht zwischen 30 und 250 kg eintragen.';er.hidden=false;setTimeout(()=>{try{er.scrollIntoView({block:'nearest',behavior:'smooth'})}catch(e){}},60)}try{$('#inBw').focus({preventScroll:true})}catch(e){}return}
     const fresh=!!S.example;
     if(fresh){S.sets=[];S.example=false;S.shown=0}
     const b2=Math.abs(b-S.bw)<0.06?S.bw:b;if(fresh||b2!==S.bw)logBw(b2);S.bw=b2;S.bwChecked=Date.now();
@@ -2571,7 +2576,7 @@ function friendLadderHTML(){
   const ranked=fl.filter(e=>e.tier>=0).sort((a,b)=>rpVal(b)-rpVal(a)),i=ranked.findIndex(e=>e.me);let hint='';
   if(i>0){const up=ranked[i-1],g=rpVal(up)-rpVal(ranked[i]);hint=rpOf(up)>=0?(g>0?`<b class="notr">${esc(up.nick)}</b> <span>liegt ${g} ${g===1?'Rangpunkt':'Rangpunkte'} vor dir.</span>`:`<b class="notr">${esc(up.nick)}</b> <span>ist mit dir gleichauf.</span>`):''}
   else if(i===0&&ranked.length>1)hint='<span>Du stehst unter deinen Freunden ganz oben.</span>';
-  return `<div class="card span2"><div class="est"><div class="lbl" style="margin:0">Freunde in den Rängen</div>${i>=0&&ranked.length>1?`<span class="chip">Platz ${i+1} von ${ranked.length}</span>`:''}</div>${hint?`<p class="note" style="margin:0">${hint}</p>`:''}<div class="flad">${rows}</div><p class="note" style="margin:0">Tippe auf eine Person, um ihr Profil zu sehen.</p></div>`;
+  return `<div class="card span2"><div class="est"><div class="lbl" style="margin:0">Freunde in den Rängen</div>${i>=0&&ranked.length>1?`<span class="chip" style="white-space:nowrap;flex:none">Platz ${i+1} von ${ranked.length}</span>`:''}</div>${hint?`<p class="note" style="margin:0">${hint}</p>`:''}<div class="flad">${rows}</div><p class="note" style="margin:0">Tippe auf eine Person, um ihr Profil zu sehen.</p></div>`;
 }
 function exFriendHTML(id,myPts,fl){
   const fr=fl.filter(f=>!f.me&&f.lr&&f.lr[id]!==undefined);if(!fr.length)return '';
@@ -2967,7 +2972,7 @@ async function recapShare(){
 }
 function maybeRecap(){
   if(S.example||!$('#intro').hidden||!$('#fx').hidden||rcState)return;const d=new Date(),p=new Date(d.getFullYear(),d.getMonth()-1,1),pk=p.getFullYear()+'-'+String(p.getMonth()+1).padStart(2,'0');
-  if(S.recapSeen&&S.recapSeen[pk])return;if(S.sets.filter(z=>L(z.lift)&&monthKey(z.ts)===pk).length<3)return;openRecap(pk);
+  if(S.recapSeen&&S.recapSeen[pk])return;if(d.getDate()>10)return;if(S.sets.filter(z=>L(z.lift)&&monthKey(z.ts)===pk).length<3)return;openRecap(pk);
 }
 /* ---------- Trainings-Erinnerung als Kalender-Eintrag ---------- */
 const REM_D=['MO','TU','WE','TH','FR','SA','SU'];
@@ -3500,7 +3505,7 @@ function renderBoard(){
     const jc=$('#joinCode'),jv=jc?jc.value:'',jf=!!jc&&document.activeElement===jc;
     const ncI=$('#newCrewName'),ncv=ncI?ncI.value:'',ncf=!!ncI&&document.activeElement===ncI;
     const alone2=$('#v-crew').classList.contains('alone');
-    if(!alone2&&!invOpen&&!jf&&!ncf)ic.innerHTML=`<button class="csnow" data-act="invtog" aria-expanded="false"><span>＋</span><b>Freunde einladen</b><span class="dim sm">Link, QR-Code, Crew beitreten</span><span class="chev" aria-hidden="true">▾</span></button>`;
+    if(!alone2&&!invOpen&&!jf&&!ncf)ic.innerHTML=`<button class="csnow inv" data-act="invtog" aria-expanded="false"><span>＋</span><b>Freunde einladen</b><span class="dim sm">Link, QR-Code, Crew beitreten</span><span class="chev" aria-hidden="true">▾</span></button>`;
     else ic.innerHTML=(alone2?'':`<button class="csnow" data-act="invtog" aria-expanded="true"><span>＋</span><b>Freunde einladen</b><span class="chev" aria-hidden="true">▾</span></button>`)+h.replace('<div class="lbl">Crew einladen</div>',alone2?'<div class="lbl">Crew einladen</div>':'');
     if(jv||jf){const n2=$('#joinCode');if(n2){n2.value=jv;if(jf)n2.focus()}}
     if(ncv||ncf){const n3=$('#newCrewName');if(n3){n3.value=ncv;if(ncf)n3.focus()}}
